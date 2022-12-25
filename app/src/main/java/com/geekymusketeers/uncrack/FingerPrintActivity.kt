@@ -9,7 +9,6 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CancellationSignal
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -27,7 +26,7 @@ class FingerPrintActivity : AppCompatActivity() {
             }
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
                 super.onAuthenticationSucceeded(result)
-                startActivity(Intent(this@FingerPrintActivity, HomeActivity::class.java))
+                startActivity(Intent(this@FingerPrintActivity, MainActivity::class.java))
                 finish()
             }
         }
