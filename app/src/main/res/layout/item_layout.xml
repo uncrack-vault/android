@@ -3,8 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:id="@+id/card"
+    android:background="@color/white"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
     android:layout_marginBottom="10dp"
-    android:backgroundTint="@color/white"
+    android:elevation="10dp"
+    android:padding="10dp"
+    app:cardCornerRadius="10dp"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,14 +19,13 @@
         android:layout_height="match_parent">
 
         <ImageView
-            app:tint="@color/black"
             android:id="@+id/imgPerson"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="64dp"
             android:layout_height="64dp"
-             />
+            android:src="@drawable/paypal" />
 
         <TextView
             android:id="@+id/txtCompany"
