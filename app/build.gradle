@@ -62,5 +62,9 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.43.1")
 
 
+    // Lottie Animation
     implementation 'com.airbnb.android:lottie:5.2.0'
+
+    //Swipe/Slide button
+    implementation "com.ncorti:slidetoact:0.9.0"
 }
