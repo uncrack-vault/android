@@ -19,7 +19,12 @@ I see a lot of peoples are tried of memorizing all their passwords, me also some
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Material Components for Android (MDC-Android) help developers execute Material Design. Developed by a core team of engineers and UX designers at Google, these components enable a reliable development workflow to build beautiful and functional Android apps.
 - [Password Strength Meter](https://github.com/gustavaa/AndroidPasswordStrengthMeter) - Password strength meter is an easy-to-implement and flexible password strength indicator for Android. It is fully customizable and features an animated strength indicator and a matching label.
 <br>
-<br>
 
-![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)
-![ForTheBadge ANDROID](https://forthebadge.com/images/badges/built-for-android.svg)
+## Architecture 👷‍♂️
+
+This app uses [MVVM(Model View View-Model)](https://developer.android.com/topic/architecture#recommended-app-arch) architecture.
+
+![68747470733a2f2f646576656c6f7065722e616e64726f69642e636f6d2f746f7069632f6c69627261726965732f6172636869746563747572652f696d616765732f66696e616c2d6172636869746563747572652e706e67 (1)](https://user-images.githubusercontent.com/80090908/210182757-555d34a6-4771-46d5-80b4-d362491c5a2b.png)
+
+## Contact 📞
+If you need any help, you can connect with me [here](https://www.linkedin.com/in/aritra-das-/).
