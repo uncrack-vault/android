@@ -67,4 +67,8 @@ dependencies {
 
     //Swipe/Slide button
     implementation "com.ncorti:slidetoact:0.9.0"
+
+    // Password Strength Meter
+    implementation 'nu.aaro.gustav:passwordstrengthmeter:0.4'
+
 }
