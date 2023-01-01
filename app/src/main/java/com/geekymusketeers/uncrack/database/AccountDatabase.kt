@@ -3,7 +3,6 @@ package com.geekymusketeers.uncrack.database
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.geekymusketeers.uncrack.data.AccountDao
 
 abstract class AccountDatabase : RoomDatabase(){
 
