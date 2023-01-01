@@ -19,4 +19,9 @@
         android:name="com.geekymusketeers.uncrack.fragments.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" />
+    <fragment
+        android:id="@+id/generatePasswordFragment"
+        android:name="com.geekymusketeers.uncrack.fragments.GeneratePasswordFragment"
+        android:label="fragment_generate_password"
+        tools:layout="@layout/fragment_generate_password" />
 </navigation>
