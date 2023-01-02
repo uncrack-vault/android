@@ -1,9 +1,9 @@
-package com.geekymusketeers.uncrack.model
+package com.geekymusketeers.uncrack.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.geekymusketeers.uncrack.data.Account
-import com.geekymusketeers.uncrack.repo.AccountRepository
+import com.geekymusketeers.uncrack.model.Account
+import com.geekymusketeers.uncrack.repository.AccountRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -1,9 +1,9 @@
-package com.geekymusketeers.uncrack.database
+package com.geekymusketeers.uncrack.data
 
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.geekymusketeers.uncrack.data.Account
+import com.geekymusketeers.uncrack.model.Account
 import kotlinx.coroutines.flow.Flow
 
 interface AccountDao {

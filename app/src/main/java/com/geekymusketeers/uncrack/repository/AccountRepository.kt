@@ -1,7 +1,7 @@
-package com.geekymusketeers.uncrack.repo
+package com.geekymusketeers.uncrack.repository
 
-import com.geekymusketeers.uncrack.data.Account
-import com.geekymusketeers.uncrack.database.AccountDatabase
+import com.geekymusketeers.uncrack.model.Account
+import com.geekymusketeers.uncrack.data.AccountDatabase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.database
+package com.geekymusketeers.uncrack.data
 
 import android.content.Context
 import androidx.room.Room
