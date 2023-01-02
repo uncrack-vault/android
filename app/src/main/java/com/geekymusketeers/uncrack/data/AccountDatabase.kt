@@ -1,9 +1,16 @@
 package com.geekymusketeers.uncrack.data
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.geekymusketeers.uncrack.model.Account
 
+@Database(
+    entities = [Account::class],
+    version = 1,
+    exportSchema = true
+)
 abstract class AccountDatabase : RoomDatabase(){
 
     abstract fun accountDao() : AccountDao
