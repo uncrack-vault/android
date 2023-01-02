@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 
 abstract class AccountDatabase : RoomDatabase(){
 
-    abstract val accountDao : AccountDao
+    abstract fun accountDao() : AccountDao
 
     companion object{
         @Volatile
@@ -14,14 +14,21 @@ abstract class AccountDatabase : RoomDatabase(){
 
         @Synchronized
         fun getDatabase(context:Context)  : AccountDatabase {
-            if (INSTANCE == null){
-                INSTANCE = Room.databaseBuilder(
-                    context,
+
+            val tempInstance = INSTANCE
+
+            if (tempInstance!=null){
+                return tempInstance
+            }
+            synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
                     AccountDatabase::class.java,
                     "account_database"
-                ).fallbackToDestructiveMigration().build()
+                ).build()
+                INSTANCE = instance
+                return instance
             }
-            return INSTANCE!!
         }
     }
 }

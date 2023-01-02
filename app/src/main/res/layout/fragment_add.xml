@@ -9,6 +9,7 @@
     tools:context=".fragments.AddFragment">
 
     <ImageView
+        android:id="@+id/back_btn"
         android:layout_width="20dp"
         android:layout_height="30dp"
         android:layout_marginTop="32dp"
@@ -129,18 +130,19 @@
         app:layout_constraintStart_toStartOf="@+id/password_title"
         app:layout_constraintTop_toBottomOf="@+id/password_title" />
 
-    <com.ncorti.slidetoact.SlideToActView
-        android:id="@+id/btn_finalbook"
-        android:layout_width="350dp"
+    <Button
+        android:id="@+id/btn_save"
+        android:background="@drawable/btn_field"
+        android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="60dp"
-        android:visibility="visible"
-        app:inner_color="@color/white"
+        android:fontFamily="@font/dm_sans"
+        android:text="Save your details"
+        android:textAllCaps="false"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/password"
         app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:outer_color="@color/black"
-        app:text="Save your details"
-        app:text_color="@color/white" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

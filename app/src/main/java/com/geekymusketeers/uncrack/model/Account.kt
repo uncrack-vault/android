@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "account")
 data class Account(
     @PrimaryKey(autoGenerate = true)
-    val id : Int = 0,
+    val id : Int,
     val company : String,
     val email : String,
     val password : String
