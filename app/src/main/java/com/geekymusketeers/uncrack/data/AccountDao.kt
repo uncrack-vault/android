@@ -14,6 +14,6 @@ interface AccountDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addAccount(account: Account)
 
-    @Query("SELECT * FROM account ORDER BY id ASC")
+    @Query("SELECT * FROM account_table ORDER BY id ASC")
     fun readAllAccount(): LiveData<List<Account>>
 }
