@@ -36,6 +36,9 @@ class FingerPrintActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finger_print)
 
+        //Hides action bar
+        supportActionBar?.hide()
+
         checkBiometricSupport()
 
         val btnUnlock : ImageView = findViewById(R.id.fingerprint_unlock)

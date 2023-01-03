@@ -16,10 +16,13 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Hides action bar
+        supportActionBar?.hide()
+
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, FingerPrintActivity::class.java)
             startActivity(intent)
             finish()
-        }, 1000)
+        }, 2000)
     }
 }
