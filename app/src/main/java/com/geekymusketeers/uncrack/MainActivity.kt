@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.geekymusketeers.uncrack.databinding.ActivityMainBinding
 import com.geekymusketeers.uncrack.fragments.GeneratePasswordFragment
 import com.geekymusketeers.uncrack.fragments.HomeFragment
+import com.geekymusketeers.uncrack.fragments.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +37,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.passwordFragment -> {
                     loadFragment(GeneratePasswordFragment())
+                    true
+                }
+                R.id.settingsFragment -> {
+                    loadFragment(SettingsFragment())
                     true
                 }
                 else -> {
