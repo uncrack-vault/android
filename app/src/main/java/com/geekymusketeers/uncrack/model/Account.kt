@@ -13,5 +13,4 @@ data class Account(
     val company : String,
     val email : String,
     val password : String
-
 ) : Parcelable
