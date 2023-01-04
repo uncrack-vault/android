@@ -27,6 +27,7 @@
         android:fontFamily="@font/dm_sans_medium"
         android:gravity="center_horizontal"
         android:text="Save Password"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,23 +49,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
-    <EditText
+    <com.skydoves.powerspinner.PowerSpinnerView
         android:id="@+id/acc_type"
         android:layout_width="380dp"
         android:layout_height="50dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/editfield"
-        android:ems="10"
+        android:gravity="start"
         android:fontFamily="@font/dm_sans"
-        android:hint="PayPal Account"
-        android:inputType="text"
-        android:paddingLeft="20dp"
+        android:hint="PayPal"
+        android:padding="15dp"
         android:textColor="@color/black"
         android:textColorHint="@android:color/darker_gray"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/account_title"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.004"
         app:layout_constraintStart_toStartOf="@+id/account_title"
-        app:layout_constraintTop_toBottomOf="@+id/account_title" />
+        app:layout_constraintTop_toBottomOf="@+id/account_title"
+        app:spinner_arrow_gravity="end"
+        app:spinner_arrow_padding="8dp"
+        app:spinner_arrow_tint="@color/black"
+        app:spinner_divider_color="@color/black"
+        app:spinner_divider_show="true"
+        app:spinner_divider_size="0.4dp"
+        app:spinner_item_height="46dp"
+        app:spinner_popup_animation="dropdown"
+        app:spinner_popup_background="@color/white"
+        app:spinner_popup_elevation="14dp" />
 
     <TextView
         android:id="@+id/email_title"
@@ -132,15 +143,17 @@
 
     <Button
         android:id="@+id/btn_save"
-        android:background="@drawable/btn_field"
-        android:layout_width="250dp"
+        android:layout_width="400dp"
         android:layout_height="60dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="160dp"
+        android:background="@drawable/btn_field"
         android:fontFamily="@font/dm_sans"
         android:text="Save your details"
+        android:textColor="@color/white"
         android:textAllCaps="false"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 

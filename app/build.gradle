@@ -57,8 +57,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.1")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.1")
-    implementation("com.google.dagger:hilt-android:2.43.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.43.1")
+
 
 
     // Lottie Animation
@@ -67,5 +66,7 @@ dependencies {
 
     // Password Strength Meter
     implementation 'nu.aaro.gustav:passwordstrengthmeter:0.4'
+
+    implementation "com.github.skydoves:powerspinner:1.2.4"
 
 }
