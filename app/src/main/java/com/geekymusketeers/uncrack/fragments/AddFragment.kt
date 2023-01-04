@@ -58,7 +58,10 @@ class AddFragment : Fragment() {
 
             viewModel.addAccount(account)
             Toast.makeText(requireContext(),"Successfully Saved",Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.action_addFragment_to_homeFragment)
+            // Moving into HomeFragment after saving
+            val frag = HomeFragment()
+            val trans = fragmentManager?.beginTransaction()
+            trans?.replace(R.id.fragment,frag)?.commit()
         }else{
             Toast.makeText(requireContext(), "Please fill out all fields!", Toast.LENGTH_LONG).show()
         }
