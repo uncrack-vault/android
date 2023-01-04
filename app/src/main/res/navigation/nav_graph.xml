@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.geekymusketeers.uncrack.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_addFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/addFragment"
         android:name="com.geekymusketeers.uncrack.fragments.AddFragment"
-        android:label="fragment_add"
+        android:label="Add"
         tools:layout="@layout/fragment_add" >
         <action
             android:id="@+id/action_addFragment_to_homeFragment"
@@ -29,8 +29,13 @@
             android:defaultValue="@null"/>
     </fragment>
     <fragment
-        android:id="@+id/generatePasswordFragment"
+        android:id="@+id/passwordFragment"
         android:name="com.geekymusketeers.uncrack.fragments.GeneratePasswordFragment"
-        android:label="fragment_generate_password"
+        android:label="Generate Password"
         tools:layout="@layout/fragment_generate_password" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.geekymusketeers.uncrack.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

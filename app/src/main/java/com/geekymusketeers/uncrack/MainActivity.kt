@@ -2,11 +2,13 @@ package com.geekymusketeers.uncrack
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.geekymusketeers.uncrack.databinding.ActivityMainBinding
 import com.geekymusketeers.uncrack.fragments.GeneratePasswordFragment
@@ -49,7 +51,36 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+//        bottomNavigationView = binding.bottomNav
+//
+//        val navController: NavController = findNavController(R.id.fragment)
+//        val appBarConfiguration =
+//            AppBarConfiguration(setOf(R.id.homeFragment, R.id.passwordFragment, R.id.settingsFragment))
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+//
+//        bottomNavigationView.setupWithNavController(navController)
+
+//        navController.addOnDestinationChangedListener { _, destination, _ ->
+//            when (destination.id) {
+//                R.id.homeFragment -> showBottomNav(bottomNavigationView)
+//                R.id.passwordFragment -> showBottomNav(bottomNavigationView)
+//                R.id.settingsFragment -> showBottomNav(bottomNavigationView)
+////                R.id.settings -> showBottomNav(bottomNavigationView)
+////                else -> hideBottomNav(bottomNavigationView)
+//            }
+//        }
     }
+
+//    private fun showBottomNav(bottomNavigationView: BottomNavigationView) {
+//        bottomNavigationView.visibility = View.VISIBLE
+//
+//    }
+
+//    private fun hideBottomNav(bottomNavigationView: BottomNavigationView) {
+//        bottomNavigationView.visibility = View.GONE
+//
+//    }
 
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()

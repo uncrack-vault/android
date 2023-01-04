@@ -5,4 +5,12 @@
     <string name="email_or_username">Email or UserName</string>
     <string name="password">Password</string>
     <string name="company">Company</string>
+    <string-array name="accounts">
+        <item>PayPal</item>
+        <item>Instagram</item>
+        <item>Facebook</item>
+        <item>LinkedIn</item>
+        <item>Snapchat</item>
+        <item>Twitter</item>
+    </string-array>
 </resources>

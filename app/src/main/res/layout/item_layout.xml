@@ -19,7 +19,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imgPerson"
+            android:id="@+id/img"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +31,7 @@
             android:id="@+id/txtCompany"
             android:fontFamily="@font/dm_sans_medium"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgPerson"
+            app:layout_constraintStart_toEndOf="@+id/img"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_marginEnd="20dp"
@@ -47,6 +47,7 @@
             android:fontFamily="@font/dm_sans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/txtCompany"
             app:layout_constraintStart_toStartOf="@+id/txtCompany"
             android:textSize="17sp"

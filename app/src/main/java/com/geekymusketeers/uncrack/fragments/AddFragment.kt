@@ -6,17 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
-import com.skydoves.powerspinner.IconSpinnerAdapter
-import com.skydoves.powerspinner.IconSpinnerItem
-import com.skydoves.powerspinner.OnSpinnerItemSelectedListener
 
 
 class AddFragment : Fragment() {
@@ -41,45 +38,13 @@ class AddFragment : Fragment() {
             findNavController().navigate(R.id.action_addFragment_to_homeFragment)
         }
 
+        // Account List
+        val accounts = resources.getStringArray(R.array.accounts)
+        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.list_items,accounts)
+        binding.accType.setAdapter(arrayAdapter)
+
         return binding.root
-
-        val adapter = IconSpinnerAdapter(binding.accType)
-        binding.accType.setOnSpinnerItemSelectedListener(
-            OnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, _, item ->
-                Toast.makeText(requireContext(), item.text, Toast.LENGTH_SHORT).show()
-            }
-        )
-        adapter.setItems(
-            arrayListOf(
-                IconSpinnerItem(
-                    iconRes = R.drawable.paypal,
-                    text = "PayPal"
-                ),
-                IconSpinnerItem(
-                    iconRes = R.drawable.facebook,
-                    text = "Facebook"
-                ),
-                IconSpinnerItem(
-                    icon = ContextCompat.getDrawable(requireContext(), R.drawable.instagram),
-                    text = "Instagram"
-                ),
-                IconSpinnerItem(
-                    icon = ContextCompat.getDrawable(requireContext(), R.drawable.linkedin),
-                    text = "LinkedIn"
-                ),
-                IconSpinnerItem(
-                    icon = ContextCompat.getDrawable(requireContext(), R.drawable.twitter),
-                    text = "Twitter"
-                ),
-                IconSpinnerItem(
-                    icon = ContextCompat.getDrawable(requireContext(), R.drawable.snapchat),
-                    text = "Snapchat"
-                )
-            )
-        )
-        binding.accType.getSpinnerRecyclerView().adapter = adapter
     }
-
 
 
 

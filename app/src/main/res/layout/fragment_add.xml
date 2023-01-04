@@ -12,10 +12,10 @@
         android:id="@+id/back_btn"
         android:layout_width="20dp"
         android:layout_height="30dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:src="@drawable/arrow"
         app:layout_constraintEnd_toStartOf="@+id/title"
-        app:layout_constraintHorizontal_bias="0.171"
+        app:layout_constraintHorizontal_bias="0.314"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,10 +24,9 @@
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginTop="32dp"
-        android:fontFamily="@font/dm_sans_medium"
+        android:fontFamily="@font/dm_sans"
         android:gravity="center_horizontal"
         android:text="Save Password"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,65 +36,60 @@
 
     <TextView
         android:id="@+id/account_title"
-        android:layout_width="130dp"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="68dp"
         android:fontFamily="@font/dm_sans_medium"
         android:text="What account?"
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintHorizontal_bias="0.122"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
-    <com.skydoves.powerspinner.PowerSpinnerView
-        android:id="@+id/acc_type"
-        android:layout_width="380dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/editfield"
-        android:gravity="start"
-        android:fontFamily="@font/dm_sans"
-        android:hint="PayPal"
-        android:padding="15dp"
-        android:textColor="@color/black"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menu_account"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
         android:textColorHint="@android:color/darker_gray"
-        android:textSize="18sp"
+        app:boxBackgroundColor="#F5F8FA"
         app:layout_constraintEnd_toEndOf="@+id/account_title"
-        app:layout_constraintHorizontal_bias="0.004"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/account_title"
-        app:layout_constraintTop_toBottomOf="@+id/account_title"
-        app:spinner_arrow_gravity="end"
-        app:spinner_arrow_padding="8dp"
-        app:spinner_arrow_tint="@color/black"
-        app:spinner_divider_color="@color/black"
-        app:spinner_divider_show="true"
-        app:spinner_divider_size="0.4dp"
-        app:spinner_item_height="46dp"
-        app:spinner_popup_animation="dropdown"
-        app:spinner_popup_background="@color/white"
-        app:spinner_popup_elevation="14dp" />
+        app:layout_constraintTop_toBottomOf="@+id/account_title">
+
+        <AutoCompleteTextView
+            android:id="@+id/acc_type"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/dm_sans"
+            android:inputType="none"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/email_title"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:fontFamily="@font/dm_sans_medium"
+        android:layout_marginTop="28dp"
         android:text="Email"
         android:textColor="@color/black"
         android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="@+id/acc_type"
+        app:layout_constraintEnd_toEndOf="@+id/menu_account"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/acc_type"
-        app:layout_constraintTop_toBottomOf="@+id/acc_type" />
+        app:layout_constraintStart_toStartOf="@+id/menu_account"
+        app:layout_constraintTop_toBottomOf="@+id/menu_account" />
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="380dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="17dp"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/editfield"
         android:ems="10"
         android:fontFamily="@font/dm_sans"
@@ -105,7 +99,7 @@
         android:textColor="@color/black"
         android:textColorHint="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="@+id/email_title"
-        app:layout_constraintHorizontal_bias="0.004"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/email_title"
         app:layout_constraintTop_toBottomOf="@+id/email_title" />
 
@@ -113,7 +107,7 @@
         android:id="@+id/password_title"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/dm_sans_medium"
         android:text="Password"
         android:textColor="@color/black"
@@ -125,9 +119,9 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="380dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="17dp"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/editfield"
         android:ems="10"
         android:fontFamily="@font/dm_sans"
@@ -137,23 +131,23 @@
         android:textColor="@color/black"
         android:textColorHint="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="@+id/password_title"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.012"
         app:layout_constraintStart_toStartOf="@+id/password_title"
         app:layout_constraintTop_toBottomOf="@+id/password_title" />
 
     <Button
         android:id="@+id/btn_save"
-        android:layout_width="400dp"
+        android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="84dp"
         android:background="@drawable/btn_field"
         android:fontFamily="@font/dm_sans"
         android:text="Save your details"
-        android:textColor="@color/white"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
