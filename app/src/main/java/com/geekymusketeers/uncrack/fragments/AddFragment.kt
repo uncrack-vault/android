@@ -15,7 +15,6 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
-import java.util.regex.Pattern
 
 
 class AddFragment : Fragment() {
@@ -30,11 +29,26 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentAddBinding.inflate(inflater,container,false)
-
         viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
 
         binding.btnSave.setOnClickListener {
+
+            val company = binding.accType.text.toString()
+            val email = binding.email.text.toString()
+            val password = binding.password.text.toString()
+
+            if (company.isEmpty()){
+                Toast.makeText(requireContext(),"Enter select company",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                Toast.makeText(requireContext(),"Please check your Email Id",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }else if (!isValidPassword(password)){
+                Toast.makeText(requireContext(),"Password is to weak",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             insertDataToDB()
+
         }
         binding.backBtn.setOnClickListener {
             findNavController().navigate(R.id.action_addFragment_to_homeFragment)
@@ -48,6 +62,15 @@ class AddFragment : Fragment() {
         return binding.root
     }
 
+    private fun isValidPassword(password: String): Boolean {
+        if (password.length < 8) return false
+        if (password.filter { it.isDigit() }.firstOrNull() == null) return false
+        if (password.filter { it.isLetter() }.filter { it.isUpperCase() }.firstOrNull() == null) return false
+        if (password.filter { it.isLetter() }.filter { it.isLowerCase() }.firstOrNull() == null) return false
+        if (password.filter { !it.isLetterOrDigit() }.firstOrNull() == null) return false
+
+        return true
+    }
 
 
     private fun insertDataToDB() {
@@ -55,7 +78,6 @@ class AddFragment : Fragment() {
         val email = binding.email.text.toString()
         val password = binding.password.text.toString()
 
-        if (inputCheck(company,email,password)){
             val account = Account(0,company, email, password)
 
             viewModel.addAccount(account)
@@ -64,17 +86,5 @@ class AddFragment : Fragment() {
             val frag = HomeFragment()
             val trans = fragmentManager?.beginTransaction()
             trans?.replace(R.id.fragment,frag)?.commit()
-        } else{
-            Toast.makeText(requireContext(), "Please fill out all fields!", Toast.LENGTH_LONG).show()
-        }
     }
-
-
-    private fun inputCheck(company: String,email: String, password: String): Boolean {
-        fun isValidEmail(email: String): Boolean {
-            return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        }
-        return !(TextUtils.isEmpty(company)&& TextUtils.isEmpty(email) && TextUtils.isEmpty(password))
-    }
-
 }
