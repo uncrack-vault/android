@@ -115,21 +115,98 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/dm_sans"
+        android:text="Category"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/password_box"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/password_box"
+        app:layout_constraintTop_toBottomOf="@+id/password_box" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/categoryChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipWork"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:checkable="true"
+                android:checked="true"
+                android:text="Work"
+                android:textColor="@color/white"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/catergory_icon"
+                app:iconStartPadding="9dp"
+                app:chipIcon="@drawable/work"
+                app:chipIconEnabled="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSocial"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:checkable="true"
+                android:text="Social"
+                android:textColor="@color/white"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/catergory_icon"
+                app:chipIcon="@drawable/social"
+                app:iconStartPadding="9dp"
+                app:chipIconEnabled="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipOther"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:checkable="true"
+                android:text="Other"
+                android:textColor="@color/white"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/catergory_icon"
+                app:chipIcon="@drawable/others"
+                app:iconStartPadding="9dp"
+                app:chipIconEnabled="true" />
+
+
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
     <Button
         android:id="@+id/btn_save"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="84dp"
         android:background="@drawable/btn_field"
         android:fontFamily="@font/dm_sans"
         android:text="Save"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/password_box"
-        app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toStartOf="@+id/password_box"
-        app:layout_constraintTop_toBottomOf="@+id/password_box" />
+        app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView"
+        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintStart_toStartOf="@+id/horizontalScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
