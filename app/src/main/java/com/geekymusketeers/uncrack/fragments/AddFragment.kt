@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack.fragments
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import java.util.regex.Pattern
 
 
 class AddFragment : Fragment() {
@@ -62,11 +64,16 @@ class AddFragment : Fragment() {
             val frag = HomeFragment()
             val trans = fragmentManager?.beginTransaction()
             trans?.replace(R.id.fragment,frag)?.commit()
-        }else{
+        } else{
             Toast.makeText(requireContext(), "Please fill out all fields!", Toast.LENGTH_LONG).show()
         }
     }
+
+
     private fun inputCheck(company: String,email: String, password: String): Boolean {
+        fun isValidEmail(email: String): Boolean {
+            return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        }
         return !(TextUtils.isEmpty(company)&& TextUtils.isEmpty(email) && TextUtils.isEmpty(password))
     }
 
