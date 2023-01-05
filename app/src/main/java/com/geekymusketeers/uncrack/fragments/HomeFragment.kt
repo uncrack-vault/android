@@ -39,6 +39,7 @@ class HomeFragment : Fragment() {
             adapter.setData(account)
         })
 
+        // Moving to AddFragment
         binding.floatingActionButton.setOnClickListener { view ->
             val fragment = AddFragment()
             val transaction = fragmentManager?.beginTransaction()
