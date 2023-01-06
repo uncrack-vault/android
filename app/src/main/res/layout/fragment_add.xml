@@ -12,7 +12,7 @@
         android:id="@+id/back_btn"
         android:layout_width="20dp"
         android:layout_height="30dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="37dp"
         android:src="@drawable/arrow"
         android:foregroundGravity="center"
         app:layout_constraintEnd_toStartOf="@+id/title"
