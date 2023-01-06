@@ -19,7 +19,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/img"
+            android:id="@+id/img_company"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,28 +28,27 @@
             android:src="@drawable/paypal" />
 
         <TextView
-            android:id="@+id/txtCompany"
+            android:id="@+id/txtEmail"
             android:fontFamily="@font/dm_sans_medium"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img"
+            app:layout_constraintStart_toEndOf="@+id/img_company"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="" />
 
         <TextView
-            android:id="@+id/txtEmail"
+            android:id="@+id/txtPassword"
             android:fontFamily="@font/dm_sans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/txtCompany"
-            app:layout_constraintStart_toStartOf="@+id/txtCompany"
+            app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+            app:layout_constraintStart_toStartOf="@+id/txtEmail"
             android:textSize="17sp"
             android:textColor="@color/black"
             android:text="" />

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
@@ -32,11 +33,12 @@ class AccountAdapter: RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentAccount = accountList[position]
 
-        holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
         holder.itemView.findViewById<TextView>(R.id.txtEmail).text = currentAccount.email
+        holder.itemView.findViewById<TextView>(R.id.txtPassword).text = currentAccount.password
 
         holder.itemView.findViewById<MaterialCardView>(R.id.card).setOnClickListener {
-
+//            val action = HomeFragment.actionListFragmentToUpdateFragment(currentAccount) // <- Pass object to Update Fragment
+//            holder.itemView.findNavController().navigate(action)
         }
     }
 

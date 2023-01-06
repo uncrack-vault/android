@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_updateFragment2"
+            app:destination="@id/updateFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -22,11 +25,6 @@
         <action
             android:id="@+id/action_addFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
-        <argument
-            android:name="account"
-            app:argType="com.geekymusketeers.uncrack.data.Account"
-            app:nullable="true"
-            android:defaultValue="@null"/>
     </fragment>
     <fragment
         android:id="@+id/passwordFragment"
@@ -38,4 +36,16 @@
         android:name="com.geekymusketeers.uncrack.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.geekymusketeers.uncrack.fragments.UpdateFragment"
+        android:label="Update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="currentAccount"
+            app:argType="com.geekymusketeers.uncrack.model.Account" />
+    </fragment>
 </navigation>
