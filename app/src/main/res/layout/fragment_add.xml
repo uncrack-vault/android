@@ -91,7 +91,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_box"
+        android:id="@+id/username_box"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="360dp"
         android:layout_height="60dp"
@@ -102,6 +102,34 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/email_box"
         app:layout_constraintTop_toBottomOf="@+id/email_box">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/dm_sans"
+            android:inputType="textEmailAddress"
+            android:lines="1"
+            android:hint="Username"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_box"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:textColorHint="@android:color/darker_gray"
+        app:boxBackgroundColor="#F5F8FA"
+        android:layout_marginEnd="20dp"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="@+id/username_box"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/username_box"
+        app:layout_constraintTop_toBottomOf="@+id/username_box">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"

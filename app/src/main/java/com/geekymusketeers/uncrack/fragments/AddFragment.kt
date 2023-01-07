@@ -51,7 +51,9 @@ class AddFragment : Fragment() {
 
         }
         binding.backBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_addFragment_to_homeFragment)
+            val frag = HomeFragment()
+            val trans = fragmentManager?.beginTransaction()
+            trans?.replace(R.id.fragment,frag)?.commit()
         }
 
         // Account List
@@ -77,8 +79,9 @@ class AddFragment : Fragment() {
         val company = binding.accType.text.toString()
         val email = binding.email.text.toString()
         val password = binding.password.text.toString()
+        val userName = binding.username.text.toString()
 
-            val account = Account(0,company, email, password)
+            val account = Account(0,company, email, userName, password)
 
             viewModel.addAccount(account)
             Toast.makeText(requireContext(),"Successfully Saved",Toast.LENGTH_LONG).show()
