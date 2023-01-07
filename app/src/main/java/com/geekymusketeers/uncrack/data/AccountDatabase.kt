@@ -8,8 +8,7 @@ import com.geekymusketeers.uncrack.model.Account
 
 @Database(
     entities = [Account::class],
-    version = 1,
-    exportSchema = true
+    version = 2
 )
 abstract class AccountDatabase : RoomDatabase(){
 
@@ -32,7 +31,7 @@ abstract class AccountDatabase : RoomDatabase(){
                     context.applicationContext,
                     AccountDatabase::class.java,
                     "account_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }
