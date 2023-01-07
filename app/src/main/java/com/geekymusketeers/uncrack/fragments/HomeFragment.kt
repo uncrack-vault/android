@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.adapter.AccountAdapter
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
@@ -41,13 +43,27 @@ class HomeFragment : Fragment() {
         })
 
         // Moving to AddFragment
-        binding.floatingActionButton.setOnClickListener { view ->
+        binding.fab.setOnClickListener { view ->
             val fragment = AddFragment()
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragment,fragment)?.commit()
         }
-
+        setUpFab()
         return binding.root
+    }
+
+    private fun setUpFab() {
+        val fab = binding.fab
+
+        binding.recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) {
+                    fab.collapse()
+                } else {
+                    fab.expand()
+                }
+            }
+        })
     }
 
 

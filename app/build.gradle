@@ -69,6 +69,6 @@ dependencies {
     // Password Strength Meter
     implementation 'nu.aaro.gustav:passwordstrengthmeter:0.4'
 
-    implementation "com.github.skydoves:powerspinner:1.2.4"
+    implementation 'com.github.imtuann:FloatingActionButtonExpandable:1.1.2'
 
 }
