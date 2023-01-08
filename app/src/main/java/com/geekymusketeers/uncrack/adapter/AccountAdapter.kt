@@ -3,15 +3,12 @@ package com.geekymusketeers.uncrack.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.fragments.HomeFragment
 import com.geekymusketeers.uncrack.model.Account
-import com.google.android.material.card.MaterialCardView
 
 class AccountAdapter: RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
 
@@ -34,8 +31,22 @@ class AccountAdapter: RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentAccount = accountList[position]
 
-        holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
+        holder.itemView.findViewById<TextView>(R.id.txtEmail).text = currentAccount.email
         holder.itemView.findViewById<TextView>(R.id.txtPassword).text = currentAccount.password
+
+        when (currentAccount.company.toLowerCase().trim()) {
+            "paypal" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.paypal)
+            "instagram" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.instagram)
+            "facebook" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.facebook)
+            "linkedin" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.linkedin)
+            "snapchat" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.snapchat)
+            "twitter" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.twitter)
+            "behance" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.behance)
+            "google drive" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.drive)
+            "spotify" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.spotify)
+            "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
+        }
+
 
         holder.itemView.findViewById<ConstraintLayout>(R.id.card_layout).setOnClickListener {
 //            val action = Home
