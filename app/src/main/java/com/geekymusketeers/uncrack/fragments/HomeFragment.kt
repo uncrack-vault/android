@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
         binding.fab.setOnClickListener { view ->
             val fragment = AddFragment()
             val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.fragment,fragment)?.commit()
+            transaction?.replace(R.id.fragment,fragment)?.addToBackStack( "tag" )?.commit()
         }
         setUpFab()
         return binding.root
