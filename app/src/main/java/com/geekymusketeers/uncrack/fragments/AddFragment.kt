@@ -10,11 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
+import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
+import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
+import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 
 
@@ -52,9 +56,9 @@ class AddFragment : Fragment() {
 
         }
         binding.backBtn.setOnClickListener {
-            val frag = HomeFragment()
-            val trans = fragmentManager?.beginTransaction()
-            trans?.replace(R.id.fragment,frag)?.commit()
+
+            handleBackButtonPress()
+
         }
 
         // Account List
@@ -63,6 +67,54 @@ class AddFragment : Fragment() {
         binding.accType.setAdapter(arrayAdapter)
 
         return binding.root
+
+    }
+
+    private fun handleBackButtonPress() {
+        val inputEmail = binding.email.text.toString().trim()
+        val inputUserName = binding.username.text.toString().trim()
+        val inputPassword = binding.password.text.toString().trim()
+
+        if (inputEmail.isNotEmpty() || inputUserName.isNotEmpty() || inputPassword.isNotEmpty()) {
+
+            val dialog = OptionsModalBinding.inflate(layoutInflater)
+            val bottomSheet = requireContext().createBottomSheet()
+            dialog.apply {
+
+                optionsHeading.text = "Discard changes"
+                optionsContent.text = "Are you sure you discard changes?"
+                positiveOption.text = "Discard"
+                positiveOption.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.red
+                    )
+                )
+                negativeOption.text = "Continue editing"
+                negativeOption.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.black
+                    )
+                )
+                positiveOption.setOnClickListener {
+                    bottomSheet.dismiss()
+                    val frag = HomeFragment()
+                    val trans = fragmentManager?.beginTransaction()
+                    trans?.replace(R.id.fragment,frag)?.commit()
+                }
+                negativeOption.setOnClickListener {
+                    bottomSheet.dismiss()
+
+                }
+            }
+            dialog.root.setBottomSheet(bottomSheet)
+        }
+        else {
+            val frag = HomeFragment()
+            val trans = fragmentManager?.beginTransaction()
+            trans?.replace(R.id.fragment,frag)?.commit()
+        }
     }
 
     override fun onResume() {
@@ -71,9 +123,7 @@ class AddFragment : Fragment() {
         requireView().requestFocus()
         requireView().setOnKeyListener { _, keyCode, event ->
             if (event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                val frag = HomeFragment()
-                val trans = fragmentManager?.beginTransaction()
-                trans?.replace(R.id.fragment,frag)?.commit()
+                handleBackButtonPress()
                 true
             } else false
         }
