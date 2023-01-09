@@ -58,7 +58,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        app:fab_bg_color="#03A9F4"
+        app:fab_bg_color="@color/black"
         app:fab_content="Save Password"
         app:fab_duration="200"
         app:fab_expanded="true"

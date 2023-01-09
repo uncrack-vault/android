@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.geekymusketeers.uncrack.R
@@ -20,6 +21,8 @@ import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
 
 
 class AddFragment : Fragment() {
@@ -39,6 +42,9 @@ class AddFragment : Fragment() {
         binding.btnSave.setOnClickListener {
 
             val company = binding.accType.text.toString()
+            val category: String = (binding.categoryChipGroup.children.toList().filter {
+                (it as Chip).isChecked
+            }[0] as Chip).text.toString()
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
 
@@ -143,10 +149,13 @@ class AddFragment : Fragment() {
     private fun insertDataToDB() {
         val company = binding.accType.text.toString()
         val email = binding.email.text.toString()
+        val category: String = (binding.categoryChipGroup.children.toList().filter {
+            (it as Chip).isChecked
+        }[0] as Chip).text.toString()
         val password = binding.password.text.toString()
         val userName = binding.username.text.toString()
 
-            val account = Account(0,company, email, userName, password)
+            val account = Account(0,company, email, category,userName, password)
 
             viewModel.addAccount(account)
             Toast.makeText(requireContext(),"Successfully Saved",Toast.LENGTH_LONG).show()

@@ -31,8 +31,8 @@ class AccountAdapter: RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentAccount = accountList[position]
 
-        holder.itemView.findViewById<TextView>(R.id.txtEmail).text = currentAccount.email
-        holder.itemView.findViewById<TextView>(R.id.txtPassword).text = currentAccount.password
+        holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
+        holder.itemView.findViewById<TextView>(R.id.txtCategory).text = currentAccount.category
 
         when (currentAccount.company.toLowerCase().trim()) {
             "paypal" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.paypal)
