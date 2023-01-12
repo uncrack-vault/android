@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".fragments.AddFragment">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.EditFragment">
 
 
     <androidx.cardview.widget.CardView
@@ -59,13 +56,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-            <AutoCompleteTextView
-                android:id="@+id/acc_type"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/dm_sans"
-                android:inputType="none"
-                android:textColor="@color/black" />
+                <AutoCompleteTextView
+                    android:id="@+id/edit_acc_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/dm_sans"
+                    android:inputType="none"
+                    android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -89,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/headerLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
+            android:id="@+id/edit_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/dm_sans"
@@ -115,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email_box">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
+            android:id="@+id/edit_username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/dm_sans"
@@ -143,7 +140,7 @@
         app:layout_constraintTop_toBottomOf="@+id/username_box">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
+            android:id="@+id/edit_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/dm_sans"
@@ -188,7 +185,7 @@
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipWork"
+                android:id="@+id/edit_chipWork"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:checkable="true"
@@ -202,7 +199,7 @@
                 app:chipIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipSocial"
+                android:id="@+id/edit_chipSocial"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:checkable="true"
@@ -215,7 +212,7 @@
                 app:chipIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipOther"
+                android:id="@+id/edit_chipOther"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:checkable="true"
@@ -246,6 +243,5 @@
         app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toStartOf="@+id/horizontalScrollView"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

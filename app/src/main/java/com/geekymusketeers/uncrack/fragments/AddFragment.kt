@@ -58,7 +58,7 @@ class AddFragment : Fragment() {
             insertDataToDB()
 
         }
-        binding.backBtn.setOnClickListener {
+        binding.back.setOnClickListener {
 
             handleBackButtonPress()
 
