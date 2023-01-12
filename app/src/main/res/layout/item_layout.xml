@@ -54,5 +54,14 @@
             android:textSize="17sp"
             android:textColor="@color/black"
             tools:text="Work" />
+
+        <ImageView
+            android:id="@+id/Options"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/options"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#838d95" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

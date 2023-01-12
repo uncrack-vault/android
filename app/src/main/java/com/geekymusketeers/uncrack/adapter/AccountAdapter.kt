@@ -1,5 +1,6 @@
 package com.geekymusketeers.uncrack.adapter
 
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.model.Account
-
 class AccountAdapter: RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
 
     private var accountList = emptyList<Account>()
@@ -31,8 +31,12 @@ class AccountAdapter: RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentAccount = accountList[position]
 
+        // Setting company name and category in card view
+
         holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
         holder.itemView.findViewById<TextView>(R.id.txtCategory).text = currentAccount.category
+
+        //  For setting icons of company according to users choice
 
         when (currentAccount.company.toLowerCase().trim()) {
             "paypal" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.paypal)
@@ -46,6 +50,8 @@ class AccountAdapter: RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
             "spotify" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.spotify)
             "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
         }
+
+
 
 
         holder.itemView.findViewById<ConstraintLayout>(R.id.card_layout).setOnClickListener {
