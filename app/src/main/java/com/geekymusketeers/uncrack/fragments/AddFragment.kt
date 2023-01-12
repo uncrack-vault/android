@@ -54,9 +54,6 @@ class AddFragment : Fragment() {
             }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                 Toast.makeText(requireContext(),"Please check your Email Id",Toast.LENGTH_LONG).show()
                 return@setOnClickListener
-            }else if (!isValidPassword(password)){
-                Toast.makeText(requireContext(),"Password is to weak",Toast.LENGTH_LONG).show()
-                return@setOnClickListener
             }
             insertDataToDB()
 
@@ -133,16 +130,6 @@ class AddFragment : Fragment() {
                 true
             } else false
         }
-    }
-
-    private fun isValidPassword(password: String): Boolean {
-        if (password.length < 8) return false
-        if (password.filter { it.isDigit() }.firstOrNull() == null) return false
-        if (password.filter { it.isLetter() }.filter { it.isUpperCase() }.firstOrNull() == null) return false
-        if (password.filter { it.isLetter() }.filter { it.isLowerCase() }.firstOrNull() == null) return false
-        if (password.filter { !it.isLetterOrDigit() }.firstOrNull() == null) return false
-
-        return true
     }
 
 
