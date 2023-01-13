@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
 
-        val adapter = AccountAdapter()
+        val adapter = AccountAdapter(requireContext())
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

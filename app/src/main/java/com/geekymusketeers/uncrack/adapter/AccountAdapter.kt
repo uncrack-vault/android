@@ -1,16 +1,30 @@
 package com.geekymusketeers.uncrack.adapter
 
 
+import android.content.Context
+import android.content.Intent
+import android.text.Layout.Directions
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.fragments.AddFragment
+import com.geekymusketeers.uncrack.fragments.EditFragment
+import com.geekymusketeers.uncrack.fragments.HomeFragment
+import com.geekymusketeers.uncrack.fragments.ViewPasswordFragment
 import com.geekymusketeers.uncrack.model.Account
-class AccountAdapter: RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
+import com.google.android.material.card.MaterialCardView
+
+class AccountAdapter(
+    private val mContext: Context
+): RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
 
     private var accountList = emptyList<Account>()
 
@@ -51,11 +65,42 @@ class AccountAdapter: RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
             "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
         }
 
+        // PopUpMenu function
+
+        holder.itemView.findViewById<ImageView>(R.id.Options).setOnClickListener {
+
+            val popUpMenu = PopupMenu(mContext,it)
+            popUpMenu.menuInflater.inflate(R.menu.option_menu,popUpMenu.menu)
 
 
+            popUpMenu.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.miEdit -> {
+                        // code here
+                        val transaction = (it.context as AppCompatActivity).supportFragmentManager.beginTransaction()
+                        transaction.replace(R.id.fragment,EditFragment())
+                        transaction.addToBackStack(null)
+                        transaction.commit()
+                        true
+                    }
+                    R.id.miDelete -> {
+                        // code here
+                        true
+                    }
+                    else -> false
+                }
 
-        holder.itemView.findViewById<ConstraintLayout>(R.id.card_layout).setOnClickListener {
-//            val action = Home
+            }
+            popUpMenu.show()
+        }
+
+
+        holder.itemView.findViewById<MaterialCardView>(R.id.card).setOnClickListener { view ->
+
+            val transaction = (view.context as AppCompatActivity).supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment,ViewPasswordFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
     }
 

@@ -16,7 +16,7 @@ interface AccountDao {
     suspend fun addAccount(account: Account)
 
     @Update
-    suspend fun updateAccount(account: Account)
+    suspend fun editAccount(account: Account)
 
     @Query("SELECT * FROM account_table ORDER BY id ASC")
     fun readAllAccount(): LiveData<List<Account>>

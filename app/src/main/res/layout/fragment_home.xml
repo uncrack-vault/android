@@ -62,6 +62,7 @@
                 android:checkable="true"
                 android:checked="true"
                 android:text="All"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/catergory_icon"
@@ -74,6 +75,7 @@
                 android:layout_height="60dp"
                 android:checkable="true"
                 android:text="Work"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/catergory_icon"
@@ -86,6 +88,7 @@
                 android:layout_height="60dp"
                 android:checkable="true"
                 android:text="Social"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/catergory_icon"
@@ -98,6 +101,7 @@
                 android:layout_height="60dp"
                 android:checkable="true"
                 android:text="Other"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/catergory_icon"
@@ -139,5 +143,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
