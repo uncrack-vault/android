@@ -229,7 +229,7 @@
     </HorizontalScrollView>
 
     <Button
-        android:id="@+id/btn_save"
+        android:id="@+id/btn_edit"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="64dp"
