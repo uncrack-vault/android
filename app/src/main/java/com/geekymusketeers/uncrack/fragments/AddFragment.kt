@@ -21,6 +21,7 @@ import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 
@@ -38,6 +39,8 @@ class AddFragment : Fragment() {
     ): View {
         _binding = FragmentAddBinding.inflate(inflater,container,false)
         viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
+
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
         binding.btnSave.setOnClickListener {
 

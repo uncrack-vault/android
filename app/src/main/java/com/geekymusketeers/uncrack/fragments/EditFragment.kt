@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentEditBinding
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class EditFragment : Fragment() {
@@ -32,6 +34,7 @@ class EditFragment : Fragment() {
 
         accountViewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
 
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
         binding.btnEdit.setOnClickListener {
             updateDB()

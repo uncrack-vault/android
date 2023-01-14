@@ -46,9 +46,7 @@
             app:destination="@id/homeFragment" />
         <argument
             app:argType="com.geekymusketeers.uncrack.model.Account"
-            app:nullable="true"
-            android:name="Account"
-            android:defaultValue="@null" />
+            android:name="account" />
 
     </fragment>
 </navigation>
