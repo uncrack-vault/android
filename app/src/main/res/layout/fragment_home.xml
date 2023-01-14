@@ -36,94 +36,32 @@
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="360dp"
-        android:layout_height="70dp"
+
+    <SearchView
+        android:id="@+id/editText_Search"
+        android:layout_width="380dp"
+        android:layout_height="55dp"
         android:layout_marginTop="20dp"
-        android:scrollbars="none"
+        android:background="@drawable/edit_text_background"
+        android:elevation="1dp"
+        android:queryHint="Search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/categoryChipGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            app:selectionRequired="true"
-            app:singleLine="true"
-            app:singleSelection="true">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipAll"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:checkable="true"
-                android:checked="true"
-                android:text="All"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                app:checkedIconEnabled="false"
-                app:chipBackgroundColor="@color/catergory_icon"
-                app:chipCornerRadius="10dp"
-                android:gravity="center"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipWork"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:checkable="true"
-                android:text="Work"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                app:checkedIconEnabled="false"
-                app:chipBackgroundColor="@color/catergory_icon"
-                app:chipCornerRadius="10dp"
-                android:gravity="center"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipSocial"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:checkable="true"
-                android:text="Social"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                app:checkedIconEnabled="false"
-                app:chipBackgroundColor="@color/catergory_icon"
-                app:chipCornerRadius="10dp"
-                android:gravity="center"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipOther"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:checkable="true"
-                android:text="Other"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                app:checkedIconEnabled="false"
-                app:chipBackgroundColor="@color/catergory_icon"
-                app:chipCornerRadius="10dp"
-                android:gravity="center" />
-
-
-        </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/editText_Search"
         tools:listitem="@layout/item_layout" />
 
     <com.tuann.floatingactionbuttonexpandable.FloatingActionButtonExpandable
