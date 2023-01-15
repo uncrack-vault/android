@@ -3,6 +3,7 @@ package com.geekymusketeers.uncrack.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.text.Layout.Directions
 import android.view.LayoutInflater
 import android.view.View
@@ -77,6 +78,10 @@ class AccountAdapter(
                 when (menuItem.itemId) {
                     R.id.miEdit -> {
                         // code here
+                        val bundle = Bundle()
+                        bundle.putParcelable("account",currentAccount)
+                        val editFragment = EditFragment()
+                        editFragment.arguments = bundle
                         val transaction = (it.context as AppCompatActivity).supportFragmentManager.beginTransaction()
                         transaction.replace(R.id.fragment,EditFragment())
                         transaction.addToBackStack(null)

@@ -27,16 +27,6 @@
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/passwordFragment"
-        android:name="com.geekymusketeers.uncrack.fragments.GeneratePasswordFragment"
-        android:label="Generate Password"
-        tools:layout="@layout/fragment_generate_password" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.geekymusketeers.uncrack.fragments.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
-    <fragment
         android:id="@+id/editFragment"
         android:name="com.geekymusketeers.uncrack.fragments.EditFragment"
         android:label="Edit"
