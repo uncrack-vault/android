@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +48,12 @@ class AccountAdapter(
         val currentAccount = accountList[position]
 
         // Setting company name and category in card view
+
+//        if (accountList.isEmpty()){
+//            holder.itemView.findViewById<LinearLayout>(R.id.empty_list).visibility = View.VISIBLE
+//        }else{
+//            holder.itemView.findViewById<LinearLayout>(R.id.empty_list).visibility = View.GONE
+//        }
 
         holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
         holder.itemView.findViewById<TextView>(R.id.txtCategory).text = currentAccount.category

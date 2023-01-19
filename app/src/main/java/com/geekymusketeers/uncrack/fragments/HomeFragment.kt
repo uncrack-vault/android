@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: AccountViewModel
+    private lateinit var adapter: AccountAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,15 +36,23 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
 
-        val adapter = AccountAdapter(requireContext())
-        val recyclerView = binding.recyclerView
+        adapter = AccountAdapter(requireContext())
+        recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
 
         viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
         viewModel.readAllData.observe(viewLifecycleOwner, Observer { account ->
             adapter.setData(account)
+            if (account.isEmpty()){
+                binding.emptyList.visibility = View.VISIBLE
+            }else{
+                binding.emptyList.visibility = View.GONE
+            }
+
         })
+
 
         // Moving to AddFragment
         binding.fab.setOnClickListener { view ->
@@ -54,24 +65,18 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-//    private fun popup_menu() {
-//        val menuItemView = requireView().findViewById<View>(R.id.Options)
-//        val popupMenu = PopupMenu(activity, menuItemView)
-//        popupMenu.menuInflater.inflate(R.menu.option_menu, popupMenu.getMenu())
-//
-//        popupMenu.setOnMenuItemClickListener { menuItem ->
-//            when(menuItem.itemId){
-//
-//                R.id.miEdit -> {
-//                    val intent = Intent(requireContext(),EditFragment::class.java)
-//                }
-//                else -> {
-//
-//                }
-//            }
-//        }
-//        popupMenu.show()
-//    }
+    override fun onResume() {
+        super.onResume()
+            viewModel.readAllData.observe(viewLifecycleOwner, Observer { account ->
+                adapter.setData(account)
+                if (account.isEmpty()){
+                    binding.emptyList.visibility = View.VISIBLE
+                }else{
+                    binding.emptyList.visibility = View.GONE
+                }
+
+            })
+    }
 
     private fun setUpFab() {
         val fab = binding.fab
