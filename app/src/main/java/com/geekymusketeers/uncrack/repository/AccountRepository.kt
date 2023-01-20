@@ -15,4 +15,8 @@ class AccountRepository(private val accountDao: AccountDao) {
     suspend fun editAccount(account: Account){
         accountDao.editAccount(account)
     }
+
+    suspend fun deleteAccount(account: Account){
+        accountDao.deleteAccount(account)
+    }
 }

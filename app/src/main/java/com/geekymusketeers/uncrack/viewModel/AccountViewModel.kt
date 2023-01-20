@@ -22,14 +22,20 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun addAccount(account: Account){
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch{
             repository.addAccount(account)
         }
     }
 
     fun editAccount(account: Account){
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch{
             repository.editAccount(account)
+        }
+    }
+
+    fun deleteAccount(account: Account){
+        viewModelScope.launch {
+            repository.deleteAccount(account)
         }
     }
 }

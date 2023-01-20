@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -17,6 +18,9 @@ interface AccountDao {
 
     @Update
     suspend fun editAccount(account: Account)
+
+    @Delete
+    suspend fun deleteAccount(account: Account)
 
     @Query("SELECT * FROM account_table ORDER BY id ASC")
     fun readAllAccount(): LiveData<List<Account>>

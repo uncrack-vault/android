@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_editFragment"
             app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_viewPasswordFragment"
+            app:destination="@id/viewPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -38,5 +41,14 @@
             app:argType="com.geekymusketeers.uncrack.model.Account"
             android:name="account" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/viewPasswordFragment"
+        android:name="com.geekymusketeers.uncrack.fragments.ViewPasswordFragment"
+        android:label="fragment_view_password"
+        tools:layout="@layout/fragment_view_password" >
+        <argument
+            android:name="data"
+            app:argType="com.geekymusketeers.uncrack.model.Account" />
     </fragment>
 </navigation>
