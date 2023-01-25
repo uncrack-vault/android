@@ -237,7 +237,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/categoryChipGroup"
+            android:id="@+id/edit_categoryChipGroup"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             app:selectionRequired="true"
