@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/back"
+            android:id="@+id/edit_back"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/back_button"

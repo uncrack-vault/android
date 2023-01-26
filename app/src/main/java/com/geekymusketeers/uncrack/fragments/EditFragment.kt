@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -14,7 +15,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentEditBinding
+import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.helper.Util
+import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
+import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.model.Account
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -52,8 +56,58 @@ class EditFragment : Fragment() {
             updateDB()
         }
 
+        binding.editBack.setOnClickListener {
 
+            backButton()
+        }
         return binding.root
+    }
+
+    private fun backButton() {
+
+        val editAccountType = binding.editAccType.text.toString().trim()
+        val editEmail = binding.editEmail.text.toString().trim()
+        val editUserName = binding.editUsername.text.toString().trim()
+        val editPassword = binding.editPassword.text.toString().trim()
+
+        if (editAccountType.isNotEmpty() || editEmail.isNotEmpty() || editUserName.isNotEmpty() || editPassword.isNotEmpty()) {
+
+            val dialog = OptionsModalBinding.inflate(layoutInflater)
+            val bottomSheet = requireContext().createBottomSheet()
+            dialog.apply {
+
+                optionsHeading.text = "Discard changes"
+                optionsContent.text = "Are you sure you discard changes?"
+                positiveOption.text = "Discard"
+                positiveOption.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.red
+                    )
+                )
+                negativeOption.text = "Continue editing"
+                negativeOption.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.black
+                    )
+                )
+                positiveOption.setOnClickListener {
+                    bottomSheet.dismiss()
+                    val frag = HomeFragment()
+                    val trans = fragmentManager?.beginTransaction()
+                    trans?.replace(R.id.fragment,frag)?.commit()
+                }
+                negativeOption.setOnClickListener {
+                    bottomSheet.dismiss()
+
+                }
+            }
+            dialog.root.setBottomSheet(bottomSheet)
+        }
+        else {
+            findNavController().navigate(R.id.action_editFragment_to_homeFragment)
+        }
     }
 
     private fun updateDB() {

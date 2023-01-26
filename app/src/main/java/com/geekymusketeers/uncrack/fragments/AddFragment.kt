@@ -77,11 +77,12 @@ class AddFragment : Fragment() {
     }
 
     private fun handleBackButtonPress() {
+        val inputAccountType = binding.accType.text.toString().trim()
         val inputEmail = binding.email.text.toString().trim()
         val inputUserName = binding.username.text.toString().trim()
         val inputPassword = binding.password.text.toString().trim()
 
-        if (inputEmail.isNotEmpty() || inputUserName.isNotEmpty() || inputPassword.isNotEmpty()) {
+        if (inputAccountType.isNotEmpty() || inputEmail.isNotEmpty() || inputUserName.isNotEmpty() || inputPassword.isNotEmpty()) {
 
             val dialog = OptionsModalBinding.inflate(layoutInflater)
             val bottomSheet = requireContext().createBottomSheet()
