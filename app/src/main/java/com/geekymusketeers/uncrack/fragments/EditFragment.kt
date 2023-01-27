@@ -1,6 +1,7 @@
 package com.geekymusketeers.uncrack.fragments
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -107,6 +108,17 @@ class EditFragment : Fragment() {
         }
         else {
             findNavController().navigate(R.id.action_editFragment_to_homeFragment)
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+        requireView().isFocusableInTouchMode = true
+        requireView().requestFocus()
+        requireView().setOnKeyListener { _, keyCode, event ->
+            if (event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                backButton()
+                true
+            } else false
         }
     }
 
