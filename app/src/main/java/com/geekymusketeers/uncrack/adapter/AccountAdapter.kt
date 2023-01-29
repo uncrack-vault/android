@@ -15,12 +15,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.fragments.AddFragment
-import com.geekymusketeers.uncrack.fragments.EditFragment
-import com.geekymusketeers.uncrack.fragments.HomeFragment
-import com.geekymusketeers.uncrack.fragments.ViewPasswordFragment
+import com.geekymusketeers.uncrack.fragments.*
 import com.geekymusketeers.uncrack.model.Account
 import com.google.android.material.card.MaterialCardView
 
@@ -47,13 +45,6 @@ class AccountAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentAccount = accountList[position]
 
-        // Setting company name and category in card view
-
-//        if (accountList.isEmpty()){
-//            holder.itemView.findViewById<LinearLayout>(R.id.empty_list).visibility = View.VISIBLE
-//        }else{
-//            holder.itemView.findViewById<LinearLayout>(R.id.empty_list).visibility = View.GONE
-//        }
 
         holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
         holder.itemView.findViewById<TextView>(R.id.txtCategory).text = currentAccount.category
@@ -72,6 +63,11 @@ class AccountAdapter(
             "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
         }
 
+        holder.itemView.findViewById<ConstraintLayout>(R.id.card_layout).setOnClickListener {
+//            val action = HomeFragmentDirections.actionHomeFragmentToEditFragment(currentAccount)
+//            holder.itemView.findNavController().navigate(action)
+        }
+
         // PopUpMenu function
 
         holder.itemView.findViewById<ImageView>(R.id.Options).setOnClickListener {
@@ -82,18 +78,6 @@ class AccountAdapter(
 
             popUpMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
-                    R.id.miEdit -> {
-                        // code here
-                        val bundle = Bundle()
-                        bundle.putParcelable("account",currentAccount)
-                        val editFragment = EditFragment()
-                        editFragment.arguments = bundle
-                        val transaction = (it.context as AppCompatActivity).supportFragmentManager.beginTransaction()
-                        transaction.replace(R.id.fragment,EditFragment())
-                        transaction.addToBackStack(null)
-                        transaction.commit()
-                        true
-                    }
                     R.id.miDelete -> {
                         // code here
                         true
@@ -105,14 +89,6 @@ class AccountAdapter(
             popUpMenu.show()
         }
 
-
-        holder.itemView.findViewById<MaterialCardView>(R.id.card).setOnClickListener { view ->
-
-            val transaction = (view.context as AppCompatActivity).supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment,ViewPasswordFragment())
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
     }
 
     override fun getItemCount(): Int {

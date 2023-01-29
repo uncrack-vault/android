@@ -14,7 +14,7 @@
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#2F3061"
+        app:cardBackgroundColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/dm_sans"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:inputType="none"
                 android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
