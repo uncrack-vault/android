@@ -37,6 +37,16 @@
             android:layout_marginStart="350dp"
             app:tint="#ffffff" />
 
+        <ImageView
+            android:id="@+id/btn_delete"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:src="@drawable/delete"
+            android:layout_marginTop="15dp"
+            android:visibility="invisible"
+            android:layout_marginStart="310dp"
+            app:tint="#ffffff" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="230dp"

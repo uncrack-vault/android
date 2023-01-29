@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
@@ -30,6 +31,7 @@ class AddFragment : Fragment() {
 
     private  var _binding : FragmentAddBinding? = null
     private val binding get() = _binding!!
+    private val args by navArgs<AddFragmentArgs>()
 
     private lateinit var viewModel : AccountViewModel
 
@@ -66,7 +68,10 @@ class AddFragment : Fragment() {
             handleBackButtonPress()
 
         }
+        binding.btnDelete.setOnClickListener {
 
+            deleteAccount()
+        }
         // Account List
         val accounts = resources.getStringArray(R.array.accounts)
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.list_items,accounts)
@@ -74,6 +79,23 @@ class AddFragment : Fragment() {
 
         return binding.root
 
+    }
+
+    private fun deleteAccount() {
+
+            val accountId = args.account!!.id
+            val email = binding.email.text.toString()
+            val userName = binding.username.text.toString()
+            val password = binding.password.text.toString()
+            val category: String = (binding.categoryChipGroup.children.toList().filter {
+                (it as Chip).isChecked
+            }[0] as Chip).text.toString()
+            val company = binding.accType.text.toString()
+
+            Account(accountId, company, email, category, userName, password).also{
+                viewModel.deleteAccount(it)
+                findNavController().navigateUp()
+            }
     }
 
     private fun handleBackButtonPress() {

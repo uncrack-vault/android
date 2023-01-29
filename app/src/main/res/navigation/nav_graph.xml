@@ -25,6 +25,11 @@
         <action
             android:id="@+id/action_addFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="account"
+            app:argType="com.geekymusketeers.uncrack.model.Account"
+            app:nullable="true"
+            android:defaultValue="@null"/>
     </fragment>
     <fragment
         android:id="@+id/editFragment"
