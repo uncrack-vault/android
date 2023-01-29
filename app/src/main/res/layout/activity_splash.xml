@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SplashActivity"
+    tools:context=".ui.splash_activity.SplashActivity"
     android:background="@color/white">
 
 
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/logo" />
+        app:lottie_rawRes="@raw/lockblue" />
 
     <TextView
         android:id="@+id/textView"

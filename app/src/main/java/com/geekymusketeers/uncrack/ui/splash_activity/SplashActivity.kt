@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.ui
+package com.geekymusketeers.uncrack.ui.splash_activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.geekymusketeers.uncrack.databinding.ActivitySplashBinding
+import com.geekymusketeers.uncrack.ui.auth.FingerPrintActivity
 
 class SplashActivity : AppCompatActivity() {
 

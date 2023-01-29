@@ -21,14 +21,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.FingerPrintActivity"
+            android:name=".ui.auth.FingerPrintActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.splash_activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

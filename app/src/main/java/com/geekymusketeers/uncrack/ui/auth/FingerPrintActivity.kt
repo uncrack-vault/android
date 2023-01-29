@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.ui
+package com.geekymusketeers.uncrack.ui.auth
 
 import android.app.KeyguardManager
 import android.content.Context
@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.ui.MainActivity
 
 class FingerPrintActivity : AppCompatActivity() {
 
