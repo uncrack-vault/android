@@ -12,8 +12,4 @@
         android:icon="@drawable/generate_pass"
         android:title="Generate Password"/>
 
-    <item android:id="@+id/settingsFragment"
-        android:iconTint="@color/black"
-        android:icon="@drawable/settings"
-        android:title="Settings"/>
 </menu>

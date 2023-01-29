@@ -164,7 +164,7 @@
             android:fontFamily="@font/dm_sans"
             android:inputType="textEmailAddress"
             android:lines="1"
-            android:hint="Email"
+            android:hint="Email *"
             android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -218,7 +218,7 @@
             android:fontFamily="@font/dm_sans"
             android:lines="1"
             android:inputType="textPassword"
-            android:hint="Password"
+            android:hint="Password *"
             android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>

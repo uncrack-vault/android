@@ -168,13 +168,13 @@ class AddFragment : Fragment() {
         val password = binding.password.text.toString()
         val userName = binding.username.text.toString()
 
-            val account = Account(0,company, email, category,userName, password)
+        val account = Account(0,company, email, category,userName, password)
 
-            viewModel.addAccount(account)
-            Toast.makeText(requireContext(),"Successfully Saved",Toast.LENGTH_LONG).show()
+        viewModel.addAccount(account)
+        Toast.makeText(requireContext(),"Successfully Saved",Toast.LENGTH_LONG).show()
             // Moving into HomeFragment after saving
-            val frag = HomeFragment()
-            val trans = fragmentManager?.beginTransaction()
-            trans?.replace(R.id.fragment,frag)?.commit()
+        val frag = HomeFragment()
+        val trans = fragmentManager?.beginTransaction()
+        trans?.replace(R.id.fragment,frag)?.commit()
     }
 }
