@@ -18,6 +18,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.adapter.AccountAdapter
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class HomeFragment : Fragment() {
@@ -35,6 +36,8 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
+
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.VISIBLE
 
         adapter = AccountAdapter(requireContext())
         recyclerView = binding.recyclerView

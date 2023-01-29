@@ -64,29 +64,10 @@ class AccountAdapter(
         }
 
         holder.itemView.findViewById<ConstraintLayout>(R.id.card_layout).setOnClickListener {
+
 //            val action = HomeFragmentDirections.actionHomeFragmentToEditFragment(currentAccount)
 //            holder.itemView.findNavController().navigate(action)
-        }
 
-        // PopUpMenu function
-
-        holder.itemView.findViewById<ImageView>(R.id.Options).setOnClickListener {
-
-            val popUpMenu = PopupMenu(mContext,it)
-            popUpMenu.menuInflater.inflate(R.menu.option_menu,popUpMenu.menu)
-
-
-            popUpMenu.setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.miDelete -> {
-                        // code here
-                        true
-                    }
-                    else -> false
-                }
-
-            }
-            popUpMenu.show()
         }
 
     }
