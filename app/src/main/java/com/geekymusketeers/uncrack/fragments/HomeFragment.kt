@@ -82,14 +82,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpFab() {
-        val fab = binding.fab
-
-        binding.recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0) {
-                    fab.collapse()
-                } else {
-                    fab.expand()
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0 && binding.fabText.visibility == View.VISIBLE) {
+                    binding.fabText.visibility = View.GONE
+                } else if (dy < 0 && binding.fabText.visibility != View.VISIBLE) {
+                    binding.fabText.visibility = View.VISIBLE
                 }
             }
         })
