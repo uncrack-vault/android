@@ -1,3 +1,5 @@
+![banner_uncrack](https://user-images.githubusercontent.com/80090908/216448828-2fb9c563-8542-4375-990a-9808159a6497.png)
+
 # UnCrack 🔒
 UnCrack is a simple android application made using Kotlin, for managing your password.
 
