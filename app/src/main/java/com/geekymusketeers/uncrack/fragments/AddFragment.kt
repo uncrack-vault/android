@@ -1,7 +1,9 @@
 package com.geekymusketeers.uncrack.fragments
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Patterns
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
@@ -9,9 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -32,6 +37,7 @@ class AddFragment : Fragment() {
     private  var _binding : FragmentAddBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<AddFragmentArgs>()
+    private var selectedAccount: String? =null
 
     private lateinit var viewModel : AccountViewModel
 
@@ -43,6 +49,23 @@ class AddFragment : Fragment() {
         viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
+
+
+        binding.accType.afterTextChanged{
+            selectedAccount = it
+            when(it.toLowerCase()){
+                "paypal" -> setImageOnAccountNameChange(R.drawable.paypal)
+                "instagram" -> setImageOnAccountNameChange(R.drawable.instagram)
+                "facebook" -> setImageOnAccountNameChange(R.drawable.facebook)
+                "linkedin" -> setImageOnAccountNameChange(R.drawable.linkedin)
+                "snapchat" -> setImageOnAccountNameChange(R.drawable.snapchat)
+                "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
+                "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
+                "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
+                "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
+                "discord" -> setImageOnAccountNameChange(R.drawable.discord)
+            }
+        }
 
         binding.btnSave.setOnClickListener {
 
@@ -79,6 +102,15 @@ class AddFragment : Fragment() {
 
         return binding.root
 
+    }
+
+    private fun setImageOnAccountNameChange(imageID: Int){
+        binding.accountLogo.apply {
+            setImageResource(imageID)
+            visibility = View.VISIBLE
+        }
+        binding.remainingLayout.visibility = View.VISIBLE
+        binding.btnSave.visibility = View.VISIBLE
     }
 
     private fun deleteAccount() {
@@ -176,5 +208,20 @@ class AddFragment : Fragment() {
         val frag = HomeFragment()
         val trans = fragmentManager?.beginTransaction()
         trans?.replace(R.id.fragment,frag)?.commit()
+    }
+
+    private fun AutoCompleteTextView.afterTextChanged(afterTextChanged: (String) -> Unit){
+
+        this.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(editable: Editable?) {
+                afterTextChanged.invoke(editable.toString())
+            }
+
+        })
+
     }
 }

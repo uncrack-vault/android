@@ -50,6 +50,7 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_alignParentEnd="true"
+                    android:visibility="gone"
                     android:src="@drawable/save" />
 
                 <ImageView
@@ -59,7 +60,7 @@
                     android:layout_marginEnd="7dp"
                     android:layout_toStartOf="@+id/btn_save"
                     android:src="@drawable/delete"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -70,7 +71,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/logo_light_mode"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,7 +84,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/menu_account"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
