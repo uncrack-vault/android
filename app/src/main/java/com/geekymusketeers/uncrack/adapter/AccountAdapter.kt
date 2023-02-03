@@ -14,11 +14,16 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.fragments.*
+import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
+import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.model.Account
 import com.google.android.material.card.MaterialCardView
 
@@ -68,6 +73,7 @@ class AccountAdapter(
 
 //            val action = HomeFragmentDirections.actionHomeFragmentToEditFragment(currentAccount)
 //            holder.itemView.findNavController().navigate(action)
+
 
         }
 
