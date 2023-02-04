@@ -37,8 +37,104 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/edit_categoryChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAll"
+                android:layout_width="90dp"
+                android:layout_height="60dp"
+                android:checkable="true"
+                android:checked="true"
+                android:gravity="center"
+                android:text="All"
+                android:textColor="@color/white"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/catergory_icon"
+                app:chipCornerRadius="10dp"
+                app:chipIcon="@drawable/all_list"
+                app:chipIconEnabled="true"
+                app:iconStartPadding="8dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipWork"
+                android:layout_width="90dp"
+                android:layout_height="60dp"
+                android:checkable="true"
+                android:gravity="center"
+                android:text="Work"
+                android:textColor="@color/white"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/catergory_icon"
+                app:chipCornerRadius="10dp"
+                app:chipIcon="@drawable/work"
+                app:chipIconEnabled="true"
+                app:iconStartPadding="5dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSocial"
+                android:layout_width="95dp"
+                android:layout_height="60dp"
+                android:checkable="true"
+                android:gravity="center"
+                android:text="Social"
+                android:textColor="@color/white"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/catergory_icon"
+                app:chipCornerRadius="10dp"
+                app:chipIcon="@drawable/social"
+                app:chipIconEnabled="true"
+                app:iconStartPadding="5dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipMail"
+                android:layout_width="90dp"
+                android:layout_height="60dp"
+                android:checkable="true"
+                android:gravity="center"
+                android:text="Mail"
+                android:textColor="@color/white"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/catergory_icon"
+                app:chipCornerRadius="10dp"
+                app:chipIcon="@drawable/mail"
+                app:chipIconEnabled="true"
+                app:iconStartPadding="5dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipOther"
+                android:layout_width="90dp"
+                android:layout_height="60dp"
+                android:checkable="true"
+                android:gravity="center"
+                android:text="Other"
+                android:textColor="@color/white"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/catergory_icon"
+                app:chipCornerRadius="10dp"
+                app:chipIcon="@drawable/others"
+                app:chipIconEnabled="true"
+                app:iconStartPadding="5dp" />
 
 
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
 
     <LinearLayout
         android:id="@+id/empty_list"
@@ -90,14 +186,13 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
         tools:listitem="@layout/item_layout" />
 
     <LinearLayout

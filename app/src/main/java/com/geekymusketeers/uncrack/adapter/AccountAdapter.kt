@@ -57,6 +57,7 @@ class AccountAdapter(
         //  For setting icons of company according to users choice
 
         when (currentAccount.company.toLowerCase().trim()) {
+            "general account" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.general_account)
             "paypal" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.paypal)
             "instagram" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.instagram)
             "facebook" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.facebook)
@@ -65,17 +66,12 @@ class AccountAdapter(
             "gmail" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.gmail)
             "twitter" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.twitter)
             "google drive" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.drive)
-            "spotify" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.spotify)
+            "netflix" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.netflix)
+            "amazon prime" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.amazon)
+            "spotify" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.amazon)
             "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
         }
 
-        holder.itemView.setOnClickListener {
-
-//            val action = HomeFragmentDirections.actionHomeFragmentToEditFragment(currentAccount)
-//            holder.itemView.findNavController().navigate(action)
-
-
-        }
 
     }
 
@@ -87,4 +83,5 @@ class AccountAdapter(
         this.accountList = account
         notifyDataSetChanged()
     }
+
 }

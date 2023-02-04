@@ -54,6 +54,7 @@ class AddFragment : Fragment() {
         binding.accType.afterTextChanged{
             selectedAccount = it
             when(it.toLowerCase()){
+                "general account" -> setImageOnAccountNameChange(R.drawable.general_account)
                 "paypal" -> setImageOnAccountNameChange(R.drawable.paypal)
                 "instagram" -> setImageOnAccountNameChange(R.drawable.instagram)
                 "facebook" -> setImageOnAccountNameChange(R.drawable.facebook)
@@ -62,6 +63,8 @@ class AddFragment : Fragment() {
                 "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
                 "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
                 "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
+                "netflix" -> setImageOnAccountNameChange(R.drawable.netflix)
+                "amazon prime" -> setImageOnAccountNameChange(R.drawable.amazon)
                 "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
                 "discord" -> setImageOnAccountNameChange(R.drawable.discord)
             }
