@@ -4,7 +4,7 @@
 UnCrack is a simple android application made using Kotlin, for managing your password.
 
 ## About this app 🎯
-UnCrack is a app where you can store all your login credentials and other informations(i.e. password,username,email and etc) of the apps that you use daily, in a secure and organized way.
+Unlock the power of secure organization with UnCrack! This innovative app securely stores all your login credentials and other important information, so you never have to worry about forgetting passwords or searching for lost information. Keep your digital life organized and protected with UnCrack.
 
 ## Purpose of this app 🤨
 I see a lot of people are tried of memorizing all their passwords, me also sometimes forgot the login credentials. So, after thinking about this situations, this app is build, to help user's to store their passwords and other information in a secured and organized manner.
