@@ -50,8 +50,8 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_alignParentEnd="true"
-                    android:visibility="gone"
-                    android:src="@drawable/save" />
+                    android:src="@drawable/save"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/btn_delete"
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/roboto"
-                android:text="Account name"
+                android:text="Select the Account"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -96,7 +96,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/roboto"
-                    android:hint="Select"
                     android:inputType="none"
                     android:paddingStart="16dp"
                     android:textColor="@color/black"
@@ -129,13 +128,23 @@
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:fontFamily="@font/roboto"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
 
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/email_box"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="360dp"
+                    android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="10dp"
                     android:textColorHint="@android:color/darker_gray"
@@ -148,7 +157,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
-                        android:hint="Email *"
                         android:inputType="textEmailAddress"
                         android:lines="1"
                         android:textColor="@color/black" />
@@ -177,7 +185,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/username_box"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="360dp"
+                    android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="10dp"
                     android:textColorHint="@android:color/darker_gray"
@@ -192,7 +200,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
-                        android:hint="Username"
                         android:inputType="textEmailAddress"
                         android:lines="1"
                         android:textColor="@color/black" />
@@ -214,12 +221,22 @@
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:fontFamily="@font/roboto"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/password_box"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="360dp"
+                    android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="10dp"
                     android:textColorHint="@android:color/darker_gray"
@@ -235,7 +252,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
-                        android:hint="Password*"
                         android:inputType="textPassword"
                         android:lines="1"
                         android:textColor="@color/black" />

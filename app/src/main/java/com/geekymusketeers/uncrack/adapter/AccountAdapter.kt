@@ -69,7 +69,7 @@ class AccountAdapter(
             "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
         }
 
-        holder.itemView.findViewById<ConstraintLayout>(R.id.card_layout).setOnClickListener {
+        holder.itemView.setOnClickListener {
 
 //            val action = HomeFragmentDirections.actionHomeFragmentToEditFragment(currentAccount)
 //            holder.itemView.findNavController().navigate(action)
