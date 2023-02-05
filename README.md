@@ -25,7 +25,7 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
 
 This app uses [MVVM(Model View View-Model)](https://developer.android.com/topic/architecture#recommended-app-arch) architecture.
 
-![68747470733a2f2f646576656c6f7065722e616e64726f69642e636f6d2f746f7069632f6c69627261726965732f6172636869746563747572652f696d616765732f66696e616c2d6172636869746563747572652e706e67 (1)](https://user-images.githubusercontent.com/80090908/210182757-555d34a6-4771-46d5-80b4-d362491c5a2b.png)
+![Architecture_Flow](https://user-images.githubusercontent.com/80090908/216841302-97243bc3-3df4-4416-8f1f-dc22398c86b1.png)
 
 ## Contact 📞
 If you need any help, you can connect with me [here](https://www.linkedin.com/in/aritra-das-/).
