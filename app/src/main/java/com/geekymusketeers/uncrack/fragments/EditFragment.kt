@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
@@ -47,15 +48,20 @@ class EditFragment : Fragment() {
         accountViewModel = ViewModelProvider(this)[AccountViewModel::class.java]
 
 
-        val Email = arguments?.getSerializable("email") as? Any
-        val UserName = arguments?.getSerializable("username") as? Any
-        val Password = arguments?.getSerializable("password") as? Any
-        val Category = arguments?.getSerializable("category") as? Any
+        // Fetching data from adapter
+        val acc = arguments?.getString("company")
+        binding.editAccType.setText(acc)
+        val email = arguments?.getString("email")
+        binding.editEmail.setText(email)
+        val username = arguments?.getString("username")
+        binding.editUsername.setText(username)
+        val pass = arguments?.getString("password")
+        binding.editPassword.setText(pass)
 
-//        binding.editAccType.setText(args.account.company)
-//        binding.editEmail.setText(Email)
-//        binding.editUsername.setText(args.account.username)
-//        binding.editPassword.setText(args.account.password)
+        // Setting adapter for the companies list
+        val accounts = resources.getStringArray(R.array.accounts)
+        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.list_items,accounts)
+        binding.editAccType.setAdapter(arrayAdapter)
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
@@ -141,8 +147,11 @@ class EditFragment : Fragment() {
         val updateAccount = Account(0,accountName, email, category,userName, password)
 
         accountViewModel.editAccount(updateAccount)
+        Toast.makeText(requireContext(),"Successfully Edited",Toast.LENGTH_LONG).show()
 
-        findNavController().navigate(R.id.action_editFragment_to_homeFragment)
+        val frag = HomeFragment()
+        val trans = fragmentManager?.beginTransaction()
+        trans?.replace(R.id.fragment,frag)?.commit()
 
     }
 

@@ -62,6 +62,8 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
         }
 
         holder.itemView.findViewById<MaterialCardView>(R.id.card).setOnClickListener {
+
+            // Passing data to Edit fragments
             val bundle = Bundle()
             bundle.putSerializable("company",currentAccount.company)
             bundle.putSerializable("email", currentAccount.email)
