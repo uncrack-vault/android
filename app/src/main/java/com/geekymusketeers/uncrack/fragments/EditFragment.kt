@@ -58,6 +58,25 @@ class EditFragment : Fragment() {
         val pass = arguments?.getString("password")
         binding.editPassword.setText(pass)
 
+        // Setting logo according to the account type
+
+        when(acc?.toLowerCase().toString()){
+            "general account" -> setImageOnAccountNameChange(R.drawable.general_account)
+            "paypal" -> setImageOnAccountNameChange(R.drawable.paypal)
+            "instagram" -> setImageOnAccountNameChange(R.drawable.instagram)
+            "facebook" -> setImageOnAccountNameChange(R.drawable.facebook)
+            "linkedin" -> setImageOnAccountNameChange(R.drawable.linkedin)
+            "snapchat" -> setImageOnAccountNameChange(R.drawable.snapchat)
+            "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
+            "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
+            "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
+            "netflix" -> setImageOnAccountNameChange(R.drawable.netflix)
+            "amazon prime" -> setImageOnAccountNameChange(R.drawable.amazon)
+            "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
+            "discord" -> setImageOnAccountNameChange(R.drawable.discord)
+        }
+
+
         // Setting adapter for the companies list
         val accounts = resources.getStringArray(R.array.accounts)
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.list_items,accounts)
@@ -74,6 +93,12 @@ class EditFragment : Fragment() {
             backButton()
         }
         return binding.root
+    }
+
+    private fun setImageOnAccountNameChange(imageID: Int) {
+        binding.accountLogo.apply {
+            setImageResource(imageID)
+        }
     }
 
     private fun backButton() {
