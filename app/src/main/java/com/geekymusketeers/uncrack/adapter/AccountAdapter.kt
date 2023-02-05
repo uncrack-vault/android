@@ -2,34 +2,22 @@ package com.geekymusketeers.uncrack.adapter
 
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.text.Layout.Directions
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.fragments.*
-import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
-import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.model.Account
 import com.google.android.material.card.MaterialCardView
 
-class AccountAdapter(
-    private val mContext: Context
-): RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
+class AccountAdapter(private val context: Context): RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
 
     private var accountList = emptyList<Account>()
 
@@ -46,6 +34,7 @@ class AccountAdapter(
             )
         )
     }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentAccount = accountList[position]
@@ -72,6 +61,27 @@ class AccountAdapter(
             "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
         }
 
+        holder.itemView.findViewById<MaterialCardView>(R.id.card).setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable("company",currentAccount.company)
+            bundle.putSerializable("email", currentAccount.email)
+            bundle.putSerializable("username", currentAccount.username)
+            bundle.putSerializable("password", currentAccount.password)
+            bundle.putSerializable("category", currentAccount.category)
+
+            val fragment = EditFragment()
+            fragment.arguments = bundle
+            val fragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment, fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+
+
+
+
+
+        }
 
     }
 
@@ -83,5 +93,4 @@ class AccountAdapter(
         this.accountList = account
         notifyDataSetChanged()
     }
-
 }

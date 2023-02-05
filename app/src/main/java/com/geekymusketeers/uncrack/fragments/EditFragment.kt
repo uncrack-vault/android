@@ -46,10 +46,16 @@ class EditFragment : Fragment() {
 
         accountViewModel = ViewModelProvider(this)[AccountViewModel::class.java]
 
-        binding.editAccType.setText(args.account.company)
-        binding.editEmail.setText(args.account.email)
-        binding.editUsername.setText(args.account.username)
-        binding.editPassword.setText(args.account.password)
+
+        val Email = arguments?.getSerializable("email") as? Any
+        val UserName = arguments?.getSerializable("username") as? Any
+        val Password = arguments?.getSerializable("password") as? Any
+        val Category = arguments?.getSerializable("category") as? Any
+
+//        binding.editAccType.setText(args.account.company)
+//        binding.editEmail.setText(Email)
+//        binding.editUsername.setText(args.account.username)
+//        binding.editPassword.setText(args.account.password)
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
