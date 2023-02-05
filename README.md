@@ -9,6 +9,19 @@ Unlock the power of secure organization with UnCrack! This innovative app secure
 ## Purpose of this app 🤨
 I see a lot of people are tried of memorizing all their passwords, me also sometimes forgot the login credentials. So, after thinking about this situations, this app is build, to help user's to store their passwords and other information in a secured and organized manner.
 
+## Featues 🔏
+
+- UnCrack securely stores all login credentials and important information in one place, accessible only to the user. The app uses advanced encryption techniques to ensure that the data is protected from unauthorized access.
+
+- With just one master password, users can easily access all of their login information and never have to worry about forgetting passwords or searching for lost information.
+
+- UnCrack can automatically fill login forms to save time and improve the user experience.
+
+- The app includes a secure password generator that can suggest stronger passwords and help users create unique and secure passwords for all their accounts.
+
+- The app has a simple and user-friendly interface that makes it easy for users to manage their login information and passwords.
+
+
 ## Made With 🛠
 
 - [Kotlin](https://developer.android.com/kotlin/first) - First class and official programming language for Android development.
@@ -19,7 +32,6 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
   - [Room](https://developer.android.com/training/data-storage/room) - Room is an android library which is an ORM which wraps android's native SQLite database
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Material Components for Android (MDC-Android) help developers execute Material Design. Developed by a core team of engineers and UX designers at Google, these components enable a reliable development workflow to build beautiful and functional Android apps.
 - [Password Strength Meter](https://github.com/gustavaa/AndroidPasswordStrengthMeter) - Password strength meter is an easy-to-implement and flexible password strength indicator for Android. It is fully customizable and features an animated strength indicator and a matching label.
-<br>
 
 ## Architecture 👷‍♂️
 
