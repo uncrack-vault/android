@@ -1,12 +1,15 @@
 package com.geekymusketeers.uncrack.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
@@ -32,7 +35,7 @@ class EditFragment : Fragment() {
 
     private var _binding: FragmentEditBinding? = null
     private val binding get() = _binding!!
-
+    private var selectedAccount: String? =null
 
     private val args by navArgs<EditFragmentArgs>()
 
@@ -61,7 +64,6 @@ class EditFragment : Fragment() {
         // Setting logo according to the account type
 
         when(acc?.toLowerCase().toString()){
-            "general account" -> setImageOnAccountNameChange(R.drawable.general_account)
             "paypal" -> setImageOnAccountNameChange(R.drawable.paypal)
             "instagram" -> setImageOnAccountNameChange(R.drawable.instagram)
             "facebook" -> setImageOnAccountNameChange(R.drawable.facebook)
@@ -74,8 +76,29 @@ class EditFragment : Fragment() {
             "amazon prime" -> setImageOnAccountNameChange(R.drawable.amazon)
             "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
             "discord" -> setImageOnAccountNameChange(R.drawable.discord)
+            "others" -> setImageOnAccountNameChange(R.drawable.general_account)
         }
 
+        // Setting logo according to the user choice when he want to edit the account ype
+
+        binding.editAccType.afterTextChanged{
+            selectedAccount = it
+            when(it.toLowerCase()){
+                "paypal" -> setImageOnAccountNameChange(R.drawable.paypal)
+                "instagram" -> setImageOnAccountNameChange(R.drawable.instagram)
+                "facebook" -> setImageOnAccountNameChange(R.drawable.facebook)
+                "linkedin" -> setImageOnAccountNameChange(R.drawable.linkedin)
+                "snapchat" -> setImageOnAccountNameChange(R.drawable.snapchat)
+                "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
+                "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
+                "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
+                "netflix" -> setImageOnAccountNameChange(R.drawable.netflix)
+                "amazon prime" -> setImageOnAccountNameChange(R.drawable.amazon)
+                "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
+                "discord" -> setImageOnAccountNameChange(R.drawable.discord)
+                "others" -> setImageOnAccountNameChange(R.drawable.general_account)
+            }
+        }
 
         // Setting adapter for the companies list
         val accounts = resources.getStringArray(R.array.accounts)
@@ -180,5 +203,21 @@ class EditFragment : Fragment() {
 
     }
 
+    private fun AutoCompleteTextView.afterTextChanged(afterTextChanged: (String) -> Unit){
+
+        this.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(editable: Editable?) {
+                afterTextChanged.invoke(editable.toString())
+            }
+
+        })
+
+    }
+
 
 }
+

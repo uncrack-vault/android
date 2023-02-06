@@ -7,7 +7,6 @@
     <string name="company">Company</string>
     <string name="let_s_go">Let\'s go</string>
     <string-array name="accounts">
-        <item>General Account</item>
         <item>PayPal</item>
         <item>Instagram</item>
         <item>Facebook</item>
@@ -20,5 +19,6 @@
         <item>Amazon Prime</item>
         <item>Spotify</item>
         <item>Discord</item>
+        <item>Others</item>
     </string-array>
 </resources>

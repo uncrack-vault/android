@@ -46,7 +46,7 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
         //  For setting icons of company according to users choice
 
         when (currentAccount.company.toLowerCase().trim()) {
-            "general account" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.general_account)
+
             "paypal" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.paypal)
             "instagram" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.instagram)
             "facebook" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.facebook)
@@ -59,6 +59,7 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
             "amazon prime" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.amazon)
             "spotify" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.amazon)
             "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
+            "others" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.general_account)
         }
 
         holder.itemView.findViewById<MaterialCardView>(R.id.card).setOnClickListener {
