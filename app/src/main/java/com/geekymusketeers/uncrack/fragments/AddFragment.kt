@@ -18,18 +18,22 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
+import com.geekymusketeers.uncrack.helper.Util
 import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 
 class AddFragment : Fragment() {
@@ -40,6 +44,7 @@ class AddFragment : Fragment() {
     private var selectedAccount: String? =null
 
     private lateinit var viewModel : AccountViewModel
+    private lateinit var myViewModel: AddEditViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +52,11 @@ class AddFragment : Fragment() {
     ): View {
         _binding = FragmentAddBinding.inflate(inflater,container,false)
         viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
+        myViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().application)
+        )[AddEditViewModel::class.java]
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
@@ -205,9 +215,14 @@ class AddFragment : Fragment() {
 
         val account = Account(0,company, email, category,userName, password)
 
-        viewModel.addAccount(account)
+        Util.log("$account")
+//        viewModel.addAccount(account)
+        lifecycleScope.launch {
+            myViewModel.saveData(viewModel,account)
+        }
+
         Toast.makeText(requireContext(),"Successfully Saved",Toast.LENGTH_LONG).show()
-            // Moving into HomeFragment after saving
+       // Moving into HomeFragment after saving
         val frag = HomeFragment()
         val trans = fragmentManager?.beginTransaction()
         trans?.replace(R.id.fragment,frag)?.commit()
