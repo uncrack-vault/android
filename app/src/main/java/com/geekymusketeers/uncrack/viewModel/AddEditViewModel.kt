@@ -3,6 +3,7 @@ package com.geekymusketeers.uncrack.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.geekymusketeers.uncrack.helper.Util
 import com.geekymusketeers.uncrack.model.Account
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -20,6 +21,8 @@ class AddEditViewModel : ViewModel() {
         deleteStatus.value = 0
         updateStatus.value = 0
     }
+
+    // Save Data
 
     suspend fun saveData(
         accountsViewModel: AccountViewModel,
@@ -53,6 +56,82 @@ class AddEditViewModel : ViewModel() {
             accountsViewModel.addAccount(account)
             1
         }
+    }
 
+    // Update Data
+
+    suspend fun updateEntry(
+        accountsViewModel: AccountViewModel,
+        account: Account
+    ) = viewModelScope.launch {
+
+        val updateData = launch {
+
+
+            val updateAccountObjectInRoomDB = viewModelScope.async(Dispatchers.IO) {
+                updateInRoomDB(accountsViewModel, account)
+            }
+
+            updateStatus.value = (updateAccountObjectInRoomDB.await())
+        }
+        updateData.join()
+        updateStatus.value = updateStatus.value?.plus(1)
+    }
+
+    private suspend fun updateInRoomDB(
+        accountsViewModel: AccountViewModel,
+        account: Account
+    ): Int {
+
+        return withContext(Dispatchers.IO) {
+            try {
+                accountsViewModel.editAccount(account)
+                Util.log("Updated in RoomDB")
+                1
+            } catch (e: java.lang.Exception) {
+                Util.log("Error: $e")
+                5
+            }
+        }
+    }
+
+    // Delete Data
+
+    suspend fun deleteEntry(
+        accountsViewModel: AccountViewModel,
+        account: Account
+    ) = viewModelScope.launch {
+
+        val deleteData = launch {
+
+
+            val deleteAccountObjectInRoomDB = viewModelScope.async(Dispatchers.IO) {
+                deleteInRoomDB(accountsViewModel, account)
+            }
+
+            deleteStatus.value = (deleteAccountObjectInRoomDB.await())
+        }
+
+        deleteData.join()
+        deleteStatus.value = deleteStatus.value?.plus(1)
+
+    }
+
+    private suspend fun deleteInRoomDB(
+        accountsViewModel: AccountViewModel,
+        account: Account
+    ): Int {
+
+        return withContext(Dispatchers.IO) {
+            try {
+                accountsViewModel.deleteAccount(account)
+                Util.log("Deleted from RoomDB")
+                1
+            } catch (e: java.lang.Exception) {
+                Util.log("Error: $e")
+                5
+            }
+
+        }
     }
 }
