@@ -40,8 +40,8 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
         val currentAccount = accountList[position]
 
 
+        holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
         holder.itemView.findViewById<TextView>(R.id.txtEmail).text = currentAccount.email
-        holder.itemView.findViewById<TextView>(R.id.txtCategory).text = currentAccount.category
 
         //  For setting icons of company according to users choice
 
@@ -62,7 +62,7 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
             "others" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.general_account)
         }
 
-        holder.itemView.findViewById<MaterialCardView>(R.id.card).setOnClickListener {
+        holder.itemView.findViewById<ImageView>(R.id.button_edit).setOnClickListener {
 
             // Passing data to Edit fragments
             val bundle = Bundle()
@@ -79,10 +79,6 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
             fragmentTransaction.replace(R.id.fragment, fragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
-
-
-
-
 
         }
 

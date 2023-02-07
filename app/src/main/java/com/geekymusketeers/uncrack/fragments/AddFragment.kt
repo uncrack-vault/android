@@ -73,11 +73,11 @@ class AddFragment : Fragment() {
                 "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
                 "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
                 "netflix" -> {
-                    binding.btnShare.visibility = View.VISIBLE
+//                    binding.btnShare.visibility = View.VISIBLE
                     setImageOnAccountNameChange(R.drawable.netflix_logo)
                 }
                 "amazon prime" -> {
-                    binding.btnShare.visibility = View.VISIBLE
+//                    binding.btnShare.visibility = View.VISIBLE
                     setImageOnAccountNameChange(R.drawable.amazon_logo)
                 }
                 "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
@@ -221,7 +221,6 @@ class AddFragment : Fragment() {
 
         val account = Account(0,company, email, category,userName, password)
 
-        Util.log("$account")
 //        viewModel.addAccount(account)
         lifecycleScope.launch {
             myViewModel.saveData(viewModel,account)

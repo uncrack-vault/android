@@ -60,13 +60,12 @@ class AddEditViewModel : ViewModel() {
 
     // Update Data
 
-    suspend fun updateEntry(
+    suspend fun updateData(
         accountsViewModel: AccountViewModel,
         account: Account
     ) = viewModelScope.launch {
 
         val updateData = launch {
-
 
             val updateAccountObjectInRoomDB = viewModelScope.async(Dispatchers.IO) {
                 updateInRoomDB(accountsViewModel, account)

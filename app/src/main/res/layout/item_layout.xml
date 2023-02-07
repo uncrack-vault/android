@@ -9,7 +9,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
     android:layout_marginBottom="10dp"
-    android:elevation="10dp"
+    android:elevation="30dp"
     android:padding="10dp"
     app:cardCornerRadius="10dp"
     android:layout_height="wrap_content">
@@ -27,33 +27,46 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginStart="-10dp"
             android:src="@drawable/paypal" />
 
         <TextView
-            android:id="@+id/txtEmail"
-            android:fontFamily="@font/dm_sans_medium"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_company"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
+            android:id="@+id/txtCompany"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/img_company"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="aritra@gmail.com" />
 
         <TextView
-            android:id="@+id/txtCategory"
+            android:id="@+id/txtEmail"
             android:fontFamily="@font/dm_sans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/txtEmail"
-            app:layout_constraintStart_toStartOf="@+id/txtEmail"
-            android:textSize="15sp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtCompany"
+            app:layout_constraintStart_toStartOf="@+id/txtCompany"
+            android:textSize="13sp"
             android:textColor="@color/black"
             tools:text="143txt3" />
 
-<!--        <ImageView-->
+        <ImageView
+            android:id="@+id/button_edit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.898"
+            app:layout_constraintStart_toEndOf="@+id/txtCompany"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/edit_logo" />
+
+        <!--        <ImageView-->
 <!--            android:id="@+id/Options"-->
 <!--            android:layout_width="25dp"-->
 <!--            android:layout_height="25dp"-->
