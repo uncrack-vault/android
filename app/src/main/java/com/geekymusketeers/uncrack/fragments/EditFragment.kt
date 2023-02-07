@@ -72,8 +72,8 @@ class EditFragment : Fragment() {
             "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
             "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
             "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
-            "netflix" -> setImageOnAccountNameChange(R.drawable.netflix)
-            "amazon prime" -> setImageOnAccountNameChange(R.drawable.amazon)
+            "netflix" -> setImageOnAccountNameChange(R.drawable.netflix_logo)
+            "amazon prime" -> setImageOnAccountNameChange(R.drawable.amazon_logo)
             "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
             "discord" -> setImageOnAccountNameChange(R.drawable.discord)
             "others" -> setImageOnAccountNameChange(R.drawable.general_account)
@@ -92,8 +92,14 @@ class EditFragment : Fragment() {
                 "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
                 "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
                 "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
-                "netflix" -> setImageOnAccountNameChange(R.drawable.netflix)
-                "amazon prime" -> setImageOnAccountNameChange(R.drawable.amazon)
+                "netflix" -> {
+                    binding.btnShare.visibility = View.VISIBLE
+                    setImageOnAccountNameChange(R.drawable.netflix_logo)
+                }
+                "amazon prime" -> {
+                    binding.btnShare.visibility = View.VISIBLE
+                    setImageOnAccountNameChange(R.drawable.amazon_logo)
+                }
                 "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
                 "discord" -> setImageOnAccountNameChange(R.drawable.discord)
                 "others" -> setImageOnAccountNameChange(R.drawable.general_account)

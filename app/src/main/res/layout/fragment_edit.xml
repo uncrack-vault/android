@@ -45,16 +45,14 @@
                     android:layout_alignParentStart="true"
                     android:src="@drawable/back_button" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="1dp"
-                    android:text="Edit your Credentials"
-                    android:fontFamily="@font/dm_sans_medium"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/btn_share"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/btn_delete"
+                    android:src="@drawable/share"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/btn_edit"
