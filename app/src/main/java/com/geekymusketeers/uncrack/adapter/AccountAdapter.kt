@@ -40,7 +40,7 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
         val currentAccount = accountList[position]
 
 
-        holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
+        holder.itemView.findViewById<TextView>(R.id.txtEmail).text = currentAccount.email
         holder.itemView.findViewById<TextView>(R.id.txtCategory).text = currentAccount.category
 
         //  For setting icons of company according to users choice
