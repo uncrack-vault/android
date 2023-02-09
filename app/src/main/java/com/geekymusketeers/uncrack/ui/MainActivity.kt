@@ -35,6 +35,10 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(GeneratePasswordFragment())
                     true
                 }
+                R.id.settingsFragment -> {
+                    loadFragment(SettingsFragment())
+                    true
+                }
                 else -> {
 
                 }
