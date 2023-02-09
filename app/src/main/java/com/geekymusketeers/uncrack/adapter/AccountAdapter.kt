@@ -17,7 +17,7 @@ import com.geekymusketeers.uncrack.fragments.*
 import com.geekymusketeers.uncrack.model.Account
 import com.google.android.material.card.MaterialCardView
 
-class AccountAdapter(private val context: Context): RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
+class AccountAdapter(private val context: Context, private val listner: (Account) -> Unit): RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
 
     private var accountList = emptyList<Account>()
 
@@ -39,6 +39,11 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentAccount = accountList[position]
 
+
+        holder.itemView.setOnClickListener {
+
+            listner(currentAccount)
+        }
 
         holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
         holder.itemView.findViewById<TextView>(R.id.txtEmail).text = currentAccount.email

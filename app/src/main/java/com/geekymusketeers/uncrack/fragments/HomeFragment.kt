@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.view.isEmpty
@@ -18,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.adapter.AccountAdapter
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
+import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding
+import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
+import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -40,7 +44,39 @@ class HomeFragment : Fragment() {
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.VISIBLE
 
-        adapter = AccountAdapter(requireContext())
+        adapter = AccountAdapter(requireContext()){ currentAccount ->
+
+            val dialog = ViewpasswordModalBinding.inflate(layoutInflater)
+            val bottomSheet = requireContext().createBottomSheet()
+
+            dialog.apply {
+
+                accountName.text = currentAccount.company
+                accountEmail.text = currentAccount.email
+                accountUsername.text = currentAccount.username
+                accountPassword.text = currentAccount.password
+
+                when (currentAccount.company.toLowerCase().trim()) {
+
+                    "paypal" -> accountLogo.setImageResource(R.drawable.paypal)
+                    "instagram" -> accountLogo.setImageResource(R.drawable.instagram)
+                    "facebook" -> accountLogo.setImageResource(R.drawable.facebook)
+                    "linkedin" -> accountLogo.setImageResource(R.drawable.linkedin)
+                    "snapchat" -> accountLogo.setImageResource(R.drawable.snapchat)
+                    "gmail" -> accountLogo.setImageResource(R.drawable.gmail)
+                    "twitter" -> accountLogo.setImageResource(R.drawable.twitter)
+                    "google drive" -> accountLogo.setImageResource(R.drawable.drive)
+                    "netflix" -> accountLogo.setImageResource(R.drawable.netflix_logo)
+                    "amazon prime" -> accountLogo.setImageResource(R.drawable.amazon_logo)
+                    "spotify" -> accountLogo.setImageResource(R.drawable.amazon)
+                    "discord" -> accountLogo.setImageResource(R.drawable.discord)
+                    "others" -> accountLogo.setImageResource(R.drawable.general_account)
+                }
+            }
+
+            dialog.root.setBottomSheet(bottomSheet)
+
+        }
         recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -68,6 +104,7 @@ class HomeFragment : Fragment() {
 //        popup_menu()
         return binding.root
     }
+
 
     override fun onResume() {
         super.onResume()

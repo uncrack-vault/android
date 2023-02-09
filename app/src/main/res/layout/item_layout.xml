@@ -9,7 +9,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
     android:layout_marginBottom="10dp"
-    android:elevation="30dp"
+    app:cardElevation="2dp"
     android:padding="10dp"
     app:cardCornerRadius="10dp"
     android:layout_height="wrap_content">
