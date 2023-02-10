@@ -64,7 +64,7 @@
             app:layout_constraintHorizontal_bias="0.898"
             app:layout_constraintStart_toEndOf="@+id/txtCompany"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/edit_logo" />
+            app:srcCompat="@drawable/edit__1_" />
 
         <!--        <ImageView-->
 <!--            android:id="@+id/Options"-->
