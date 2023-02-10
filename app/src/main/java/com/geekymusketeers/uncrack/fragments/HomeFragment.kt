@@ -14,6 +14,7 @@ import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +25,9 @@ import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding
 import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -33,6 +36,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: AccountViewModel
+    private lateinit var deleteViewModel: AddEditViewModel
     private lateinit var adapter: AccountAdapter
     private lateinit var recyclerView: RecyclerView
 
@@ -44,6 +48,11 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.VISIBLE
+        deleteViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().application)
+        )[AddEditViewModel::class.java]
 
         adapter = AccountAdapter(requireContext()){ currentAccount ->
 
@@ -56,7 +65,12 @@ class HomeFragment : Fragment() {
                 accountName.text = currentAccount.company
                 accountEmail.text = currentAccount.email
                 accountUsername.text = currentAccount.username
+                accountCategory.text = currentAccount.category
                 accountPassword.setText(currentAccount.password)
+
+                if(currentAccount.username.isNotEmpty()) {
+                    accountUsername.visibility = View.VISIBLE
+                }
 
                 // functions of buttons
 
@@ -74,6 +88,17 @@ class HomeFragment : Fragment() {
                         R.color.black
                     )
                 )
+
+                positiveOption.setOnClickListener {
+                    bottomSheet.dismiss()
+                    lifecycleScope.launch {
+                        deleteViewModel.deleteEntry(viewModel,currentAccount)
+                    }
+                    Toast.makeText(requireContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show()
+                }
+                negativeOption.setOnClickListener {
+                    bottomSheet.dismiss()
+                }
 
                 when (currentAccount.company.toLowerCase().trim()) {
 
