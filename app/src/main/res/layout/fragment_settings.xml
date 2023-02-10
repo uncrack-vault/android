@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.SettingsFragment">
 
 
@@ -55,7 +55,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_profile"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Profile" />
+                    android:text="Profile" />
 
                 <TextView
                     android:id="@+id/txtProfile_description"
@@ -67,7 +67,7 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/txtProfile"
                     app:layout_constraintTop_toBottomOf="@+id/txtProfile"
-                    tools:text="Create your profile" />
+                    android:text="Create your profile" />
 
 
 
@@ -116,7 +116,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_about"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="About" />
+                    android:text="About" />
 
                 <TextView
                     android:id="@+id/txtAbout_description"
@@ -128,7 +128,7 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/txtAbout"
                     app:layout_constraintTop_toBottomOf="@+id/txtAbout"
-                    tools:text="About the app" />
+                    android:text="About the app" />
 
 
 
@@ -177,7 +177,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_feedback"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Feedback" />
+                    android:text="Feedback" />
 
                 <TextView
                     android:id="@+id/txtFeedback_description"
@@ -189,7 +189,7 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/txtFeedback"
                     app:layout_constraintTop_toBottomOf="@+id/txtFeedback"
-                    tools:text="Tell us the perspective after using the app" />
+                    android:text="Tell us the perspective after using the app" />
 
 
 
@@ -197,10 +197,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/rate"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
@@ -239,7 +236,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_rate"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Share App" />
+                    android:text="Share App" />
 
                 <TextView
                     android:id="@+id/txtRate_description"
@@ -251,7 +248,7 @@
                     app:layout_constraintStart_toStartOf="@+id/txtRate"
                     android:textSize="13sp"
                     android:textColor="@color/black"
-                    tools:text="Share the app with other's" />
+                    android:text="Share the app with other's" />
 
 
 
@@ -261,9 +258,6 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/biometric"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -302,7 +296,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_biometric"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Biometric Authentication" />
+                    android:text="Biometric Authentication" />
 
                 <TextView
                     android:id="@+id/txtBiometric_description"
@@ -314,7 +308,7 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/txtBiometric"
                     app:layout_constraintTop_toBottomOf="@+id/txtBiometric"
-                    tools:text="Fingerprint" />
+                    android:text="Fingerprint" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -325,4 +319,4 @@
 
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

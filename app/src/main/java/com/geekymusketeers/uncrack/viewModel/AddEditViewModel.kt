@@ -65,16 +65,11 @@ class AddEditViewModel : ViewModel() {
         account: Account
     ) = viewModelScope.launch {
 
-        val updateData = launch {
-
-            val updateAccountObjectInRoomDB = viewModelScope.async(Dispatchers.IO) {
-                updateInRoomDB(accountsViewModel, account)
-            }
-
-            updateStatus.value = (updateAccountObjectInRoomDB.await())
+        val updateAccountObjectInRoomDB = viewModelScope.async(Dispatchers.IO) {
+            updateInRoomDB(accountsViewModel, account)
         }
-        updateData.join()
-        updateStatus.value = updateStatus.value?.plus(1)
+
+        updateStatus.value = updateStatus.value?.plus(updateAccountObjectInRoomDB.await())
     }
 
     private suspend fun updateInRoomDB(
@@ -85,11 +80,11 @@ class AddEditViewModel : ViewModel() {
         return withContext(Dispatchers.IO) {
             try {
                 accountsViewModel.editAccount(account)
-                Util.log("Updated in RoomDB")
-                1
+//                Util.log("Updated in RoomDB")
+                return@withContext 1
             } catch (e: java.lang.Exception) {
                 Util.log("Error: $e")
-                5
+                return@withContext 5
             }
         }
     }

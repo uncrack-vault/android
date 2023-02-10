@@ -71,6 +71,8 @@ class AccountAdapter(private val context: Context, private val listner: (Account
 
             // Passing data to Edit fragments
             val bundle = Bundle()
+            bundle.putSerializable("category",currentAccount.category)
+            bundle.putSerializable("id",currentAccount.id)
             bundle.putSerializable("company",currentAccount.company)
             bundle.putSerializable("email", currentAccount.email)
             bundle.putSerializable("username", currentAccount.username)

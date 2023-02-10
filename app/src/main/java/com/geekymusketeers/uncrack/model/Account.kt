@@ -10,9 +10,9 @@ import kotlinx.parcelize.Parcelize
 data class Account(
     @PrimaryKey(autoGenerate = true)
     val id : Int,
-    val company : String,
-    val email : String,
-    val category : String,
-    val username : String,
-    val password : String
+    var company : String,
+    var email : String,
+    var category : String,
+    var username : String,
+    var password : String
 ) : Parcelable

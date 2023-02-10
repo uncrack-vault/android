@@ -14,8 +14,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
-import androidx.navigation.NavArgs
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.geekymusketeers.uncrack.R
@@ -26,8 +25,10 @@ import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.model.Account
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.launch
 
 
 class EditFragment : Fragment() {
@@ -40,6 +41,7 @@ class EditFragment : Fragment() {
     private val args by navArgs<EditFragmentArgs>()
 
     private lateinit var accountViewModel: AccountViewModel
+    private lateinit var editViewModel: AddEditViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,17 +51,27 @@ class EditFragment : Fragment() {
         _binding = FragmentEditBinding.inflate(inflater,container,false)
 
         accountViewModel = ViewModelProvider(this)[AccountViewModel::class.java]
+        editViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().application)
+        )[AddEditViewModel::class.java]
 
 
         // Fetching data from adapter
-        val acc = arguments?.getString("company")
+        val id = arguments?.getInt("id")
+        val acc = arguments?.getString("company").toString()
         binding.editAccType.setText(acc)
-        val email = arguments?.getString("email")
+        val email = arguments?.getString("email").toString()
         binding.editEmail.setText(email)
-        val username = arguments?.getString("username")
+        val username = arguments?.getString("username").toString()
         binding.editUsername.setText(username)
-        val pass = arguments?.getString("password")
+        val pass = arguments?.getString("password").toString()
         binding.editPassword.setText(pass)
+        val category = arguments?.getString("category").toString()
+
+
+        val account = id?.let { Account(it,acc,email,category,username,pass) }
 
         // Setting logo according to the account type
 
@@ -93,11 +105,11 @@ class EditFragment : Fragment() {
                 "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
                 "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
                 "netflix" -> {
-                    binding.btnShare.visibility = View.VISIBLE
+//                    binding.btnShare.visibility = View.VISIBLE
                     setImageOnAccountNameChange(R.drawable.netflix_logo)
                 }
                 "amazon prime" -> {
-                    binding.btnShare.visibility = View.VISIBLE
+//                    binding.btnShare.visibility = View.VISIBLE
                     setImageOnAccountNameChange(R.drawable.amazon_logo)
                 }
                 "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
@@ -114,7 +126,8 @@ class EditFragment : Fragment() {
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
         binding.btnEdit.setOnClickListener {
-            updateDB()
+
+            updateDB(account)
         }
 
         binding.editBack.setOnClickListener {
@@ -188,7 +201,7 @@ class EditFragment : Fragment() {
         }
     }
 
-    private fun updateDB() {
+    private fun updateDB(account: Account?) {
 
         val accountName = binding.editAccType.text.toString()
         val email = binding.editEmail.text.toString()
@@ -198,10 +211,42 @@ class EditFragment : Fragment() {
         val password = binding.editPassword.text.toString()
         val userName = binding.editUsername.text.toString()
 
-        val updateAccount = Account(0,accountName, email, category,userName, password)
+//        val updateAccount = Account(0,accountName, email, category,userName, password)
 
-        accountViewModel.editAccount(updateAccount)
-        Toast.makeText(requireContext(),"Successfully Edited",Toast.LENGTH_LONG).show()
+        if (account!=null){
+            if (accountName != account.company){
+                account.company = accountName
+            }
+            if (email != account.email){
+                account.email = email
+            }
+            if (category != account.category){
+                account.category = category
+            }
+            if (password != account.password){
+                account.password = password
+            }
+            if (userName != account.username){
+                account.username = userName
+            }
+            lifecycleScope.launch {
+                editViewModel.updateData(accountViewModel,account)
+            }
+        }
+
+//        accountViewModel.editAccount(updateAccount)
+
+        editViewModel.updateStatus.observe(viewLifecycleOwner){
+
+            if (it == 1){
+                Toast.makeText(requireContext(),"Successfully Edited",Toast.LENGTH_LONG).show()
+            }
+            else if (it == 5){
+                Toast.makeText(requireContext(),"Failed to edit",Toast.LENGTH_LONG).show()
+            }
+
+        }
+
 
         val frag = HomeFragment()
         val trans = fragmentManager?.beginTransaction()
