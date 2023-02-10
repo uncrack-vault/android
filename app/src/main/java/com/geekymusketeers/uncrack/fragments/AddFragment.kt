@@ -110,10 +110,6 @@ class AddFragment : Fragment() {
             handleBackButtonPress()
 
         }
-        binding.btnDelete.setOnClickListener {
-
-            deleteAccount()
-        }
         // Account List
         val accounts = resources.getStringArray(R.array.accounts)
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.list_items,accounts)
@@ -132,22 +128,7 @@ class AddFragment : Fragment() {
         binding.btnSave.visibility = View.VISIBLE
     }
 
-    private fun deleteAccount() {
 
-            val accountId = args.account!!.id
-            val email = binding.email.text.toString()
-            val userName = binding.username.text.toString()
-            val password = binding.password.text.toString()
-            val category: String = (binding.categoryChipGroup.children.toList().filter {
-                (it as Chip).isChecked
-            }[0] as Chip).text.toString()
-            val company = binding.accType.text.toString()
-
-            Account(accountId, company, email, category, userName, password).also{
-                viewModel.deleteAccount(it)
-                findNavController().navigateUp()
-            }
-    }
 
     private fun handleBackButtonPress() {
         val inputAccountType = binding.accType.text.toString().trim()

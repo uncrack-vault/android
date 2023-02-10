@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -51,10 +52,28 @@ class HomeFragment : Fragment() {
 
             dialog.apply {
 
+                // Fetching data and setting it to textview and edittext
                 accountName.text = currentAccount.company
                 accountEmail.text = currentAccount.email
                 accountUsername.text = currentAccount.username
-                accountPassword.text = currentAccount.password
+                accountPassword.setText(currentAccount.password)
+
+                // functions of buttons
+
+                positiveOption.text = "Delete"
+                positiveOption.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.white
+                    )
+                )
+                negativeOption.text = "Cancel"
+                negativeOption.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.black
+                    )
+                )
 
                 when (currentAccount.company.toLowerCase().trim()) {
 
