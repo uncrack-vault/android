@@ -14,73 +14,13 @@
         android:orientation="vertical">
 
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            app:cardElevation="5dp"
-            android:padding="10dp"
-            app:cardCornerRadius="10dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/profile_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="15dp">
-
-                <ImageView
-                    android:id="@+id/img_profile"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/profile_logo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.476" />
-
-                <TextView
-                    android:id="@+id/txtProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/dm_sans_medium"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="10dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/img_profile"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="Profile" />
-
-                <TextView
-                    android:id="@+id/txtProfile_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/dm_sans"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    app:layout_constraintStart_toStartOf="@+id/txtProfile"
-                    app:layout_constraintTop_toBottomOf="@+id/txtProfile"
-                    android:text="Create your profile" />
-
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="90dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             app:cardElevation="5dp"
@@ -108,7 +48,7 @@
                     android:id="@+id/txtAbout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/dm_sans_medium"
                     android:textColor="@color/black"
                     android:layout_marginStart="10dp"
@@ -130,6 +70,78 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtAbout"
                     android:text="About the app" />
 
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/darkMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardElevation="5dp"
+            android:padding="10dp"
+            app:cardCornerRadius="10dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/darkMode_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp">
+
+                <ImageView
+                    android:id="@+id/img_darkMode"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/about_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.476" />
+
+                <TextView
+                    android:id="@+id/txtDarkMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="10dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/img_darkMode"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Dark  Mode" />
+
+                <TextView
+                    android:id="@+id/txtDarkMode_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/dm_sans"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/txtDarkMode"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDarkMode"
+                    android:text="Change the theme as you want" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/DarkModeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOff="Off"
+                    android:textOn="On"
+                    android:thumb="@drawable/switch_thumb"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:track="@drawable/switch_track" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -169,7 +181,7 @@
                     android:id="@+id/txtFeedback"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/dm_sans_medium"
                     android:textColor="@color/black"
                     android:layout_marginStart="10dp"
@@ -189,7 +201,7 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/txtFeedback"
                     app:layout_constraintTop_toBottomOf="@+id/txtFeedback"
-                    android:text="Tell us the perspective after using the app" />
+                    android:text="Tell us your perspective after using the app" />
 
 
 
@@ -228,7 +240,7 @@
                     android:id="@+id/txtRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/dm_sans_medium"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -289,7 +301,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/dm_sans_medium"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -310,6 +322,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtBiometric"
                     android:text="Fingerprint" />
 
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/FingerPrintSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOff="Off"
+                    android:textOn="On"
+                    android:thumb="@drawable/switch_thumb"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:track="@drawable/switch_track" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

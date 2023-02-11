@@ -15,6 +15,9 @@
         android:theme="@style/Theme.UnCrack"
         tools:targetApi="31">
         <activity
+            android:name=".AboutUsActivity"
+            android:exported="false" />
+        <activity
             android:name=".OnboardingActivity"
             android:exported="false" />
         <activity
