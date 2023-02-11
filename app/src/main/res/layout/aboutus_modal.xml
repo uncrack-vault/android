@@ -15,10 +15,19 @@
 
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/uncrack_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UnCrack"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:fontFamily="@font/dm_sans_bold"/>
 
         <TextView
             android:id="@+id/options_content"

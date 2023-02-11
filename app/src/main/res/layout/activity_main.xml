@@ -25,6 +25,7 @@
         app:itemTextColor="@drawable/bottom_nav_color_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

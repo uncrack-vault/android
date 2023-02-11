@@ -7,20 +7,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.SettingsFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dm_sans_medium"
+        android:gravity="start"
+        android:layout_marginStart="10dp"
+        android:text="Settings"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             app:cardElevation="5dp"
@@ -98,7 +111,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/about_logo"
+                    android:src="@drawable/themes"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
