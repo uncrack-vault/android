@@ -6,6 +6,7 @@
     <string name="password">Password</string>
     <string name="company">Company</string>
     <string name="let_s_go">Let\'s go</string>
+    <string name="mailTo">mailto:aritrarick2002@gmail.com?Subject=Your%20feedback%20is%20important%20to%20us%21</string>
     <string-array name="accounts">
         <item>PayPal</item>
         <item>Instagram</item>

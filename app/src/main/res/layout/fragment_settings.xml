@@ -13,7 +13,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/dm_sans_medium"
         android:gravity="start"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:text="Settings"
         android:textColor="@color/black"
         android:textSize="25sp"

@@ -1,8 +1,12 @@
 package com.geekymusketeers.uncrack.fragments
 
+import android.app.KeyguardManager
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.hardware.biometrics.BiometricPrompt
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.CancellationSignal
@@ -12,7 +16,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
+import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.AboutusModalBinding
 import com.geekymusketeers.uncrack.databinding.FragmentSettingsBinding
 import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
@@ -56,6 +63,11 @@ class SettingsFragment : Fragment() {
             Context.MODE_PRIVATE)
         val currentState = pref.getBoolean("switchState", false)
 
+        binding.feedback.setOnClickListener {
+            val openURL = Intent(Intent.ACTION_VIEW)
+            openURL.data = Uri.parse(requireContext().resources.getString(R.string.mailTo))
+            startActivity(openURL)
+        }
 
         binding.about.setOnClickListener {
 
@@ -71,9 +83,6 @@ class SettingsFragment : Fragment() {
             dialog.root.setBottomSheet(bottomSheet)
 
         }
-
-
-
         binding.FingerPrintSwitch.apply {
             setOnTouchListener { _, event ->
                 event.actionMasked == MotionEvent.ACTION_MOVE
@@ -87,7 +96,6 @@ class SettingsFragment : Fragment() {
                     val editor: SharedPreferences.Editor = pref.edit()
                     editor.putBoolean("switchState", newState)
                     editor.apply()
-
                     val biometricPrompt = BiometricPrompt.Builder(requireContext())
                         .setTitle("Unlock UnCrack")
                         .setSubtitle("Input your Fingerprint to ensure it's you...")
