@@ -139,14 +139,22 @@ class HomeFragment : Fragment() {
 
 
         // Moving to AddFragment
-        binding.fab.setOnClickListener { view ->
-            val fragment = AddFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.fragment,fragment)?.addToBackStack( "tag" )?.commit()
+        binding.fab.setOnClickListener {
+            goToAddFragment()
+        }
+
+        binding.fabCircle.setOnClickListener {
+            goToAddFragment()
         }
         setUpFab()
 //        popup_menu()
         return binding.root
+    }
+
+    private fun goToAddFragment() {
+        val fragment = AddFragment()
+        val transaction = fragmentManager?.beginTransaction()
+        transaction?.replace(R.id.fragment,fragment)?.addToBackStack( "tag" )?.commit()
     }
 
 

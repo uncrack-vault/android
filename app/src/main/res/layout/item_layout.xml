@@ -27,7 +27,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginStart="-10dp"
             android:src="@drawable/paypal" />
 
         <TextView
