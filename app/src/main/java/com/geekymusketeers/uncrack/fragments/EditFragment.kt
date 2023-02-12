@@ -127,6 +127,17 @@ class EditFragment : Fragment() {
 
         binding.btnEdit.setOnClickListener {
 
+            val accountType = binding.editAccType.text.toString()
+            val email = binding.editEmail.text.toString()
+
+            if (accountType.isEmpty()){
+                Toast.makeText(requireContext(),"Please select the account type",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }else if (email.isEmpty()){
+                Toast.makeText(requireContext(),"Please enter the email id",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             updateDB(account)
         }
 
@@ -162,7 +173,7 @@ class EditFragment : Fragment() {
                 positiveOption.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.red
+                        R.color.white
                     )
                 )
                 negativeOption.text = "Continue editing"
@@ -239,7 +250,7 @@ class EditFragment : Fragment() {
         editViewModel.updateStatus.observe(viewLifecycleOwner){
 
             if (it == 1){
-                Toast.makeText(requireContext(),"Successfully Edited",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),"Successfully Updated",Toast.LENGTH_LONG).show()
             }
             else if (it == 5){
                 Toast.makeText(requireContext(),"Failed to edit",Toast.LENGTH_LONG).show()

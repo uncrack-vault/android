@@ -27,6 +27,7 @@ import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 
@@ -94,7 +95,7 @@ class HomeFragment : Fragment() {
                     lifecycleScope.launch {
                         deleteViewModel.deleteEntry(viewModel,currentAccount)
                     }
-                    Toast.makeText(requireContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "Successfully Deleted", Snackbar.LENGTH_SHORT).show()
                 }
                 negativeOption.setOnClickListener {
                     bottomSheet.dismiss()

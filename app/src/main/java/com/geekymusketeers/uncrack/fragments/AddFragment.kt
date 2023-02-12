@@ -89,16 +89,14 @@ class AddFragment : Fragment() {
         binding.btnSave.setOnClickListener {
 
             val company = binding.accType.text.toString()
-            val category: String = (binding.categoryChipGroup.children.toList().filter {
-                (it as Chip).isChecked
-            }[0] as Chip).text.toString()
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
 
-            if (company.isEmpty()){
-                Toast.makeText(requireContext(),"Enter select company",Toast.LENGTH_LONG).show()
+            if (company.isEmpty() || email.isEmpty() || password.isEmpty()){
+                Toast.makeText(requireContext(),"Please fill all the details",Toast.LENGTH_LONG).show()
                 return@setOnClickListener
-            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            }
+            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                 Toast.makeText(requireContext(),"Please check your Email Id",Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
@@ -148,7 +146,7 @@ class AddFragment : Fragment() {
                 positiveOption.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.red
+                        R.color.white
                     )
                 )
                 negativeOption.text = "Continue editing"

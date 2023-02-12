@@ -24,7 +24,7 @@
         android:layout_height="65dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/bottom_nav"
         android:elevation="8dp"
         app:itemIconSize="27dp"
