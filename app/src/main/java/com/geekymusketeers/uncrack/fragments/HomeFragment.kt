@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
                 // Fetching data and setting it to textview and edittext
                 accountName.text = currentAccount.company
                 accountEmail.text = currentAccount.email
-                accountUsername.text = currentAccount.username
+                accountUsername.text = "UserName:  " + currentAccount.username
                 accountCategory.text = currentAccount.category
                 accountPassword.setText(currentAccount.password)
 

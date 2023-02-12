@@ -75,34 +75,16 @@
                 android:visibility="visible" />
 
             <TextView
+                android:id="@+id/edit_acc_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/roboto"
-                android:text="Select the Account"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/dm_sans_bold"
+                android:text="Account Name"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/menu_account"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:textColorHint="@android:color/darker_gray"
-                app:boxBackgroundColor="#F5F8FA">
-
-                <AutoCompleteTextView
-                    android:id="@+id/edit_acc_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto"
-                    android:inputType="none"
-                    android:paddingStart="16dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:id="@+id/remainingLayout"

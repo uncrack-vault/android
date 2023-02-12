@@ -61,7 +61,7 @@ class EditFragment : Fragment() {
         // Fetching data from adapter
         val id = arguments?.getInt("id")
         val acc = arguments?.getString("company").toString()
-        binding.editAccType.setText(acc)
+        binding.editAccType.text = acc
         val email = arguments?.getString("email").toString()
         binding.editEmail.setText(email)
         val username = arguments?.getString("username").toString()
@@ -69,6 +69,9 @@ class EditFragment : Fragment() {
         val pass = arguments?.getString("password").toString()
         binding.editPassword.setText(pass)
         val category = arguments?.getString("category").toString()
+        binding.editCategoryChipGroup.children.toList().filter {
+            (it as Chip).isChecked
+        }
 
 
         val account = id?.let { Account(it,acc,email,category,username,pass) }
@@ -93,35 +96,7 @@ class EditFragment : Fragment() {
 
         // Setting logo according to the user choice when he want to edit the account ype
 
-        binding.editAccType.afterTextChanged{
-            selectedAccount = it
-            when(it.toLowerCase()){
-                "paypal" -> setImageOnAccountNameChange(R.drawable.paypal)
-                "instagram" -> setImageOnAccountNameChange(R.drawable.instagram)
-                "facebook" -> setImageOnAccountNameChange(R.drawable.facebook)
-                "linkedin" -> setImageOnAccountNameChange(R.drawable.linkedin)
-                "snapchat" -> setImageOnAccountNameChange(R.drawable.snapchat)
-                "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
-                "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
-                "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
-                "netflix" -> {
-//                    binding.btnShare.visibility = View.VISIBLE
-                    setImageOnAccountNameChange(R.drawable.netflix_logo)
-                }
-                "amazon prime" -> {
-//                    binding.btnShare.visibility = View.VISIBLE
-                    setImageOnAccountNameChange(R.drawable.amazon_logo)
-                }
-                "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
-                "discord" -> setImageOnAccountNameChange(R.drawable.discord)
-                "others" -> setImageOnAccountNameChange(R.drawable.general_account)
-            }
-        }
 
-        // Setting adapter for the companies list
-        val accounts = resources.getStringArray(R.array.accounts)
-        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.list_items,accounts)
-        binding.editAccType.setAdapter(arrayAdapter)
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
@@ -197,7 +172,9 @@ class EditFragment : Fragment() {
             dialog.root.setBottomSheet(bottomSheet)
         }
         else {
-            findNavController().navigate(R.id.action_editFragment_to_homeFragment)
+            val frag = HomeFragment()
+            val trans = fragmentManager?.beginTransaction()
+            trans?.replace(R.id.fragment,frag)?.commit()
         }
     }
     override fun onResume() {
@@ -221,8 +198,6 @@ class EditFragment : Fragment() {
         }[0] as Chip).text.toString()
         val password = binding.editPassword.text.toString()
         val userName = binding.editUsername.text.toString()
-
-//        val updateAccount = Account(0,accountName, email, category,userName, password)
 
         if (account!=null){
             if (accountName != account.company){
@@ -257,28 +232,12 @@ class EditFragment : Fragment() {
             }
 
         }
-
-
         val frag = HomeFragment()
         val trans = fragmentManager?.beginTransaction()
         trans?.replace(R.id.fragment,frag)?.commit()
 
     }
 
-    private fun AutoCompleteTextView.afterTextChanged(afterTextChanged: (String) -> Unit){
-
-        this.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(editable: Editable?) {
-                afterTextChanged.invoke(editable.toString())
-            }
-
-        })
-
-    }
 
 
 }

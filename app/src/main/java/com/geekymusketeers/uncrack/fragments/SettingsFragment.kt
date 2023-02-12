@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.AboutusModalBinding
 import com.geekymusketeers.uncrack.databinding.FragmentSettingsBinding
+import com.geekymusketeers.uncrack.helper.Util
 import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
 
@@ -31,27 +32,8 @@ class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
     lateinit var pref: SharedPreferences
-
-
-
     private var cancellationSignal: CancellationSignal? = null
-    private val authenticationCallback: BiometricPrompt.AuthenticationCallback
-        get() = @RequiresApi(Build.VERSION_CODES.P)
-        object : BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
-                super.onAuthenticationError(errorCode, errString)
-                Toast.makeText(
-                    requireContext(),
-                    "Authentication error : $errString",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
 
-            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
-                super.onAuthenticationSucceeded(result)
-
-            }
-        }
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreateView(
@@ -59,8 +41,10 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        pref  = requireContext().getSharedPreferences("mypref",
-            Context.MODE_PRIVATE)
+        pref = requireContext().getSharedPreferences(
+            "mypref",
+            Context.MODE_PRIVATE
+        )
         val currentState = pref.getBoolean("switchState", false)
 
         binding.feedback.setOnClickListener {
@@ -87,15 +71,16 @@ class SettingsFragment : Fragment() {
             setOnTouchListener { _, event ->
                 event.actionMasked == MotionEvent.ACTION_MOVE
             }
-            isChecked = currentState
-            setOnCheckedChangeListener { _, isChecked ->
+            setOnCheckedChangeListener { _, isCheckedL ->
 
-                if (isChecked) {
+                Toast.makeText(requireContext(), isCheckedL.toString(), Toast.LENGTH_SHORT).show()
 
-                    val newState = currentState.not()
-                    val editor: SharedPreferences.Editor = pref.edit()
-                    editor.putBoolean("switchState", newState)
-                    editor.apply()
+
+                val editor: SharedPreferences.Editor = pref.edit()
+                editor.putBoolean("switchState", isCheckedL)
+                editor.apply()
+                Util.log("test123: $currentState")
+                if (isCheckedL) {
                     val biometricPrompt = BiometricPrompt.Builder(requireContext())
                         .setTitle("Unlock UnCrack")
                         .setSubtitle("Input your Fingerprint to ensure it's you...")
@@ -114,6 +99,7 @@ class SettingsFragment : Fragment() {
                         authenticationCallback
                     )
                 }
+
             }
             return binding.root
         }
@@ -130,4 +116,21 @@ class SettingsFragment : Fragment() {
         }
         return cancellationSignal as CancellationSignal
     }
+
+    private val authenticationCallback: BiometricPrompt.AuthenticationCallback
+        get() = @RequiresApi(Build.VERSION_CODES.P)
+        object : BiometricPrompt.AuthenticationCallback() {
+            override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
+                super.onAuthenticationError(errorCode, errString)
+                Toast.makeText(
+                    requireContext(),
+                    "Authentication error : $errString",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
+                super.onAuthenticationSucceeded(result)
+            }
+        }
 }
