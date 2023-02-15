@@ -25,4 +25,13 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="ThemeOverlay.search" parent="Theme.UnCrack">
+
+        <!-- Text color -->
+        <item name="android:editTextColor">#000000</item>
+        <!-- Hint text color -->
+        <item name="android:textColorHint">#000000</item>
+
+    </style>
+
 </resources>

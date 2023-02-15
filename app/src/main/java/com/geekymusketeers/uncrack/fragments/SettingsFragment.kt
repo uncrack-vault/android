@@ -76,6 +76,7 @@ class SettingsFragment : Fragment() {
                 Toast.makeText(requireContext(), isCheckedL.toString(), Toast.LENGTH_SHORT).show()
 
 
+
                 val editor: SharedPreferences.Editor = pref.edit()
                 editor.putBoolean("switchState", isCheckedL)
                 editor.apply()
