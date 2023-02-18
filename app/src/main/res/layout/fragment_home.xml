@@ -39,13 +39,15 @@
 
     <EditText
         android:id="@+id/search"
-        android:layout_width="390dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/search_background"
         android:hint="Search"
         android:drawableStart="@drawable/search"
         android:drawablePadding="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:inputType="text"
         android:paddingLeft="10dp"
         android:textColor="@color/black"

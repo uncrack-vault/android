@@ -69,7 +69,8 @@ class AddFragment : Fragment() {
                 "facebook" -> setImageOnAccountNameChange(R.drawable.facebook)
                 "linkedin" -> setImageOnAccountNameChange(R.drawable.linkedin)
                 "snapchat" -> setImageOnAccountNameChange(R.drawable.snapchat)
-                "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
+                "youtube" -> setImageOnAccountNameChange(R.drawable.youtube)
+                "dropbox" -> setImageOnAccountNameChange(R.drawable.dropbox)
                 "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
                 "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
                 "netflix" -> {
