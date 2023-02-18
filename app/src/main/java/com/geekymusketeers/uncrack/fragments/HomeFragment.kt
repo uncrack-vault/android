@@ -2,12 +2,15 @@ package com.geekymusketeers.uncrack.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isEmpty
@@ -24,11 +27,14 @@ import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
 import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding
 import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
+import com.geekymusketeers.uncrack.model.Account
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment() {
@@ -40,6 +46,7 @@ class HomeFragment : Fragment() {
     private lateinit var deleteViewModel: AddEditViewModel
     private lateinit var adapter: AccountAdapter
     private lateinit var recyclerView: RecyclerView
+    var arrNotes = ArrayList<Account>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -138,7 +145,6 @@ class HomeFragment : Fragment() {
 
         })
 
-
         // Moving to AddFragment
         binding.fab.setOnClickListener {
             goToAddFragment()
@@ -150,6 +156,11 @@ class HomeFragment : Fragment() {
         setUpFab()
 //        popup_menu()
         return binding.root
+    }
+
+    private fun filter(text: String) {
+
+
     }
 
     private fun goToAddFragment() {
