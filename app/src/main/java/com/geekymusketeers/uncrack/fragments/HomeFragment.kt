@@ -76,6 +76,18 @@ class HomeFragment : Fragment() {
                 accountCategory.text = currentAccount.category
                 accountPassword.setText(currentAccount.password)
 
+                shareBtn.setOnClickListener {
+
+                    val email = currentAccount.email
+                    val userName = currentAccount.username
+                    val password = currentAccount.password
+                    val shareNote = "${email}\n${userName}\n${password}"
+                    val myIntent= Intent(Intent.ACTION_SEND)
+                    myIntent.type = "text/plane"
+                    myIntent.putExtra(Intent.EXTRA_TEXT,shareNote)
+                    context?.startActivity(myIntent)
+                }
+
                 if(currentAccount.username.isNotEmpty()) {
                     accountUsername.visibility = View.VISIBLE
                 }
