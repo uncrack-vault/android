@@ -65,7 +65,6 @@ class HomeFragment : Fragment() {
                 accountName.text = currentAccount.company
                 accountEmail.text = currentAccount.email
                 accountUsername.text = "UserName:  " + currentAccount.username
-                accountCategory.text = currentAccount.category
                 accountPassword.setText(currentAccount.password)
 
                 shareBtn.setOnClickListener {
@@ -84,11 +83,20 @@ class HomeFragment : Fragment() {
                             val email = currentAccount.email
                             val userName = currentAccount.username
                             val password = currentAccount.password
-                            val shareNote = "${"Email: $email"}\n${"UserName: $userName"}\n${"Password: $password"}"
-                            val myIntent= Intent(Intent.ACTION_SEND)
-                            myIntent.type = "text/plane"
-                            myIntent.putExtra(Intent.EXTRA_TEXT,shareNote)
-                            context?.startActivity(myIntent)
+                            if (userName.isEmpty()){
+                                val shareNoteWithoutUserName = "${"Email: $email"}\n${"Password: $password"}"
+                                val myIntent= Intent(Intent.ACTION_SEND)
+                                myIntent.type = "text/plane"
+                                myIntent.putExtra(Intent.EXTRA_TEXT,shareNoteWithoutUserName)
+                                context?.startActivity(myIntent)
+                            }else{
+                                val shareNote = "${"Email: $email"}\n${"UserName: $userName"}\n${"Password: $password"}"
+                                val myIntent= Intent(Intent.ACTION_SEND)
+                                myIntent.type = "text/plane"
+                                myIntent.putExtra(Intent.EXTRA_TEXT,shareNote)
+                                context?.startActivity(myIntent)
+                            }
+
                         }
                         negativeOption.setOnClickListener {
                             bottomSheet.dismiss()

@@ -4,7 +4,6 @@ import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.hardware.biometrics.BiometricPrompt
 import android.net.Uri
 import android.os.Build
@@ -16,8 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
+import android.content.pm.PackageManager
 import androidx.fragment.app.Fragment
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.AboutusModalBinding
@@ -70,6 +68,11 @@ class SettingsFragment : Fragment() {
             dialog.root.setBottomSheet(bottomSheet)
 
         }
+
+        binding.share.setOnClickListener {
+            shareAPK()
+        }
+
         binding.FingerPrintSwitch.apply {
 
             setOnTouchListener { _, event ->
@@ -106,6 +109,16 @@ class SettingsFragment : Fragment() {
 
             return binding.root
         }
+    }
+
+    private fun shareAPK() {
+
+        val apkUri = Uri.parse("file://${requireActivity().applicationInfo.publicSourceDir}")
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "application/vnd.android.package-archive"
+        shareIntent.putExtra(Intent.EXTRA_STREAM, apkUri)
+        startActivity(Intent.createChooser(shareIntent, "Share APK via"))
+
     }
 
     private fun getCancellationSignal(): CancellationSignal {

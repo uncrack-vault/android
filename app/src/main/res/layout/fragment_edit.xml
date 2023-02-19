@@ -45,14 +45,18 @@
                     android:layout_alignParentStart="true"
                     android:src="@drawable/back_button" />
 
-                <ImageView
-                    android:id="@+id/btn_share"
-                    android:layout_width="25dp"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="25dp"
                     android:layout_toStartOf="@+id/btn_edit"
-                    android:src="@drawable/share"
-                    android:visibility="gone" />
+                    android:layout_toEndOf="@+id/edit_back"
+                    android:text="Edit your Details"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/btn_edit"
