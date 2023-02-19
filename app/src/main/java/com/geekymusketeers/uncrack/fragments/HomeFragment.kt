@@ -1,29 +1,21 @@
 package com.geekymusketeers.uncrack.fragments
 
+import com.geekymusketeers.uncrack.R
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.SearchView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.adapter.AccountAdapter
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
+import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding
 import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
@@ -31,10 +23,10 @@ import com.geekymusketeers.uncrack.model.Account
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment() {
@@ -78,14 +70,33 @@ class HomeFragment : Fragment() {
 
                 shareBtn.setOnClickListener {
 
-                    val email = currentAccount.email
-                    val userName = currentAccount.username
-                    val password = currentAccount.password
-                    val shareNote = "${email}\n${userName}\n${password}"
-                    val myIntent= Intent(Intent.ACTION_SEND)
-                    myIntent.type = "text/plane"
-                    myIntent.putExtra(Intent.EXTRA_TEXT,shareNote)
-                    context?.startActivity(myIntent)
+                    val shareDialog = SharepasswordModalBinding.inflate(layoutInflater)
+                    val bottomSheet = requireContext().createBottomSheet()
+
+                    shareDialog.apply {
+                        optionsHeading.text = "Wait a Second"
+                        optionsContent.text = "Are you sure you want to share your credentials with other's?"
+                        positiveOption.text = "Yes"
+                        negativeOption.text = "No"
+
+                        positiveOption.setOnClickListener {
+                            bottomSheet.dismiss()
+                            val email = currentAccount.email
+                            val userName = currentAccount.username
+                            val password = currentAccount.password
+                            val shareNote = "${"Email: $email"}\n${"UserName: $userName"}\n${"Password: $password"}"
+                            val myIntent= Intent(Intent.ACTION_SEND)
+                            myIntent.type = "text/plane"
+                            myIntent.putExtra(Intent.EXTRA_TEXT,shareNote)
+                            context?.startActivity(myIntent)
+                        }
+                        negativeOption.setOnClickListener {
+                            bottomSheet.dismiss()
+
+                        }
+                    }
+                    shareDialog.root.setBottomSheet(bottomSheet)
+
                 }
 
                 if(currentAccount.username.isNotEmpty()) {
