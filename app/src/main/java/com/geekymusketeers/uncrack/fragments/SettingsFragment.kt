@@ -33,6 +33,7 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var pref: SharedPreferences
     private var cancellationSignal: CancellationSignal? = null
+    private var isFingerPrintEnabled: Boolean = false
 
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -45,7 +46,9 @@ class SettingsFragment : Fragment() {
             "mypref",
             Context.MODE_PRIVATE
         )
-        val currentState = pref.getBoolean("switchState", false)
+        isFingerPrintEnabled = pref.getBoolean("switchState", false)
+        Util.log("OnCreateState: $isFingerPrintEnabled")
+        binding.FingerPrintSwitch.isChecked = isFingerPrintEnabled
 
         binding.feedback.setOnClickListener {
             val openURL = Intent(Intent.ACTION_VIEW)
@@ -68,20 +71,19 @@ class SettingsFragment : Fragment() {
 
         }
         binding.FingerPrintSwitch.apply {
+
             setOnTouchListener { _, event ->
                 event.actionMasked == MotionEvent.ACTION_MOVE
             }
-            setOnCheckedChangeListener { _, isCheckedL ->
 
-                Toast.makeText(requireContext(), isCheckedL.toString(), Toast.LENGTH_SHORT).show()
-
-
+            setOnClickListener {
+                isFingerPrintEnabled = isFingerPrintEnabled.not()
 
                 val editor: SharedPreferences.Editor = pref.edit()
-                editor.putBoolean("switchState", isCheckedL)
+                editor.putBoolean("switchState", isFingerPrintEnabled)
                 editor.apply()
-                Util.log("test123: $currentState")
-                if (isCheckedL) {
+                Util.log("test123: ${isFingerPrintEnabled.not()}")
+                if (isFingerPrintEnabled) {
                     val biometricPrompt = BiometricPrompt.Builder(requireContext())
                         .setTitle("Unlock UnCrack")
                         .setSubtitle("Input your Fingerprint to ensure it's you...")
@@ -100,8 +102,8 @@ class SettingsFragment : Fragment() {
                         authenticationCallback
                     )
                 }
-
             }
+
             return binding.root
         }
     }
