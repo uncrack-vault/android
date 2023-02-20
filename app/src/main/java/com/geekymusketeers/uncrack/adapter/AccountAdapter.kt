@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.fragments.*
 import com.geekymusketeers.uncrack.data.model.Account
 import com.geekymusketeers.uncrack.ui.fragments.EditFragment
 import com.google.android.material.card.MaterialCardView

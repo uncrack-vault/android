@@ -56,7 +56,7 @@ class SplashActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 2000)
+        }, 1600)
     }
 
     private fun getCancellationSignal(): CancellationSignal {

@@ -34,7 +34,6 @@ class AddFragment : Fragment() {
 
     private  var _binding : FragmentAddBinding? = null
     private val binding get() = _binding!!
-    private val args by navArgs<AddFragmentArgs>()
     private var selectedAccount: String? =null
 
     private lateinit var viewModel : AccountViewModel

@@ -33,7 +33,6 @@ class EditFragment : Fragment() {
     private val binding get() = _binding!!
     private var selectedAccount: String? =null
 
-    private val args by navArgs<EditFragmentArgs>()
 
     private lateinit var accountViewModel: AccountViewModel
     private lateinit var editViewModel: AddEditViewModel

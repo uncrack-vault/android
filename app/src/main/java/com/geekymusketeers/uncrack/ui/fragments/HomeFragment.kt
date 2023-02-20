@@ -56,19 +56,7 @@ class HomeFragment : Fragment() {
                 .getInstance(requireActivity().application)
         )[AddEditViewModel::class.java]
 
-        // Search View
-        binding.search.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Handle search query text change
-                searchDatabase(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-            }
-        })
 
         adapter = AccountAdapter(requireContext()){ currentAccount ->
 
@@ -205,14 +193,6 @@ class HomeFragment : Fragment() {
 //        popup_menu()
         return binding.root
     }
-
-    private fun searchDatabase(query: String) {
-        val searchQuery = "%$query%"
-
-        val searchResults = dao.searchData(searchQuery)
-        adapter.setData(searchResults)
-    }
-
 
 
     private fun goToAddFragment() {

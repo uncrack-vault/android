@@ -22,9 +22,6 @@ interface AccountDao {
     @Delete
     suspend fun deleteAccount(account: Account)
 
-    @Query("SELECT * FROM account_table WHERE company LIKE :searchQuery")
-    fun searchData(searchQuery: String): List<Account>
-
     @Query("SELECT * FROM account_table ORDER BY id ASC")
     fun readAllAccount(): LiveData<List<Account>>
 }
