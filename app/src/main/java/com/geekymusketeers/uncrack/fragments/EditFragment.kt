@@ -28,6 +28,7 @@ import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 
@@ -107,10 +108,10 @@ class EditFragment : Fragment() {
             val email = binding.editEmail.text.toString()
 
             if (accountType.isEmpty()){
-                Toast.makeText(requireContext(),"Please select the account type",Toast.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Please select the account type", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }else if (email.isEmpty()){
-                Toast.makeText(requireContext(),"Please enter the email id",Toast.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Please enter the Email Id", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

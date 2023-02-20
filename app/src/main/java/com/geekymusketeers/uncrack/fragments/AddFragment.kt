@@ -94,11 +94,11 @@ class AddFragment : Fragment() {
             val password = binding.password.text.toString()
 
             if (company.isEmpty() || email.isEmpty() || password.isEmpty()){
-                Toast.makeText(requireContext(),"Please fill all the details",Toast.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Please fill all the details", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                Toast.makeText(requireContext(),"Please check your Email Id",Toast.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Please check your Email Id", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             insertDataToDB()
@@ -206,7 +206,7 @@ class AddFragment : Fragment() {
             myViewModel.saveData(viewModel,account)
         }
 
-        Toast.makeText(requireContext(),"Successfully Saved",Toast.LENGTH_LONG).show()
+        Snackbar.make(binding.root, "Successful Saved", Snackbar.LENGTH_SHORT).show()
        // Moving into HomeFragment after saving
         val frag = HomeFragment()
         val trans = fragmentManager?.beginTransaction()
