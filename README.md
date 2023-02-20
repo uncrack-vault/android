@@ -15,8 +15,6 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
 
 - With just one master password, users can easily access all of their login information and never have to worry about forgetting passwords or searching for lost information.
 
-- UnCrack can automatically fill login forms to save time and improve the user experience.
-
 - The app includes a secure password generator that can suggest stronger passwords and help users create unique and secure passwords for all their accounts.
 
 - The app has a simple and user-friendly interface that makes it easy for users to manage their login information and passwords.
@@ -32,6 +30,27 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
   - [Room](https://developer.android.com/training/data-storage/room) - Room is an android library which is an ORM which wraps android's native SQLite database
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Material Components for Android (MDC-Android) help developers execute Material Design. Developed by a core team of engineers and UX designers at Google, these components enable a reliable development workflow to build beautiful and functional Android apps.
 - [Password Strength Meter](https://github.com/gustavaa/AndroidPasswordStrengthMeter) - Password strength meter is an easy-to-implement and flexible password strength indicator for Android. It is fully customizable and features an animated strength indicator and a matching label.
+
+# Package Structure 👀
+
+    com.geekymusketeers.uncrack    # Root Package
+    .
+    ├── data                # For data handling.
+    |   ├── model           # Model data classes, for local entities.
+    │   ├── repository      # Single source of data.
+    │   └── room            # For saving data.
+    |
+    ├── adapter             # Bidge between an `AdapterView` and the underlying data for that view             
+    │   
+    |
+    ├── ui                  # UI/View layer
+    |   ├── fragments       # application's user interface or behavior that can be placed in an `Activity`.      
+    |   ├── onBoarding      # OnboardingScreen
+    │   └── splashScreen    # SplashScreen
+    |
+    ├── utils               # Utility Classes / Kotlin extensions
+    |
+    └── viewmodel           # Generates a binding class for each XML layout file
 
 ## Architecture 👷‍♂️
 
