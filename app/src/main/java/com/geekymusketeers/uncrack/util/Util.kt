@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.helper
+package com.geekymusketeers.uncrack.util
 
 import android.app.Activity
 import android.content.Context

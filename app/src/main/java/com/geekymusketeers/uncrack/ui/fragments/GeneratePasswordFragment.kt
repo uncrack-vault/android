@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.fragments
+package com.geekymusketeers.uncrack.ui.fragments
 
 import android.content.ClipData
 import android.content.ClipboardManager

@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.geekymusketeers.uncrack.databinding.ActivitySplashBinding
-import com.geekymusketeers.uncrack.helper.Util
+import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.ui.MainActivity
 
 

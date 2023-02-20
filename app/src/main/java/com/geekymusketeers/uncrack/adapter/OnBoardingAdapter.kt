@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.model.Onboarding
+import com.geekymusketeers.uncrack.data.model.Onboarding
 
 
 class OnBoardingAdapter(

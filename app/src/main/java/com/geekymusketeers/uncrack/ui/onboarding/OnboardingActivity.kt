@@ -10,7 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.adapter.OnBoardingAdapter
 import com.geekymusketeers.uncrack.databinding.ActivityOnboardingBinding
-import com.geekymusketeers.uncrack.model.Onboarding
+import com.geekymusketeers.uncrack.data.model.Onboarding
 import com.geekymusketeers.uncrack.ui.auth.FingerPrintActivity
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle

@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.data
+package com.geekymusketeers.uncrack.data.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,7 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.geekymusketeers.uncrack.model.Account
+import com.geekymusketeers.uncrack.data.model.Account
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,6 +22,8 @@ interface AccountDao {
     @Delete
     suspend fun deleteAccount(account: Account)
 
+    @Query("SELECT * FROM account_table WHERE company LIKE :searchQuery")
+    fun searchData(searchQuery: String): List<Account>
 
     @Query("SELECT * FROM account_table ORDER BY id ASC")
     fun readAllAccount(): LiveData<List<Account>>

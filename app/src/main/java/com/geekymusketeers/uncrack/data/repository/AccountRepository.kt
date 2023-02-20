@@ -1,9 +1,8 @@
-package com.geekymusketeers.uncrack.repository
+package com.geekymusketeers.uncrack.data.repository
 
 import androidx.lifecycle.LiveData
-import com.geekymusketeers.uncrack.data.AccountDao
-import com.geekymusketeers.uncrack.model.Account
-import java.util.concurrent.Flow
+import com.geekymusketeers.uncrack.data.room.AccountDao
+import com.geekymusketeers.uncrack.data.model.Account
 
 
 class AccountRepository(private val accountDao: AccountDao) {

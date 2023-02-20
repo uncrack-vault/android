@@ -3,8 +3,8 @@ package com.geekymusketeers.uncrack.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.geekymusketeers.uncrack.helper.Util
-import com.geekymusketeers.uncrack.model.Account
+import com.geekymusketeers.uncrack.util.Util
+import com.geekymusketeers.uncrack.data.model.Account
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -50,7 +50,8 @@ class AddEditViewModel : ViewModel() {
 
     private suspend fun saveInRoomDB(
         accountsViewModel: AccountViewModel,
-        account: Account) : Int {
+        account: Account
+    ) : Int {
 
         return withContext(Dispatchers.IO){
             accountsViewModel.addAccount(account)

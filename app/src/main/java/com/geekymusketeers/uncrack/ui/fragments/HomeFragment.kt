@@ -1,8 +1,10 @@
-package com.geekymusketeers.uncrack.fragments
+package com.geekymusketeers.uncrack.ui.fragments
 
 import com.geekymusketeers.uncrack.R
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,19 +16,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.adapter.AccountAdapter
+import com.geekymusketeers.uncrack.data.room.AccountDao
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
 import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding
-import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
-import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
-import com.geekymusketeers.uncrack.model.Account
+import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
+import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
-import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -38,7 +38,8 @@ class HomeFragment : Fragment() {
     private lateinit var deleteViewModel: AddEditViewModel
     private lateinit var adapter: AccountAdapter
     private lateinit var recyclerView: RecyclerView
-    var arrNotes = ArrayList<Account>()
+    private lateinit var dao: AccountDao
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,11 +49,26 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.VISIBLE
+        
         deleteViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory
                 .getInstance(requireActivity().application)
         )[AddEditViewModel::class.java]
+
+        // Search View
+        binding.search.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Handle search query text change
+                searchDatabase(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
 
         adapter = AccountAdapter(requireContext()){ currentAccount ->
 
@@ -190,10 +206,14 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun filter(text: String) {
+    private fun searchDatabase(query: String) {
+        val searchQuery = "%$query%"
 
-
+        val searchResults = dao.searchData(searchQuery)
+        adapter.setData(searchResults)
     }
+
+
 
     private fun goToAddFragment() {
         val fragment = AddFragment()

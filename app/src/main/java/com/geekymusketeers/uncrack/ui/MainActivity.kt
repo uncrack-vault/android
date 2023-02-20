@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivityMainBinding
-import com.geekymusketeers.uncrack.fragments.GeneratePasswordFragment
-import com.geekymusketeers.uncrack.fragments.HomeFragment
-import com.geekymusketeers.uncrack.fragments.SettingsFragment
+import com.geekymusketeers.uncrack.ui.fragments.GeneratePasswordFragment
+import com.geekymusketeers.uncrack.ui.fragments.HomeFragment
+import com.geekymusketeers.uncrack.ui.fragments.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

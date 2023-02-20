@@ -1,10 +1,10 @@
-package com.geekymusketeers.uncrack.data
+package com.geekymusketeers.uncrack.data.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.geekymusketeers.uncrack.model.Account
+import com.geekymusketeers.uncrack.data.model.Account
 
 @Database(
     entities = [Account::class],
@@ -16,7 +16,7 @@ abstract class AccountDatabase : RoomDatabase(){
 
     companion object{
         @Volatile
-        var INSTANCE : AccountDatabase ? = null
+        var INSTANCE : AccountDatabase? = null
 
         @Synchronized
         fun getDatabase(context:Context)  : AccountDatabase {

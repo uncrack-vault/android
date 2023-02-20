@@ -1,6 +1,5 @@
-package com.geekymusketeers.uncrack.fragments
+package com.geekymusketeers.uncrack.ui.fragments
 
-import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -15,14 +14,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import android.content.pm.PackageManager
 import androidx.fragment.app.Fragment
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.AboutusModalBinding
 import com.geekymusketeers.uncrack.databinding.FragmentSettingsBinding
-import com.geekymusketeers.uncrack.helper.Util
-import com.geekymusketeers.uncrack.helper.Util.Companion.createBottomSheet
-import com.geekymusketeers.uncrack.helper.Util.Companion.setBottomSheet
+import com.geekymusketeers.uncrack.util.Util
+import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
+import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 
 
 class SettingsFragment : Fragment() {
@@ -69,9 +67,9 @@ class SettingsFragment : Fragment() {
 
         }
 
-        binding.share.setOnClickListener {
-            shareAPK()
-        }
+//        binding.share.setOnClickListener {
+//            shareAPK()
+//        }
 
         binding.FingerPrintSwitch.apply {
 
@@ -111,15 +109,15 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun shareAPK() {
-
-        val apkUri = Uri.parse("file://${requireActivity().applicationInfo.publicSourceDir}")
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.type = "application/vnd.android.package-archive"
-        shareIntent.putExtra(Intent.EXTRA_STREAM, apkUri)
-        startActivity(Intent.createChooser(shareIntent, "Share APK via"))
-
-    }
+//    private fun shareAPK() {
+//
+//        val apkUri = Uri.parse("file://${requireActivity().applicationInfo.publicSourceDir}")
+//        val shareIntent = Intent(Intent.ACTION_SEND)
+//        shareIntent.type = "application/vnd.android.package-archive"
+//        shareIntent.putExtra(Intent.EXTRA_STREAM, apkUri)
+//        startActivity(Intent.createChooser(shareIntent, "Share APK via"))
+//
+//    }
 
     private fun getCancellationSignal(): CancellationSignal {
         cancellationSignal = CancellationSignal()
