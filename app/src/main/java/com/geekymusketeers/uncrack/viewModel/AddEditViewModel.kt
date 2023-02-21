@@ -37,8 +37,7 @@ class AddEditViewModel : ViewModel() {
                 saveInRoomDB(accountsViewModel, account)
             }
 
-            saveStatus.value =
-                createAccountObjectInRoomDB.await()
+            saveStatus.postValue(createAccountObjectInRoomDB.await())
 
         }
 
