@@ -64,7 +64,7 @@
                     android:layout_height="25dp"
                     android:layout_alignParentEnd="true"
                     android:src="@drawable/save"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
 
             </RelativeLayout>
