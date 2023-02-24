@@ -63,7 +63,7 @@ class AccountAdapter(private val context: Context, private val listner: (Account
             "google drive" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.drive)
             "netflix" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.netflix_logo)
             "amazon prime" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.amazon_logo)
-            "spotify" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.amazon)
+            "spotify" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.spotify)
             "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
             "others" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.general_account)
         }
@@ -97,7 +97,7 @@ class AccountAdapter(private val context: Context, private val listner: (Account
     }
 
     fun setData(account: List<Account>){
-        this.accountList = account
+        accountList = account
         notifyDataSetChanged()
     }
 }

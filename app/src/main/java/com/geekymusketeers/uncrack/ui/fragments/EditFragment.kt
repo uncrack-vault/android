@@ -51,6 +51,7 @@ class EditFragment : Fragment() {
                 .getInstance(requireActivity().application)
         )[AddEditViewModel::class.java]
 
+        initObservers()
 
         // Fetching data from adapter
         val id = arguments?.getInt("id")
@@ -116,6 +117,23 @@ class EditFragment : Fragment() {
             backButton()
         }
         return binding.root
+    }
+
+    private fun initObservers() {
+        editViewModel.updateStatus.observe(viewLifecycleOwner){
+
+            if (it == 1){
+                Toast.makeText(requireContext(),"Successfully Updated",Toast.LENGTH_SHORT).show()
+                val frag = HomeFragment()
+                val trans = fragmentManager?.beginTransaction()
+                trans?.replace(R.id.fragment,frag)?.commit()
+            }
+            else if (it == 5){
+                Toast.makeText(requireContext(),"Failed to edit",Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
     }
 
     private fun setImageOnAccountNameChange(imageID: Int) {
@@ -214,26 +232,6 @@ class EditFragment : Fragment() {
                 editViewModel.updateData(accountViewModel,account)
             }
         }
-
-//        accountViewModel.editAccount(updateAccount)
-
-        editViewModel.updateStatus.observe(viewLifecycleOwner){
-
-            if (it == 1){
-                Toast.makeText(requireContext(),"Successfully Updated",Toast.LENGTH_LONG).show()
-            }
-            else if (it == 5){
-                Toast.makeText(requireContext(),"Failed to edit",Toast.LENGTH_LONG).show()
-            }
-
-        }
-        val frag = HomeFragment()
-        val trans = fragmentManager?.beginTransaction()
-        trans?.replace(R.id.fragment,frag)?.commit()
-
     }
-
-
-
 }
 

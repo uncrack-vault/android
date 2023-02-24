@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
@@ -53,6 +54,7 @@ class AddFragment : Fragment() {
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
+        init()
 
         binding.accType.afterTextChanged{
             selectedAccount = it
@@ -87,11 +89,11 @@ class AddFragment : Fragment() {
             val password = binding.password.text.toString()
 
             if (company.isEmpty() || email.isEmpty() || password.isEmpty()){
-                Snackbar.make(binding.root, "Please fill all the details", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(it, "Please fill all the details", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                Snackbar.make(binding.root, "Please check your Email Id", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(it, "Please check your Email Id", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             insertDataToDB()
@@ -108,6 +110,23 @@ class AddFragment : Fragment() {
         binding.accType.setAdapter(arrayAdapter)
 
         return binding.root
+
+    }
+
+    private fun init() {
+        myViewModel.saveStatus.observe(viewLifecycleOwner){
+
+            if (it == 2){
+                Toast.makeText(requireContext(), "Successful Saved", Toast.LENGTH_SHORT).show()
+                // Moving into HomeFragment after saving
+                val frag = HomeFragment()
+                val trans = fragmentManager?.beginTransaction()
+                trans?.replace(R.id.fragment,frag)?.commit()
+
+            }else if (it == 6){
+                Toast.makeText(requireContext(), "Failed to save", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     }
 
@@ -194,16 +213,10 @@ class AddFragment : Fragment() {
 
         val account = Account(0,company, email, category,userName, password)
 
-//        viewModel.addAccount(account)
         lifecycleScope.launch {
             myViewModel.saveData(viewModel,account)
         }
 
-        Snackbar.make(binding.root, "Successful Saved", Snackbar.LENGTH_SHORT).show()
-       // Moving into HomeFragment after saving
-        val frag = HomeFragment()
-        val trans = fragmentManager?.beginTransaction()
-        trans?.replace(R.id.fragment,frag)?.commit()
     }
 
     private fun AutoCompleteTextView.afterTextChanged(afterTextChanged: (String) -> Unit){
