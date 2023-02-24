@@ -1,11 +1,13 @@
 package com.geekymusketeers.uncrack.ui.fragments
 
+import android.annotation.SuppressLint
 import com.geekymusketeers.uncrack.R
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -16,11 +18,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.adapter.AccountAdapter
+import com.geekymusketeers.uncrack.data.model.Account
 import com.geekymusketeers.uncrack.data.room.AccountDao
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
 import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
+import com.geekymusketeers.uncrack.util.Util.Companion.getBaseStringForFiltering
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
@@ -36,11 +40,12 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: AccountViewModel
     private lateinit var deleteViewModel: AddEditViewModel
-    private lateinit var adapter: AccountAdapter
+    private lateinit var accountAdapter: AccountAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var dao: AccountDao
+    private var accountList = mutableListOf<Account>()
 
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,7 +63,7 @@ class HomeFragment : Fragment() {
 
 
 
-        adapter = AccountAdapter(requireContext()){ currentAccount ->
+        accountAdapter = AccountAdapter(requireContext()){ currentAccount ->
 
             val dialog = ViewpasswordModalBinding.inflate(layoutInflater)
             val bottomSheet = requireContext().createBottomSheet()
@@ -165,14 +170,24 @@ class HomeFragment : Fragment() {
             dialog.root.setBottomSheet(bottomSheet)
 
         }
+
+        accountAdapter.notifyDataSetChanged()
         recyclerView = binding.recyclerView
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.apply {
+            adapter = accountAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
 
 
         viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
         viewModel.readAllData.observe(viewLifecycleOwner, Observer { account ->
-            adapter.setData(account)
+
+
+            accountList.clear()
+            accountList.addAll(account)
+
+            accountAdapter.setData(account)
             if (account.isEmpty()){
                 binding.emptyList.visibility = View.VISIBLE
             }else{
@@ -189,9 +204,62 @@ class HomeFragment : Fragment() {
         binding.fabCircle.setOnClickListener {
             goToAddFragment()
         }
+
+        setFilter()
+
         setUpFab()
 //        popup_menu()
         return binding.root
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setFilter() {
+        binding.etFilter.apply {
+
+            addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    if (p0.toString().isNotEmpty()) {
+                        filter(getBaseStringForFiltering(p0.toString().lowercase()))
+                        setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.clear_text, 0)
+                    } else {
+                        setCompoundDrawablesWithIntrinsicBounds(R.drawable.search, 0, 0, 0)
+                        filter("")
+                    }
+                }
+
+            })
+
+            setOnTouchListener(View.OnTouchListener { _, event ->
+                if (event.action == MotionEvent.ACTION_UP) {
+                    if (event.rawX >= (this.right - this.compoundPaddingRight)) {
+                        this.setText("")
+                        return@OnTouchListener true
+                    }
+                }
+                return@OnTouchListener false
+            })
+
+        }
+    }
+
+    private fun filter(search: String) {
+        val filterList = mutableListOf<Account>()
+        if (search.isNotEmpty()){
+            for (account in accountList){
+                if (getBaseStringForFiltering(account.company.lowercase()).contains(search)){
+                    filterList.add(account)
+                }
+            }
+            accountAdapter.setData(filterList)
+        }else{
+            accountAdapter.setData(accountList)
+        }
     }
 
 
@@ -205,7 +273,7 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
             viewModel.readAllData.observe(viewLifecycleOwner, Observer { account ->
-                adapter.setData(account)
+                accountAdapter.setData(account)
                 if (account.isEmpty()){
                     binding.emptyList.visibility = View.VISIBLE
                 }else{

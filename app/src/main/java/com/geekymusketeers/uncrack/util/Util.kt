@@ -14,6 +14,17 @@ class Util {
             Log.d("", message)
         }
 
+        fun getBaseStringForFiltering(originalString: String) : String {
+            val stringBuilder = StringBuilder()
+
+            for (char in originalString.toCharArray()) {
+                if (char.isLetter())
+                    stringBuilder.append(char)
+            }
+
+            return stringBuilder.toString()
+        }
+
         fun Context.createBottomSheet(): BottomSheetDialog {
             return BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
         }
