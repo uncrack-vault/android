@@ -138,7 +138,7 @@ class SettingsFragment : Fragment() {
                 super.onAuthenticationError(errorCode, errString)
                 Toast.makeText(
                     requireContext(),
-                    "Authentication error : $errString",
+                    "Authentication error",
                     Toast.LENGTH_SHORT
                 ).show()
             }

@@ -21,6 +21,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
+import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
@@ -96,7 +97,30 @@ class AddFragment : Fragment() {
                 Snackbar.make(it, "Please check your Email Id", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            insertDataToDB()
+
+            val saveDialog = SharepasswordModalBinding.inflate(layoutInflater)
+            val bottomSheet = requireContext().createBottomSheet()
+
+            saveDialog.apply {
+                imageView.setImageResource(R.drawable.save_img)
+                optionsHeading.text = "Confirm Changes"
+                optionsContent.text = "Are you sure you want to make changed?"
+                positiveOption.text = "Save Changes"
+                negativeOption.text = "Don't Save"
+
+                positiveOption.setOnClickListener {
+                    bottomSheet.dismiss()
+                    insertDataToDB()
+                    val frag = HomeFragment()
+                    val trans = fragmentManager?.beginTransaction()
+                    trans?.replace(R.id.fragment,frag)?.commit()
+                }
+                negativeOption.setOnClickListener {
+                    bottomSheet.dismiss()
+                }
+            }
+            saveDialog.root.setBottomSheet(bottomSheet)
+
 
         }
         binding.back.setOnClickListener {
