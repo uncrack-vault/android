@@ -1,6 +1,7 @@
 package com.geekymusketeers.uncrack.ui.fragments
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -44,13 +45,8 @@ class EditFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentEditBinding.inflate(inflater,container,false)
 
-        accountViewModel = ViewModelProvider(this)[AccountViewModel::class.java]
-        editViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory
-                .getInstance(requireActivity().application)
-        )[AddEditViewModel::class.java]
 
+        initialization()
         initObservers()
 
         // Fetching data from adapter
@@ -68,11 +64,9 @@ class EditFragment : Fragment() {
             (it as Chip).isChecked
         }
 
-
         val account = id?.let { Account(it,acc,email,category,username,pass) }
 
         // Setting logo according to the account type
-
         when(acc?.toLowerCase().toString()){
             "paypal" -> setImageOnAccountNameChange(R.drawable.paypal)
             "instagram" -> setImageOnAccountNameChange(R.drawable.instagram)
@@ -90,19 +84,15 @@ class EditFragment : Fragment() {
             "others" -> setImageOnAccountNameChange(R.drawable.general_account)
         }
 
-        // Setting logo according to the user choice when he want to edit the account ype
-
-
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
         binding.btnEdit.setOnClickListener {
 
-            val accountType = binding.editAccType.text.toString()
             val email = binding.editEmail.text.toString()
 
-            if (accountType.isEmpty()){
-                Snackbar.make(binding.root, "Please select the account type", Snackbar.LENGTH_SHORT).show()
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                Snackbar.make(binding.root, "Please check your Email Id", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }else if (email.isEmpty()){
                 Snackbar.make(binding.root, "Please enter the Email Id", Snackbar.LENGTH_SHORT).show()
@@ -118,6 +108,16 @@ class EditFragment : Fragment() {
         }
         return binding.root
     }
+
+    private fun initialization() {
+        accountViewModel = ViewModelProvider(this)[AccountViewModel::class.java]
+        editViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().application)
+        )[AddEditViewModel::class.java]
+    }
+
 
     private fun initObservers() {
         editViewModel.updateStatus.observe(viewLifecycleOwner){

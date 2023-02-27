@@ -56,7 +56,7 @@ class SplashActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 1600)
+        }, 1700)
     }
 
     private fun getCancellationSignal(): CancellationSignal {
@@ -79,7 +79,7 @@ class SplashActivity : AppCompatActivity() {
                 super.onAuthenticationError(errorCode, errString)
                 Toast.makeText(
                     this@SplashActivity,
-                    "Authentication error : $errString",
+                    "Authentication error",
                     Toast.LENGTH_SHORT
                 ).show()
             }

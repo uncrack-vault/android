@@ -46,12 +46,9 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentAddBinding.inflate(inflater,container,false)
-        viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
-        myViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory
-                .getInstance(requireActivity().application)
-        )[AddEditViewModel::class.java]
+
+
+        initialization()
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
@@ -104,7 +101,7 @@ class AddFragment : Fragment() {
             saveDialog.apply {
                 imageView.setImageResource(R.drawable.save_img)
                 optionsHeading.text = "Confirm Changes"
-                optionsContent.text = "Are you sure you want to make changed?"
+                optionsContent.text = "Are you sure you want save?"
                 positiveOption.text = "Save Changes"
                 negativeOption.text = "Don't Save"
 
@@ -135,6 +132,15 @@ class AddFragment : Fragment() {
 
         return binding.root
 
+    }
+
+    private fun initialization() {
+        viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
+        myViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().application)
+        )[AddEditViewModel::class.java]
     }
 
     private fun init() {
