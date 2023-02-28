@@ -161,7 +161,7 @@ class HomeFragment : Fragment() {
                     "google drive" -> accountLogo.setImageResource(R.drawable.drive)
                     "netflix" -> accountLogo.setImageResource(R.drawable.netflix_logo)
                     "amazon prime" -> accountLogo.setImageResource(R.drawable.amazon_logo)
-                    "spotify" -> accountLogo.setImageResource(R.drawable.amazon)
+                    "spotify" -> accountLogo.setImageResource(R.drawable.spotify)
                     "discord" -> accountLogo.setImageResource(R.drawable.discord)
                     "others" -> accountLogo.setImageResource(R.drawable.general_account)
                 }

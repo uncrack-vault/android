@@ -21,6 +21,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
+import com.geekymusketeers.uncrack.databinding.SavepasswordModalBinding
 import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
@@ -95,11 +96,10 @@ class AddFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val saveDialog = SharepasswordModalBinding.inflate(layoutInflater)
+            val saveDialog = SavepasswordModalBinding.inflate(layoutInflater)
             val bottomSheet = requireContext().createBottomSheet()
 
             saveDialog.apply {
-                imageView.setImageResource(R.drawable.save_img)
                 optionsHeading.text = "Confirm Changes"
                 optionsContent.text = "Are you sure you want save?"
                 positiveOption.text = "Save Changes"

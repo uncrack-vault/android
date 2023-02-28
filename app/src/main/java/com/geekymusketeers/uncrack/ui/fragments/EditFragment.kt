@@ -19,6 +19,8 @@ import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.databinding.EditpasswordModalBinding
+import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -98,8 +100,28 @@ class EditFragment : Fragment() {
                 Snackbar.make(binding.root, "Please enter the Email Id", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val saveDialog = EditpasswordModalBinding.inflate(layoutInflater)
+            val bottomSheet = requireContext().createBottomSheet()
 
-            updateDB(account)
+            saveDialog.apply {
+                optionsHeading.text = "Confirm Changes"
+                optionsContent.text = "Are you sure you want save the updated credentials?"
+                positiveOption.text = "Save Changes"
+                negativeOption.text = "Don't Save"
+
+                positiveOption.setOnClickListener {
+                    bottomSheet.dismiss()
+                    updateDB(account)
+                    val frag = HomeFragment()
+                    val trans = fragmentManager?.beginTransaction()
+                    trans?.replace(R.id.fragment,frag)?.commit()
+                }
+                negativeOption.setOnClickListener {
+                    bottomSheet.dismiss()
+                }
+            }
+            saveDialog.root.setBottomSheet(bottomSheet)
+
         }
 
         binding.editBack.setOnClickListener {
