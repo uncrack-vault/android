@@ -58,5 +58,9 @@ This app uses [MVVM(Model View View-Model)](https://developer.android.com/topic/
 
 ![Architecture_Flow](https://user-images.githubusercontent.com/80090908/216841302-97243bc3-3df4-4416-8f1f-dc22398c86b1.png)
 
+## Support 💁‍♂️ & Download 💹
+
+<a href="https://www.producthunt.com/posts/uncrack?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-uncrack" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=381745&theme=light" alt="UnCrack - 🔏&#0032;UnCrack&#0032;help&#0032;you&#0032;to&#0032;manage&#0032;&#0038;&#0032;secure&#0032;your&#0032;password&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 ## Contact 📞
 If you need any help, you can connect with me [here](https://www.linkedin.com/in/aritra-das-/).
