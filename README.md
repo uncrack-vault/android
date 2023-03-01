@@ -1,4 +1,5 @@
-![banner_uncrack](https://user-images.githubusercontent.com/80090908/216448828-2fb9c563-8542-4375-990a-9808159a6497.png)
+![banner_uncrack](https://user-images.githubusercontent.com/80090908/222189367-9e76c1ff-00c6-4168-a975-0e4898434c23.png)
+
 
 # UnCrack 🔒
 UnCrack is a simple android application made using Kotlin, for managing your password.
@@ -34,7 +35,7 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
 # Package Structure 👀
 
     com.geekymusketeers.uncrack    # Root Package
-    .
+    
     ├── data                # For data handling.
     |   ├── model           # Model data classes, for local entities.
     │   ├── repository      # Single source of data.
