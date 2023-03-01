@@ -1,6 +1,8 @@
 package com.geekymusketeers.uncrack.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import com.geekymusketeers.uncrack.R
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -79,6 +82,17 @@ class HomeFragment : Fragment() {
                 val decryptedViewPassword = encryption.decryptOrNull(currentAccount.password)
                 accountPassword.setText(decryptedViewPassword)
 
+                // Copy password to clipboard
+                CopyPassword.setOnClickListener {
+                    val clipboard: ClipboardManager? = ContextCompat.getSystemService(
+                        requireContext(),
+                        ClipboardManager::class.java
+                    )
+                    val clip = ClipData.newPlainText("Copy Password", accountPassword.text.toString())
+                    clipboard?.setPrimaryClip(clip)
+                    Toast.makeText(requireContext(),"Password Copied to Clipboard",Toast.LENGTH_SHORT).show()
+                }
+
                 // Share button feature
                 shareBtn.setOnClickListener {
 
@@ -119,6 +133,7 @@ class HomeFragment : Fragment() {
                     shareDialog.root.setBottomSheet(bottomSheet)
 
                 }
+
 
                 // Favourite button feature
 

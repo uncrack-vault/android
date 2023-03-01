@@ -52,10 +52,6 @@ class EditFragment : Fragment() {
         _binding = FragmentEditBinding.inflate(inflater,container,false)
 
 
-        val keyStore = KeyStore.getInstance("AndroidKeyStore")
-        keyStore.load(null)
-        val secretKeyEntry = keyStore.getEntry("MyKeyAlias", null) as KeyStore.SecretKeyEntry
-        secretKey = secretKeyEntry.secretKey
 
         initialization()
         initObservers()
