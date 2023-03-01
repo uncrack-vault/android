@@ -1,5 +1,6 @@
 package com.geekymusketeers.uncrack.ui.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Patterns
 import android.view.KeyEvent
@@ -8,11 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentEditBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
@@ -20,13 +21,15 @@ import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.data.model.Account
 import com.geekymusketeers.uncrack.databinding.EditpasswordModalBinding
-import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
+import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+import java.security.KeyStore
+import javax.crypto.SecretKey
 
 
 class EditFragment : Fragment() {
@@ -34,12 +37,13 @@ class EditFragment : Fragment() {
 
     private var _binding: FragmentEditBinding? = null
     private val binding get() = _binding!!
-    private var selectedAccount: String? =null
+    private lateinit var secretKey: SecretKey
 
 
     private lateinit var accountViewModel: AccountViewModel
     private lateinit var editViewModel: AddEditViewModel
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +51,11 @@ class EditFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentEditBinding.inflate(inflater,container,false)
 
+
+        val keyStore = KeyStore.getInstance("AndroidKeyStore")
+        keyStore.load(null)
+        val secretKeyEntry = keyStore.getEntry("MyKeyAlias", null) as KeyStore.SecretKeyEntry
+        secretKey = secretKeyEntry.secretKey
 
         initialization()
         initObservers()
@@ -60,7 +69,9 @@ class EditFragment : Fragment() {
         val username = arguments?.getString("username").toString()
         binding.editUsername.setText(username)
         val pass = arguments?.getString("password").toString()
-        binding.editPassword.setText(pass)
+        val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
+        val decryptedPassword = encryption.decryptOrNull(pass)
+        binding.editPassword.setText(decryptedPassword)
         val category = arguments?.getString("category").toString()
         binding.editCategoryChipGroup.children.toList().filter {
             (it as Chip).isChecked
@@ -130,6 +141,7 @@ class EditFragment : Fragment() {
         }
         return binding.root
     }
+
 
     private fun initialization() {
         accountViewModel = ViewModelProvider(this)[AccountViewModel::class.java]

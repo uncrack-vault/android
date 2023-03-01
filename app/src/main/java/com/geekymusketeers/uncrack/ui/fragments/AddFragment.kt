@@ -1,5 +1,6 @@
 package com.geekymusketeers.uncrack.ui.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,17 +13,17 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.databinding.SavepasswordModalBinding
-import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
+import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
@@ -42,6 +43,7 @@ class AddFragment : Fragment() {
     private lateinit var viewModel : AccountViewModel
     private lateinit var myViewModel: AddEditViewModel
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -232,6 +234,7 @@ class AddFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun insertDataToDB() {
         val company = binding.accType.text.toString()
         val email = binding.email.text.toString()
@@ -241,7 +244,11 @@ class AddFragment : Fragment() {
         val password = binding.password.text.toString()
         val userName = binding.username.text.toString()
 
-        val account = Account(0,company, email, category,userName, password)
+        // Encrypt the password field
+        val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
+        val encryptedPassword = encryption.encryptOrNull(password)
+
+        val account = Account(0,company, email, category,userName, encryptedPassword)
 
         lifecycleScope.launch {
             myViewModel.saveData(viewModel,account)

@@ -23,6 +23,7 @@ import com.geekymusketeers.uncrack.data.room.AccountDao
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
 import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding
+import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.getBaseStringForFiltering
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
@@ -74,8 +75,11 @@ class HomeFragment : Fragment() {
                 accountName.text = currentAccount.company
                 accountEmail.text = currentAccount.email
                 accountUsername.text = "UserName:  " + currentAccount.username
-                accountPassword.setText(currentAccount.password)
+                val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
+                val decryptedViewPassword = encryption.decryptOrNull(currentAccount.password)
+                accountPassword.setText(decryptedViewPassword)
 
+                // Share button feature
                 shareBtn.setOnClickListener {
 
                     val shareDialog = SharepasswordModalBinding.inflate(layoutInflater)
@@ -116,12 +120,25 @@ class HomeFragment : Fragment() {
 
                 }
 
+                // Favourite button feature
+
+//                favBtn.setOnClickListener {
+//                    favBtn.setImageResource(if (currentAccount.isFavourite) R.drawable.favorite else R.drawable.favorite_border)
+//                    favBtn.setOnClickListener {
+//                        currentAccount.isFavourite = !currentAccount.isFavourite
+//                        lifecycleScope.launch {
+//                            viewModel.editAccount(currentAccount)
+//                        }
+//                        favBtn.setImageResource(if (currentAccount.isFavourite) R.drawable.favorite else R.drawable.favorite_border)
+//                    }
+//                }
+
+
                 if(currentAccount.username.isNotEmpty()) {
                     accountUsername.visibility = View.VISIBLE
                 }
 
                 // functions of buttons
-
                 positiveOption.text = "Delete"
                 positiveOption.setTextColor(
                     ContextCompat.getColor(
