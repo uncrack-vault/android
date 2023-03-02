@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivityMainBinding
+import com.geekymusketeers.uncrack.ui.fragments.CardFragment
 import com.geekymusketeers.uncrack.ui.fragments.GeneratePasswordFragment
 import com.geekymusketeers.uncrack.ui.fragments.HomeFragment
 import com.geekymusketeers.uncrack.ui.fragments.SettingsFragment
@@ -29,6 +30,10 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.homeFragment -> {
                     loadFragment(HomeFragment())
+                    true
+                }
+                R.id.cardFragment ->{
+                    loadFragment(CardFragment())
                     true
                 }
                 R.id.passwordFragment -> {
