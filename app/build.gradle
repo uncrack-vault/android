@@ -82,7 +82,6 @@ dependencies {
     // Floating Action Bar
     implementation 'com.github.imtuann:FloatingActionButtonExpandable:1.1.2'
 
-    implementation 'com.github.zhpanvip:viewpagerindicator:1.0.4'
 
 
 
