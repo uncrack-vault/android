@@ -8,7 +8,7 @@ import com.geekymusketeers.uncrack.data.model.Card
 
 @Database(
     entities = [Card::class],
-    version = 2
+    version = 1
 )
 abstract class CardDatabase : RoomDatabase() {
 

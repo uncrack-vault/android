@@ -155,13 +155,13 @@
             android:id="@+id/fab_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/dm_sans_bold"
             android:paddingEnd="10dp"
             android:text="Save account"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             android:textColor="@android:color/white"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 

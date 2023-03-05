@@ -1,5 +1,6 @@
 package com.geekymusketeers.uncrack.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,8 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Card
 import java.util.EventListener
 
-class CardAdapter(private val listener: (Card) -> Unit):
+class CardAdapter(private val context: Context,
+    private val listener: (Card) -> Unit):
     RecyclerView.Adapter<CardAdapter.ViewHolder>()
 {
     private var cardList = emptyList<Card>()
@@ -37,9 +39,11 @@ class CardAdapter(private val listener: (Card) -> Unit):
         val currentCard = cardList[position]
         holder.itemView.setOnClickListener {
             listener(currentCard)
+
         }
         holder.itemView.findViewById<TextView>(R.id.card_number).text = currentCard.cardNumber
-        holder.itemView.findViewById<TextView>(R.id.expiry_date).text = currentCard.expirationDate
+        holder.itemView.findViewById<TextView>(R.id.month).text = currentCard.expirationMonth
+        holder.itemView.findViewById<TextView>(R.id.year).text = currentCard.expirationYear
         holder.itemView.findViewById<TextView>(R.id.card_holder_name).text = currentCard.cardHolderName
 
     }

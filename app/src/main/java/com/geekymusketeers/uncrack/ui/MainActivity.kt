@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivityMainBinding
-import com.geekymusketeers.uncrack.ui.fragments.CardFragment
+import com.geekymusketeers.uncrack.ui.fragments.card.CardFragment
 import com.geekymusketeers.uncrack.ui.fragments.GeneratePasswordFragment
 import com.geekymusketeers.uncrack.ui.fragments.HomeFragment
 import com.geekymusketeers.uncrack.ui.fragments.SettingsFragment
@@ -51,35 +51,8 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-//        bottomNavigationView = binding.bottomNav
-//
-//        val navController: NavController = findNavController(R.id.fragment)
-//        val appBarConfiguration =
-//            AppBarConfiguration(setOf(R.id.homeFragment, R.id.passwordFragment, R.id.settingsFragment))
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//
-//        bottomNavigationView.setupWithNavController(navController)
-
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            when (destination.id) {
-//                R.id.homeFragment -> showBottomNav(bottomNavigationView)
-//                R.id.passwordFragment -> showBottomNav(bottomNavigationView)
-//                R.id.settingsFragment -> showBottomNav(bottomNavigationView)
-////                R.id.settings -> showBottomNav(bottomNavigationView)
-////                else -> hideBottomNav(bottomNavigationView)
-//            }
-//        }
     }
 
-//    private fun showBottomNav(bottomNavigationView: BottomNavigationView) {
-//        bottomNavigationView.visibility = View.VISIBLE
-//
-//    }
-
-//    private fun hideBottomNav(bottomNavigationView: BottomNavigationView) {
-//        bottomNavigationView.visibility = View.GONE
-//
-//    }
 
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()

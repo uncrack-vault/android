@@ -44,4 +44,18 @@
             android:name="account" />
 
     </fragment>
+    <fragment
+        android:id="@+id/cardFragment"
+        android:name="com.geekymusketeers.uncrack.ui.fragments.card.CardFragment"
+        android:label="fragment_card"
+        tools:layout="@layout/fragment_card" >
+        <action
+            android:id="@+id/action_cardFragment_to_cardDetialsAddFragment"
+            app:destination="@id/cardDetialsAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardDetialsAddFragment"
+        android:name="com.geekymusketeers.uncrack.ui.fragments.card.CardDetialsAddFragment"
+        android:label="fragment_card_detials_add"
+        tools:layout="@layout/fragment_card_detials_add" />
 </navigation>
