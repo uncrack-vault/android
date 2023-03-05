@@ -8,16 +8,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Card
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.databinding.FragmentCardBinding
 import com.geekymusketeers.uncrack.databinding.FragmentCardDetialsAddBinding
+import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.ui.fragments.HomeFragment
+import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.CardViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -31,6 +36,7 @@ class CardDetialsAddFragment : Fragment() {
     private lateinit var buttonLayout: ConstraintLayout
     private lateinit var buttonText: TextView
     private lateinit var buttonProgress: ProgressBar
+    private var selectedCard: String? =null
 
     private lateinit var addCardViewModel: CardViewModel
 
@@ -45,8 +51,69 @@ class CardDetialsAddFragment : Fragment() {
         initialization()
         settingCardDetails()
         handleOperations()
+        settingLayoutAccordingToCard()
+        binding.backButton.setOnClickListener {
+            handleBackButton()
+        }
 
+
+        // Account List
+        val accounts = resources.getStringArray(R.array.cards)
+        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.list_items,accounts)
+        binding.cardType.setAdapter(arrayAdapter)
         return binding.root
+    }
+
+    private fun handleBackButton() {
+
+        val dialog = OptionsModalBinding.inflate(layoutInflater)
+        val bottomSheet = requireContext().createBottomSheet()
+        dialog.apply {
+
+            optionsHeading.text = "Discard changes"
+            optionsContent.text = "Are you sure you discard changes?"
+            positiveOption.text = "Discard"
+            positiveOption.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.white
+                )
+            )
+            negativeOption.text = "Continue editing"
+            negativeOption.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.black
+                )
+            )
+            positiveOption.setOnClickListener {
+                bottomSheet.dismiss()
+                transaction()
+            }
+            negativeOption.setOnClickListener {
+                bottomSheet.dismiss()
+
+            }
+        }
+    }
+
+    private fun settingLayoutAccordingToCard() {
+        binding.cardType.afterTextChanged{
+            selectedCard = it
+            when(it.toLowerCase()){
+                "visa" -> setImageOnAccountNameChange(R.drawable.ic_visa)
+                "mastercard" -> setImageOnAccountNameChange(R.drawable.ic_mastercard)
+
+            }
+        }
+    }
+
+    private fun setImageOnAccountNameChange(cardImageID:Int) {
+        binding.demoCardType.apply {
+            setImageResource(cardImageID)
+        }
+        binding.demoAddCard.visibility = View.VISIBLE
+        binding.remainingCardLayout.visibility = View.VISIBLE
     }
 
     private fun handleOperations() {
@@ -55,7 +122,7 @@ class CardDetialsAddFragment : Fragment() {
             val cardNo = binding.cardNumber.text.toString()
             val cardName = binding.CardHolderName.text.toString()
             val cvv = binding.CVV.text.toString()
-            showProgress()
+//            showProgress()
             if (cardNo.isEmpty() && cardName.isEmpty() && cvv.isEmpty()){
                 validation()
                 return@setOnClickListener
@@ -71,20 +138,25 @@ class CardDetialsAddFragment : Fragment() {
             }
             // Inserting CardDetails to Room DB
             insertDetails()
-            val frag = CardFragment()
-            val trans = fragmentManager?.beginTransaction()
-            trans?.replace(R.id.fragment,frag)?.commit()
+            transaction()
         }
     }
 
+    private fun transaction() {
+        val frag = CardFragment()
+        val trans = fragmentManager?.beginTransaction()
+        trans?.replace(R.id.fragment,frag)?.commit()
+    }
+
     private fun insertDetails() {
+        val type = binding.cardType.text.toString()
         val no = binding.cardNumber.text.toString()
         val name = binding.CardHolderName.text.toString()
         val month = binding.expiryMonth.text.toString()
         val year = binding.expiryYear.text.toString()
         val cvv = binding.CVV.text.toString()
 
-        val card = Card(0,no,name,month,year,cvv)
+        val card = Card(0,type,no,name,month,year,cvv)
         addCardViewModel.addCard(card)
 
     }
@@ -244,6 +316,21 @@ class CardDetialsAddFragment : Fragment() {
 //            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 //            }
 //        })
+    }
+
+    private fun AutoCompleteTextView.afterTextChanged(afterTextChanged: (String) -> Unit){
+
+        this.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(editable: Editable?) {
+                afterTextChanged.invoke(editable.toString())
+            }
+
+        })
+
     }
 
     private fun initialization() {

@@ -10,6 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class Card(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+    val cardType: String,
     val cardNumber: String,
     val cardHolderName: String,
     val expirationMonth: String,

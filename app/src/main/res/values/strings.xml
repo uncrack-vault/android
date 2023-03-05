@@ -23,4 +23,8 @@
         <item>Discord</item>
         <item>Others</item>
     </string-array>
+    <string-array name="cards">
+        <item>VISA</item>
+        <item>MasterCard</item>
+    </string-array>
 </resources>
