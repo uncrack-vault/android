@@ -23,6 +23,7 @@ import com.geekymusketeers.uncrack.databinding.FragmentCardDetialsAddBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.ui.fragments.HomeFragment
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
+import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.CardViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -95,6 +96,7 @@ class CardDetialsAddFragment : Fragment() {
 
             }
         }
+        dialog.root.setBottomSheet(bottomSheet)
     }
 
     private fun settingLayoutAccordingToCard() {
@@ -102,7 +104,10 @@ class CardDetialsAddFragment : Fragment() {
             selectedCard = it
             when(it.toLowerCase()){
                 "visa" -> setImageOnAccountNameChange(R.drawable.ic_visa)
-                "mastercard" -> setImageOnAccountNameChange(R.drawable.ic_mastercard)
+                "mastercard" -> {
+//                    binding.demoAddCard.setCardBackgroundColor(ContextCompat.getColor(context, R.color.my_card_color))
+                    setImageOnAccountNameChange(R.drawable.ic_mastercard)
+                }
 
             }
         }
