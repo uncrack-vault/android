@@ -90,12 +90,12 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/demo_add_card"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="210dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="16dp"
                 android:visibility="gone"
-                app:cardBackgroundColor="#DF54A0F8"
+                app:cardBackgroundColor="#54A0F8"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,32 +105,46 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#DF54A0F8">
+                    android:layout_height="match_parent">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+
+                    <TextView
+                        android:id="@+id/demo_cvv_text"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:gravity="end"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:text="CVV"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="@+id/demo_expiry_date"
+                        app:layout_constraintTop_toBottomOf="@+id/demo_expiry_date" />
+
+                    <TextView
+                        android:id="@+id/demo_cvv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="****"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/demo_cvv_text"
+                        app:layout_constraintTop_toBottomOf="@+id/demo_cvv_text" />
+
+                    <ImageView
+                        android:id="@+id/demo_card_type"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_visa"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/demo_card_holder_name">
+                        app:layout_constraintHorizontal_bias="0.922"
+                        app:layout_constraintStart_toEndOf="@+id/demo_card_holder_name"
+                        app:layout_constraintTop_toBottomOf="@+id/demo_card_holder_name" />
 
-                        <ImageView
-                            android:id="@+id/demo_card_type"
-                            android:layout_width="60dp"
-                            android:layout_height="50dp"
-                            android:layout_marginEnd="20dp"
-                            android:src="@drawable/ic_visa"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.922"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/demo_card_holder_name" />
-
-                    </LinearLayout>
+                    <!--                    </LinearLayout>-->
 
                     <LinearLayout
                         android:id="@+id/demo_card_number"
@@ -138,7 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginStart="15dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="20dp"
                         android:gravity="center"
                         android:orientation="horizontal"
                         app:layout_constraintStart_toStartOf="parent"
@@ -203,7 +217,8 @@
                         android:id="@+id/demo_expiry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
                         android:fontFamily="@font/dm_sans_medium"
                         android:text="EXPIRY DATE"
                         android:textColor="@color/white"
@@ -217,7 +232,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:orientation="horizontal"
-                        app:layout_constraintEnd_toEndOf="@+id/demo_expiry"
                         app:layout_constraintStart_toStartOf="@+id/demo_expiry"
                         app:layout_constraintTop_toBottomOf="@+id/demo_expiry">
 
@@ -269,7 +283,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginStart="30dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="12dp"
                         android:layout_marginEnd="48dp"
                         android:fontFamily="@font/dm_sans_medium"
                         android:text="CARD HOLDER NAME"
@@ -335,6 +349,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
                         android:hint="Card Number"
+                        android:imeOptions="actionNext"
                         android:inputType="phone"
                         android:lines="1"
                         android:maxLength="19"
@@ -382,6 +397,7 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/dm_sans"
                             android:hint="Month"
+                            android:imeOptions="actionNext"
                             android:inputType="number"
                             android:lines="1"
                             android:maxLength="2"
@@ -420,6 +436,7 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/dm_sans"
                             android:hint="Year"
+                            android:imeOptions="actionNext"
                             android:inputType="number"
                             android:lines="1"
                             android:maxLength="4"
@@ -451,6 +468,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
                         android:hint="Card Holder Name"
+                        android:imeOptions="actionNext"
                         android:inputType="text"
                         android:lines="1"
                         android:textColor="@color/black" />

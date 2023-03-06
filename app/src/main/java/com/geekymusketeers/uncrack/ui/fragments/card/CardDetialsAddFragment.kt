@@ -4,6 +4,7 @@ import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,8 +19,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Card
 import com.geekymusketeers.uncrack.databinding.FragmentCardDetialsAddBinding
@@ -29,6 +32,7 @@ import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.CardViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.*
 import java.util.*
 
 
@@ -40,7 +44,7 @@ class CardDetialsAddFragment : Fragment() {
     private lateinit var buttonLayout: ConstraintLayout
     private lateinit var buttonText: TextView
     private lateinit var buttonProgress: ProgressBar
-    private var selectedCard: String? =null
+    private var selectedCard: String? = null
 
     private lateinit var addCardViewModel: CardViewModel
 
@@ -63,7 +67,7 @@ class CardDetialsAddFragment : Fragment() {
 
         // Account List
         val accounts = resources.getStringArray(R.array.cards)
-        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.list_items,accounts)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.list_items, accounts)
         binding.cardType.setAdapter(arrayAdapter)
         return binding.root
     }
@@ -103,17 +107,26 @@ class CardDetialsAddFragment : Fragment() {
     }
 
     private fun settingLayoutAccordingToCard() {
-        binding.cardType.afterTextChanged{
+        binding.cardType.afterTextChanged {
             selectedCard = it
-            when(it.lowercase(Locale.getDefault())){
+            when (it.lowercase(Locale.getDefault())) {
                 "visa" -> setImageOnAccountNameChange(R.drawable.ic_visa)
-                "mastercard" -> setImageOnAccountNameChange(R.drawable.ic_mastercard)
+                "mastercard" -> {
+                    binding.demoAddCard.backgroundTintList = ColorStateList.valueOf(
+                        ResourcesCompat.getColor(
+                            resources,
+                            R.color.mastercard,
+                            null
+                        )
+                    )
+                    setImageOnAccountNameChange(R.drawable.ic_mastercard)
+                }
 
             }
         }
     }
 
-    private fun setImageOnAccountNameChange(cardImageID:Int) {
+    private fun setImageOnAccountNameChange(cardImageID: Int) {
         binding.demoCardType.apply {
             setImageResource(cardImageID)
         }
@@ -127,30 +140,40 @@ class CardDetialsAddFragment : Fragment() {
             val cardNo = binding.cardNumber.text.toString()
             val cardName = binding.CardHolderName.text.toString()
             val cvv = binding.CVV.text.toString()
-//            showProgress()
-            if (cardNo.isEmpty() && cardName.isEmpty() && cvv.isEmpty()){
-                validation()
-                return@setOnClickListener
-            }else if (cvv.isEmpty()){
+            showProgress()
+            if (cvv.isEmpty()) {
                 binding.cardCVVHelperTV.text = "Please Enter the CVV."
                 binding.cardCVVHelperTV.visibility = View.VISIBLE
-            }else if (cardNo.isEmpty()){
+                validation()
+                stopProgress()
+                return@setOnClickListener
+            } else if (cardNo.isEmpty()) {
                 binding.cardNumberHelperTV.text = "Please Enter the Card Number."
                 binding.cardNumberHelperTV.visibility = View.VISIBLE
-            }else if (cardName.isEmpty()){
+                validation()
+                stopProgress()
+                return@setOnClickListener
+            } else if (cardName.isEmpty()) {
                 binding.cardNameHelperTV.text = "Please Enter the Card Holder Name."
                 binding.cardNameHelperTV.visibility = View.VISIBLE
+                validation()
+                stopProgress()
+                return@setOnClickListener
             }
-            // Inserting CardDetails to Room DB
-            insertDetails()
-            transaction()
+            lifecycleScope.launch(Dispatchers.Main) {
+                delay(800L)
+                // Inserting CardDetails to Room DB
+                insertDetails()
+                transaction()
+            }
+
         }
     }
 
     private fun transaction() {
         val frag = CardFragment()
         val trans = fragmentManager?.beginTransaction()
-        trans?.replace(R.id.fragment,frag)?.commit()
+        trans?.replace(R.id.fragment, frag)?.commit()
     }
 
     private fun insertDetails() {
@@ -162,14 +185,13 @@ class CardDetialsAddFragment : Fragment() {
         val cvv = binding.CVV.text.toString()
 
         // Encrypting the data's
-
         val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
         val encryptedNo = encryption.encryptOrNull(no)
         val encryptedMonth = encryption.encryptOrNull(month)
         val encryptedYear = encryption.encryptOrNull(year)
         val encryptedCVV = encryption.encryptOrNull(cvv)
 
-        val card = Card(0,type,encryptedNo,name,encryptedMonth,encryptedYear,encryptedCVV)
+        val card = Card(0, type, encryptedNo, name, encryptedMonth, encryptedYear, encryptedCVV)
         addCardViewModel.addCard(card)
 
     }
@@ -195,6 +217,7 @@ class CardDetialsAddFragment : Fragment() {
             cardCVVHelperTV.visibility = View.VISIBLE
         }
     }
+
     @SuppressLint("ResourceType")
     private fun settingCardDetails() {
 
@@ -318,30 +341,22 @@ class CardDetialsAddFragment : Fragment() {
 
         // Setting CVV to the CardView
 
-//        binding.CVV.onFocusChangeListener = OnFocusChangeListener { view, hasFocus ->
-//            if (hasFocus) {
-//                val set = AnimatorInflater.loadAnimator(requireContext(), R.anim.rotate_card) as AnimatorSet
-//                set.setTarget(binding.demoAddCard)
-//                set.start()
-//            }
-//        }
-//        binding.CVV.addTextChangedListener(object :TextWatcher{
-//            override fun afterTextChanged(s: Editable?) {
-//                tv_card_cv.text = s.toString()
-//                initData()
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//            }
-//        })
+        binding.CVV.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                binding.demoCvv.text = s.toString()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
     }
 
-    private fun AutoCompleteTextView.afterTextChanged(afterTextChanged: (String) -> Unit){
+    private fun AutoCompleteTextView.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
-        this.addTextChangedListener(object: TextWatcher {
+        this.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}

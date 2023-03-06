@@ -2,20 +2,19 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card"
+    android:id="@+id/atm_card"
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:layout_marginHorizontal="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    app:cardBackgroundColor="#DF54A0F8"
+    app:cardBackgroundColor="#54A0F8"
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#DF54A0F8">
+        android:layout_height="match_parent">
 
 
         <LinearLayout
