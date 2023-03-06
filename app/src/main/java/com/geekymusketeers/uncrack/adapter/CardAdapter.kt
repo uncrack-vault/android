@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
@@ -45,6 +46,12 @@ class CardAdapter(private val context: Context,
         holder.itemView.findViewById<TextView>(R.id.month).text = currentCard.expirationMonth
         holder.itemView.findViewById<TextView>(R.id.year).text = currentCard.expirationYear
         holder.itemView.findViewById<TextView>(R.id.card_holder_name).text = currentCard.cardHolderName
+
+        when(currentCard.cardType.toLowerCase().trim()){
+
+            "visa" -> holder.itemView.findViewById<ImageView>(R.id.type).setImageResource(R.drawable.ic_visa)
+            "mastercard" -> holder.itemView.findViewById<ImageView>(R.id.type).setImageResource(R.drawable.ic_mastercard)
+        }
 
     }
 

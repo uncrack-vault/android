@@ -1,5 +1,7 @@
 package com.geekymusketeers.uncrack.ui.fragments.card
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,6 +16,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Card
@@ -104,10 +107,7 @@ class CardDetialsAddFragment : Fragment() {
             selectedCard = it
             when(it.toLowerCase()){
                 "visa" -> setImageOnAccountNameChange(R.drawable.ic_visa)
-                "mastercard" -> {
-//                    binding.demoAddCard.setCardBackgroundColor(ContextCompat.getColor(context, R.color.my_card_color))
-                    setImageOnAccountNameChange(R.drawable.ic_mastercard)
-                }
+                "mastercard" -> setImageOnAccountNameChange(R.drawable.ic_mastercard)
 
             }
         }

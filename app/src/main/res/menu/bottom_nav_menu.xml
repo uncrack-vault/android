@@ -9,12 +9,12 @@
 
     <item android:id="@+id/cardFragment"
         app:iconTint="@color/black"
-        android:icon="@drawable/card"
-        android:title="Home"/>
+        android:icon="@drawable/credit_card"
+        android:title="Card"/>
 
     <item android:id="@+id/passwordFragment"
         app:iconTint="@color/black"
-        android:icon="@drawable/generate_pass"
+        android:icon="@drawable/generate_password"
         android:title="Generate Password"/>
 
     <item android:id="@+id/settingsFragment"
