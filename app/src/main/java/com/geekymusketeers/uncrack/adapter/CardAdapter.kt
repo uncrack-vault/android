@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Card
+import com.geekymusketeers.uncrack.util.Encryption
 import java.util.EventListener
 
 class CardAdapter(private val context: Context,
@@ -42,9 +43,15 @@ class CardAdapter(private val context: Context,
             listener(currentCard)
 
         }
-        holder.itemView.findViewById<TextView>(R.id.card_number).text = currentCard.cardNumber
-        holder.itemView.findViewById<TextView>(R.id.month).text = currentCard.expirationMonth
-        holder.itemView.findViewById<TextView>(R.id.year).text = currentCard.expirationYear
+
+        val decryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
+        val decryptedNumber = decryption.decryptOrNull(currentCard.cardNumber)
+        val decryptedMonth = decryption.decryptOrNull(currentCard.expirationMonth)
+        val decryptedYear = decryption.decryptOrNull(currentCard.expirationYear)
+
+        holder.itemView.findViewById<TextView>(R.id.card_number).text = decryptedNumber
+        holder.itemView.findViewById<TextView>(R.id.month).text = decryptedMonth
+        holder.itemView.findViewById<TextView>(R.id.year).text = decryptedYear
         holder.itemView.findViewById<TextView>(R.id.card_holder_name).text = currentCard.cardHolderName
 
         when(currentCard.cardType.toLowerCase().trim()){

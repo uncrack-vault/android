@@ -1,14 +1,16 @@
 package com.geekymusketeers.uncrack.ui.fragments.card
 
-import android.content.res.ColorStateList
-import android.graphics.Color
+import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -16,20 +18,18 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Card
-import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
-import com.geekymusketeers.uncrack.databinding.FragmentCardBinding
 import com.geekymusketeers.uncrack.databinding.FragmentCardDetialsAddBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
-import com.geekymusketeers.uncrack.ui.fragments.HomeFragment
+import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
-import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.CardViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 
 class CardDetialsAddFragment : Fragment() {
@@ -105,7 +105,7 @@ class CardDetialsAddFragment : Fragment() {
     private fun settingLayoutAccordingToCard() {
         binding.cardType.afterTextChanged{
             selectedCard = it
-            when(it.toLowerCase()){
+            when(it.lowercase(Locale.getDefault())){
                 "visa" -> setImageOnAccountNameChange(R.drawable.ic_visa)
                 "mastercard" -> setImageOnAccountNameChange(R.drawable.ic_mastercard)
 
@@ -161,7 +161,15 @@ class CardDetialsAddFragment : Fragment() {
         val year = binding.expiryYear.text.toString()
         val cvv = binding.CVV.text.toString()
 
-        val card = Card(0,type,no,name,month,year,cvv)
+        // Encrypting the data's
+
+        val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
+        val encryptedNo = encryption.encryptOrNull(no)
+        val encryptedMonth = encryption.encryptOrNull(month)
+        val encryptedYear = encryption.encryptOrNull(year)
+        val encryptedCVV = encryption.encryptOrNull(cvv)
+
+        val card = Card(0,type,encryptedNo,name,encryptedMonth,encryptedYear,encryptedCVV)
         addCardViewModel.addCard(card)
 
     }
@@ -187,6 +195,7 @@ class CardDetialsAddFragment : Fragment() {
             cardCVVHelperTV.visibility = View.VISIBLE
         }
     }
+    @SuppressLint("ResourceType")
     private fun settingCardDetails() {
 
         // Setting Card Number to the CardView
@@ -309,6 +318,13 @@ class CardDetialsAddFragment : Fragment() {
 
         // Setting CVV to the CardView
 
+//        binding.CVV.onFocusChangeListener = OnFocusChangeListener { view, hasFocus ->
+//            if (hasFocus) {
+//                val set = AnimatorInflater.loadAnimator(requireContext(), R.anim.rotate_card) as AnimatorSet
+//                set.setTarget(binding.demoAddCard)
+//                set.start()
+//            }
+//        }
 //        binding.CVV.addTextChangedListener(object :TextWatcher{
 //            override fun afterTextChanged(s: Editable?) {
 //                tv_card_cv.text = s.toString()
