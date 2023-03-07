@@ -67,6 +67,7 @@
                 android:id="@+id/card_Type"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/ic_visa"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.922"

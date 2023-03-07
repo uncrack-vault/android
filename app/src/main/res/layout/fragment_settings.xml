@@ -249,7 +249,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_biometric"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="Biometric Authentication" />
+                    android:text="Security" />
 
                 <TextView
                     android:id="@+id/txtBiometric_description"
@@ -261,7 +261,7 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/txtBiometric"
                     app:layout_constraintTop_toBottomOf="@+id/txtBiometric"
-                    android:text="Fingerprint" />
+                    android:text="Biometric Authentication" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/FingerPrintSwitch"

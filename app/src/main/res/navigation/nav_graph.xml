@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.geekymusketeers.uncrack.ui.fragments.HomeFragment"
+        android:name="com.geekymusketeers.uncrack.ui.fragments.account.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.geekymusketeers.uncrack.ui.fragments.AddFragment"
+        android:name="com.geekymusketeers.uncrack.ui.fragments.account.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/editFragment"
-        android:name="com.geekymusketeers.uncrack.ui.fragments.EditFragment"
+        android:name="com.geekymusketeers.uncrack.ui.fragments.account.EditFragment"
         android:label="fragment_edit"
         tools:layout="@layout/fragment_edit" >
         <action
