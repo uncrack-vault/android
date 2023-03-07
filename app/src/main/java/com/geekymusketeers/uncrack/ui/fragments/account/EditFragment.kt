@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.ui.fragments
+package com.geekymusketeers.uncrack.ui.fragments.account
 
 import android.os.Build
 import android.os.Bundle
@@ -28,7 +28,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
-import java.security.KeyStore
 import javax.crypto.SecretKey
 
 

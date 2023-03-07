@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.ui.fragments
+package com.geekymusketeers.uncrack.ui.fragments.account
 
 import android.os.Build
 import android.os.Bundle

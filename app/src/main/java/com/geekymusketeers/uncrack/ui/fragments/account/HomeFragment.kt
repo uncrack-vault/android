@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.ui.fragments
+package com.geekymusketeers.uncrack.ui.fragments.account
 
 import android.annotation.SuppressLint
 import android.content.ClipData
@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.adapter.AccountAdapter
 import com.geekymusketeers.uncrack.data.model.Account
-import com.geekymusketeers.uncrack.data.room.AccountDao
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
 import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding

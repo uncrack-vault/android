@@ -7,7 +7,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivityMainBinding
 import com.geekymusketeers.uncrack.ui.fragments.card.CardFragment
 import com.geekymusketeers.uncrack.ui.fragments.GeneratePasswordFragment
-import com.geekymusketeers.uncrack.ui.fragments.HomeFragment
+import com.geekymusketeers.uncrack.ui.fragments.account.HomeFragment
 import com.geekymusketeers.uncrack.ui.fragments.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

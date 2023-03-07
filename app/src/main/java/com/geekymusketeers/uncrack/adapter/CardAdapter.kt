@@ -52,6 +52,7 @@ class CardAdapter(private val context: Context,
         val decryptedMonth = decryption.decryptOrNull(currentCard.expirationMonth)
         val decryptedYear = decryption.decryptOrNull(currentCard.expirationYear)
 
+
         holder.itemView.findViewById<TextView>(R.id.card_number).text = decryptedNumber
         holder.itemView.findViewById<TextView>(R.id.month).text = decryptedMonth
         holder.itemView.findViewById<TextView>(R.id.year).text = decryptedYear
