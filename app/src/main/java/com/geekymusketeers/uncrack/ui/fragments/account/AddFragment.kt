@@ -10,10 +10,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +38,9 @@ class AddFragment : Fragment() {
     private  var _binding : FragmentAddBinding? = null
     private val binding get() = _binding!!
     private var selectedAccount: String? =null
+    private lateinit var buttonLayout: ConstraintLayout
+    private lateinit var buttonText: TextView
+    private lateinit var buttonProgress: ProgressBar
 
     private lateinit var viewModel : AccountViewModel
     private lateinit var myViewModel: AddEditViewModel
@@ -69,32 +71,45 @@ class AddFragment : Fragment() {
                 "dropbox" -> setImageOnAccountNameChange(R.drawable.dropbox)
                 "twitter" -> setImageOnAccountNameChange(R.drawable.twitter)
                 "google drive" -> setImageOnAccountNameChange(R.drawable.drive)
-                "netflix" -> {
-//                    binding.btnShare.visibility = View.VISIBLE
-                    setImageOnAccountNameChange(R.drawable.netflix_logo)
-                }
-                "amazon prime" -> {
-//                    binding.btnShare.visibility = View.VISIBLE
-                    setImageOnAccountNameChange(R.drawable.amazon_logo)
-                }
+                "netflix" -> setImageOnAccountNameChange(R.drawable.netflix_logo)
+                "amazon prime" -> setImageOnAccountNameChange(R.drawable.amazon_logo)
                 "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
                 "discord" -> setImageOnAccountNameChange(R.drawable.discord)
                 "others" -> setImageOnAccountNameChange(R.drawable.general_account)
             }
         }
 
-        binding.btnSave.setOnClickListener {
+        buttonLayout.setOnClickListener {
 
             val company = binding.accType.text.toString()
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
 
-            if (company.isEmpty() || email.isEmpty() || password.isEmpty()){
-                Snackbar.make(it, "Please fill all the details", Snackbar.LENGTH_SHORT).show()
+            if (email.isEmpty() && password.isEmpty()){
+                binding.apply {
+                    emailHelperTV.text = "Please Enter the Email ID"
+                    emailHelperTV.visibility = View.VISIBLE
+                    passwordHelperTV.text = "Please Enter the Password"
+                    passwordHelperTV.visibility = View.VISIBLE
+                }
+                return@setOnClickListener
+            }
+            else if (email.isEmpty()){
+                binding.apply {
+                    emailHelperTV.text = "Please Enter the Email ID"
+                    emailHelperTV.visibility = View.VISIBLE
+                }
+                return@setOnClickListener
+            }
+            else if (password.isEmpty()){
+                binding.apply {
+                    passwordHelperTV.text = "Please Enter the Password"
+                    passwordHelperTV.visibility = View.VISIBLE
+                }
                 return@setOnClickListener
             }
             else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                Snackbar.make(it, "Please check your Email Id", Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Please check your Email Id", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -143,6 +158,14 @@ class AddFragment : Fragment() {
             ViewModelProvider.AndroidViewModelFactory
                 .getInstance(requireActivity().application)
         )[AddEditViewModel::class.java]
+        binding.apply {
+            btnSave.apply {
+                this@AddFragment.buttonLayout = this.progressButtonBg
+                this@AddFragment.buttonText = this.buttonText
+                this@AddFragment.buttonText.text = "Save"
+                this@AddFragment.buttonProgress = this.buttonProgress
+            }
+        }
     }
 
     private fun init() {
@@ -168,7 +191,6 @@ class AddFragment : Fragment() {
             visibility = View.VISIBLE
         }
         binding.remainingLayout.visibility = View.VISIBLE
-        binding.btnSave.visibility = View.VISIBLE
     }
 
 
