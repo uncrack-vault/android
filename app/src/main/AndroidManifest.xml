@@ -15,18 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnCrack"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.onboarding.OnboardingActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.auth.FingerPrintActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

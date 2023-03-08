@@ -67,9 +67,11 @@ class SettingsFragment : Fragment() {
 
         }
 
-//        binding.share.setOnClickListener {
-//            shareAPK()
-//        }
+        binding.privacyPolicy.setOnClickListener {
+            val url = "https://www.freeprivacypolicy.com/live/3b81d583-2a6f-43e2-ade6-5b283389f8b5"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
 
         binding.FingerPrintSwitch.apply {
 

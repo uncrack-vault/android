@@ -44,7 +44,7 @@
                 android:id="@+id/about_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="15dp">
+                android:layout_margin="20dp">
 
                 <ImageView
                     android:id="@+id/img_about"
@@ -105,7 +105,7 @@
                 android:id="@+id/feedback_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="15dp">
+                android:layout_margin="20dp">
 
                 <ImageView
                     android:id="@+id/img_feedback"
@@ -149,65 +149,65 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-<!--        <com.google.android.material.card.MaterialCardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:id="@+id/share"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:layout_marginBottom="100dp"-->
-<!--            app:cardElevation="5dp"-->
-<!--            android:padding="10dp"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            android:layout_height="wrap_content">-->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:id="@+id/privacy_policy"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardElevation="5dp"
+            android:padding="10dp"
+            app:cardCornerRadius="10dp"
+            android:layout_height="wrap_content">
 
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:id="@+id/rate_layout"-->
-<!--                android:layout_margin="15dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent">-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rate_layout"
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/img_rate"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    android:layout_width="30dp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:layout_marginTop="10dp"-->
-<!--                    android:src="@drawable/share_icon" />-->
+                <ImageView
+                    android:id="@+id/img_policy"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/policy" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/txtRate"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="10dp"-->
-<!--                    android:fontFamily="@font/dm_sans_medium"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="18sp"-->
-<!--                    android:layout_marginStart="10dp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/img_rate"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    android:text="Share App" />-->
+                <TextView
+                    android:id="@+id/txtPolicy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/img_policy"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Privacy Policy" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/txtRate_description"-->
-<!--                    android:fontFamily="@font/dm_sans"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="5dp"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/txtRate"-->
-<!--                    app:layout_constraintStart_toStartOf="@+id/txtRate"-->
-<!--                    android:textSize="13sp"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:text="Share the app with other's" />-->
-
-
+                <TextView
+                    android:id="@+id/txtRate_description"
+                    android:fontFamily="@font/dm_sans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/txtPolicy"
+                    app:layout_constraintStart_toStartOf="@+id/txtPolicy"
+                    android:textSize="13sp"
+                    android:textColor="@color/black"
+                    android:text="Read your privacy policy" />
 
 
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-<!--        </com.google.android.material.card.MaterialCardView>-->
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
 
         <com.google.android.material.card.MaterialCardView
@@ -225,7 +225,7 @@
                 android:id="@+id/biometric_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="15dp">
+                android:layout_margin="20dp">
 
                 <ImageView
                     android:id="@+id/img_biometric"
