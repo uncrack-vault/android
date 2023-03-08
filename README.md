@@ -1,4 +1,4 @@
-![banner_uncrack](https://user-images.githubusercontent.com/80090908/222189367-9e76c1ff-00c6-4168-a975-0e4898434c23.png)
+![banner_uncrack](https://user-images.githubusercontent.com/80090908/223813616-345451bc-c90f-4ac1-ae29-13ad1fe43c4b.png)
 
 
 # UnCrack 🔒
@@ -45,8 +45,7 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
     │   
     |
     ├── ui                  # UI/View layer
-    |   ├── fragments       # application's user interface or behavior that can be placed in an `Activity`.      
-    |   ├── onBoarding      # OnboardingScreen
+    |   ├── fragments       # application's user interface or behavior that can be placed in an Activity      
     │   └── splashScreen    # SplashScreen
     |
     ├── utils               # Utility Classes / Kotlin extensions
