@@ -1,12 +1,18 @@
 package com.geekymusketeers.uncrack.ui.splash_activity
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.hardware.biometrics.BiometricPrompt
 import android.os.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivitySplashBinding
 import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.ui.MainActivity
@@ -39,7 +45,7 @@ class SplashActivity : AppCompatActivity() {
                 .setNegativeButton("Cancel", this.mainExecutor) { _, _ ->
                     Toast.makeText(
                         this,
-                        "Fingerprint not matching with the registered one",
+                        "Fingerprint not given",
                         Toast.LENGTH_SHORT
                     ).show()
                 }.build()
@@ -50,6 +56,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
     }
+
 
     private fun goToHomeScreen() {
         Handler(Looper.getMainLooper()).postDelayed({
@@ -77,11 +84,7 @@ class SplashActivity : AppCompatActivity() {
         object : BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
                 super.onAuthenticationError(errorCode, errString)
-                Toast.makeText(
-                    this@SplashActivity,
-                    "Authentication error",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@SplashActivity, "Authentication error", Toast.LENGTH_SHORT).show()
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {

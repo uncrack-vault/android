@@ -111,16 +111,6 @@ class SettingsFragment : Fragment() {
         }
     }
 
-//    private fun shareAPK() {
-//
-//        val apkUri = Uri.parse("file://${requireActivity().applicationInfo.publicSourceDir}")
-//        val shareIntent = Intent(Intent.ACTION_SEND)
-//        shareIntent.type = "application/vnd.android.package-archive"
-//        shareIntent.putExtra(Intent.EXTRA_STREAM, apkUri)
-//        startActivity(Intent.createChooser(shareIntent, "Share APK via"))
-//
-//    }
-
     private fun getCancellationSignal(): CancellationSignal {
         cancellationSignal = CancellationSignal()
         cancellationSignal?.setOnCancelListener {

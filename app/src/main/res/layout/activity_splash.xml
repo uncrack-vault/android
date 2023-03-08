@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/dm_sans"
         android:gravity="center"
-        android:text="Store your information's safely"
+        android:text="Store your credentials safely"
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
