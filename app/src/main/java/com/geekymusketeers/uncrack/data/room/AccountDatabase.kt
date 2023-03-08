@@ -8,7 +8,7 @@ import com.geekymusketeers.uncrack.data.model.Account
 
 @Database(
     entities = [Account::class],
-    version = 1
+    version = 2
 )
 abstract class AccountDatabase : RoomDatabase(){
 

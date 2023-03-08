@@ -37,4 +37,9 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
             repository.deleteAccount(account)
         }
     }
+    fun updateBookmark(account: Account) {
+        viewModelScope.launch {
+            repository.updateFavourite(account)
+        }
+    }
 }

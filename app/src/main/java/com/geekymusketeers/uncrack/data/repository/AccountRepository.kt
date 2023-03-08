@@ -19,4 +19,17 @@ class AccountRepository(private val accountDao: AccountDao) {
     suspend fun deleteAccount(account: Account){
         accountDao.deleteAccount(account)
     }
+
+     fun getFavouriteAccount(){
+        accountDao.getFavourite()
+    }
+
+    suspend fun updateFavourite(account: Account){
+
+        val id  = account.id
+        val test:Boolean = accountDao.updateFavourite(id)
+        if (test) accountDao.isNotSelected(id)
+        else accountDao.isSelected(id)
+
+    }
 }

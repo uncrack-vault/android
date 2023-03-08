@@ -9,15 +9,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Account
-import com.geekymusketeers.uncrack.ui.fragments.EditFragment
-import com.google.android.material.card.MaterialCardView
+import com.geekymusketeers.uncrack.ui.fragments.account.EditFragment
 
-class AccountAdapter(private val context: Context, private val listner: (Account) -> Unit): RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
+class AccountAdapter(private val context: Context,
+                     private val listener: (Account) -> Unit):
+    RecyclerView.Adapter<AccountAdapter.ViewHolder>()
+{
 
     private var accountList = emptyList<Account>()
 
@@ -42,7 +42,7 @@ class AccountAdapter(private val context: Context, private val listner: (Account
 
         holder.itemView.setOnClickListener {
 
-            listner(currentAccount)
+            listener(currentAccount)
         }
 
         holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
@@ -67,6 +67,7 @@ class AccountAdapter(private val context: Context, private val listner: (Account
             "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
             "others" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.general_account)
         }
+
 
         holder.itemView.findViewById<ImageView>(R.id.button_edit).setOnClickListener {
 
