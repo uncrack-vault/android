@@ -68,8 +68,15 @@ class EditFragment : Fragment() {
         val decryptedPassword = encryption.decryptOrNull(pass)
         binding.editPassword.setText(decryptedPassword)
         val category = arguments?.getString("category").toString()
-        binding.editCategoryChipGroup.children.toList().filter {
-            (it as Chip).isChecked
+        for (child in binding.editCategoryChipGroup.children) {
+            if (child is Chip) {
+                // Check if the Chip's text matches the category from arguments
+                if (child.text == category) {
+                    // Set the Chip as checked
+                    child.isChecked = true
+                    break // Exit the loop since the correct Chip has been found
+                }
+            }
         }
 
         val account = id?.let { Account(it,acc,email,category,username,pass) }
