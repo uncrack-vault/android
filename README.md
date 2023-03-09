@@ -14,7 +14,7 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
 
 - UnCrack securely stores all login credentials and important information in one place, accessible only to the user. The app uses advanced encryption techniques to ensure that the data is protected from unauthorized access.
 
-- With just one master password, users can easily access all of their login information and never have to worry about forgetting passwords or searching for lost information.
+- With just a fingerprint, users can easily access all of their login information and never have to worry about forgetting passwords or searching for lost information.
 
 - The app includes a secure password generator that can suggest stronger passwords and help users create unique and secure passwords for all their accounts.
 
@@ -41,11 +41,11 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
     │   ├── repository      # Single source of data.
     │   └── room            # For saving data.
     |
-    ├── adapter             # Bidge between an `AdapterView` and the underlying data for that view             
+    ├── adapter             # All Adapters for recyclerViews              
     │   
     |
     ├── ui                  # UI/View layer
-    |   ├── fragments       # application's user interface or behavior that can be placed in an Activity      
+    |   ├── fragments       # All fragments     
     │   └── splashScreen    # SplashScreen
     |
     ├── utils               # Utility Classes / Kotlin extensions
