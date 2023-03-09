@@ -87,6 +87,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="RtlSymmetry" />
 
+    <ImageView
+        android:id="@+id/card_clearText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/clear_text"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/cardFilter"
+        app:layout_constraintEnd_toEndOf="@+id/cardFilter"
+        app:layout_constraintTop_toTopOf="@+id/cardFilter" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/card_recyclerView"
         android:layout_width="match_parent"

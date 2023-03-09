@@ -56,6 +56,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="RtlSymmetry" />
 
+    <ImageView
+        android:id="@+id/clearText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        android:src="@drawable/clear_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etFilter"
+        app:layout_constraintEnd_toEndOf="@+id/etFilter"
+        app:layout_constraintTop_toTopOf="@+id/etFilter" />
+
     <LinearLayout
         android:id="@+id/empty_list"
         android:layout_width="match_parent"

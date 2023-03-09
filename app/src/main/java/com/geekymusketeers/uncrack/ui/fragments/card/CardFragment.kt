@@ -123,8 +123,23 @@ class CardFragment : Fragment() {
 
         setUpFab()
         setCardFilter()
+        cardClearText()
         return binding.root
 
+    }
+
+    private fun cardClearText() {
+        binding.apply {
+            cardClearText.setOnClickListener {
+                Util.hideKeyboard(requireActivity())
+                it.visibility = View.GONE
+                cardFilter.apply {
+                    setText("")
+                    setCompoundDrawablesWithIntrinsicBounds(R.drawable.search, 0, 0, 0)
+                    clearFocus()
+                }
+            }
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -141,23 +156,15 @@ class CardFragment : Fragment() {
                 override fun afterTextChanged(p0: Editable?) {
                     if (p0.toString().isNotEmpty()) {
                         filter(Util.getBaseStringForFiltering(p0.toString().lowercase()))
-                        setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.clear_text, 0)
+                        setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                        binding.cardClearText.visibility = View.VISIBLE
                     } else {
                         setCompoundDrawablesWithIntrinsicBounds(R.drawable.search, 0, 0, 0)
-                        filter("")
+                        binding.cardClearText.visibility = View.GONE
+                        cardAdapter.setCardData(cardList)
                     }
                 }
 
-            })
-
-            setOnTouchListener(View.OnTouchListener { _, event ->
-                if (event.action == MotionEvent.ACTION_UP) {
-                    if (event.rawX >= (this.right - this.compoundPaddingRight)) {
-                        this.setText("")
-                        return@OnTouchListener true
-                    }
-                }
-                return@OnTouchListener false
             })
 
         }

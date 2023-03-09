@@ -26,6 +26,7 @@ import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
 import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding
 import com.geekymusketeers.uncrack.util.Encryption
+import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.getBaseStringForFiltering
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
@@ -222,8 +223,23 @@ class HomeFragment : Fragment() {
 
         setFilter()
         setUpFab()
+        clearText()
 
         return binding.root
+    }
+
+    private fun clearText() {
+        binding.apply {
+            clearText.setOnClickListener {
+                Util.hideKeyboard(requireActivity())
+                it.visibility = View.GONE
+                etFilter.apply {
+                    setText("")
+                    setCompoundDrawablesWithIntrinsicBounds(R.drawable.search, 0, 0, 0)
+                    clearFocus()
+                }
+            }
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -240,25 +256,16 @@ class HomeFragment : Fragment() {
                 override fun afterTextChanged(p0: Editable?) {
                     if (p0.toString().isNotEmpty()) {
                         filter(getBaseStringForFiltering(p0.toString().lowercase()))
-                        setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.clear_text, 0)
+                        setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                        binding.clearText.visibility = View.VISIBLE
                     } else {
                         setCompoundDrawablesWithIntrinsicBounds(R.drawable.search, 0, 0, 0)
-                        filter("")
+                        binding.clearText.visibility = View.GONE
+                        accountAdapter.setData(accountList)
                     }
                 }
 
             })
-
-            setOnTouchListener(View.OnTouchListener { _, event ->
-                if (event.action == MotionEvent.ACTION_UP) {
-                    if (event.rawX >= (this.right - this.compoundPaddingRight)) {
-                        this.setText("")
-                        return@OnTouchListener true
-                    }
-                }
-                return@OnTouchListener false
-            })
-
         }
     }
 
