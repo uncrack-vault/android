@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
@@ -36,8 +39,9 @@ class EditFragment : Fragment() {
 
     private var _binding: FragmentEditBinding? = null
     private val binding get() = _binding!!
-    private lateinit var secretKey: SecretKey
-
+    private lateinit var buttonLayout: ConstraintLayout
+    private lateinit var buttonText: TextView
+    private lateinit var buttonProgress: ProgressBar
 
     private lateinit var accountViewModel: AccountViewModel
     private lateinit var editViewModel: AddEditViewModel
@@ -49,8 +53,6 @@ class EditFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentEditBinding.inflate(inflater,container,false)
-
-
 
         initialization()
         initObservers()
@@ -102,16 +104,32 @@ class EditFragment : Fragment() {
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
-        binding.btnEdit.setOnClickListener {
+        buttonLayout.setOnClickListener {
 
             val email = binding.editEmail.text.toString()
+            val pass = binding.editPassword.text.toString()
 
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                Snackbar.make(binding.root, "Please check your Email Id", Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Please check your Email Id", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }else if (email.isEmpty() && pass.isEmpty()){
+                binding.apply {
+                    editEmailHelperTV.text = "Please Enter the Email ID"
+                    editEmailHelperTV.visibility = View.VISIBLE
+                    editPasswordHelperTV.text = "Please Enter the Password"
+                    editPasswordHelperTV.visibility = View.VISIBLE
+                }
                 return@setOnClickListener
             }else if (email.isEmpty()){
-                Snackbar.make(binding.root, "Please enter the Email Id", Snackbar.LENGTH_SHORT).show()
-                return@setOnClickListener
+                binding.apply {
+                    editEmailHelperTV.text = "Please Enter the Email ID"
+                    editEmailHelperTV.visibility = View.VISIBLE
+                }
+            }else if (pass.isEmpty()){
+                binding.apply {
+                    editPasswordHelperTV.text = "Please Enter the Password"
+                    editPasswordHelperTV.visibility = View.VISIBLE
+                }
             }
             val saveDialog = EditpasswordModalBinding.inflate(layoutInflater)
             val bottomSheet = requireContext().createBottomSheet()
@@ -147,11 +165,15 @@ class EditFragment : Fragment() {
 
     private fun initialization() {
         accountViewModel = ViewModelProvider(this)[AccountViewModel::class.java]
-        editViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory
-                .getInstance(requireActivity().application)
-        )[AddEditViewModel::class.java]
+        editViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AddEditViewModel::class.java]
+        binding.apply {
+            btnEdit.apply {
+                this@EditFragment.buttonLayout = this.progressButtonBg
+                this@EditFragment.buttonText = this.buttonText
+                this@EditFragment.buttonText.text = "Save"
+                this@EditFragment.buttonProgress = this.buttonProgress
+            }
+        }
     }
 
 

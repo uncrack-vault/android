@@ -48,31 +48,23 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginStart="26dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_toStartOf="@+id/btn_edit"
+                    android:layout_marginEnd="26dp"
                     android:layout_toEndOf="@+id/edit_back"
-                    android:text="Edit your Details"
                     android:fontFamily="@font/dm_sans_medium"
                     android:gravity="center_horizontal"
+                    android:text="Edit your Details"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/btn_edit"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/save"
-                    android:visibility="visible" />
 
 
             </RelativeLayout>
 
             <ImageView
                 android:id="@+id/account_logo"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/logo_light_mode"
@@ -100,42 +92,14 @@
 
                 <!--            Email-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="start"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:text="Email ID"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:text="*"
-                        android:textStyle="bold"
-                        android:layout_marginStart="2dp"
-                        android:textColor="@color/red"
-                        android:textSize="16sp" />
-
-
-                </LinearLayout>
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/email_box"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
-                    android:textColorHint="@android:color/darker_gray"
-                    app:boxBackgroundColor="#F5F8FA"
+                    android:layout_marginTop="30dp"
+                    android:textColorHint="@color/black"
+                    app:boxBackgroundColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/headerLayout"
                     app:layout_constraintHorizontal_bias="0.0">
 
@@ -146,37 +110,32 @@
                         android:fontFamily="@font/dm_sans"
                         android:inputType="textEmailAddress"
                         android:lines="1"
+                        android:hint="Email"
                         android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--            UserName-->
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/editEmailHelperTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="start"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/red"
+                    android:textSize="13sp"
+                    android:visibility="gone"
+                    tools:text="Please Enter the Email." />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:text="UserName"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
+                <!--UserName-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/username_box"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
-                    android:textColorHint="@android:color/darker_gray"
-                    app:boxBackgroundColor="#F5F8FA"
+                    android:layout_marginTop="30dp"
+                    android:textColorHint="@color/black"
+                    app:boxBackgroundColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/email_box"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/email_box"
@@ -187,47 +146,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
-                        android:inputType="textEmailAddress"
+                        android:inputType="text"
+                        android:hint="UserName"
                         android:lines="1"
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--            Password-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="start"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:text="Password"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:text="*"
-                        android:textStyle="bold"
-                        android:layout_marginStart="2dp"
-                        android:textColor="@color/red"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
+                <!--Password-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/password_box"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
-                    android:textColorHint="@android:color/darker_gray"
-                    app:boxBackgroundColor="#F5F8FA"
+                    android:layout_marginTop="30dp"
+                    android:textColorHint="@color/black"
+                    app:boxBackgroundColor="@color/white"
                     app:endIconMode="password_toggle"
                     app:layout_constraintEnd_toEndOf="@+id/email_box"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -240,16 +174,28 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
                         android:inputType="textPassword"
+                        android:hint="Password"
                         android:lines="1"
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/editPasswordHelperTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/red"
+                    android:textSize="13sp"
+                    android:visibility="gone"
+                    tools:text="Please Enter the Password." />
 
                 <!--            Category-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:gravity="start"
                     android:orientation="horizontal">
 
@@ -347,6 +293,14 @@
 
                     </com.google.android.material.chip.ChipGroup>
                 </HorizontalScrollView>
+
+                <include
+                    android:id="@+id/btn_edit"
+                    layout="@layout/primary_progress_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="50dp" />
 
 
             </LinearLayout>
