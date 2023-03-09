@@ -305,7 +305,7 @@
                             android:layout_height="60dp"
                             android:checkable="true"
                             android:gravity="center"
-                            android:text="Other"
+                            android:text="Others"
                             android:textColor="@color/white"
                             app:checkedIconEnabled="false"
                             app:chipBackgroundColor="@color/catergory_icon"

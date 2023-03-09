@@ -52,11 +52,8 @@ class AddFragment : Fragment() {
     ): View {
         _binding = FragmentAddBinding.inflate(inflater,container,false)
 
-
         initialization()
-
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
-
         init()
 
         binding.accType.afterTextChanged{
@@ -81,7 +78,6 @@ class AddFragment : Fragment() {
 
         buttonLayout.setOnClickListener {
 
-            val company = binding.accType.text.toString()
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
 
