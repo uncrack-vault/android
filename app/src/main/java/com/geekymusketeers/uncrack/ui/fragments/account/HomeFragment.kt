@@ -32,7 +32,6 @@ import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 
@@ -133,21 +132,6 @@ class HomeFragment : Fragment() {
 
                 }
 
-
-                // Favourite button feature
-
-//                favBtn.setOnClickListener {
-//                    favBtn.setImageResource(if (currentAccount.isFavourite) R.drawable.favorite else R.drawable.favorite_border)
-//                    favBtn.setOnClickListener {
-//                        currentAccount.isFavourite = !currentAccount.isFavourite
-//                        lifecycleScope.launch {
-//                            viewModel.editAccount(currentAccount)
-//                        }
-//                        favBtn.setImageResource(if (currentAccount.isFavourite) R.drawable.favorite else R.drawable.favorite_border)
-//                    }
-//                }
-
-
                 if(currentAccount.username.isNotEmpty()) {
                     accountUsername.visibility = View.VISIBLE
                 }
@@ -173,7 +157,7 @@ class HomeFragment : Fragment() {
                     lifecycleScope.launch {
                         deleteViewModel.deleteEntry(viewModel,currentAccount)
                     }
-                    Snackbar.make(binding.root, "Successfully Deleted", Snackbar.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),"Successfully Deleted",Toast.LENGTH_SHORT).show()
                 }
                 negativeOption.setOnClickListener {
                     bottomSheet.dismiss()
@@ -237,9 +221,8 @@ class HomeFragment : Fragment() {
         }
 
         setFilter()
-
         setUpFab()
-//        popup_menu()
+
         return binding.root
     }
 
@@ -303,15 +286,15 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-            viewModel.readAllData.observe(viewLifecycleOwner, Observer { account ->
+            viewModel.readAllData.observe(viewLifecycleOwner) { account ->
                 accountAdapter.setData(account)
-                if (account.isEmpty()){
+                if (account.isEmpty()) {
                     binding.emptyList.visibility = View.VISIBLE
-                }else{
+                } else {
                     binding.emptyList.visibility = View.GONE
                 }
 
-            })
+            }
     }
 
     private fun setUpFab() {
