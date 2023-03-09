@@ -88,13 +88,13 @@ class SettingsFragment : Fragment() {
                 Util.log("test123: ${isFingerPrintEnabled.not()}")
                 if (isFingerPrintEnabled) {
                     val biometricPrompt = BiometricPrompt.Builder(requireContext())
-                        .setTitle("Unlock UnCrack")
-                        .setSubtitle("Input your Fingerprint to ensure it's you...")
-                        .setDescription("Enter biometric credentials to proceed")
+                        .setTitle("Secure UnCrack")
+                        .setSubtitle("Give your Fingerprint to ensure it's security")
+                        .setDescription("Enter your fingerprint to proceed")
                         .setNegativeButton("Cancel", requireActivity().mainExecutor) { _, _ ->
                             Toast.makeText(
                                 requireContext(),
-                                "Fingerprint not registered",
+                                "Fingerprint not given",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }.build()

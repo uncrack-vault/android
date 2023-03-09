@@ -14,6 +14,8 @@
     <string name="edit_email">Email <font color='#FF0000'>*</font></string>
     <string name="edit_username">UserName</string>
     <string name="edit_password">Password <font color='#FF0000'>*</font></string>
+    <string name="v1_4">v1.4</string>
+    <string name="description_about_the_option">Description about the option</string>
     <string-array name="accounts">
         <item>PayPal</item>
         <item>Instagram</item>

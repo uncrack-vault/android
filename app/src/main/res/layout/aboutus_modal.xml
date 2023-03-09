@@ -30,13 +30,22 @@
             android:fontFamily="@font/dm_sans_bold"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/v1_4"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/dm_sans_bold"/>
+
+        <TextView
             android:id="@+id/options_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/dm_sans"
             android:gravity="center"
-            android:text="Description about the option"
+            android:text="@string/description_about_the_option"
             android:textColor="@color/black"
             android:layout_marginBottom="10dp"
             android:textSize="15sp" />

@@ -94,9 +94,9 @@ class HomeFragment : Fragment() {
 
                 // Share button feature
                 shareBtn.setOnClickListener {
-
+                    bottomSheet.dismiss()
                     val shareDialog = SharepasswordModalBinding.inflate(layoutInflater)
-                    val bottomSheet = requireContext().createBottomSheet()
+                    val bottomShareSheet = requireContext().createBottomSheet()
 
                     shareDialog.apply {
                         optionsHeading.text = "Wait a Second"
@@ -105,18 +105,17 @@ class HomeFragment : Fragment() {
                         negativeOption.text = "No"
 
                         positiveOption.setOnClickListener {
-                            bottomSheet.dismiss()
+                            bottomShareSheet.dismiss()
                             val email = currentAccount.email
                             val userName = currentAccount.username
-                            val password = currentAccount.password
                             if (userName.isEmpty()){
-                                val shareNoteWithoutUserName = "${"Email: $email"}\n${"Password: $password"}"
+                                val shareNoteWithoutUserName = "${"Email: $email"}\n${"Password: $decryptedViewPassword"}"
                                 val myIntent= Intent(Intent.ACTION_SEND)
                                 myIntent.type = "text/plane"
                                 myIntent.putExtra(Intent.EXTRA_TEXT,shareNoteWithoutUserName)
                                 context?.startActivity(myIntent)
                             }else{
-                                val shareNote = "${"Email: $email"}\n${"UserName: $userName"}\n${"Password: $password"}"
+                                val shareNote = "${"Email: $email"}\n${"UserName: $userName"}\n${"Password: $decryptedViewPassword"}"
                                 val myIntent= Intent(Intent.ACTION_SEND)
                                 myIntent.type = "text/plane"
                                 myIntent.putExtra(Intent.EXTRA_TEXT,shareNote)
@@ -125,11 +124,11 @@ class HomeFragment : Fragment() {
 
                         }
                         negativeOption.setOnClickListener {
-                            bottomSheet.dismiss()
+                            bottomShareSheet.dismiss()
 
                         }
                     }
-                    shareDialog.root.setBottomSheet(bottomSheet)
+                    shareDialog.root.setBottomSheet(bottomShareSheet)
 
                 }
 
