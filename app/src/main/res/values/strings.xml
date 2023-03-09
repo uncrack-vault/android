@@ -7,6 +7,13 @@
     <string name="company">Company</string>
     <string name="let_s_go">Let\'s go</string>
     <string name="mailTo">mailto:aritrarick2002@gmail.com?Subject=Your%20feedback%20is%20important%20to%20us%21</string>
+    <string name="email">Email <font color='#FF0000'>*</font></string>
+    <string name="username">UserName</string>
+    <string name="add_password">Password <font color='#FF0000'>*</font></string>
+    <string name="select_the_account">Select the Account <font color='#FF0000'>*</font></string>
+    <string name="edit_email">Email <font color='#FF0000'>*</font></string>
+    <string name="edit_username">UserName</string>
+    <string name="edit_password">Password <font color='#FF0000'>*</font></string>
     <string-array name="accounts">
         <item>PayPal</item>
         <item>Instagram</item>

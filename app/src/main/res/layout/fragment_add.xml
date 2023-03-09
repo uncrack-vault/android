@@ -85,7 +85,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/roboto"
                     android:inputType="none"
-                    android:hint="Select the Account"
+                    android:hint="@string/select_the_account"
                     android:paddingStart="16dp"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -119,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
-                        android:hint="Email"
+                        android:hint="@string/email"
                         android:inputType="textEmailAddress"
                         android:lines="1"
                         android:textColor="@color/black" />
@@ -157,7 +157,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
-                        android:hint="UserName"
+                        android:hint="@string/username"
                         android:inputType="textEmailAddress"
                         android:lines="1"
                         android:textColor="@color/black" />
@@ -184,7 +184,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
-                        android:hint="Password"
+                        android:hint="@string/add_password"
                         android:inputType="textPassword"
                         android:lines="1"
                         android:textColor="@color/black" />

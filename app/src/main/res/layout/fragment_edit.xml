@@ -110,7 +110,7 @@
                         android:fontFamily="@font/dm_sans"
                         android:inputType="textEmailAddress"
                         android:lines="1"
-                        android:hint="Email"
+                        android:hint="@string/edit_email"
                         android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -147,7 +147,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
                         android:inputType="text"
-                        android:hint="UserName"
+                        android:hint="@string/edit_username"
                         android:lines="1"
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -174,7 +174,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
                         android:inputType="textPassword"
-                        android:hint="Password"
+                        android:hint="@string/edit_password"
                         android:lines="1"
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
