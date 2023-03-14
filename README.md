@@ -60,7 +60,7 @@ This app uses [MVVM(Model View View-Model)](https://developer.android.com/topic/
 
 ## Support 💁‍♂️ & Download 💹
 
-<a href="https://www.producthunt.com/posts/uncrack?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-uncrack" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=381745&theme=light" alt="UnCrack - 🔏&#0032;UnCrack&#0032;help&#0032;you&#0032;to&#0032;manage&#0032;&#0038;&#0032;secure&#0032;your&#0032;password&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+<a href="https://www.producthunt.com/posts/uncrack?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-uncrack" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=381745&theme=light" alt="UnCrack - 🔏&#0032;UnCrack&#0032;help&#0032;you&#0032;to&#0032;manage&#0032;&#0038;&#0032;secure&#0032;your&#0032;password&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>  <a href="https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=84px /></a>
 
 ## Contact 📞
 If you need any help, you can connect with me [here](https://www.linkedin.com/in/aritra-das-/).
