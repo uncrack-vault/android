@@ -272,11 +272,12 @@ class CardDetialsAddFragment : Fragment() {
                             s?.delete(s.toString().length - 1, s.toString().length)
                     }
                 }
-//                initData()
+                if (str == 19){
+                    binding.expiryMonth.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                //Log.d("PayView", "start: $start count: $count after: $after s:${s?.length}")
                 isRemoveText = start < s!!.length
             }
 
@@ -295,7 +296,9 @@ class CardDetialsAddFragment : Fragment() {
                     expiryMonth.error = null
                     expiryYear.error = null
                 }
-//                initData()
+                if (s?.length == 4){
+                    binding.CardHolderName.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -314,7 +317,9 @@ class CardDetialsAddFragment : Fragment() {
                     expiryMonth.error = null
                     expiryYear.error = null
                 }
-//                initData()
+                if (s?.length == 2){
+                    binding.expiryYear.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -329,7 +334,9 @@ class CardDetialsAddFragment : Fragment() {
         binding.CardHolderName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 binding.demoCardHolderName.text = s.toString()
-//              initData()
+                if (s.toString().length >= 2) {
+                    binding.CVV.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

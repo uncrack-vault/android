@@ -134,18 +134,17 @@
                         app:layout_constraintStart_toStartOf="@+id/demo_cvv_text"
                         app:layout_constraintTop_toBottomOf="@+id/demo_cvv_text" />
 
+
                     <ImageView
                         android:id="@+id/demo_card_type"
-                        android:layout_width="0dp"
+                        android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="8dp"
                         android:src="@drawable/ic_visa"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.922"
-                        app:layout_constraintStart_toEndOf="@+id/demo_card_holder_name"
-                        app:layout_constraintTop_toBottomOf="@+id/demo_card_holder_name" />
-
-                    <!--                    </LinearLayout>-->
+                        app:layout_constraintHorizontal_bias="0.89"
+                        app:layout_constraintStart_toEndOf="@+id/demo_cvv_text" />
 
                     <LinearLayout
                         android:id="@+id/demo_card_number"
@@ -297,10 +296,11 @@
 
                     <TextView
                         android:id="@+id/demo_card_holder_name"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/dm_sans_medium"
+                        android:maxLines="1"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold"
