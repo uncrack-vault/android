@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentGeneratePasswordBinding
@@ -27,24 +28,19 @@ class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
 
         binding.passwordInputMeter.setPasswordStrengthCalculator(object : PasswordStrengthCalculator{
             override fun calculatePasswordSecurityLevel(password: String?): Int {
-                if (password!=null){
-                    return getPasswordScope(password)
+                return if (password!=null){
+                    getPasswordScope(password)
                 }else{
-                    return 0
+                    0
                 }
             }
-
             override fun getMinimumLength(): Int {
                 return 1
             }
-
             override fun passwordAccepted(level: Int): Boolean {
                 return true
             }
-
-            override fun onPasswordAccepted(password: String?) {
-
-            }
+            override fun onPasswordAccepted(password: String?) {}
         })
 
         val generatedPassword = generatePassword(passwordLength,
@@ -68,7 +64,7 @@ class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
 
         binding.sliderPasswordStrength.addOnChangeListener(object : Slider.OnChangeListener{
             override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
-                slider.setLabelFormatter(LabelFormatter { it->
+                slider.setLabelFormatter(LabelFormatter {
                     return@LabelFormatter "${value.toInt()} Letters"
                 })
             }
@@ -84,10 +80,9 @@ class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
 
             if (generatedPassword.isBlank()){
                 if (passwordLength==0){
-                    Snackbar.make(view,"Password length cannot be zero", Snackbar.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),"Password length cannot be zero", Toast.LENGTH_SHORT).show()
                 } else {
-                    Snackbar.make(view, "Please check at least one item", Snackbar.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(requireContext(),"Please check at least one item", Toast.LENGTH_SHORT).show()
                 }
             }else{
                 binding.etGeneratedPassword.setText(generatedPassword)
@@ -101,11 +96,11 @@ class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
             )
             val clip = ClipData.newPlainText("Generated Password", binding.etGeneratedPassword.text.toString())
             clipboard?.setPrimaryClip(clip)
-            Snackbar.make(view, "Password Copied to Clipboard", Snackbar.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),"Password Copied to Clipboard", Toast.LENGTH_SHORT).show()
         }
     }
 
-    fun<E> MutableList<E>.mRandom(): E? = if (size>0) get(Random().nextInt(size)) else null
+    private fun<E> MutableList<E>.mRandom(): E? = if (size>0) get(Random().nextInt(size)) else null
 
     private fun generatePassword(length: Int, includeUpperCaseLetters: Boolean,includeLowerCaseLetters : Boolean,
                                 includeSymbols : Boolean, includeNumbers : Boolean): String {
@@ -136,18 +131,18 @@ class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
         if(password.isEmpty() || password.isBlank()) {
             return 0
         } else {
-            if(password.length == 0) {
-                return 0
+            return if(password.isEmpty()) {
+                0
             } else if (password.length in 1..3) {
-                return 1
+                1
             } else if (password.length in 4..6) {
-                return 2
+                2
             } else if (password.length in 7..9) {
-                return 3
+                3
             } else if (password.length in 10..12) {
-                return 4
+                4
             } else {
-                return 5
+                5
             }
         }
     }
