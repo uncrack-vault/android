@@ -16,12 +16,14 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivitySplashBinding
 import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.ui.MainActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class SplashActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySplashBinding
     private var cancellationSignal: CancellationSignal? = null
+    private lateinit var biometricPrompt: BiometricPrompt
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,16 +40,24 @@ class SplashActivity : AppCompatActivity() {
         Util.log("switchValue $isSwitchClicked")
 
         if (isSwitchClicked){
-            val biometricPrompt = BiometricPrompt.Builder(this)
+            biometricPrompt = BiometricPrompt.Builder(this)
                 .setTitle("Unlock UnCrack")
                 .setSubtitle("Input your Fingerprint to ensure it's you...")
                 .setDescription("Enter biometric credentials to proceed")
                 .setNegativeButton("Cancel", this.mainExecutor) { _, _ ->
-                    Toast.makeText(
-                        this,
-                        "Fingerprint not given",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    // Show Material Dialog
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle("Authentication Cancelled")
+                        .setMessage("Do you want to try again?")
+                        .setPositiveButton("Yes") { _, _ ->
+                            // Try authentication again
+                            biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
+                        }
+                        .setNegativeButton("No") { _, _ ->
+                            // Cancel authentication and go back to the previous screen
+                            finish()
+                        }
+                        .show()
                 }.build()
 
             biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
