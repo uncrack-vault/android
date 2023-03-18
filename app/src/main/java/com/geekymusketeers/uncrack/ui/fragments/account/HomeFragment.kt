@@ -93,6 +93,26 @@ class HomeFragment : Fragment() {
                     passwordScoreText.text = passwordScore.toString()
                     val mappedScore = (passwordScore * 100) / 9
                     circularProgressBar.setProgressWithAnimation(mappedScore.toFloat(), 3000)
+                    when (passwordScore) {
+                        in 0..3 -> {
+                            val colorRed = ContextCompat.getColor(requireContext(), R.color.red)
+                            strengthLevel.setTextColor(colorRed)
+                            circularProgressBar.progressBarColor = colorRed
+                            strengthLevel.text = "Weak"
+                        }
+                        in 4..6 -> {
+                            val colorYellow = ContextCompat.getColor(requireContext(), R.color.yellow)
+                            strengthLevel.setTextColor(colorYellow)
+                            circularProgressBar.progressBarColor = colorYellow
+                            strengthLevel.text = "Medium"
+                        }
+                        in 7..9 -> {
+                            val colorGreen = ContextCompat.getColor(requireContext(), R.color.green)
+                            strengthLevel.setTextColor(colorGreen)
+                            circularProgressBar.progressBarColor = colorGreen
+                            strengthLevel.text = "Strong"
+                        }
+                    }
                 }
 
                 // Copy password to clipboard
