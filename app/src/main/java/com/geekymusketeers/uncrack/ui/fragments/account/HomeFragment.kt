@@ -34,6 +34,7 @@ import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 
 class HomeFragment : Fragment() {
@@ -77,9 +78,22 @@ class HomeFragment : Fragment() {
                 accountName.text = currentAccount.company
                 accountEmail.text = currentAccount.email
                 accountUsername.text = "UserName:  " + currentAccount.username
+                accountCategory.text = currentAccount.category
+                when(accountCategory.text){
+                    "Work" -> categoryImage.setImageResource(R.drawable.work_icon)
+                    "Social" -> categoryImage.setImageResource(R.drawable.social_icon)
+                    "Mail" -> categoryImage.setImageResource(R.drawable.email_icon)
+                    "Others" -> categoryImage.setImageResource(R.drawable.others_icon)
+                }
                 val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
                 val decryptedViewPassword = encryption.decryptOrNull(currentAccount.password)
                 accountPassword.setText(decryptedViewPassword)
+                if (decryptedViewPassword != null) {
+                    val passwordScore = calculatePasswordScore(decryptedViewPassword)
+                    passwordScoreText.text = passwordScore.toString()
+                    val mappedScore = (passwordScore * 100) / 9
+                    circularProgressBar.setProgressWithAnimation(mappedScore.toFloat(), 3000)
+                }
 
                 // Copy password to clipboard
                 CopyPassword.setOnClickListener {
@@ -225,6 +239,36 @@ class HomeFragment : Fragment() {
         clearText()
 
         return binding.root
+    }
+
+    private fun calculatePasswordScore(password: String): Int {
+        var score = 0
+        // Check for password length
+        if (password.length >= 8) {
+            score += 1
+        }
+        // Check for uppercase letters
+        if (password.matches(Regex(".*[A-Z].*"))) {
+            score += 1
+        }
+        // Check for lowercase letters
+        if (password.matches(Regex(".*[a-z].*"))) {
+            score += 1
+        }
+        // Check for digits
+        if (password.matches(Regex(".*\\d.*"))) {
+            score += 1
+        }
+        // Check for special characters
+        if (password.matches(Regex(".*[!@#\$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*"))) {
+            score += 1
+        }
+        // Check for consecutive characters
+        if (!password.matches(Regex("(.)\\1{2,}"))) {
+            score += 1
+        }
+        // Calculate the password score out of 9
+        return ((score.toFloat() / 6.toFloat()) * 9).toInt()
     }
 
     private fun clearText() {

@@ -88,8 +88,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.5'
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
 
-
-
+    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
 
 
 }
