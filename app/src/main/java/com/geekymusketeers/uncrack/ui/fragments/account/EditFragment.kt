@@ -268,6 +268,10 @@ class EditFragment : Fragment() {
             (it as Chip).isChecked
         }[0] as Chip).text.toString()
         val password = binding.editPassword.text.toString()
+
+        val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
+        val encryptedEditedPassword = encryption.encryptOrNull(password)
+
         val userName = binding.editUsername.text.toString()
 
         if (account!=null){
@@ -280,8 +284,8 @@ class EditFragment : Fragment() {
             if (category != account.category){
                 account.category = category
             }
-            if (password != account.password){
-                account.password = password
+            if (encryptedEditedPassword != account.password){
+                account.password = encryptedEditedPassword
             }
             if (userName != account.username){
                 account.username = userName
