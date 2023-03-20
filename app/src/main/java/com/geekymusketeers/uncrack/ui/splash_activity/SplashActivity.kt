@@ -18,14 +18,14 @@ import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.ui.MainActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-
+@RequiresApi(Build.VERSION_CODES.P)
 class SplashActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySplashBinding
     private var cancellationSignal: CancellationSignal? = null
     private lateinit var biometricPrompt: BiometricPrompt
 
-    @RequiresApi(Build.VERSION_CODES.P)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
@@ -46,25 +46,30 @@ class SplashActivity : AppCompatActivity() {
                 .setDescription("Enter biometric credentials to proceed")
                 .setNegativeButton("Cancel", this.mainExecutor) { _, _ ->
                     // Show Material Dialog
-                    MaterialAlertDialogBuilder(this)
-                        .setTitle("Authentication Cancelled")
-                        .setMessage("Do you want to try again?")
-                        .setPositiveButton("Yes") { _, _ ->
-                            // Try authentication again
-                            biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
-                        }
-                        .setNegativeButton("No") { _, _ ->
-                            // Cancel authentication and go back to the previous screen
-                            finish()
-                        }
-                        .show()
-                }.build()
-
+                    showDialog()
+                }
+                .build()
             biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
+
         }else{
             goToHomeScreen()
         }
 
+    }
+
+    private fun showDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Authentication Cancelled")
+            .setMessage("Do you want to try again?")
+            .setPositiveButton("Yes") { _, _ ->
+                // Try authentication again
+                biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
+            }
+            .setNegativeButton("No") { _, _ ->
+                // Cancel authentication and go back to the previous screen
+                finish()
+            }
+            .show()
     }
 
 
@@ -76,14 +81,11 @@ class SplashActivity : AppCompatActivity() {
         }, 1700)
     }
 
+
     private fun getCancellationSignal(): CancellationSignal {
         cancellationSignal = CancellationSignal()
         cancellationSignal?.setOnCancelListener {
-            Toast.makeText(
-                this,
-                "Authentication cancelled by the user",
-                Toast.LENGTH_SHORT
-            ).show()
+            showDialog()
         }
         return cancellationSignal as CancellationSignal
     }
@@ -94,7 +96,7 @@ class SplashActivity : AppCompatActivity() {
         object : BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
                 super.onAuthenticationError(errorCode, errString)
-                Toast.makeText(this@SplashActivity, "Authentication error", Toast.LENGTH_SHORT).show()
+                showDialog()
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
