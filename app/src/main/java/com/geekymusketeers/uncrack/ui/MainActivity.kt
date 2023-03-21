@@ -1,27 +1,29 @@
 package com.geekymusketeers.uncrack.ui
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivityMainBinding
-import com.geekymusketeers.uncrack.ui.fragments.card.CardFragment
 import com.geekymusketeers.uncrack.ui.fragments.GeneratePasswordFragment
-import com.geekymusketeers.uncrack.ui.fragments.account.HomeFragment
 import com.geekymusketeers.uncrack.ui.fragments.SettingsFragment
+import com.geekymusketeers.uncrack.ui.fragments.account.HomeFragment
+import com.geekymusketeers.uncrack.ui.fragments.card.CardFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var bottomNav: BottomNavigationView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         loadFragment(HomeFragment())
-
         //Hides action bar
         supportActionBar?.hide()
 

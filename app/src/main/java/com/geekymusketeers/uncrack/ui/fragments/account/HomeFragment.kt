@@ -104,7 +104,7 @@ class HomeFragment : Fragment() {
                             val colorYellow = ContextCompat.getColor(requireContext(), R.color.yellow)
                             strengthLevel.setTextColor(colorYellow)
                             circularProgressBar.progressBarColor = colorYellow
-                            strengthLevel.text = "Medium"
+                            strengthLevel.text = "Fair"
                         }
                         in 7..9 -> {
                             val colorGreen = ContextCompat.getColor(requireContext(), R.color.green)
