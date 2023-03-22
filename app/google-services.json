@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "276783569819",
+    "project_id": "uncrack-f89dc",
+    "storage_bucket": "uncrack-f89dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276783569819:android:b2ec1e4c3f842fe2ae5f3e",
+        "android_client_info": {
+          "package_name": "com.geekymusketeers.uncrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276783569819-8196ce1gqlpjhmsmo46r16lciir1s5n4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDYDNY0EJfBaEAPbs_UosuNka_gnYG_LU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276783569819-8196ce1gqlpjhmsmo46r16lciir1s5n4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
