@@ -51,45 +51,15 @@ class SettingsFragment : Fragment() {
         binding.FingerPrintSwitch.isChecked = isFingerPrintEnabled
 
         binding.feedback.setOnClickListener {
-            val openURL = Intent(Intent.ACTION_VIEW)
-            openURL.data = Uri.parse(requireContext().resources.getString(R.string.mailTo))
-            startActivity(openURL)
+            feedback()
         }
 
         binding.about.setOnClickListener {
-
-            val dialog = AboutusModalBinding.inflate(layoutInflater)
-            val bottomSheet = requireContext().createBottomSheet()
-            dialog.apply {
-
-                optionsContent.text =
-                    "I see a lot of people are tried of memorizing all their passwords, me also sometimes forgot the login credentials. So, after thinking about this situations, this app is build, to help user's to store their passwords and other information in a secured and organized manner."
-                optionsContent1.text =
-                    "UnCrack is a offline password manager that securely stores all your login credentials and other important information, so you never have to worry about forgetting passwords or searching for lost information. Keep your digital life organized and protected with UnCrack."
-            }
-            dialog.root.setBottomSheet(bottomSheet)
-
+            about()
         }
 
         binding.shareApp.setOnClickListener {
-
-            val send =
-                "Checkout the app on Play Store \n https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack"
-            val b = BitmapFactory.decodeResource(resources, R.drawable.banner_uncrack)
-            val share = Intent(Intent.ACTION_SEND)
-            share.type = "image/jpeg"
-            val bytes = ByteArrayOutputStream()
-            b.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-            share.putExtra(Intent.EXTRA_TEXT, send)
-            val path = MediaStore.Images.Media.insertImage(
-                requireActivity().contentResolver,
-                b,
-                "Invite",
-                null
-            )
-            val imageUri = Uri.parse(path)
-            share.putExtra(Intent.EXTRA_STREAM, imageUri)
-            startActivity(Intent.createChooser(share, "Select"))
+            shareApp()
         }
 
 
@@ -106,6 +76,7 @@ class SettingsFragment : Fragment() {
                 editor.putBoolean("switchState", isFingerPrintEnabled)
                 editor.apply()
                 Util.log("test123: ${isFingerPrintEnabled.not()}")
+
                 if (isFingerPrintEnabled) {
                     val biometricPrompt = BiometricPrompt.Builder(requireContext())
                         .setTitle("Secure UnCrack")
@@ -117,6 +88,8 @@ class SettingsFragment : Fragment() {
                                 "Fingerprint not given",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            isFingerPrintEnabled = false // turn off switch
+                            binding.FingerPrintSwitch.isChecked = false // update switch state
                         }.build()
 
                     biometricPrompt.authenticate(
@@ -124,11 +97,51 @@ class SettingsFragment : Fragment() {
                         requireActivity().mainExecutor,
                         authenticationCallback
                     )
+                } else {
+                    binding.FingerPrintSwitch.isChecked = false // update switch state
                 }
             }
 
             return binding.root
         }
+    }
+
+    private fun shareApp() {
+        val send = "Checkout the app on Play Store \n https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack"
+        val b = BitmapFactory.decodeResource(resources, R.drawable.banner_uncrack)
+        val share = Intent(Intent.ACTION_SEND)
+        share.type = "image/jpeg"
+        val bytes = ByteArrayOutputStream()
+        b.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        share.putExtra(Intent.EXTRA_TEXT, send)
+        val path = MediaStore.Images.Media.insertImage(
+            requireActivity().contentResolver,
+            b,
+            "Invite",
+            null
+        )
+        val imageUri = Uri.parse(path)
+        share.putExtra(Intent.EXTRA_STREAM, imageUri)
+        startActivity(Intent.createChooser(share, "Select"))
+    }
+
+    private fun about() {
+        val dialog = AboutusModalBinding.inflate(layoutInflater)
+        val bottomSheet = requireContext().createBottomSheet()
+        dialog.apply {
+
+            optionsContent.text =
+                "I see a lot of people are tried of memorizing all their passwords, me also sometimes forgot the login credentials. So, after thinking about this situations, this app is build, to help user's to store their passwords and other information in a secured and organized manner."
+            optionsContent1.text =
+                "UnCrack is a offline password manager that securely stores all your login credentials and other important information, so you never have to worry about forgetting passwords or searching for lost information. Keep your digital life organized and protected with UnCrack."
+        }
+        dialog.root.setBottomSheet(bottomSheet)
+    }
+
+    private fun feedback() {
+        val openURL = Intent(Intent.ACTION_VIEW)
+        openURL.data = Uri.parse(requireContext().resources.getString(R.string.mailTo))
+        startActivity(openURL)
     }
 
     private fun getCancellationSignal(): CancellationSignal {
@@ -144,19 +157,19 @@ class SettingsFragment : Fragment() {
     }
 
     private val authenticationCallback: BiometricPrompt.AuthenticationCallback
-        get() = @RequiresApi(Build.VERSION_CODES.P)
-        object : BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
-                super.onAuthenticationError(errorCode, errString)
-                Toast.makeText(
-                    requireContext(),
-                    "Authentication error",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
-                super.onAuthenticationSucceeded(result)
-            }
+    get() = @RequiresApi(Build.VERSION_CODES.P)
+    object : BiometricPrompt.AuthenticationCallback() {
+        override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
+            super.onAuthenticationError(errorCode, errString)
+            Toast.makeText(
+                requireContext(),
+                "Authentication error",
+                Toast.LENGTH_SHORT
+            ).show()
         }
+
+        override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
+            super.onAuthenticationSucceeded(result)
+        }
+    }
 }
