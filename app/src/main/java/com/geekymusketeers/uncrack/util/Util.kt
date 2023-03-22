@@ -12,6 +12,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class Util {
     companion object{
+
+        const val SYMBOLS = "!@#$%&*+=-~?/_"
         fun log(message: String) {
             Log.d("", message)
         }

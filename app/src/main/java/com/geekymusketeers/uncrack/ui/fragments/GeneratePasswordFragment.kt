@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentGeneratePasswordBinding
+import com.geekymusketeers.uncrack.util.Util
 import com.google.android.material.slider.LabelFormatter
 import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
@@ -105,45 +106,33 @@ class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
     private fun generatePassword(length: Int, includeUpperCaseLetters: Boolean,includeLowerCaseLetters : Boolean,
                                 includeSymbols : Boolean, includeNumbers : Boolean): String {
 
-        var password = ""
-        val list = mutableListOf<Int>()
-        if (includeUpperCaseLetters)
-            list.add(0)
-        if (includeLowerCaseLetters)
-            list.add(1)
-        if (includeNumbers)
-            list.add(2)
-        if (includeSymbols)
-            list.add(3)
+        val password = StringBuilder(length)
+        val list = mutableListOf<Char>()
 
-        for(i in 1..length){
-            when(list.toMutableList().mRandom()){
-                0-> password += ('A'..'Z').toMutableList().mRandom().toString()
-                1-> password += ('a'..'z').toMutableList().mRandom().toString()
-                2-> password += ('0'..'9').toMutableList().mRandom().toString()
-                3-> password += listOf('!','@','#','$','%','&','*','+','=','-','~','?','/','_').toMutableList().mRandom().toString()
-            }
+        if (includeUpperCaseLetters)
+            list.addAll('A'..'Z')
+        if (includeLowerCaseLetters)
+            list.addAll('a'..'z')
+        if (includeNumbers)
+            list.addAll('0'..'9')
+        if (includeSymbols)
+            list.addAll(Util.SYMBOLS.toList())
+
+        for (i in 1..length) {
+            password.append(list.mRandom())
         }
-        return password
+
+        return password.toString()
     }
 
     private fun getPasswordScope(password: String): Int {
-        if(password.isEmpty() || password.isBlank()) {
-            return 0
-        } else {
-            return if(password.isEmpty()) {
-                0
-            } else if (password.length in 1..3) {
-                1
-            } else if (password.length in 4..6) {
-                2
-            } else if (password.length in 7..9) {
-                3
-            } else if (password.length in 10..12) {
-                4
-            } else {
-                5
-            }
+        return when {
+            password.isBlank() -> 0
+            password.length in 1..3 -> 1
+            password.length in 4..6 -> 2
+            password.length in 7..9 -> 3
+            password.length in 10..12 -> 4
+            else -> 5
         }
     }
 
