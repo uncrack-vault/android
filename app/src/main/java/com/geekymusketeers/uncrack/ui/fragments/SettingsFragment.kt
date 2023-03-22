@@ -3,11 +3,14 @@ package com.geekymusketeers.uncrack.ui.fragments
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.hardware.biometrics.BiometricPrompt
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.CancellationSignal
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -21,6 +24,7 @@ import com.geekymusketeers.uncrack.databinding.FragmentSettingsBinding
 import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
+import java.io.ByteArrayOutputStream
 
 
 class SettingsFragment : Fragment() {
@@ -67,11 +71,27 @@ class SettingsFragment : Fragment() {
 
         }
 
-        binding.privacyPolicy.setOnClickListener {
-            val url = "https://www.freeprivacypolicy.com/live/3b81d583-2a6f-43e2-ade6-5b283389f8b5"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+        binding.shareApp.setOnClickListener {
+
+            val send =
+                "Checkout the app on Play Store \n https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack"
+            val b = BitmapFactory.decodeResource(resources, R.drawable.banner_uncrack)
+            val share = Intent(Intent.ACTION_SEND)
+            share.type = "image/jpeg"
+            val bytes = ByteArrayOutputStream()
+            b.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+            share.putExtra(Intent.EXTRA_TEXT, send)
+            val path = MediaStore.Images.Media.insertImage(
+                requireActivity().contentResolver,
+                b,
+                "Invite",
+                null
+            )
+            val imageUri = Uri.parse(path)
+            share.putExtra(Intent.EXTRA_STREAM, imageUri)
+            startActivity(Intent.createChooser(share, "Select"))
         }
+
 
         binding.FingerPrintSwitch.apply {
 
