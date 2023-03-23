@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.adapter.AccountAdapter
 import com.geekymusketeers.uncrack.data.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
+import com.geekymusketeers.uncrack.databinding.ParagraphModalBinding
 import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding
 import com.geekymusketeers.uncrack.util.Encryption
@@ -113,6 +114,18 @@ class HomeFragment : Fragment() {
                             strengthLevel.text = "Strong"
                         }
                     }
+                }
+
+                // Info button
+                info.setOnClickListener {
+                    val dialog = ParagraphModalBinding.inflate(layoutInflater)
+                    val bottomSheet = requireActivity().createBottomSheet()
+                    dialog.apply {
+                        paragraphHeading.text = resources.getString(R.string.Password_Strength)
+                        paragraphContent.text =
+                            resources.getString(R.string.password_strength_des)
+                    }
+                    dialog.root.setBottomSheet(bottomSheet)
                 }
 
                 // Copy password to clipboard
