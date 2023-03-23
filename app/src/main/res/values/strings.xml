@@ -16,6 +16,8 @@
     <string name="edit_password">Password <font color='#FF0000'>*</font></string>
     <string name="v1_4">v1.4</string>
     <string name="description_about_the_option">Description about the option</string>
+    <string name="Password_Strength">Check Password Strength</string>
+    <string name="password_strength_des">You can check the strength of the password that you have saved for any particular account.</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
@@ -32,6 +34,7 @@
         <item>Spotify</item>
         <item>Discord</item>
     </string-array>
+
     <string-array name="cards">
         <item>VISA</item>
         <item>MasterCard</item>
