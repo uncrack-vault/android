@@ -33,6 +33,11 @@
         <item>Amazon Prime</item>
         <item>Spotify</item>
         <item>Discord</item>
+        <item>Github</item>
+        <item>Gmail</item>
+        <item>Paytm</item>
+        <item>Quora</item>
+        <item>Reddit</item>
     </string-array>
 
     <string-array name="cards">

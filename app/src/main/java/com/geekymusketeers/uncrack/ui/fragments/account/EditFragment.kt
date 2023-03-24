@@ -98,6 +98,11 @@ class EditFragment : Fragment() {
             "amazon prime" -> setImageOnAccountNameChange(R.drawable.amazon_logo)
             "spotify" -> setImageOnAccountNameChange(R.drawable.spotify)
             "discord" -> setImageOnAccountNameChange(R.drawable.discord)
+            "github" -> setImageOnAccountNameChange(R.drawable.cl_github)
+            "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
+            "paytm" -> setImageOnAccountNameChange(R.drawable.cl_paytm)
+            "quora" -> setImageOnAccountNameChange(R.drawable.cl_quora)
+            "reddit" -> setImageOnAccountNameChange(R.drawable.cl_reddit)
             "others" -> setImageOnAccountNameChange(R.drawable.general_account)
         }
 

@@ -225,6 +225,11 @@ class HomeFragment : Fragment() {
                     "amazon prime" -> accountLogo.setImageResource(R.drawable.amazon_logo)
                     "spotify" -> accountLogo.setImageResource(R.drawable.spotify)
                     "discord" -> accountLogo.setImageResource(R.drawable.discord)
+                    "github" -> accountLogo.setImageResource(R.drawable.cl_github)
+                    "gmail" -> accountLogo.setImageResource(R.drawable.gmail)
+                    "paytm" -> accountLogo.setImageResource(R.drawable.cl_paytm)
+                    "quora" -> accountLogo.setImageResource(R.drawable.cl_quora)
+                    "reddit" -> accountLogo.setImageResource(R.drawable.cl_reddit)
                     "others" -> accountLogo.setImageResource(R.drawable.general_account)
                 }
             }

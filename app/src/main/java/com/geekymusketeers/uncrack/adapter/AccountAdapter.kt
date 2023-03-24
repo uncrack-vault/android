@@ -65,6 +65,11 @@ class AccountAdapter(private val context: Context,
             "amazon prime" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.amazon_logo)
             "spotify" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.spotify)
             "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
+            "github" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.cl_github)
+            "gmail" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.cl_gmail)
+            "paytm" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.cl_paytm)
+            "quora" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.cl_quora)
+            "reddit" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.cl_reddit)
             "others" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.general_account)
         }
 
