@@ -116,18 +116,6 @@ class HomeFragment : Fragment() {
                     }
                 }
 
-                // Info button
-                info.setOnClickListener {
-                    val dialog = ParagraphModalBinding.inflate(layoutInflater)
-                    val bottomSheet = requireActivity().createBottomSheet()
-                    dialog.apply {
-                        paragraphHeading.text = resources.getString(R.string.Password_Strength)
-                        paragraphContent.text =
-                            resources.getString(R.string.password_strength_des)
-                    }
-                    dialog.root.setBottomSheet(bottomSheet)
-                }
-
                 // Copy password to clipboard
                 CopyPassword.setOnClickListener {
                     val clipboard: ClipboardManager? = ContextCompat.getSystemService(
