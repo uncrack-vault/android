@@ -79,6 +79,7 @@ class HomeFragment : Fragment() {
                 accountName.text = currentAccount.company
                 accountEmail.text = currentAccount.email
                 accountUsername.text = "UserName:  " + currentAccount.username
+                accountNote.text = "Note: " + currentAccount.note
                 accountCategory.text = currentAccount.category
                 when(accountCategory.text){
                     "Work" -> categoryImage.setImageResource(R.drawable.work_icon)
@@ -143,14 +144,15 @@ class HomeFragment : Fragment() {
                             bottomShareSheet.dismiss()
                             val email = currentAccount.email
                             val userName = currentAccount.username
-                            if (userName.isEmpty()){
+                            val note = currentAccount.note
+                            if (userName.isEmpty() && note.isEmpty()){
                                 val shareNoteWithoutUserName = "${"Email: $email"}\n${"Password: $decryptedViewPassword"}"
                                 val myIntent= Intent(Intent.ACTION_SEND)
                                 myIntent.type = "text/plane"
                                 myIntent.putExtra(Intent.EXTRA_TEXT,shareNoteWithoutUserName)
                                 context?.startActivity(myIntent)
                             }else{
-                                val shareNote = "${"Email: $email"}\n${"UserName: $userName"}\n${"Password: $decryptedViewPassword"}"
+                                val shareNote = "${"Email: $email"}\n${"UserName: $userName"}\n${"Password: $decryptedViewPassword"}\n${"Note: $note"}"
                                 val myIntent= Intent(Intent.ACTION_SEND)
                                 myIntent.type = "text/plane"
                                 myIntent.putExtra(Intent.EXTRA_TEXT,shareNote)
@@ -169,6 +171,9 @@ class HomeFragment : Fragment() {
 
                 if(currentAccount.username.isNotEmpty()) {
                     accountUsername.visibility = View.VISIBLE
+                }
+                if (currentAccount.note.isNotEmpty()){
+                    accountNote.visibility = View.VISIBLE
                 }
 
                 // functions of buttons
@@ -236,20 +241,20 @@ class HomeFragment : Fragment() {
 
 
         viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
-        viewModel.readAllData.observe(viewLifecycleOwner, Observer { account ->
+        viewModel.readAllData.observe(viewLifecycleOwner) { account ->
 
 
             accountList.clear()
             accountList.addAll(account)
 
             accountAdapter.setData(account)
-            if (account.isEmpty()){
+            if (account.isEmpty()) {
                 binding.emptyList.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.emptyList.visibility = View.GONE
             }
 
-        })
+        }
 
         // Moving to AddFragment
         binding.fab.setOnClickListener {
