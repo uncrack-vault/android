@@ -85,6 +85,7 @@ class AccountAdapter(private val context: Context,
             bundle.putSerializable("username", currentAccount.username)
             bundle.putSerializable("password", currentAccount.password)
             bundle.putSerializable("category", currentAccount.category)
+            bundle.putSerializable("note",currentAccount.note)
 
             val fragment = EditFragment()
             fragment.arguments = bundle

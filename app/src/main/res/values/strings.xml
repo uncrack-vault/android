@@ -7,9 +7,9 @@
     <string name="company">Company</string>
     <string name="let_s_go">Let\'s go</string>
     <string name="mailTo">mailto:aritrarick2002@gmail.com?Subject=Your%20feedback%20is%20important%20to%20us%21</string>
-    <string name="email">Email <font color='#FF0000'>*</font></string>
-    <string name="username">UserName</string>
-    <string name="add_password">Password <font color='#FF0000'>*</font></string>
+    <string name="email">Email</string>
+    <string name="username">UserName <font color='#808080'> (optional)</font></string>
+    <string name="add_password">Password</string>
     <string name="select_the_account">Select the Account <font color='#FF0000'>*</font></string>
     <string name="edit_email">Email <font color='#FF0000'>*</font></string>
     <string name="edit_username">UserName</string>
@@ -19,6 +19,22 @@
     <string name="Password_Strength">Check Password Strength</string>
     <string name="password_strength_des">You can check the strength of the password that you have saved for any particular account.</string>
     <string name="share_details">Share Details</string>
+    <string name="credentials_backups">Credentials Backups</string>
+    <string name="backup_credentials_to_google_drive">Backup credentials to Google Drive</string>
+    <string name="security">Security</string>
+    <string name="biometric_authentication">Biometric Authentication</string>
+    <string name="share_app">Share App</string>
+    <string name="share_app_with_others">Share app with others</string>
+    <string name="feedback">Feedback</string>
+    <string name="tell_us_your_perspective_after_using_the_app">Tell us your perspective after using the app</string>
+    <string name="about_the_app">About the app</string>
+    <string name="about">About</string>
+    <string name="save_details">Save</string>
+    <string name="discard">Discard changes</string>
+    <string name="discard_text">Are you sure you discard changes?</string>
+    <string name="continue_editing">Continue editing</string>
+    <string name="note">Note <font color='#808080'> (optional)</font></string>
+    <string name="category">Category</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

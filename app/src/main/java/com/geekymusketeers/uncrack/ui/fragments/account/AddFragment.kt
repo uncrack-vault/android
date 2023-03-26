@@ -74,7 +74,9 @@ class AddFragment : Fragment() {
                 "discord" -> setImageOnAccountNameChange(R.drawable.discord)
                 "github" -> setImageOnAccountNameChange(R.drawable.cl_github)
                 "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
-                "paytm" -> setImageOnAccountNameChange(R.drawable.cl_paytm)
+                "paytm" -> {
+                    setImageOnAccountNameChange(R.drawable.cl_paytm)
+                }
                 "quora" -> setImageOnAccountNameChange(R.drawable.cl_quora)
                 "reddit" -> setImageOnAccountNameChange(R.drawable.cl_reddit)
                 "others" -> setImageOnAccountNameChange(R.drawable.general_account)
@@ -163,7 +165,7 @@ class AddFragment : Fragment() {
             btnSave.apply {
                 this@AddFragment.buttonLayout = this.progressButtonBg
                 this@AddFragment.buttonText = this.buttonText
-                this@AddFragment.buttonText.text = "Save"
+                this@AddFragment.buttonText.text = getString(R.string.save_details)
                 this@AddFragment.buttonProgress = this.buttonProgress
             }
         }
@@ -208,8 +210,8 @@ class AddFragment : Fragment() {
             val bottomSheet = requireContext().createBottomSheet()
             dialog.apply {
 
-                optionsHeading.text = "Discard changes"
-                optionsContent.text = "Are you sure you discard changes?"
+                optionsHeading.text = getString(R.string.discard)
+                optionsContent.text = getString(R.string.discard_text)
                 positiveOption.text = "Discard"
                 positiveOption.setTextColor(
                     ContextCompat.getColor(
@@ -217,7 +219,7 @@ class AddFragment : Fragment() {
                         R.color.white
                     )
                 )
-                negativeOption.text = "Continue editing"
+                negativeOption.text = getString(R.string.continue_editing)
                 negativeOption.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),
@@ -266,12 +268,13 @@ class AddFragment : Fragment() {
         }[0] as Chip).text.toString()
         val password = binding.password.text.toString()
         val userName = binding.username.text.toString()
+        val note = binding.note.text.toString()
 
         // Encrypt the password field
         val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
         val encryptedPassword = encryption.encryptOrNull(password)
 
-        val account = Account(0,company, email, category,userName, encryptedPassword)
+        val account = Account(0,company, email, category,userName, encryptedPassword,note)
 
         lifecycleScope.launch {
             myViewModel.saveData(viewModel,account)

@@ -69,6 +69,8 @@ class EditFragment : Fragment() {
         val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
         val decryptedPassword = encryption.decryptOrNull(pass)
         binding.editPassword.setText(decryptedPassword)
+        val note = arguments?.getString("note").toString()
+        binding.editNote.setText(note)
         val category = arguments?.getString("category").toString()
         for (child in binding.editCategoryChipGroup.children) {
             if (child is Chip) {
@@ -81,7 +83,7 @@ class EditFragment : Fragment() {
             }
         }
 
-        val account = id?.let { Account(it,acc,email,category,username,pass) }
+        val account = id?.let { Account(it,acc,email,category,username,pass,note) }
 
         // Setting logo according to the account type
         when(acc?.toLowerCase().toString()){
@@ -175,7 +177,7 @@ class EditFragment : Fragment() {
             btnEdit.apply {
                 this@EditFragment.buttonLayout = this.progressButtonBg
                 this@EditFragment.buttonText = this.buttonText
-                this@EditFragment.buttonText.text = "Save"
+                this@EditFragment.buttonText.text = getString(R.string.save_details)
                 this@EditFragment.buttonProgress = this.buttonProgress
             }
         }
@@ -278,6 +280,7 @@ class EditFragment : Fragment() {
         val encryptedEditedPassword = encryption.encryptOrNull(password)
 
         val userName = binding.editUsername.text.toString()
+        val notes = binding.editNote.text.toString()
 
         if (account!=null){
             if (accountName != account.company){
@@ -294,6 +297,9 @@ class EditFragment : Fragment() {
             }
             if (userName != account.username){
                 account.username = userName
+            }
+            if (notes != account.note){
+                account.note = notes
             }
             lifecycleScope.launch {
                 editViewModel.updateData(accountViewModel,account)
