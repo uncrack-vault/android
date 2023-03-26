@@ -52,19 +52,18 @@ class MainActivity : AppCompatActivity() {
                     .setPositiveButton("Update") { _, _ ->
 
                         val i = Intent(Intent.ACTION_VIEW)
-                        val uri = Uri.parse("https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack")
+                        val uri =
+                            Uri.parse("https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack")
                         i.data = uri
                         startActivity(i)
-
                     }
                     .setNegativeButton("No") { _, _ ->
+                        // Cancel authentication and go back to the previous screen
                         finish()
                     }
                     .show()
             }
         }
-
-
 
         bottomNav = binding.bottomNav
         bottomNav.setOnItemSelectedListener {
