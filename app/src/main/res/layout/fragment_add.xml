@@ -68,7 +68,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/logo_light_mode"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/menu_account"
@@ -98,17 +98,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <!--Email-->
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/email"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/email_box"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     app:boxBackgroundColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/headerLayout"
@@ -119,7 +135,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
-                        android:hint="@string/email"
                         android:inputType="textEmailAddress"
                         android:lines="1"
                         android:textColor="@color/black" />
@@ -139,12 +154,29 @@
 
                 <!--UserName-->
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/username"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/username_box"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     app:boxBackgroundColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/email_box"
@@ -157,20 +189,35 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
-                        android:hint="@string/username"
                         android:inputType="textEmailAddress"
                         android:lines="1"
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!--Password-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/password"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/password_box"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     app:boxBackgroundColor="@color/white"
                     app:endIconMode="password_toggle"
@@ -184,7 +231,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/dm_sans"
-                        android:hint="@string/add_password"
                         android:inputType="textPassword"
                         android:lines="1"
                         android:textColor="@color/black" />
@@ -201,25 +247,11 @@
                     android:visibility="gone"
                     tools:text="Please Enter the Password." />
 
-                <!--                <Button-->
-                <!--                    android:id="@+id/btn_generate_password"-->
-                <!--                    android:layout_width="210dp"-->
-                <!--                    android:layout_height="55dp"-->
-                <!--                    android:layout_gravity="end"-->
-                <!--                    android:layout_marginTop="5dp"-->
-                <!--                    android:layout_marginEnd="10dp"-->
-                <!--                    android:text="Generate Password"-->
-                <!--                    android:paddingStart="20dp"-->
-                <!--                    android:textAllCaps="false"-->
-                <!--                    android:drawableLeft="@drawable/refresh"-->
-                <!--                    android:fontFamily="@font/dm_sans_medium"-->
-                <!--                    android:textSize="13sp"/>-->
-                <!--Category-->
-
+                <!--Note-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="start"
                     android:orientation="horizontal">
 
@@ -227,7 +259,48 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
-                        android:text="Category"
+                        android:text="@string/note"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/note_box"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:textColorHint="@color/black"
+                    app:boxBackgroundColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="@+id/email_box"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/email_box"
+                    app:layout_constraintTop_toBottomOf="@+id/email_box">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/note"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/dm_sans"
+                        android:inputType="textPassword"
+                        android:lines="1"
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Category-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/category"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
