@@ -30,6 +30,8 @@ import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -120,17 +122,19 @@ class AddFragment : Fragment() {
             val bottomSheet = requireContext().createBottomSheet()
 
             saveDialog.apply {
-                optionsHeading.text = "Confirm Changes"
-                optionsContent.text = "Are you sure you want save?"
-                positiveOption.text = "Save Changes"
-                negativeOption.text = "Don't Save"
+                optionsHeading.text = getString(R.string.confirm_changes)
+                optionsContent.text = getString(R.string.save_text)
+                positiveOption.text = getString(R.string.save_changes)
+                negativeOption.text = getString(R.string.dont_save)
 
                 positiveOption.setOnClickListener {
                     bottomSheet.dismiss()
-                    insertDataToDB()
-                    val frag = HomeFragment()
-                    val trans = fragmentManager?.beginTransaction()
-                    trans?.replace(R.id.fragment,frag)?.commit()
+                    binding.progressAnimation.progressParent.visibility = View.VISIBLE
+                    lifecycleScope.launch(Dispatchers.Main){
+                        delay(1000L)
+                        insertDataToDB()
+                        transaction()
+                    }
                 }
                 negativeOption.setOnClickListener {
                     bottomSheet.dismiss()
@@ -152,6 +156,12 @@ class AddFragment : Fragment() {
 
         return binding.root
 
+    }
+
+    private fun transaction() {
+        val frag = HomeFragment()
+        val trans = fragmentManager?.beginTransaction()
+        trans?.replace(R.id.fragment,frag)?.commit()
     }
 
     private fun initialization() {

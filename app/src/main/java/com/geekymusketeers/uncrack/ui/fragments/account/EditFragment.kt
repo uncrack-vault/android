@@ -30,6 +30,8 @@ import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.crypto.SecretKey
 
@@ -142,17 +144,20 @@ class EditFragment : Fragment() {
             val bottomSheet = requireContext().createBottomSheet()
 
             saveDialog.apply {
-                optionsHeading.text = "Confirm Changes"
-                optionsContent.text = "Are you sure you want save the updated credentials?"
-                positiveOption.text = "Save Changes"
-                negativeOption.text = "Don't Save"
+                optionsHeading.text = getString(R.string.confirm_changes)
+                optionsContent.text = getString(R.string.update_text)
+                positiveOption.text = getString(R.string.save_changes)
+                negativeOption.text = getString(R.string.dont_save)
 
                 positiveOption.setOnClickListener {
                     bottomSheet.dismiss()
-                    updateDB(account)
-                    val frag = HomeFragment()
-                    val trans = fragmentManager?.beginTransaction()
-                    trans?.replace(R.id.fragment,frag)?.commit()
+                    binding.progressAnimation.progressParent.visibility = View.VISIBLE
+                    lifecycleScope.launch(Dispatchers.Main){
+                        delay(1000L)
+                        updateDB(account)
+                        transaction()
+                    }
+
                 }
                 negativeOption.setOnClickListener {
                     bottomSheet.dismiss()
@@ -167,6 +172,12 @@ class EditFragment : Fragment() {
             backButton()
         }
         return binding.root
+    }
+
+    private fun transaction() {
+        val frag = HomeFragment()
+        val trans = fragmentManager?.beginTransaction()
+        trans?.replace(R.id.fragment,frag)?.commit()
     }
 
 

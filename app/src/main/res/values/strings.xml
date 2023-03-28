@@ -10,7 +10,7 @@
     <string name="email">Email</string>
     <string name="username">UserName <font color='#808080'> (optional)</font></string>
     <string name="add_password">Password</string>
-    <string name="select_the_account">Select the Account <font color='#FF0000'>*</font></string>
+    <string name="select_the_account">Select the Account</string>
     <string name="edit_email">Email <font color='#FF0000'>*</font></string>
     <string name="edit_username">UserName</string>
     <string name="edit_password">Password <font color='#FF0000'>*</font></string>
@@ -35,6 +35,20 @@
     <string name="continue_editing">Continue editing</string>
     <string name="note">Note <font color='#808080'> (optional)</font></string>
     <string name="category">Category</string>
+    <string name="hint_email">youremail123@gmail.com</string>
+    <string name="hint_password">********</string>
+    <string name="hint_note">yourNote</string>
+    <string name="hint_year">Year</string>
+    <string name="hint_month">Month</string>
+    <string name="hint_card_number">Card Number</string>
+    <string name="hint_card_holder_name">Card Holder Name</string>
+    <string name="hint_cvv">CVV</string>
+    <string name="saving_changes">Saving changes...</string>
+    <string name="confirm_changes">Confirm Changes</string>
+    <string name="update_text">Are you sure you want save the updated credentials?</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="dont_save">Don\'t Save</string>
+    <string name="save_text">Are you sure you want save?</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
