@@ -7,13 +7,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivityMainBinding
+import com.geekymusketeers.uncrack.databinding.UpdatemodalBinding
 import com.geekymusketeers.uncrack.ui.fragments.GeneratePasswordFragment
 import com.geekymusketeers.uncrack.ui.fragments.SettingsFragment
 import com.geekymusketeers.uncrack.ui.fragments.account.HomeFragment
 import com.geekymusketeers.uncrack.ui.fragments.card.CardFragment
+import com.geekymusketeers.uncrack.util.Util
+import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
+import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.play.core.appupdate.AppUpdateInfo
@@ -43,28 +48,7 @@ class MainActivity : AppCompatActivity() {
         appUpdateManager = AppUpdateManagerFactory.create(this)
         task = appUpdateManager.appUpdateInfo
 
-        // Checking for Update
-        task.addOnSuccessListener {
-            if (it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                MaterialAlertDialogBuilder(this)
-                    .setTitle("Update Alert!")
-                    .setMessage("Kindly update your app.")
-                    .setPositiveButton("Update") { _, _ ->
-
-                        val i = Intent(Intent.ACTION_VIEW)
-                        val uri =
-                            Uri.parse("https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack")
-                        i.data = uri
-                        startActivity(i)
-                    }
-                    .setNegativeButton("No") { _, _ ->
-                        // Cancel authentication and go back to the previous screen
-                        finish()
-                    }
-                    .show()
-            }
-        }
-
+        checkForUpdate()
         bottomNav = binding.bottomNav
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
@@ -94,10 +78,58 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun checkForUpdate() {
+        appUpdateManager = AppUpdateManagerFactory.create(this)
+        task = appUpdateManager.appUpdateInfo
+
+        // Checking for Update
+        task.addOnSuccessListener {
+            if (it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                askUserForUpdate()
+            }
+        }
+    }
+
+    private fun askUserForUpdate() {
+        val dialog = UpdatemodalBinding.inflate(layoutInflater)
+        val bottomSheet = createBottomSheet()
+        dialog.apply {
+
+            optionsHeading.text = getString(R.string.update_available)
+            optionsContent.text = getString(R.string.would_you_like_to_update)
+            positiveOption.text = getString(R.string.update)
+            positiveOption.setTextColor(
+                ContextCompat.getColor(
+                    this@MainActivity,
+                    R.color.white
+                )
+            )
+
+            negativeOption.text = getString(R.string.later)
+            negativeOption.setTextColor(
+                ContextCompat.getColor(
+                    this@MainActivity,
+                    R.color.black
+                )
+            )
+
+            positiveOption.setOnClickListener {
+                bottomSheet.dismiss()
+                val i = Intent(Intent.ACTION_VIEW)
+                val uri = Uri.parse(Util.PLAYSTORE_URL)
+                i.data = uri
+                startActivity(i)
+            }
+            negativeOption.setOnClickListener {
+                bottomSheet.dismiss()
+            }
+        }
+        dialog.root.setBottomSheet(bottomSheet)
+    }
+
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment, fragment)
         transaction.commit()
     }
-
 }

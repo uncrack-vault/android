@@ -14,6 +14,7 @@ class Util {
     companion object{
 
         const val SYMBOLS = "!@#$%&*+=-~?/_"
+        const val PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack"
         fun log(message: String) {
             Log.d("", message)
         }
