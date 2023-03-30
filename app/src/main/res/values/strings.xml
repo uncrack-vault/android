@@ -53,6 +53,8 @@
     <string name="would_you_like_to_update">Would you like to update it now?</string>
     <string name="update">Update</string>
     <string name="later">Later</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
