@@ -50,12 +50,10 @@
                     android:id="@+id/img_about"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
                     android:src="@drawable/about_logo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.476" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:id="@+id/txtAbout"
@@ -69,7 +67,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_about"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="About" />
+                    android:text="@string/about" />
 
                 <TextView
                     android:id="@+id/txtAbout_description"
@@ -81,7 +79,7 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/txtAbout"
                     app:layout_constraintTop_toBottomOf="@+id/txtAbout"
-                    android:text="About the app" />
+                    android:text="@string/about_the_app" />
 
 
 
@@ -111,12 +109,10 @@
                     android:id="@+id/img_feedback"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
                     android:src="@drawable/feedback"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.476" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/txtFeedback"
@@ -130,7 +126,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_feedback"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="Feedback" />
+                    android:text="@string/feedback" />
 
                 <TextView
                     android:id="@+id/txtFeedback_description"
@@ -142,7 +138,7 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/txtFeedback"
                     app:layout_constraintTop_toBottomOf="@+id/txtFeedback"
-                    android:text="Tell us your perspective after using the app" />
+                    android:text="@string/tell_us_your_perspective_after_using_the_app" />
 
 
 
@@ -174,7 +170,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
                     android:src="@drawable/share_icon" />
 
                 <TextView
@@ -189,7 +184,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_share"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="Share App" />
+                    android:text="@string/share_app" />
 
                 <TextView
                     android:id="@+id/txtShare_description"
@@ -201,7 +196,7 @@
                     app:layout_constraintStart_toStartOf="@+id/txtShare"
                     android:textSize="13sp"
                     android:textColor="@color/black"
-                    android:text="Share app with others" />
+                    android:text="@string/share_app_with_others" />
 
 
 
@@ -231,7 +226,6 @@
                     android:id="@+id/img_biometric"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
                     android:src="@drawable/lock_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -249,7 +243,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_biometric"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="Security" />
+                    android:text="@string/security" />
 
                 <TextView
                     android:id="@+id/txtBiometric_description"
@@ -261,20 +255,77 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/txtBiometric"
                     app:layout_constraintTop_toBottomOf="@+id/txtBiometric"
-                    android:text="Biometric Authentication" />
+                    android:text="@string/biometric_authentication" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/FingerPrintSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textOff="Off"
-                    android:textOn="On"
+                    android:textOff="@string/off"
+                    android:textOn="@string/on"
                     android:thumb="@drawable/switch_thumb"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:track="@drawable/switch_track" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/backup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            app:cardElevation="5dp"
+            android:padding="10dp"
+            app:cardCornerRadius="10dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/backup_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp">
+
+                <ImageView
+                    android:id="@+id/img_drive"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/backup"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtBackup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/img_drive"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/credentials_backups" />
+
+                <TextView
+                    android:id="@+id/txtBackUp_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/dm_sans"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/txtBackup"
+                    app:layout_constraintTop_toBottomOf="@+id/txtBackup"
+                    android:text="@string/backup_credentials_to_google_drive" />
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
