@@ -79,16 +79,16 @@ class CardDetialsAddFragment : Fragment() {
         val bottomSheet = requireContext().createBottomSheet()
         dialog.apply {
 
-            optionsHeading.text = "Discard changes"
-            optionsContent.text = "Are you sure you discard changes?"
-            positiveOption.text = "Discard"
+            optionsHeading.text = getString(R.string.discard)
+            optionsContent.text = getString(R.string.discard_text)
+            positiveOption.text = getString(R.string.DISCARD)
             positiveOption.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
                     R.color.white
                 )
             )
-            negativeOption.text = "Continue editing"
+            negativeOption.text = getString(R.string.continue_editing)
             negativeOption.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
@@ -143,19 +143,19 @@ class CardDetialsAddFragment : Fragment() {
             val cvv = binding.CVV.text.toString()
             showProgress()
             if (cvv.isEmpty()) {
-                binding.cardCVVHelperTV.text = "Please Enter the CVV."
+                binding.cardCVVHelperTV.text = getString(R.string.please_enter_the_cvv)
                 binding.cardCVVHelperTV.visibility = View.VISIBLE
                 validation()
                 stopProgress()
                 return@setOnClickListener
             } else if (cardNo.isEmpty()) {
-                binding.cardNumberHelperTV.text = "Please Enter the Card Number."
+                binding.cardNumberHelperTV.text = getString(R.string.please_enter_the_card_number)
                 binding.cardNumberHelperTV.visibility = View.VISIBLE
                 validation()
                 stopProgress()
                 return@setOnClickListener
             } else if (cardName.isEmpty()) {
-                binding.cardNameHelperTV.text = "Please Enter the Card Holder Name."
+                binding.cardNameHelperTV.text = getString(R.string.please_enter_the_card_holder_name)
                 binding.cardNameHelperTV.visibility = View.VISIBLE
                 validation()
                 stopProgress()
@@ -210,11 +210,11 @@ class CardDetialsAddFragment : Fragment() {
 
     private fun validation() {
         binding.apply {
-            cardNumberHelperTV.text = "Please Enter the Card Number."
+            cardNumberHelperTV.text = getString(R.string.please_enter_the_card_number)
             cardNumberHelperTV.visibility = View.VISIBLE
-            cardNameHelperTV.text = "Please Enter the Card Holder Name."
+            cardNameHelperTV.text = getString(R.string.please_enter_the_card_holder_name)
             cardNameHelperTV.visibility = View.VISIBLE
-            cardCVVHelperTV.text = "Please Enter the CVV."
+            cardCVVHelperTV.text = getString(R.string.please_enter_the_cvv)
             cardCVVHelperTV.visibility = View.VISIBLE
         }
     }
@@ -395,7 +395,7 @@ class CardDetialsAddFragment : Fragment() {
             btnSaveCardDetails.apply {
                 this@CardDetialsAddFragment.buttonLayout = this.progressButtonBg
                 this@CardDetialsAddFragment.buttonText = this.buttonText
-                this@CardDetialsAddFragment.buttonText.text = "Save"
+                this@CardDetialsAddFragment.buttonText.text = getString(R.string.save_details)
                 this@CardDetialsAddFragment.buttonProgress = this.buttonProgress
             }
         }

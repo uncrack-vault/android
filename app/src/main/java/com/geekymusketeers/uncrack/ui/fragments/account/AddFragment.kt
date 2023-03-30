@@ -76,9 +76,7 @@ class AddFragment : Fragment() {
                 "discord" -> setImageOnAccountNameChange(R.drawable.discord)
                 "github" -> setImageOnAccountNameChange(R.drawable.cl_github)
                 "gmail" -> setImageOnAccountNameChange(R.drawable.gmail)
-                "paytm" -> {
-                    setImageOnAccountNameChange(R.drawable.cl_paytm)
-                }
+                "paytm" -> setImageOnAccountNameChange(R.drawable.cl_paytm)
                 "quora" -> setImageOnAccountNameChange(R.drawable.cl_quora)
                 "reddit" -> setImageOnAccountNameChange(R.drawable.cl_reddit)
                 "others" -> setImageOnAccountNameChange(R.drawable.general_account)
@@ -92,23 +90,23 @@ class AddFragment : Fragment() {
 
             if (email.isEmpty() && password.isEmpty()){
                 binding.apply {
-                    emailHelperTV.text = "Please Enter the Email ID"
+                    emailHelperTV.text = getString(R.string.please_enter_the_email_id)
                     emailHelperTV.visibility = View.VISIBLE
-                    passwordHelperTV.text = "Please Enter the Password"
+                    passwordHelperTV.text = getString(R.string.please_enter_the_password)
                     passwordHelperTV.visibility = View.VISIBLE
                 }
                 return@setOnClickListener
             }
             else if (email.isEmpty()){
                 binding.apply {
-                    emailHelperTV.text = "Please Enter the Email ID"
+                    emailHelperTV.text = getString(R.string.please_enter_the_email_id)
                     emailHelperTV.visibility = View.VISIBLE
                 }
                 return@setOnClickListener
             }
             else if (password.isEmpty()){
                 binding.apply {
-                    passwordHelperTV.text = "Please Enter the Password"
+                    passwordHelperTV.text = getString(R.string.please_enter_the_password)
                     passwordHelperTV.visibility = View.VISIBLE
                 }
                 return@setOnClickListener
@@ -222,7 +220,7 @@ class AddFragment : Fragment() {
 
                 optionsHeading.text = getString(R.string.discard)
                 optionsContent.text = getString(R.string.discard_text)
-                positiveOption.text = "Discard"
+                positiveOption.text = getString(R.string.DISCARD)
                 positiveOption.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),

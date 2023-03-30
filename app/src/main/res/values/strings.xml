@@ -55,6 +55,19 @@
     <string name="later">Later</string>
     <string name="off">Off</string>
     <string name="on">On</string>
+    <string name="add_your_card_details">Add your Card Details</string>
+    <string name="select_your_card">Select your Card</string>
+    <string name="cvv">CVV</string>
+    <string name="cvv_hint">****</string>
+    <string name="expiry_date">EXPIRY DATE</string>
+    <string name="card_holder_name">CARD HOLDER NAME</string>
+    <string name="add_your_details">Add your Details</string>
+    <string name="DISCARD">Discard</string>
+    <string name="please_enter_the_cvv">Please Enter the CVV.</string>
+    <string name="please_enter_the_card_number">Please Enter the Card Number.</string>
+    <string name="please_enter_the_card_holder_name">Please Enter the Card Holder Name.</string>
+    <string name="please_enter_the_email_id">Please Enter the Email ID</string>
+    <string name="please_enter_the_password">Please Enter the Password</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
