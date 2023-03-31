@@ -34,7 +34,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/dm_sans_bold"
-            android:text="Empty List"
+            android:text="@string/empty_list"
             android:textColor="@color/black"
             android:textSize="25sp" />
 
@@ -46,7 +46,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/dm_sans"
-            android:text="You have no Cards saved till now"
+            android:text="@string/you_have_no_cards_saved_till_now"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -56,13 +56,14 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="14dp"
         android:layout_marginEnd="20dp"
-        android:fontFamily="@font/dm_sans_medium"
-        android:text="Card Details"
+        android:paddingBottom="15dp"
+        android:fontFamily="@font/dm_sans_bold"
+        android:text="@string/my_cards"
         android:textColor="@color/black"
-        android:textSize="25dp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +83,6 @@
         android:paddingEnd="10dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="RtlSymmetry" />

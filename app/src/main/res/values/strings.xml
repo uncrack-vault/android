@@ -68,6 +68,17 @@
     <string name="please_enter_the_card_holder_name">Please Enter the Card Holder Name.</string>
     <string name="please_enter_the_email_id">Please Enter the Email ID</string>
     <string name="please_enter_the_password">Please Enter the Password</string>
+    <string name="my_cards">My Cards</string>
+    <string name="you_have_no_cards_saved_till_now">You have no Cards saved till now</string>
+    <string name="empty_list">Empty List</string>
+    <string name="my_passwords">My Passwords</string>
+    <string name="settings">Settings</string>
+    <string name="password_generator">Password Generator</string>
+    <string name="include_numbers">Numbers</string>
+    <string name="include_lowercase_letters">Letters (lowercase)</string>
+    <string name="include_uppercase_letters">Letters (uppercase)</string>
+    <string name="include_symbols">Symbols</string>
+    <string name="password_length">Password Length</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
