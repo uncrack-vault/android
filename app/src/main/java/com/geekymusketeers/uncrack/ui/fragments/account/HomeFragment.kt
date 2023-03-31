@@ -80,6 +80,7 @@ class HomeFragment : Fragment() {
                 accountEmail.text = currentAccount.email
                 accountUsername.text = "UserName:  " + currentAccount.username
                 accountNote.text = "Note: " + currentAccount.note
+                accountDateTime.text = "Last Updated: "+currentAccount.dateTime
                 accountCategory.text = currentAccount.category
                 when(accountCategory.text){
                     "Work" -> categoryImage.setImageResource(R.drawable.work_icon)
@@ -135,10 +136,10 @@ class HomeFragment : Fragment() {
                     val bottomShareSheet = requireContext().createBottomSheet()
 
                     shareDialog.apply {
-                        optionsHeading.text = "Wait a Second"
-                        optionsContent.text = "Are you sure you want to share your credentials with other's?"
-                        positiveOption.text = "Yes"
-                        negativeOption.text = "No"
+                        optionsHeading.text = getString(R.string.wait_a_second)
+                        optionsContent.text = getString(R.string.are_you_sure)
+                        positiveOption.text = getString(R.string.yes)
+                        negativeOption.text = getString(R.string.no)
 
                         positiveOption.setOnClickListener {
                             bottomShareSheet.dismiss()

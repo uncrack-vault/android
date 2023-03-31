@@ -33,6 +33,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class AddFragment : Fragment() {
@@ -277,12 +279,14 @@ class AddFragment : Fragment() {
         val password = binding.password.text.toString()
         val userName = binding.username.text.toString()
         val note = binding.note.text.toString()
+        val sdf = SimpleDateFormat("dd MMM yyyy, h:mma")
+        val currentDate = sdf.format(Date())
 
         // Encrypt the password field
         val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
         val encryptedPassword = encryption.encryptOrNull(password)
 
-        val account = Account(0,company, email, category,userName, encryptedPassword,note)
+        val account = Account(0,company, email, category,userName, encryptedPassword,note,currentDate)
 
         lifecycleScope.launch {
             myViewModel.saveData(viewModel,account)

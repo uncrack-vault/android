@@ -16,5 +16,6 @@ data class Account(
     var username : String,
     var password : String,
     var note : String,
+    var dateTime : String,
     var isFavourite : Boolean = false
 ) : Parcelable

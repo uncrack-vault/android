@@ -33,6 +33,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.crypto.SecretKey
 
 
@@ -73,6 +75,7 @@ class EditFragment : Fragment() {
         binding.editPassword.setText(decryptedPassword)
         val note = arguments?.getString("note").toString()
         binding.editNote.setText(note)
+        val dateTime = arguments?.getString("dateTime").toString()
         val category = arguments?.getString("category").toString()
         for (child in binding.editCategoryChipGroup.children) {
             if (child is Chip) {
@@ -85,7 +88,7 @@ class EditFragment : Fragment() {
             }
         }
 
-        val account = id?.let { Account(it,acc,email,category,username,pass,note) }
+        val account = id?.let { Account(it,acc,email,category,username,pass,note,dateTime) }
 
         // Setting logo according to the account type
         when(acc?.toLowerCase().toString()){
@@ -292,6 +295,8 @@ class EditFragment : Fragment() {
 
         val userName = binding.editUsername.text.toString()
         val notes = binding.editNote.text.toString()
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        val currentDate = sdf.format(Date())
 
         if (account!=null){
             if (accountName != account.company){
@@ -311,6 +316,9 @@ class EditFragment : Fragment() {
             }
             if (notes != account.note){
                 account.note = notes
+            }
+            if (currentDate != account.dateTime){
+                account.dateTime = currentDate
             }
             lifecycleScope.launch {
                 editViewModel.updateData(accountViewModel,account)

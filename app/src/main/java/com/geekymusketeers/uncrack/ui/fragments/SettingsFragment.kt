@@ -1,5 +1,6 @@
 package com.geekymusketeers.uncrack.ui.fragments
 
+
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -25,6 +26,7 @@ import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import java.io.ByteArrayOutputStream
+import java.util.*
 
 
 class SettingsFragment : Fragment() {
@@ -105,6 +107,7 @@ class SettingsFragment : Fragment() {
             return binding.root
         }
     }
+
 
     private fun shareApp() {
         val send = "Checkout the app on Play Store \n https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack"

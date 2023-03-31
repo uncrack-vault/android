@@ -79,6 +79,10 @@
     <string name="include_uppercase_letters">Letters (uppercase)</string>
     <string name="include_symbols">Symbols</string>
     <string name="password_length">Password Length</string>
+    <string name="wait_a_second">Wait a Second</string>
+    <string name="are_you_sure">Are you sure you want to share your credentials with other\'s?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
