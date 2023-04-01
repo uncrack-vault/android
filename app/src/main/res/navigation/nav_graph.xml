@@ -58,4 +58,18 @@
         android:name="com.geekymusketeers.uncrack.ui.fragments.card.CardDetialsAddFragment"
         android:label="fragment_card_detials_add"
         tools:layout="@layout/fragment_card_detials_add" />
+    <fragment
+        android:id="@+id/settingsFragment2"
+        android:name="com.geekymusketeers.uncrack.ui.fragments.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_securityFragment"
+            app:destination="@id/securityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/securityFragment"
+        android:name="com.geekymusketeers.uncrack.ui.fragments.settings.SecurityFragment"
+        android:label="fragment_security"
+        tools:layout="@layout/fragment_security" />
 </navigation>
