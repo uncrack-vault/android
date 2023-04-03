@@ -7,7 +7,16 @@
 
     <fragment
         android:id="@+id/masterKeyFragment"
-        android:name="com.geekymusketeers.uncrack.ui.auth.fragment.MasterKeyFragment"
+        android:name="com.geekymusketeers.uncrack.ui.auth.fragment.CreateMasterKeyFragment"
         android:label="fragment_master_key"
-        tools:layout="@layout/fragment_master_key" />
+        tools:layout="@layout/fragment_create_master_key" >
+        <action
+            android:id="@+id/action_masterKeyFragment_to_lockMasterKeyFragment"
+            app:destination="@id/lockMasterKeyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lockMasterKeyFragment"
+        android:name="com.geekymusketeers.uncrack.ui.auth.fragment.LockMasterKeyFragment"
+        android:label="fragment_lock_master_key"
+        tools:layout="@layout/fragment_lock_master_key" />
 </navigation>

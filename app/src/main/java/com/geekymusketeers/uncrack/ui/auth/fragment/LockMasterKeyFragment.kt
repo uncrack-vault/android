@@ -8,14 +8,15 @@ import android.view.ViewGroup
 import com.geekymusketeers.uncrack.R
 
 
-class MasterKeyFragment : Fragment() {
+class LockMasterKeyFragment : Fragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_master_key, container, false)
+        return inflater.inflate(R.layout.fragment_lock_master_key, container, false)
     }
 
 }

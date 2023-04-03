@@ -1,18 +1,12 @@
 package com.geekymusketeers.uncrack.ui.splash_activity
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
+
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.hardware.biometrics.BiometricPrompt
 import android.os.*
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivitySplashBinding
 import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.ui.MainActivity

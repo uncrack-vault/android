@@ -86,6 +86,14 @@
     <string name="settings">Settings</string>
     <string name="about_app_text">I see a lot of people are tried of memorizing all their passwords, me also sometimes forgot the login credentials. So, after thinking about this situations, this app is build, to help user\'s to store their passwords and other information in a secured and organized manner.</string>
     <string name="about_app_text_second">UnCrack is a offline password manager that securely stores all your login credentials and other important information, so you never have to worry about forgetting passwords or searching for lost information. Keep your digital life organized and protected with UnCrack.</string>
+    <string name="security_screen">Security</string>
+    <string name="unlock_with_fingerprint">Unlock with Fingerprint</string>
+    <string name="update_your_master_key">Update your Master Key</string>
+    <string name="set_up_a_master_key_to_secure_all_your_credentials">Set up a master key to secure your credentials with end-to-end encryption</string>
+    <string name="master_key">Master Key</string>
+    <string name="end_to_end_encryption">End-to-end encryption</string>
+    <string name="confirm_master_key">Confirm Master Key</string>
+    <string name="enter_your_master_key_to_continue">Please enter your Master Key to continue</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
