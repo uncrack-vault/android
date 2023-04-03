@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:fontFamily="@font/dm_sans_bold"
+        android:fontFamily="@font/dm_sans_medium"
         android:text="Toolbar Title"
         android:textColor="@color/black"
         android:textSize="30sp" />

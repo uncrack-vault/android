@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/masterkey_graph"
+    app:startDestination="@id/masterKeyFragment">
+
+    <fragment
+        android:id="@+id/masterKeyFragment"
+        android:name="com.geekymusketeers.uncrack.ui.auth.fragment.MasterKeyFragment"
+        android:label="fragment_master_key"
+        tools:layout="@layout/fragment_master_key" />
+</navigation>
