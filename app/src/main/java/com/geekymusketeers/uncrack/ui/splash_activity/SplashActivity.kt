@@ -1,22 +1,26 @@
 package com.geekymusketeers.uncrack.ui.splash_activity
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
+
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.hardware.biometrics.BiometricPrompt
 import android.os.*
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.geekymusketeers.uncrack.R
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.geekymusketeers.uncrack.databinding.ActivitySplashBinding
 import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.ui.MainActivity
+import com.geekymusketeers.uncrack.ui.auth.MasterKeyActivity
+import com.geekymusketeers.uncrack.viewModel.KeyViewModel
+import com.geekymusketeers.uncrack.viewModel.ViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.P)
 class SplashActivity : AppCompatActivity() {
@@ -24,6 +28,7 @@ class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplashBinding
     private var cancellationSignal: CancellationSignal? = null
     private lateinit var biometricPrompt: BiometricPrompt
+    private val keyViewModel by viewModels<KeyViewModel> { ViewModelFactory() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +36,9 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         //Hides action bar
         supportActionBar?.hide()
-
 
         val pref = applicationContext.getSharedPreferences("mypref", Context.MODE_PRIVATE)
         val isSwitchClicked = pref.getBoolean("switchState", false)
@@ -52,9 +57,34 @@ class SplashActivity : AppCompatActivity() {
             biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
 
         }else{
-            goToHomeScreen()
+            handleMasterKey()
         }
 
+    }
+
+    private fun handleMasterKey() {
+        keyViewModel.getMasterKey().observe(this) {
+            when {
+                it.isEmpty() -> {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(1000)
+                        val intent = Intent(this@SplashActivity, MasterKeyActivity::class.java)
+                        intent.putExtra("flow","createMasterKey")
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+                else -> {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(1000)
+                        val intent = Intent(this@SplashActivity, MasterKeyActivity::class.java)
+                        intent.putExtra("flow","askForMasterKey")
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+            }
+        }
     }
 
     private fun showDialog() {
@@ -70,15 +100,6 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }
             .show()
-    }
-
-
-    private fun goToHomeScreen() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 1800)
     }
 
 
@@ -101,7 +122,7 @@ class SplashActivity : AppCompatActivity() {
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
                 super.onAuthenticationSucceeded(result)
-                goToHomeScreen()
+                handleMasterKey()
 
             }
         }

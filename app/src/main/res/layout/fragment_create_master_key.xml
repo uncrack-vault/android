@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.auth.fragment.CreateMasterKeyFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_shape"
+        android:orientation="vertical"
+        android:padding="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dm_sans_bold"
+            android:text="@string/end_to_end_encryption"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:layout_marginBottom="15dp"
+            android:textSize="22sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dm_sans"
+            android:text="@string/set_up_a_master_key_to_secure_all_your_credentials"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:layout_marginBottom="50dp"
+            android:textSize="15sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/masterKey_box"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="5dp"
+            android:textColorHint="@color/hint_color"
+            app:boxBackgroundColor="@color/white"
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="@+id/headerLayout"
+            app:layout_constraintHorizontal_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/masterKey"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/dm_sans"
+                android:inputType="text"
+                android:hint="@string/master_key"
+                android:lines="1"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/masterKeyHelperTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/dm_sans"
+            android:textColor="@color/red"
+            android:textSize="13sp"
+            android:visibility="gone"
+            tools:text="Please Enter the First Name." />
+
+
+
+        <include
+            android:id="@+id/btnSaveMasterKey"
+            layout="@layout/primary_progress_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

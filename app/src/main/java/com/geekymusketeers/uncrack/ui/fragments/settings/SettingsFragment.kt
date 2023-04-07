@@ -62,8 +62,8 @@ class SettingsFragment : Fragment() {
 
         settingsItemList = ArrayList()
         settingsItemList.apply {
+            add(SettingsItem(0, R.drawable.edit, "Edit Profile"))
             add(SettingsItem(1, R.drawable.lock, "Security"))
-            add(SettingsItem(1, R.drawable.edit, "Edit Profile"))
             add(SettingsItem(2, R.drawable.feedback, "Give us a feedback"))
             add(SettingsItem(3, R.drawable.share, "Share the app"))
             add(SettingsItem(4, R.drawable.info, "About"))
@@ -73,10 +73,10 @@ class SettingsFragment : Fragment() {
 
             when(it) {
                 0 -> {
-                    transaction()
+                    editProfile()
                 }
                 1 -> {
-                    editProfile()
+                    transaction()
                 }
                 2 -> {
                     giveFeedback()
