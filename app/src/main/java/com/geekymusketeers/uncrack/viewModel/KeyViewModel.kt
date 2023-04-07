@@ -11,13 +11,11 @@ import kotlinx.coroutines.launch
 
 class KeyViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val getMasterKeyData : LiveData<List<Key>>
     private val keyRepository: KeyRepository
 
     init {
         val keyDao = KeyDatabase.getDatabase(application).keyDao()
         keyRepository = KeyRepository(keyDao)
-        getMasterKeyData = keyRepository.getMasterKey
     }
 
     fun setMasterKey(key: Key){
@@ -25,4 +23,5 @@ class KeyViewModel(application: Application) : AndroidViewModel(application) {
             keyRepository.setMasterKey(key)
         }
     }
+    fun getMasterKey() : LiveData<List<Key>> = keyRepository.getMasterKey()
 }

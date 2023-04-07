@@ -17,7 +17,7 @@
         android:theme="@style/Theme.UnCrack"
         tools:targetApi="31">
         <activity
-            android:name=".MasterKeyActivity"
+            android:name=".ui.auth.MasterKeyActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
