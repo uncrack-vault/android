@@ -10,7 +10,7 @@ import com.geekymusketeers.uncrack.data.model.Key
 @Dao
 interface KeyDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun setMasterKey(key: Key)
 
     @Query("SELECT * FROM master_key")

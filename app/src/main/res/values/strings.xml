@@ -98,6 +98,11 @@
     <string name="master_key_cannot_be_blank">Master Key cannot be blank</string>
     <string name="at_least_6_letter_long">Your master key should be at least 6 letters long</string>
     <string name="incorrect_password">Incorrect Password!</string>
+    <string name="change_master_key">Change Master Key</string>
+    <string name="old_password">Old Master Key</string>
+    <string name="create_master_key">Create Master Key</string>
+    <string name="old_master_key_cannot_be_blank">Old Master Key cannot be blank</string>
+    <string name="old_master_key_is_incorrect">The Old Master Key is incorrect</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
