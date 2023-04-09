@@ -69,10 +69,7 @@
                     app:helperText="Enter your previous master key to confirm it is really you who wants to change the password"
                     app:helperTextEnabled="true"
                     app:helperTextTextColor="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:passwordToggleEnabled="true">
+                    app:endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -110,10 +107,7 @@
                     app:helperText="Set an app lock master key to secure all your credentials"
                     app:helperTextEnabled="true"
                     app:helperTextTextColor="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layoutOldMasterKey"
-                    app:passwordToggleEnabled="true">
+                    app:endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -144,8 +138,7 @@
                     layout="@layout/primary_progress_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="90dp"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutMasterKey" />
+                    android:layout_marginTop="90dp"/>
 
 
             </LinearLayout>
