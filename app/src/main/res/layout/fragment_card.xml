@@ -52,18 +52,10 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="20dp"
-        android:paddingBottom="15dp"
-        android:fontFamily="@font/dm_sans_bold"
-        android:text="@string/my_cards"
-        android:textColor="@color/black"
-        android:textSize="30sp"
+    <!--ToolBar-->
+    <include
+        android:id="@+id/include"
+        layout="@layout/my_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +76,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/include"
         tools:ignore="RtlSymmetry" />
 
     <ImageView

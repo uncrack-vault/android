@@ -269,8 +269,13 @@ class HomeFragment : Fragment() {
         setFilter()
         setUpFab()
         clearText()
+        init()
 
         return binding.root
+    }
+
+    private fun init() {
+        binding.include.toolbarTitle.text = getString(R.string.my_passwords)
     }
 
     private fun calculatePasswordScore(password: String): Int {

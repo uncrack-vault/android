@@ -27,6 +27,8 @@ class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
 
         var passwordLength = 13
 
+        binding.include.toolbarTitle.text = getString(R.string.password_generator)
+
         binding.passwordInputMeter.setPasswordStrengthCalculator(object : PasswordStrengthCalculator{
             override fun calculatePasswordSecurityLevel(password: String?): Int {
                 return if (password!=null){

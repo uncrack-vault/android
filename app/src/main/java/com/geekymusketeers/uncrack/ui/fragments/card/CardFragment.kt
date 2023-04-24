@@ -124,8 +124,13 @@ class CardFragment : Fragment() {
         setUpFab()
         setCardFilter()
         cardClearText()
+        init()
         return binding.root
 
+    }
+
+    private fun init() {
+        binding.include.toolbarTitle.text = getString(R.string.my_cards)
     }
 
     private fun cardClearText() {
