@@ -10,7 +10,7 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="50dp"
             android:fontFamily="@font/dm_sans_medium"
             android:text="@string/enter_your_master_key_to_continue"
             android:textAlignment="center"
@@ -47,7 +47,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
             android:textColorHint="@color/hint_color"
             app:boxBackgroundColor="@color/white"
             app:endIconMode="password_toggle"
@@ -71,7 +71,7 @@
             android:id="@+id/inputMasterKeyHelperTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/dm_sans"
             android:textColor="@color/red"
             android:textSize="13sp"
@@ -83,7 +83,7 @@
             layout="@layout/primary_progress_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="25dp" />
 
     </LinearLayout>
 

@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentCreateMasterKeyBinding
 import com.geekymusketeers.uncrack.databinding.FragmentLockMasterKeyBinding
@@ -17,6 +18,9 @@ import com.geekymusketeers.uncrack.ui.MainActivity
 import com.geekymusketeers.uncrack.ui.auth.MasterKeyActivity
 import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class LockMasterKeyFragment : Fragment() {
@@ -44,6 +48,7 @@ class LockMasterKeyFragment : Fragment() {
         buttonLayout.setOnClickListener {
             checkKeyViewModel.getMasterKey().observe(viewLifecycleOwner) { key ->
                 val inputMasterKey = binding.inputMasterKey.text.toString()
+                showProgress()
                 val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
                 val correctMasterKey = encryption.decryptOrNull(key[0].password)
                 if (inputMasterKey.isEmpty() || inputMasterKey.isBlank()){
@@ -51,22 +56,43 @@ class LockMasterKeyFragment : Fragment() {
                         inputMasterKeyHelperTV.text = getString(R.string.master_key_cannot_be_blank)
                         inputMasterKeyHelperTV.visibility = View.VISIBLE
                     }
+                    stopProgress()
+                    return@observe
                 } else {
                     if (inputMasterKey == correctMasterKey) {
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-                        (activity as MasterKeyActivity).finish()
+                        lifecycleScope.launch(Dispatchers.Main) {
+                            delay(800L)
+                            goToMainActivity()
+                        }
                     }
                     else {
                         binding.apply {
                             inputMasterKeyHelperTV.text = getString(R.string.incorrect_password)
                             inputMasterKeyHelperTV.visibility = View.VISIBLE
                         }
+                        stopProgress()
+                        return@observe
                     }
                 }
             }
         }
 
+    }
+
+    private fun goToMainActivity() {
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        startActivity(intent)
+        (activity as MasterKeyActivity).finish()
+    }
+
+    private fun showProgress() {
+        buttonText.visibility = View.GONE
+        buttonProgress.visibility = View.VISIBLE
+    }
+
+    private fun stopProgress() {
+        buttonText.visibility = View.VISIBLE
+        buttonProgress.visibility = View.GONE
     }
 
     private fun initialization() {
