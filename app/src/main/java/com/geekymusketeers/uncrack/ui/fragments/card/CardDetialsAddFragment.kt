@@ -141,7 +141,6 @@ class CardDetialsAddFragment : Fragment() {
             val cardNo = binding.cardNumber.text.toString()
             val cardName = binding.CardHolderName.text.toString()
             val cvv = binding.CVV.text.toString()
-            showProgress()
             if (cvv.isEmpty()) {
                 binding.cardCVVHelperTV.text = getString(R.string.please_enter_the_cvv)
                 binding.cardCVVHelperTV.visibility = View.VISIBLE
@@ -161,8 +160,9 @@ class CardDetialsAddFragment : Fragment() {
                 stopProgress()
                 return@setOnClickListener
             }
+            binding.progressAnimation.progressParent.visibility = View.VISIBLE
             lifecycleScope.launch(Dispatchers.Main) {
-                delay(800L)
+                delay(1000L)
                 // Inserting CardDetails to Room DB
                 insertDetails()
                 transaction()
