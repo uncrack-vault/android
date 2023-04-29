@@ -9,7 +9,7 @@
 
     <item android:id="@+id/cardFragment"
         app:iconTint="@color/black"
-        android:icon="@drawable/credit_card"
+        android:icon="@drawable/card"
         android:title="Card"/>
 
     <item android:id="@+id/passwordFragment"

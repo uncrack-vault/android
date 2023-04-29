@@ -17,6 +17,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentSecurityBinding
 import com.geekymusketeers.uncrack.databinding.FragmentSettingsBinding
 import com.geekymusketeers.uncrack.ui.auth.fragment.UpdateMasterKeyFragment
+import com.geekymusketeers.uncrack.ui.fragments.account.HomeFragment
 import com.geekymusketeers.uncrack.util.Util
 
 
@@ -47,6 +48,13 @@ class SecurityFragment : Fragment() {
         binding.goToUpdateMasterKey.setOnClickListener {
             transaction()
         }
+
+        binding.back.setOnClickListener {
+            val frag = SettingsFragment()
+            val trans = fragmentManager?.beginTransaction()
+            trans?.replace(R.id.fragment,frag)?.commit()
+        }
+
         binding.FingerPrintSwitch.apply {
 
             setOnTouchListener { _, event ->
