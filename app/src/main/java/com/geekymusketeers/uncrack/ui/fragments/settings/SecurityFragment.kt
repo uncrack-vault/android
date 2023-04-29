@@ -45,7 +45,7 @@ class SecurityFragment : Fragment() {
         Util.log("OnCreateState: $isFingerPrintEnabled")
         binding.FingerPrintSwitch.isChecked = isFingerPrintEnabled
 
-        binding.goToUpdateMasterKey.setOnClickListener {
+        binding.updateMasterKeyLayout.setOnClickListener {
             transaction()
         }
 

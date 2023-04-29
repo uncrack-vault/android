@@ -27,7 +27,7 @@
         android:layout_marginBottom="15dp"
         android:background="@drawable/bottom_nav"
         android:elevation="10dp"
-        app:itemIconSize="30dp"
+        app:itemIconSize="26dp"
         app:itemIconTint="@drawable/bottom_nav_color"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"

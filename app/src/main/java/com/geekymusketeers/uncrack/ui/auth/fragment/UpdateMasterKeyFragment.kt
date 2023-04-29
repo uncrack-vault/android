@@ -16,6 +16,7 @@ import com.geekymusketeers.uncrack.data.model.Key
 import com.geekymusketeers.uncrack.databinding.FragmentCreateMasterKeyBinding
 import com.geekymusketeers.uncrack.databinding.FragmentUpdateMasterKeyBinding
 import com.geekymusketeers.uncrack.ui.fragments.settings.SecurityFragment
+import com.geekymusketeers.uncrack.ui.fragments.settings.SettingsFragment
 import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -44,6 +45,12 @@ class UpdateMasterKeyFragment : Fragment() {
 
         initialization()
         clickHandlers()
+
+        binding.back.setOnClickListener {
+            val frag = SecurityFragment()
+            val trans = fragmentManager?.beginTransaction()
+            trans?.replace(R.id.fragment,frag)?.commit()
+        }
 
         return binding.root
     }
