@@ -102,7 +102,7 @@ class SettingsFragment : Fragment() {
     private fun transaction() {
         val frag = SecurityFragment()
         val trans = fragmentManager?.beginTransaction()
-        trans?.replace(R.id.fragment,frag)?.commit()
+        trans?.replace(R.id.fragment,frag)?.addToBackStack(null)?.commit()
     }
 
     private fun rateTheApp() {
