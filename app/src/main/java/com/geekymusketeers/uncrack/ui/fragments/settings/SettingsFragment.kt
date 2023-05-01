@@ -38,9 +38,6 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var settingsItemList: ArrayList<SettingsItem>
     private lateinit var settingsItemAdapter: SettingsItemAdapter
-    lateinit var pref: SharedPreferences
-    private var cancellationSignal: CancellationSignal? = null
-    private var isFingerPrintEnabled: Boolean = false
 
 
     @RequiresApi(Build.VERSION_CODES.P)
