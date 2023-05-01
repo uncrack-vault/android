@@ -46,7 +46,8 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
     │   
     |
     ├── ui                  # UI/View layer
-    |   ├── fragments       # All fragments     
+    |   ├── auth            # For Security
+    |   └── fragments       # All fragments     
     │   └── splashScreen    # SplashScreen
     |
     ├── utils               # Utility Classes / Kotlin extensions
