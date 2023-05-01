@@ -104,6 +104,7 @@
     <string name="old_master_key_cannot_be_blank">Old Master Key cannot be blank</string>
     <string name="old_master_key_is_incorrect">The Old Master Key is incorrect</string>
     <string name="name">Name</string>
+    <string name="store_your_credentials_safely">Store your credentials safely</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
