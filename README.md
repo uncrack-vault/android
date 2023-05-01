@@ -4,6 +4,8 @@
 # UnCrack 🔒
 UnCrack is a simple android application made using Kotlin, for managing your password.
 
+<a href="https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=84px /></a>
+
 ## About this app 🎯
 Unlock the power of secure organization with UnCrack! This innovative app securely stores all your login credentials and other important information, so you never have to worry about forgetting passwords or searching for lost information. Keep your digital life organized and protected with UnCrack.
 
