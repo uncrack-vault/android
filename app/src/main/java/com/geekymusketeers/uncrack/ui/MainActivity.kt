@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivityMainBinding
 import com.geekymusketeers.uncrack.databinding.UpdatemodalBinding
-import com.geekymusketeers.uncrack.ui.fragments.GeneratePasswordFragment
+import com.geekymusketeers.uncrack.ui.fragments.generate_password.GeneratePasswordFragment
 import com.geekymusketeers.uncrack.ui.fragments.settings.SettingsFragment
 import com.geekymusketeers.uncrack.ui.fragments.account.HomeFragment
 import com.geekymusketeers.uncrack.ui.fragments.card.CardFragment

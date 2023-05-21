@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.ui.fragments
+package com.geekymusketeers.uncrack.ui.fragments.generate_password
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -68,7 +68,7 @@ class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
         binding.sliderPasswordStrength.addOnChangeListener(object : Slider.OnChangeListener{
             override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
                 slider.setLabelFormatter(LabelFormatter {
-                    return@LabelFormatter "${value.toInt()} Letters"
+                    return@LabelFormatter value.toInt().toString()
                 })
             }
         })
@@ -99,7 +99,7 @@ class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
             )
             val clip = ClipData.newPlainText("Generated Password", binding.etGeneratedPassword.text.toString())
             clipboard?.setPrimaryClip(clip)
-            Toast.makeText(requireContext(),"Password Copied to Clipboard", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),"Password Copied", Toast.LENGTH_SHORT).show()
         }
     }
 
