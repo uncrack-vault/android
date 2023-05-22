@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.auth.fragment.CreateMasterKeyFragment">
+    tools:context=".ui.auth.master_key.CreateMasterKeyFragment">
 
 
     <com.airbnb.lottie.LottieAnimationView
@@ -79,6 +79,41 @@
 
         <TextView
             android:id="@+id/masterKeyHelperTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/dm_sans"
+            android:textColor="@color/red"
+            android:textSize="13sp"
+            android:visibility="gone"
+            tools:text="Please Enter the First Name." />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirm_masterKey_box"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/hint_color"
+            app:boxBackgroundColor="@color/white"
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="@+id/headerLayout"
+            app:layout_constraintHorizontal_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirm_masterKey"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/dm_sans"
+                android:inputType="text"
+                android:hint="@string/confirm_master_key"
+                android:lines="1"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/confirmMasterKeyHelperTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
