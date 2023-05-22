@@ -15,9 +15,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentSecurityBinding
-import com.geekymusketeers.uncrack.databinding.FragmentSettingsBinding
-import com.geekymusketeers.uncrack.ui.auth.fragment.UpdateMasterKeyFragment
-import com.geekymusketeers.uncrack.ui.fragments.account.HomeFragment
+import com.geekymusketeers.uncrack.ui.auth.master_key.UpdateMasterKeyFragment
 import com.geekymusketeers.uncrack.util.Util
 
 

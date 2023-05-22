@@ -2,17 +2,11 @@ package com.geekymusketeers.uncrack.ui.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.ActivityMasterKeyBinding
-import com.geekymusketeers.uncrack.databinding.ActivitySplashBinding
-import com.geekymusketeers.uncrack.ui.auth.fragment.CreateMasterKeyFragment
-import com.geekymusketeers.uncrack.ui.fragments.account.HomeFragment
-import com.geekymusketeers.uncrack.ui.fragments.card.CardFragment
 
 class MasterKeyActivity : AppCompatActivity() {
 

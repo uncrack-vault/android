@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.ui.auth.fragment
+package com.geekymusketeers.uncrack.ui.auth.master_key
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,15 +13,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Key
-import com.geekymusketeers.uncrack.databinding.FragmentCreateMasterKeyBinding
 import com.geekymusketeers.uncrack.databinding.FragmentUpdateMasterKeyBinding
 import com.geekymusketeers.uncrack.ui.fragments.settings.SecurityFragment
-import com.geekymusketeers.uncrack.ui.fragments.settings.SettingsFragment
 import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

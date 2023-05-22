@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/masterKeyFragment"
-        android:name="com.geekymusketeers.uncrack.ui.auth.fragment.CreateMasterKeyFragment"
+        android:name="com.geekymusketeers.uncrack.ui.auth.master_key.CreateMasterKeyFragment"
         android:label="fragment_master_key"
         tools:layout="@layout/fragment_create_master_key" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/lockMasterKeyFragment"
-        android:name="com.geekymusketeers.uncrack.ui.auth.fragment.LockMasterKeyFragment"
+        android:name="com.geekymusketeers.uncrack.ui.auth.master_key.LockMasterKeyFragment"
         android:label="fragment_lock_master_key"
         tools:layout="@layout/fragment_lock_master_key" />
 </navigation>
