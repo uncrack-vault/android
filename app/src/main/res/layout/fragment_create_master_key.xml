@@ -123,8 +123,6 @@
             android:visibility="gone"
             tools:text="Please Enter the First Name." />
 
-
-
         <include
             android:id="@+id/btnSaveMasterKey"
             layout="@layout/primary_progress_button"

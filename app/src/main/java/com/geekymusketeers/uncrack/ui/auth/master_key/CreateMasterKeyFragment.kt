@@ -78,16 +78,9 @@ class CreateMasterKeyFragment : Fragment() {
                 stopProgress()
                 return@setOnClickListener
             }
-//            else {
-//                binding.apply {
-//                    confirmMasterKeyHelperTV.text = getString(R.string.master_key_matches)
-//                    confirmMasterKeyHelperTV.setTextColor(resources.getColor(R.color.green))
-//                    confirmMasterKeyHelperTV.visibility = View.GONE
-//                }
-//                stopProgress()
-//            }
+
             lifecycleScope.launch(Dispatchers.Main) {
-                delay(1000L)
+                delay(1400L)
                 setMasterKey()
                 goToMainActivity()
             }

@@ -95,7 +95,7 @@
     <string name="confirm_master_key">Confirm Master Key</string>
     <string name="enter_your_master_key_to_continue">Kindly provide your Master Key to proceed 👋.</string>
     <string name="save_master_key">Save Master Key</string>
-    <string name="master_key_cannot_be_blank">Master Key cannot be blank</string>
+    <string name="master_key_cannot_be_blank">Please set a Master Key</string>
     <string name="at_least_6_letter_long">Your master key should be at least 6 letters long</string>
     <string name="incorrect_password">Incorrect Password! Please check your Master Key</string>
     <string name="change_master_key">Change Master Key</string>
@@ -106,7 +106,7 @@
     <string name="name">Name</string>
     <string name="store_your_credentials_safely">Store your credentials safely</string>
     <string name="type_a_password">Type a password</string>
-    <string name="confirm_master_key_cannot_be_blank">Confirm master key cannot be blank</string>
+    <string name="confirm_master_key_cannot_be_blank">Please Enter your Master Key to confirm</string>
     <string name="enter_correct_master_key">Please enter the correct Master Key</string>
     <string name="master_key_matches">Master Key matches</string>
     <string-array name="accounts">
