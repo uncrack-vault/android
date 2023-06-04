@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.ui.auth.fragment
+package com.geekymusketeers.uncrack.ui.auth.master_key
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Key
-import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.databinding.FragmentCreateMasterKeyBinding
 import com.geekymusketeers.uncrack.ui.MainActivity
 import com.geekymusketeers.uncrack.util.Encryption
@@ -45,8 +44,9 @@ class CreateMasterKeyFragment : Fragment() {
     private fun clickHandlers() {
         buttonLayout.setOnClickListener {
             val masterKey = binding.masterKey.text.toString()
+            val confirmMasterKey = binding.confirmMasterKey.text.toString()
             showProgress()
-            if (masterKey.isEmpty() || masterKey.isBlank()){
+            if (masterKey.isEmpty() || masterKey.isBlank()) {
                 binding.apply {
                     masterKeyHelperTV.text = getString(R.string.master_key_cannot_be_blank)
                     masterKeyHelperTV.visibility = View.VISIBLE
@@ -62,8 +62,25 @@ class CreateMasterKeyFragment : Fragment() {
                 stopProgress()
                 return@setOnClickListener
             }
+            if (confirmMasterKey.isEmpty() || confirmMasterKey.isBlank()) {
+                binding.apply {
+                    confirmMasterKeyHelperTV.text = getString(R.string.confirm_master_key_cannot_be_blank)
+                    confirmMasterKeyHelperTV.visibility = View.VISIBLE
+                }
+                stopProgress()
+                return@setOnClickListener
+            }
+            else if (masterKey != confirmMasterKey) {
+                binding.apply {
+                    confirmMasterKeyHelperTV.text = getString(R.string.enter_correct_master_key)
+                    confirmMasterKeyHelperTV.visibility = View.VISIBLE
+                }
+                stopProgress()
+                return@setOnClickListener
+            }
+
             lifecycleScope.launch(Dispatchers.Main) {
-                delay(800L)
+                delay(1400L)
                 setMasterKey()
                 goToMainActivity()
             }

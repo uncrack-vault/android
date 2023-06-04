@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.ui.auth.fragment
+package com.geekymusketeers.uncrack.ui.auth.master_key
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.databinding.FragmentCreateMasterKeyBinding
 import com.geekymusketeers.uncrack.databinding.FragmentLockMasterKeyBinding
 import com.geekymusketeers.uncrack.ui.MainActivity
 import com.geekymusketeers.uncrack.ui.auth.MasterKeyActivity
