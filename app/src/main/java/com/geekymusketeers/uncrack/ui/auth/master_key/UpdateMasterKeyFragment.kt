@@ -123,7 +123,7 @@ class UpdateMasterKeyFragment : Fragment() {
         val encryptedUpdatedKey = encrypt.encryptOrNull(updatedKey)
 
         val updatedMasterKey = Key(0,encryptedUpdatedKey)
-        updateKeyViewModel.setMasterKey(updatedMasterKey)
+        updateKeyViewModel.saveMasterKey(updatedMasterKey)
     }
 
     private fun showProgress() {
