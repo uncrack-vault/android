@@ -56,6 +56,17 @@ class MasterKeyActivityTest{
         onView(withId(R.id.confirmMasterKeyHelperTV)).check(matches(withText("Please enter the correct Master Key")))
     }
 
+    @Test
+    fun master_key_length_less_then_6() {
+        val masterKey = "123"
+        val confirmMasterKey = "123"
+        onView(withId(R.id.masterKey)).perform(ViewActions.typeText(masterKey),closeSoftKeyboard())
+        onView(withId(R.id.confirm_masterKey)).perform(ViewActions.typeText(confirmMasterKey),closeSoftKeyboard())
+        onView(withId(R.id.btnSaveMasterKey)).perform(click())
+        onView(withId(R.id.masterKeyHelperTV)).isVisible()
+        onView(withId(R.id.masterKeyHelperTV)).check(matches(withText("Your master key should be at least 6 letters long")))
+    }
+
 //    @Test
 //    fun master_key_isEmpty() {
 //        val masterKey = ""
