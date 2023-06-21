@@ -8,7 +8,7 @@ import com.geekymusketeers.uncrack.data.model.Card
 import com.geekymusketeers.uncrack.data.model.Key
 
 @Database(entities = [Key::class],
-    version = 2)
+    version = 3)
 abstract class KeyDatabase : RoomDatabase() {
 
     abstract fun keyDao(): KeyDao

@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack.ui.auth.master_key
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,9 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
@@ -16,6 +20,7 @@ import com.geekymusketeers.uncrack.data.model.Key
 import com.geekymusketeers.uncrack.databinding.FragmentCreateMasterKeyBinding
 import com.geekymusketeers.uncrack.ui.MainActivity
 import com.geekymusketeers.uncrack.util.Encryption
+import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -35,10 +40,50 @@ class CreateMasterKeyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCreateMasterKeyBinding.inflate(inflater,container,false)
+        binding.btnSaveMasterKey.root.isEnabled = false
+        keyViewModel = ViewModelProvider(requireActivity())[KeyViewModel::class.java]
 
+        initObservers()
         initialization()
         clickHandlers()
+        initViews()
         return binding.root
+    }
+
+    private fun initObservers() {
+
+        keyViewModel.run {
+            enableButtonLiveData.observe(viewLifecycleOwner){ enable ->
+//                binding.btnSaveMasterKey.progressButtonBg.isVisible = it
+                binding.btnSaveMasterKey.root.isEnabled = enable
+//                Util.log("enableButtonLiveData: $it")
+                val buttonBackground = if (enable) R.color.black else R.color.deep_grey
+                binding.btnSaveMasterKey.root.setBackgroundColor(
+                    ContextCompat.getColor(requireContext(), buttonBackground)
+                )
+//                binding.btnSaveMasterKey.root.isClickable = it
+//                if (it) {
+//                    binding.btnSaveMasterKey.root.visibility = View.VISIBLE
+//                } else {
+//                    binding.btnSaveMasterKey.root.visibility = View.GONE
+//                }
+            }
+        }
+    }
+
+    private fun initViews() {
+        binding.apply {
+            masterKey.addTextChangedListener {
+                keyViewModel.setMasterKey(it.toString())
+                masterKeyHelperTV.visibility = View.GONE
+                keyViewModel.checkMasterKey()
+            }
+            confirmMasterKey.addTextChangedListener {
+                keyViewModel.setConfirmMasterKey(it.toString())
+                confirmMasterKeyHelperTV.visibility = View.GONE
+                keyViewModel.checkMasterKey()
+            }
+        }
     }
 
     private fun clickHandlers() {
@@ -102,7 +147,7 @@ class CreateMasterKeyFragment : Fragment() {
         val encryptedKey = encryption.encryptOrNull(masterKey)
 
         val key = Key(0,encryptedKey)
-        keyViewModel.setMasterKey(key)
+        keyViewModel.saveMasterKey(key)
     }
 
 
@@ -117,7 +162,6 @@ class CreateMasterKeyFragment : Fragment() {
     }
 
     private fun initialization() {
-        keyViewModel = ViewModelProvider(this)[KeyViewModel::class.java]
         binding.apply {
             btnSaveMasterKey.apply {
                 this@CreateMasterKeyFragment.buttonLayout = this.progressButtonBg
