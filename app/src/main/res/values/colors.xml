@@ -16,4 +16,9 @@
     <color name="card_shadow_color">#B0D6FF</color>
     <color name="colorSlideAct">#ef5059</color>
     <color name="colorSlideInAct">#F47980</color>
+    <color name="background_color">#774DDD</color>
+    <color name="button_color">#25262B</color>
+    <color name="card_color">#FAFAFA</color>
+    <color name="search_bar_color">#F3F3F5</color>
+    <color name="light_gray">#707070</color>
 </resources>

@@ -71,7 +71,7 @@
     <string name="my_cards">My Cards</string>
     <string name="you_have_no_cards_saved_till_now">You have no Cards saved till now</string>
     <string name="empty_list">Empty List</string>
-    <string name="my_passwords">My Passwords</string>
+    <string name="my_passwords">My passwords</string>
     <string name="password_generator">Password Generator</string>
     <string name="include_numbers">Numbers</string>
     <string name="include_lowercase_letters">Letters (lowercase)</string>
@@ -109,6 +109,10 @@
     <string name="confirm_master_key_cannot_be_blank">Please Enter your Master Key to confirm</string>
     <string name="enter_correct_master_key">Please enter the correct Master Key</string>
     <string name="master_key_matches">Master Key matches</string>
+    <string name="search">Search...</string>
+    <string name="add_icon">add_icon</string>
+    <string name="image_logo">image_logo</string>
+    <string name="add_a_new_password">Add a new password</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
