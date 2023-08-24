@@ -49,19 +49,19 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.homeFragment -> {
                     loadFragment(HomeFragment())
-                    true
+                    return@setOnItemSelectedListener true
                 }
                 R.id.cardFragment ->{
                     loadFragment(CardFragment())
-                    true
+                    return@setOnItemSelectedListener true
                 }
                 R.id.passwordFragment -> {
                     loadFragment(GeneratePasswordFragment())
-                    true
+                    return@setOnItemSelectedListener true
                 }
                 R.id.settingsFragment -> {
                     loadFragment(SettingsFragment())
-                    true
+                    return@setOnItemSelectedListener true
                 }
                 else -> {
 

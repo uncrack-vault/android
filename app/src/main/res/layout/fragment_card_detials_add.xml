@@ -343,7 +343,7 @@
                     app:helperTextEnabled="true"
                     app:layout_constraintEnd_toEndOf="@+id/headerLayout"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:startIconDrawable="@drawable/card">
+                    app:startIconDrawable="@drawable/card_icon">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/cardNumber"

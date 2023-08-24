@@ -3,23 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/homeFragment"
-        app:iconTint="@color/black"
-        android:icon="@drawable/home_icon"
-        android:title="Home"/>
+        android:icon="@drawable/password_icon"
+        android:title="Password"/>
 
     <item android:id="@+id/cardFragment"
-        app:iconTint="@color/black"
-        android:icon="@drawable/card"
+        android:icon="@drawable/card_icon"
         android:title="Card"/>
 
     <item android:id="@+id/passwordFragment"
-        app:iconTint="@color/black"
-        android:icon="@drawable/generate_password"
+        android:icon="@drawable/generate_password_icon"
         android:title="Generate Password"/>
 
     <item android:id="@+id/settingsFragment"
-        app:iconTint="@color/black"
-        android:icon="@drawable/setting"
+        android:icon="@drawable/settings_icon"
         android:title="Settings"/>
 
 </menu>
