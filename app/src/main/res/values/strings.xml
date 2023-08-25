@@ -10,7 +10,7 @@
     <string name="email">Email</string>
     <string name="username">UserName <font color='#808080'> (optional)</font></string>
     <string name="add_password">Password</string>
-    <string name="select_the_account">Select the Account</string>
+    <string name="select_the_account">Select</string>
     <string name="edit_email">Email <font color='#FF0000'>*</font></string>
     <string name="edit_username">UserName</string>
     <string name="edit_password">Password <font color='#FF0000'>*</font></string>
@@ -113,6 +113,17 @@
     <string name="add_icon">add_icon</string>
     <string name="image_logo">image_logo</string>
     <string name="add_a_new_password">Add a new password</string>
+    <string name="new_password">New Password</string>
+    <string name="password_information">Password Information</string>
+    <string name="demo_note">Your note</string>
+    <string name="demo_password">Your password</string>
+    <string name="demo_username">Your username</string>
+    <string name="demo_email">Your email</string>
+    <string name="account_name">Account name</string>
+    <string name="work">Work</string>
+    <string name="social">Social</string>
+    <string name="mail">Mail</string>
+    <string name="others">Others</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
