@@ -35,6 +35,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.floor
 
 
 class AddFragment : Fragment() {
@@ -83,6 +84,13 @@ class AddFragment : Fragment() {
                 "others" -> setImageOnAccountNameChange(R.drawable.general_account)
             }
         }
+
+        binding.generateRandomPassword.setOnClickListener {
+            val generatedPassword = generateRandomPassword(7) // length of the password
+            binding.password.setText(generatedPassword)
+            binding.password.setSelection(generatedPassword.length)
+        }
+
 
         buttonLayout.setOnClickListener {
 
@@ -155,6 +163,13 @@ class AddFragment : Fragment() {
 
         return binding.root
 
+    }
+
+    private fun generateRandomPassword(length: Int): String {
+        val charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+"
+        return (1..length)
+            .map { charset.random() }
+            .joinToString("")
     }
 
     private fun transaction() {
