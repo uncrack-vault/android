@@ -49,7 +49,6 @@ class AddFragment : Fragment() {
     private lateinit var viewModel : AccountViewModel
     private lateinit var myViewModel: AddEditViewModel
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -62,7 +61,7 @@ class AddFragment : Fragment() {
 
         binding.accType.afterTextChanged{
             selectedAccount = it
-            when(it.toLowerCase()){
+            when(it.lowercase(Locale.ROOT)){
                 "paypal" -> setImageOnAccountNameChange(R.drawable.paypal)
                 "instagram" -> setImageOnAccountNameChange(R.drawable.instagram)
                 "facebook" -> setImageOnAccountNameChange(R.drawable.facebook)
@@ -269,7 +268,6 @@ class AddFragment : Fragment() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun insertDataToDB() {
         val company = binding.accType.text.toString()
         val email = binding.email.text.toString()
