@@ -4,398 +4,374 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background_color"
     tools:context=".ui.fragments.account.EditFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ScrollView
+        <ImageView
+            android:id="@+id/edit_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/back_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="26dp"
+            android:layout_toEndOf="@+id/edit_back"
+            android:fontFamily="@font/dm_sans_bold"
+            android:gravity="center_horizontal"
+            android:text="Edit Password"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bottom_bg"
         android:orientation="vertical"
-        android:scrollbars="none"
+        android:padding="8dp"
+        android:layout_marginTop="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="start"
             android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:paddingEnd="16dp"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:layout_marginBottom="20dp"
+                android:paddingEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
 
                 <ImageView
-                    android:id="@+id/edit_back"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentStart="true"
-                    android:src="@drawable/back_button" />
+                    android:id="@+id/account_logo"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/logo_light_mode"
+                    android:visibility="visible" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginEnd="26dp"
-                    android:layout_toEndOf="@+id/edit_back"
-                    android:fontFamily="@font/dm_sans_medium"
-                    android:gravity="center_horizontal"
-                    android:text="Edit your Details"
+                    android:id="@+id/edit_acc_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:text="Account Name"
+                    android:layout_gravity="center_horizontal"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
 
-            </RelativeLayout>
-
-            <ImageView
-                android:id="@+id/account_logo"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/logo_light_mode"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/edit_acc_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/dm_sans_bold"
-                android:text="Account Name"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-
-            <LinearLayout
-                android:id="@+id/remainingLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <!--            Email-->
-
                 <LinearLayout
+                    android:id="@+id/remainingLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="start"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:text="@string/email"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/email_box"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
                     android:layout_marginTop="5dp"
-                    android:textColorHint="@color/black"
-                    app:boxBackgroundColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="@+id/headerLayout"
-                    app:layout_constraintHorizontal_bias="0.0">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <!--            Email-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/email"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <EditText
                         android:id="@+id/edit_email"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
-                        android:inputType="textEmailAddress"
-                        android:lines="1"
-                        android:textColor="@color/black" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:id="@+id/editEmailHelperTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="@color/red"
-                    android:textSize="13sp"
-                    android:visibility="gone"
-                    tools:text="Please Enter the Email." />
-
-                <!--UserName-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:gravity="start"
-                    android:orientation="horizontal">
+                        android:paddingStart="14dp"
+                        android:textColorHint="@color/hint_color"
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/editEmailHelperTV"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/roboto"
-                        android:text="@string/username"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textColor="@color/red"
+                        android:textSize="13sp"
+                        android:visibility="gone"
+                        tools:text="Please Enter the Email." />
 
-                </LinearLayout>
+                    <!--UserName-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/username_box"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="5dp"
-                    android:textColorHint="@color/black"
-                    app:boxBackgroundColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="@+id/email_box"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/email_box"
-                    app:layout_constraintTop_toBottomOf="@+id/email_box">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:gravity="start"
+                        android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/username"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <EditText
                         android:id="@+id/edit_username"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:paddingStart="14dp"
+                        android:textColorHint="@color/hint_color"
+                        tools:ignore="RtlSymmetry" />
 
-                <!--Password-->
+                    <!--Password-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:gravity="start"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:text="@string/password"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:layout_marginTop="25dp"
+                        android:gravity="start"
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/password"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/password_box"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="5dp"
-                    android:textColorHint="@color/black"
-                    app:boxBackgroundColor="@color/white"
-                    app:endIconMode="password_toggle"
-                    app:layout_constraintEnd_toEndOf="@+id/email_box"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/email_box"
-                    app:layout_constraintTop_toBottomOf="@+id/email_box">
+                    </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <EditText
                         android:id="@+id/edit_password"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
-                        android:inputType="textPassword"
-                        android:lines="1"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:id="@+id/editPasswordHelperTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="@color/red"
-                    android:textSize="13sp"
-                    android:visibility="gone"
-                    tools:text="Please Enter the Password." />
-
-                <!--Note-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:gravity="start"
-                    android:orientation="horizontal">
+                        android:paddingStart="14dp"
+                        android:textColorHint="@color/hint_color"
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/editPasswordHelperTV"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/roboto"
-                        android:text="@string/note"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textColor="@color/red"
+                        android:textSize="13sp"
+                        android:visibility="gone"
+                        tools:text="Please Enter the Password." />
 
-                </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/note_box"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="5dp"
-                    android:textColorHint="@color/black"
-                    app:boxBackgroundColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="@+id/email_box"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/email_box"
-                    app:layout_constraintTop_toBottomOf="@+id/email_box">
+                    <!--Note-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:gravity="start"
+                        android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/note"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <EditText
                         android:id="@+id/edit_note"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:paddingStart="14dp"
+                        android:textColorHint="@color/hint_color"
+                        tools:ignore="RtlSymmetry" />
 
-                <!--            Category-->
+                    <!--            Category-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="start"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:text="Category"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:layout_marginTop="30dp"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/category"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+
+                    <HorizontalScrollView
+                        android:id="@+id/horizontalScrollView"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:scrollbars="none"
+                        app:layout_constraintEnd_toEndOf="@+id/textView4"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/textView4"
+                        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/edit_categoryChipGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="70dp"
+                            app:selectionRequired="true"
+                            app:singleLine="true"
+                            app:singleSelection="true">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipWork"
+                                android:layout_width="90dp"
+                                android:layout_height="60dp"
+                                android:checkable="true"
+                                android:checked="true"
+                                android:gravity="center"
+                                android:text="Work"
+                                android:textColor="@color/white"
+                                app:checkedIconEnabled="false"
+                                app:chipBackgroundColor="@color/catergory_icon"
+                                app:chipCornerRadius="10dp"
+                                app:chipIcon="@drawable/work"
+                                app:chipIconEnabled="true"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipSocial"
+                                android:layout_width="95dp"
+                                android:layout_height="60dp"
+                                android:checkable="true"
+                                android:gravity="center"
+                                android:text="Social"
+                                android:textColor="@color/white"
+                                app:checkedIconEnabled="false"
+                                app:chipBackgroundColor="@color/catergory_icon"
+                                app:chipCornerRadius="10dp"
+                                app:chipIcon="@drawable/social"
+                                app:chipIconEnabled="true"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipMail"
+                                android:layout_width="90dp"
+                                android:layout_height="60dp"
+                                android:checkable="true"
+                                android:gravity="center"
+                                android:text="Mail"
+                                android:textColor="@color/white"
+                                app:checkedIconEnabled="false"
+                                app:chipBackgroundColor="@color/catergory_icon"
+                                app:chipCornerRadius="10dp"
+                                app:chipIcon="@drawable/mail"
+                                app:chipIconEnabled="true"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipOther"
+                                android:layout_width="90dp"
+                                android:layout_height="60dp"
+                                android:checkable="true"
+                                android:gravity="center"
+                                android:text="Other"
+                                android:textColor="@color/white"
+                                app:checkedIconEnabled="false"
+                                app:chipBackgroundColor="@color/catergory_icon"
+                                app:chipCornerRadius="10dp"
+                                app:chipIcon="@drawable/others"
+                                app:chipIconEnabled="true"
+                                app:iconStartPadding="5dp" />
+
+
+                        </com.google.android.material.chip.ChipGroup>
+                    </HorizontalScrollView>
+
+                    <include
+                        android:id="@+id/btn_edit"
+                        layout="@layout/primary_progress_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="50dp" />
+
 
                 </LinearLayout>
-
-
-                <HorizontalScrollView
-                    android:id="@+id/horizontalScrollView"
-                    android:layout_width="360dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:scrollbars="none"
-                    app:layout_constraintEnd_toEndOf="@+id/textView4"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/textView4"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/edit_categoryChipGroup"
-                        android:layout_width="wrap_content"
-                        android:layout_height="70dp"
-                        app:selectionRequired="true"
-                        app:singleLine="true"
-                        app:singleSelection="true">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipWork"
-                            android:layout_width="90dp"
-                            android:layout_height="60dp"
-                            android:checkable="true"
-                            android:checked="true"
-                            android:gravity="center"
-                            android:text="Work"
-                            android:textColor="@color/white"
-                            app:checkedIconEnabled="false"
-                            app:chipBackgroundColor="@color/catergory_icon"
-                            app:chipCornerRadius="10dp"
-                            app:chipIcon="@drawable/work"
-                            app:chipIconEnabled="true"
-                            app:iconStartPadding="5dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipSocial"
-                            android:layout_width="95dp"
-                            android:layout_height="60dp"
-                            android:checkable="true"
-                            android:gravity="center"
-                            android:text="Social"
-                            android:textColor="@color/white"
-                            app:checkedIconEnabled="false"
-                            app:chipBackgroundColor="@color/catergory_icon"
-                            app:chipCornerRadius="10dp"
-                            app:chipIcon="@drawable/social"
-                            app:chipIconEnabled="true"
-                            app:iconStartPadding="5dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipMail"
-                            android:layout_width="90dp"
-                            android:layout_height="60dp"
-                            android:checkable="true"
-                            android:gravity="center"
-                            android:text="Mail"
-                            android:textColor="@color/white"
-                            app:checkedIconEnabled="false"
-                            app:chipBackgroundColor="@color/catergory_icon"
-                            app:chipCornerRadius="10dp"
-                            app:chipIcon="@drawable/mail"
-                            app:chipIconEnabled="true"
-                            app:iconStartPadding="5dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipOther"
-                            android:layout_width="90dp"
-                            android:layout_height="60dp"
-                            android:checkable="true"
-                            android:gravity="center"
-                            android:text="Other"
-                            android:textColor="@color/white"
-                            app:checkedIconEnabled="false"
-                            app:chipBackgroundColor="@color/catergory_icon"
-                            app:chipCornerRadius="10dp"
-                            app:chipIcon="@drawable/others"
-                            app:chipIconEnabled="true"
-                            app:iconStartPadding="5dp" />
-
-
-                    </com.google.android.material.chip.ChipGroup>
-                </HorizontalScrollView>
-
-                <include
-                    android:id="@+id/btn_edit"
-                    layout="@layout/primary_progress_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="50dp" />
-
 
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
     <include
         android:id="@+id/progress_animation"
