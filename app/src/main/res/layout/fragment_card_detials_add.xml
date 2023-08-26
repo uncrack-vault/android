@@ -127,7 +127,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="16dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:cardBackgroundColor="#54A0F8"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="5dp"
@@ -354,7 +354,7 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="16dp"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -364,45 +364,45 @@
 
                     <!--Card Number-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/card_number_box"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="10dp"
-                    android:textColorHint="@android:color/black"
-                    app:boxBackgroundColor="@color/white"
-                    app:endIconMode="clear_text"
-                    app:helperTextEnabled="true"
-                    app:layout_constraintEnd_toEndOf="@+id/headerLayout"
-                    app:startIconDrawable="@drawable/card_icon">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/cardNumber"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/card_number_box"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/dm_sans"
-                        android:hint="@string/hint_card_number"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@android:color/black"
+                        app:boxBackgroundColor="@color/white"
+                        app:endIconMode="clear_text"
+                        app:helperTextEnabled="true"
+                        app:layout_constraintEnd_toEndOf="@+id/headerLayout"
+                        app:startIconDrawable="@drawable/card_icon">
 
-                        android:imeOptions="actionNext"
-                        android:inputType="phone"
-                        android:lines="1"
-                        android:maxLength="19"
-                        android:textColor="@color/black" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/cardNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/dm_sans"
+                            android:hint="@string/hint_card_number"
 
-                </com.google.android.material.textfield.TextInputLayout>
+                            android:imeOptions="actionNext"
+                            android:inputType="phone"
+                            android:lines="1"
+                            android:maxLength="19"
+                            android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/cardNumberHelperTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/roboto"
-                    android:paddingStart="15dp"
-                    android:textColor="@color/red"
-                    android:textSize="13sp"
-                    android:visibility="gone"
-                    tools:text="Please Enter the Card Number." />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/cardNumberHelperTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/roboto"
+                        android:paddingStart="15dp"
+                        android:textColor="@color/red"
+                        android:textSize="13sp"
+                        android:visibility="gone"
+                        tools:text="Please Enter the Card Number." />
 
                     <!--Expiry Date-->
 
