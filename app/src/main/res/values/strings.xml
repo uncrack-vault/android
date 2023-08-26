@@ -73,11 +73,11 @@
     <string name="empty_list">Empty List</string>
     <string name="my_passwords">My passwords</string>
     <string name="password_generator">Password Generator</string>
-    <string name="include_numbers">Numbers</string>
-    <string name="include_lowercase_letters">Letters (lowercase)</string>
-    <string name="include_uppercase_letters">Letters (uppercase)</string>
-    <string name="include_symbols">Symbols</string>
-    <string name="password_length">Set your Password Length</string>
+    <string name="include_numbers">Include numbers</string>
+    <string name="include_lowercase_letters">Include lowercase letters</string>
+    <string name="include_uppercase_letters">Include uppercase letters</string>
+    <string name="include_symbols">Include symbols</string>
+    <string name="password_length">Password Length</string>
     <string name="wait_a_second">Wait a Second</string>
     <string name="are_you_sure">Are you sure you want to share your credentials with other\'s?</string>
     <string name="yes">Yes</string>
@@ -124,6 +124,8 @@
     <string name="social">Social</string>
     <string name="mail">Mail</string>
     <string name="others">Others</string>
+    <string name="generate_password">Generate Password</string>
+    <string name="generate">Generate</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
