@@ -135,6 +135,7 @@
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
                         android:paddingStart="14dp"
+                        android:maxLines="1"
                         android:textColorHint="@color/hint_color"
                         tools:ignore="RtlSymmetry" />
 
@@ -176,6 +177,7 @@
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
                         android:paddingStart="14dp"
+                        android:maxLines="1"
                         android:textColorHint="@color/hint_color"
                         tools:ignore="RtlSymmetry" />
 
@@ -206,6 +208,7 @@
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
                         android:paddingStart="14dp"
+                        android:maxLines="1"
                         android:textColorHint="@color/hint_color"
                         tools:ignore="RtlSymmetry" />
 

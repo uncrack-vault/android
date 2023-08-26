@@ -163,6 +163,7 @@
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
                         android:hint="@string/demo_email"
+                        android:maxLines="1"
                         android:paddingStart="14dp"
                         android:textColorHint="@color/hint_color"
                         tools:ignore="RtlSymmetry" />
@@ -205,6 +206,7 @@
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
                         android:hint="@string/demo_username"
+                        android:maxLines="1"
                         android:paddingStart="14dp"
                         android:textColorHint="@color/hint_color"
                         tools:ignore="RtlSymmetry" />
@@ -236,6 +238,7 @@
                         android:fontFamily="@font/dm_sans"
                         android:hint="@string/demo_password"
                         android:paddingStart="14dp"
+                        android:maxLines="1"
                         android:textColorHint="@color/hint_color"
                         tools:ignore="RtlSymmetry" />
 
