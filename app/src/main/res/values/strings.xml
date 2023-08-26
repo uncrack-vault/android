@@ -126,6 +126,7 @@
     <string name="others">Others</string>
     <string name="generate_password">Generate Password</string>
     <string name="generate">Generate</string>
+    <string name="add_a_new_card">Add a new card</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
