@@ -61,7 +61,7 @@ class CardDetialsAddFragment : Fragment() {
         settingCardDetails()
         handleOperations()
         settingLayoutAccordingToCard()
-        binding.backButton.setOnClickListener {
+        binding.back.setOnClickListener {
             handleBackButton()
         }
 

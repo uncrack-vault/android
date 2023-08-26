@@ -127,6 +127,11 @@
     <string name="generate_password">Generate Password</string>
     <string name="generate">Generate</string>
     <string name="add_a_new_card">Add a new card</string>
+    <string name="new_card">New Card</string>
+    <string name="card_information">Card Information</string>
+    <string name="card_name">Card Name</string>
+    <string name="your_card_number">Your Card Number</string>
+    <string name="card_number">Card Number</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
