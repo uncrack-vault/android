@@ -27,7 +27,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/dm_sans_medium"
+            android:fontFamily="@font/dm_sans"
             android:text="@string/enter_your_master_key_to_continue"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -37,21 +37,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/accountNameHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:text="@string/master_key"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <EditText
             android:id="@+id/inputMasterKey"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/edittext_field"
             android:fontFamily="@font/dm_sans"
-            android:hint="@string/demo_email"
+            android:hint="@string/demo_master_key"
             android:maxLines="1"
             android:paddingStart="14dp"
             android:textColorHint="@color/hint_color"
-            app:layout_constraintEnd_toEndOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="@+id/accountNameHeader"
+            app:layout_constraintStart_toStartOf="@+id/accountNameHeader"
+            app:layout_constraintTop_toBottomOf="@+id/accountNameHeader"
             tools:ignore="RtlSymmetry" />
 
         <TextView
@@ -73,9 +86,10 @@
             layout="@layout/primary_progress_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="130dp"
             app:layout_constraintEnd_toEndOf="@+id/inputMasterKey"
-            app:layout_constraintStart_toStartOf="@+id/inputMasterKey" />
+            app:layout_constraintStart_toStartOf="@+id/inputMasterKey"
+            app:layout_constraintTop_toBottomOf="@+id/inputMasterKey" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -132,6 +132,7 @@
     <string name="card_name">Card Name</string>
     <string name="your_card_number">Your Card Number</string>
     <string name="card_number">Card Number</string>
+    <string name="demo_master_key">Your Master Key</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
