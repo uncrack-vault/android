@@ -93,7 +93,7 @@
     <string name="master_key">Master Key</string>
     <string name="end_to_end_encryption">End-to-end encryption</string>
     <string name="confirm_master_key">Confirm Master Key</string>
-    <string name="enter_your_master_key_to_continue">Kindly provide your Master Key to proceed 👋.</string>
+    <string name="enter_your_master_key_to_continue">Kindly provide your master key to proceed 👋.</string>
     <string name="save_master_key">Save Master Key</string>
     <string name="master_key_cannot_be_blank">Please set a Master Key</string>
     <string name="at_least_6_letter_long">Your master key should be at least 6 letters long</string>

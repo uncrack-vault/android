@@ -5,77 +5,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".ui.auth.master_key.LockMasterKeyFragment">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/lock_masterkey"
-        app:lottie_repeatMode="reverse" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_shape"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_bg"
         android:orientation="vertical"
-        android:padding="32dp"
+        android:padding="16dp"
+        android:layout_marginTop="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
             android:fontFamily="@font/dm_sans_medium"
             android:text="@string/enter_your_master_key_to_continue"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="22sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/masterKey_box"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
+        <EditText
+            android:id="@+id/inputMasterKey"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="15dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/edittext_field"
+            android:fontFamily="@font/dm_sans"
+            android:hint="@string/demo_email"
+            android:maxLines="1"
+            android:paddingStart="14dp"
             android:textColorHint="@color/hint_color"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toEndOf="@+id/headerLayout"
-            app:layout_constraintHorizontal_bias="0.0">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputMasterKey"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/dm_sans"
-                android:hint="@string/master_key"
-                android:inputType="text"
-                android:lines="1"
-                android:textColor="@color/black" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/inputMasterKeyHelperTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/dm_sans"
             android:textColor="@color/red"
             android:textSize="13sp"
             android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/inputMasterKey"
+            app:layout_constraintStart_toStartOf="@+id/inputMasterKey"
+            app:layout_constraintTop_toBottomOf="@+id/inputMasterKey"
             tools:text="Please Enter the First Name." />
 
         <include
@@ -83,8 +73,20 @@
             layout="@layout/primary_progress_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/inputMasterKey"
+            app:layout_constraintStart_toStartOf="@+id/inputMasterKey" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:src="@drawable/laying"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
