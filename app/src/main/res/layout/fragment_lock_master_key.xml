@@ -9,18 +9,16 @@
     tools:context=".ui.auth.master_key.LockMasterKeyFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/bottom_bg"
         android:orientation="vertical"
         android:padding="16dp"
-        android:layout_marginTop="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <TextView
@@ -59,13 +57,13 @@
             android:background="@drawable/edittext_field"
             android:fontFamily="@font/dm_sans"
             android:hint="@string/demo_master_key"
-            android:maxLines="1"
+            android:lines="1"
+            android:inputType="text"
             android:paddingStart="14dp"
             android:textColorHint="@color/hint_color"
             app:layout_constraintEnd_toEndOf="@+id/accountNameHeader"
             app:layout_constraintStart_toStartOf="@+id/accountNameHeader"
-            app:layout_constraintTop_toBottomOf="@+id/accountNameHeader"
-            tools:ignore="RtlSymmetry" />
+            app:layout_constraintTop_toBottomOf="@+id/accountNameHeader" />
 
         <TextView
             android:id="@+id/inputMasterKeyHelperTV"
@@ -91,7 +89,7 @@
             app:layout_constraintStart_toStartOf="@+id/inputMasterKey"
             app:layout_constraintTop_toBottomOf="@+id/inputMasterKey" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView"

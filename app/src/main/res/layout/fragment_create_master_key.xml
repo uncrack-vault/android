@@ -8,23 +8,13 @@
     tools:context=".ui.auth.master_key.CreateMasterKeyFragment">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/clumsy"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bottom_bg"
         android:orientation="vertical"
-        android:padding="32dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -71,13 +61,13 @@
             android:background="@drawable/edittext_field"
             android:fontFamily="@font/dm_sans"
             android:hint="@string/demo_master_key"
-            android:maxLines="1"
+            android:lines="1"
+            android:inputType="text"
             android:paddingStart="14dp"
             android:textColorHint="@color/hint_color"
             app:layout_constraintEnd_toEndOf="@+id/accountNameHeader"
             app:layout_constraintStart_toStartOf="@+id/accountNameHeader"
-            app:layout_constraintTop_toBottomOf="@+id/accountNameHeader"
-            tools:ignore="RtlSymmetry" />
+            app:layout_constraintTop_toBottomOf="@+id/accountNameHeader" />
 
         <TextView
             android:id="@+id/masterKeyHelperTV"
@@ -112,13 +102,13 @@
             android:background="@drawable/edittext_field"
             android:fontFamily="@font/dm_sans"
             android:hint="@string/demo_master_key"
-            android:maxLines="1"
+            android:lines="1"
+            android:inputType="text"
             android:paddingStart="14dp"
             android:textColorHint="@color/hint_color"
             app:layout_constraintEnd_toEndOf="@+id/accountNameHeader"
             app:layout_constraintStart_toStartOf="@+id/accountNameHeader"
-            app:layout_constraintTop_toBottomOf="@+id/accountNameHeader"
-            tools:ignore="RtlSymmetry" />
+            app:layout_constraintTop_toBottomOf="@+id/accountNameHeader" />
 
         <TextView
             android:id="@+id/confirmMasterKeyHelperTV"
@@ -139,4 +129,15 @@
             android:layout_marginTop="40dp" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/typing"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
