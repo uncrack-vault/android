@@ -5,109 +5,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".ui.fragments.settings.SecurityFragment">
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="18dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/back_button" />
+            android:src="@drawable/back_icon" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="135dp"
-            android:fontFamily="@font/dm_sans_medium"
-            android:text="@string/security_screen"
-            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/dm_sans_bold"
+            android:gravity="center_horizontal"
+            android:text="@string/security"
+            android:textColor="@color/white"
             android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_bg"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fingerprint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <TextView
+                android:id="@+id/txtBiometric"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dm_sans"
+                android:text="@string/unlock_with_fingerprint"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/FingerPrintSwitch"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:textOff="@string/off"
+                android:textOn="@string/on"
+                android:thumb="@drawable/switch_thumb"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:track="@drawable/switch_track" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/update_master_key_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/fingerprint_layout"
+            app:layout_constraintStart_toStartOf="@+id/fingerprint_layout"
+            app:layout_constraintTop_toBottomOf="@+id/fingerprint_layout">
+
+            <TextView
+                android:id="@+id/txtMasterKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dm_sans"
+                android:text="@string/update_your_master_key"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/goToUpdateMasterKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/arrow_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fingerprint_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <TextView
-            android:id="@+id/txtBiometric"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/dm_sans"
-            android:text="@string/unlock_with_fingerprint"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/FingerPrintSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOff="@string/off"
-            android:textOn="@string/on"
-            android:thumb="@drawable/switch_thumb"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:track="@drawable/switch_track" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/update_master_key_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/fingerprint_layout"
-        app:layout_constraintStart_toStartOf="@+id/fingerprint_layout"
-        app:layout_constraintTop_toBottomOf="@+id/fingerprint_layout">
-
-        <TextView
-            android:id="@+id/txtMasterKey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/dm_sans"
-            android:text="@string/update_your_master_key"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/goToUpdateMasterKey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/arrow_forward"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
