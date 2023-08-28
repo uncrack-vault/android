@@ -191,20 +191,6 @@ class CardFragment : Fragment() {
             }
         })
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        cardViewModel.readAllCardData.observe(viewLifecycleOwner) { card ->
-//            cardAdapter.setCardData(card)
-//            if (card.isEmpty()) {
-//                binding.emptyCardList.visibility = View.VISIBLE
-//            } else {
-//                binding.emptyCardList.visibility = View.GONE
-//            }
-//
-//        }
-//    }
-
     private fun goToCardAddFragment() {
         val fragment = CardDetialsAddFragment()
         val transaction = fragmentManager?.beginTransaction()
