@@ -54,7 +54,7 @@
         <EditText
             android:id="@+id/inputMasterKey"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/edittext_field"
             android:fontFamily="@font/dm_sans"
@@ -95,8 +95,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:src="@drawable/laying"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"

@@ -3,30 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.auth.master_key.CreateMasterKeyFragment">
 
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
         android:layout_height="300dp"
+        android:src="@drawable/clumsy"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/create_masterkey"
-        app:lottie_repeatMode="reverse" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_shape"
+        android:background="@drawable/bottom_bg"
         android:orientation="vertical"
         android:padding="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +37,7 @@
             android:textColor="@color/black"
             android:textAlignment="center"
             android:layout_marginBottom="15dp"
-            android:textSize="22sp"/>
+            android:textSize="23sp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -50,32 +46,38 @@
             android:text="@string/set_up_a_master_key_to_secure_all_your_credentials"
             android:textColor="@color/black"
             android:textAlignment="center"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="20dp"
             android:textSize="15sp"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/masterKey_box"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        <TextView
+            android:id="@+id/masterKey_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:text="@string/master_key"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <EditText
+            android:id="@+id/masterKey"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_field"
+            android:fontFamily="@font/dm_sans"
+            android:hint="@string/demo_master_key"
+            android:maxLines="1"
+            android:paddingStart="14dp"
             android:textColorHint="@color/hint_color"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toEndOf="@+id/headerLayout"
-            app:layout_constraintHorizontal_bias="0.0">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/masterKey"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/dm_sans"
-                android:inputType="text"
-                android:hint="@string/master_key"
-                android:lines="1"
-                android:textColor="@color/black" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintEnd_toEndOf="@+id/accountNameHeader"
+            app:layout_constraintStart_toStartOf="@+id/accountNameHeader"
+            app:layout_constraintTop_toBottomOf="@+id/accountNameHeader"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/masterKeyHelperTV"
@@ -88,29 +90,35 @@
             android:visibility="gone"
             tools:text="Please Enter the First Name." />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/confirm_masterKey_box"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        <TextView
+            android:id="@+id/confirmMasterKey_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:text="Confirm Master Key"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <EditText
+            android:id="@+id/confirm_masterKey"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_field"
+            android:fontFamily="@font/dm_sans"
+            android:hint="@string/demo_master_key"
+            android:maxLines="1"
+            android:paddingStart="14dp"
             android:textColorHint="@color/hint_color"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toEndOf="@+id/headerLayout"
-            app:layout_constraintHorizontal_bias="0.0">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/confirm_masterKey"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/dm_sans"
-                android:inputType="text"
-                android:hint="@string/confirm_master_key"
-                android:lines="1"
-                android:textColor="@color/black" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintEnd_toEndOf="@+id/accountNameHeader"
+            app:layout_constraintStart_toStartOf="@+id/accountNameHeader"
+            app:layout_constraintTop_toBottomOf="@+id/accountNameHeader"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/confirmMasterKeyHelperTV"

@@ -91,7 +91,7 @@
     <string name="update_your_master_key">Update your Master Key</string>
     <string name="set_up_a_master_key_to_secure_all_your_credentials">Set up a master key to secure your credentials with end-to-end encryption</string>
     <string name="master_key">Master Key</string>
-    <string name="end_to_end_encryption">End-to-end encryption</string>
+    <string name="end_to_end_encryption">End-to-End Encryption</string>
     <string name="confirm_master_key">Confirm Master Key</string>
     <string name="enter_your_master_key_to_continue">Kindly provide your master key to proceed 👋.</string>
     <string name="save_master_key">Save Master Key</string>
