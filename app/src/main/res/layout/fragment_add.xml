@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <!--Email-->
 
@@ -163,7 +163,8 @@
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
                         android:hint="@string/demo_email"
-                        android:maxLines="1"
+                        android:inputType="textEmailAddress"
+                        android:lines="1"
                         android:paddingStart="14dp"
                         android:textColorHint="@color/hint_color"
                         tools:ignore="RtlSymmetry" />
@@ -206,7 +207,8 @@
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
                         android:hint="@string/demo_username"
-                        android:maxLines="1"
+                        android:inputType="text"
+                        android:lines="1"
                         android:paddingStart="14dp"
                         android:textColorHint="@color/hint_color"
                         tools:ignore="RtlSymmetry" />
@@ -237,8 +239,9 @@
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
                         android:hint="@string/demo_password"
+                        android:inputType="text"
+                        android:lines="1"
                         android:paddingStart="14dp"
-                        android:maxLines="1"
                         android:textColorHint="@color/hint_color"
                         tools:ignore="RtlSymmetry" />
 
@@ -297,6 +300,7 @@
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
                         android:hint="@string/demo_note"
+                        android:inputType="text"
                         android:paddingStart="14dp"
                         android:textColorHint="@color/hint_color"
                         tools:ignore="RtlSymmetry" />
