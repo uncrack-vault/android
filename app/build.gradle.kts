@@ -16,8 +16,8 @@ android {
         applicationId = "com.geekymusketeers.uncrack"
         minSdk = 24
         targetSdk = 34
-        versionCode = 8
-        versionName = "1.6.1"
+        versionCode = 9
+        versionName = "2.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     lint {
