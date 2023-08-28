@@ -14,7 +14,7 @@
     <string name="edit_email">Email <font color='#FF0000'>*</font></string>
     <string name="edit_username">UserName</string>
     <string name="edit_password">Password <font color='#FF0000'>*</font></string>
-    <string name="v1_4">v1.4</string>
+    <string name="v2.0.0">v2.0.0</string>
     <string name="description_about_the_option">Description about the option</string>
     <string name="Password_Strength">Check Password Strength</string>
     <string name="password_strength_des">You can check the strength of the password that you have saved for any particular account.</string>
@@ -82,7 +82,7 @@
     <string name="are_you_sure">Are you sure you want to share your credentials with other\'s?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="made_with_v1_2">Made with ♥ v1.6</string>
+    <string name="made_with_v1_2">Made with ♥ v2.0.0</string>
     <string name="settings">Settings</string>
     <string name="about_app_text">I see a lot of people are tried of memorizing all their passwords, me also sometimes forgot the login credentials. So, after thinking about this situations, this app is build, to help user\'s to store their passwords and other information in a secured and organized manner.</string>
     <string name="about_app_text_second">UnCrack is a offline password manager that securely stores all your login credentials and other important information, so you never have to worry about forgetting passwords or searching for lost information. Keep your digital life organized and protected with UnCrack.</string>
