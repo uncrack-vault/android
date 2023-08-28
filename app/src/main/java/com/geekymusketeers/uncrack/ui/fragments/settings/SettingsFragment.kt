@@ -111,7 +111,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun shareApp() {
-        val send = "Checkout the app on Play Store \n https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack"
+        val send = Util.SEND_APP
         val b = BitmapFactory.decodeResource(resources, R.drawable.banner_uncrack)
         val share = Intent(Intent.ACTION_SEND)
         share.type = "image/jpeg"
