@@ -81,7 +81,6 @@
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone"
-            tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="15dp">
 
             <com.airbnb.lottie.LottieAnimationView
@@ -120,18 +119,16 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/card_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
             android:layout_marginEnd="5dp"
+            android:layout_marginTop="15dp"
             android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
             android:paddingBottom="30dp"
-            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
