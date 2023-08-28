@@ -100,7 +100,7 @@
     <string name="incorrect_password">Incorrect Password! Please check your Master Key</string>
     <string name="change_master_key">Change Master Key</string>
     <string name="old_password">Old Master Key</string>
-    <string name="create_master_key">Create Master Key</string>
+    <string name="create_master_key">Create new Master Key</string>
     <string name="old_master_key_cannot_be_blank">Old Master Key cannot be blank</string>
     <string name="old_master_key_is_incorrect">The Old Master Key is incorrect</string>
     <string name="name">Name</string>
@@ -133,6 +133,10 @@
     <string name="your_card_number">Your Card Number</string>
     <string name="card_number">Card Number</string>
     <string name="demo_master_key">Your Master Key</string>
+    <string name="your_old_master_key">Your Old Master Key</string>
+    <string name="your_new_master_key">Your new Master Key</string>
+    <string name="enter_your_previous_master_key_to_confirm_it_is_really_you_who_wants_to_change_the_password">Enter your previous master key to confirm it is really you who wants to change the password</string>
+    <string name="set_an_app_lock_master_key_to_secure_all_your_credentials">Set an app lock master key to secure all your credentials</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

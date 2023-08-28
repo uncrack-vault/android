@@ -9,7 +9,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:layout_marginVertical="5dp"
         android:outlineAmbientShadowColor="@color/card_shadow_color"
         android:outlineSpotShadowColor="@color/card_shadow_color"

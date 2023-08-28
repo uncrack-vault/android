@@ -49,7 +49,6 @@ class SettingsFragment : Fragment() {
 
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.VISIBLE
 
-        initialization()
         handleOperations()
         return binding.root
     }
@@ -62,11 +61,11 @@ class SettingsFragment : Fragment() {
 
         settingsItemList = ArrayList()
         settingsItemList.apply {
-            add(SettingsItem(0, R.drawable.lock, "Security"))
-            add(SettingsItem(1, R.drawable.feedback, "Give us a feedback"))
-            add(SettingsItem(2, R.drawable.share, "Share the app"))
+            add(SettingsItem(0, R.drawable.lock, "Secure UnCrack"))
+            add(SettingsItem(1, R.drawable.feedback, "Request Features"))
+            add(SettingsItem(2, R.drawable.share, "Share UnCrack"))
             add(SettingsItem(3, R.drawable.info, "About"))
-            add(SettingsItem(4, R.drawable.rating, "Rate the app"))
+            add(SettingsItem(4, R.drawable.rating, "Rate us on Google Play"))
         }
         settingsItemAdapter = SettingsItemAdapter(requireContext(), settingsItemList) {
 
@@ -146,10 +145,5 @@ class SettingsFragment : Fragment() {
 
         }
         dialog.root.setBottomSheet(bottomSheet)
-    }
-
-    private fun initialization() {
-
-        binding.include.toolbarTitle.text = getString(R.string.settings)
     }
 }

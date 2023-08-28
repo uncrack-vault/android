@@ -17,6 +17,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentSecurityBinding
 import com.geekymusketeers.uncrack.ui.auth.master_key.UpdateMasterKeyFragment
 import com.geekymusketeers.uncrack.util.Util
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class SecurityFragment : Fragment() {
@@ -34,6 +35,7 @@ class SecurityFragment : Fragment() {
     ): View {
 
         _binding = FragmentSecurityBinding.inflate(inflater, container, false)
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
 
         pref = requireContext().getSharedPreferences(
             "mypref",
