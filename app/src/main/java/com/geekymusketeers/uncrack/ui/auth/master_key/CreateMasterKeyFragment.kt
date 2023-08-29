@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack.ui.auth.master_key
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import com.geekymusketeers.uncrack.databinding.FragmentCreateMasterKeyBinding
 import com.geekymusketeers.uncrack.ui.MainActivity
 import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util
+import com.geekymusketeers.uncrack.util.Util.Companion.hideKeyboard
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -35,6 +37,8 @@ class CreateMasterKeyFragment : Fragment() {
     private lateinit var buttonText: TextView
     private lateinit var buttonProgress: ProgressBar
     private lateinit var keyViewModel: KeyViewModel
+    private var isPasswordVisible = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -131,6 +135,34 @@ class CreateMasterKeyFragment : Fragment() {
             }
 
         }
+        binding.passwordToggle.setOnClickListener {
+            togglePassword()
+        }
+        binding.confirmPasswordToggle.setOnClickListener {
+            confirmTogglePassword()
+        }
+    }
+
+    private fun confirmTogglePassword() {
+        hideKeyboard(requireActivity())
+        val showPasswordResId =
+            if (isPasswordVisible) R.drawable.visibility_on else R.drawable.visibility_off
+        isPasswordVisible = isPasswordVisible.not()
+        val passwordTransMethod = if (isPasswordVisible) null else PasswordTransformationMethod()
+
+        binding.confirmPasswordToggle.setImageResource(showPasswordResId)
+        binding.confirmMasterKey.transformationMethod = passwordTransMethod
+    }
+
+    private fun togglePassword() {
+        hideKeyboard(requireActivity())
+        val showPasswordResId =
+            if (isPasswordVisible) R.drawable.visibility_on else R.drawable.visibility_off
+        isPasswordVisible = isPasswordVisible.not()
+        val passwordTransMethod = if (isPasswordVisible) null else PasswordTransformationMethod()
+
+        binding.passwordToggle.setImageResource(showPasswordResId)
+        binding.masterKey.transformationMethod = passwordTransMethod
     }
 
     private fun goToMainActivity() {

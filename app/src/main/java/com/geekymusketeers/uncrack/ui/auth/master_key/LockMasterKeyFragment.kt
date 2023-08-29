@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack.ui.auth.master_key
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.geekymusketeers.uncrack.databinding.FragmentLockMasterKeyBinding
 import com.geekymusketeers.uncrack.ui.MainActivity
 import com.geekymusketeers.uncrack.ui.auth.MasterKeyActivity
 import com.geekymusketeers.uncrack.util.Encryption
+import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -30,6 +32,7 @@ class LockMasterKeyFragment : Fragment() {
     private lateinit var buttonText: TextView
     private lateinit var buttonProgress: ProgressBar
     private lateinit var checkKeyViewModel: KeyViewModel
+    private var isPasswordVisible = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,6 +79,20 @@ class LockMasterKeyFragment : Fragment() {
             }
         }
 
+        binding.passwordToggle.setOnClickListener {
+            togglePassword()
+        }
+    }
+
+    private fun togglePassword() {
+        Util.hideKeyboard(requireActivity())
+        val showPasswordResId =
+            if (isPasswordVisible) R.drawable.visibility_on else R.drawable.visibility_off
+        isPasswordVisible = isPasswordVisible.not()
+        val passwordTransMethod = if (isPasswordVisible) null else PasswordTransformationMethod()
+
+        binding.passwordToggle.setImageResource(showPasswordResId)
+        binding.inputMasterKey.transformationMethod = passwordTransMethod
     }
 
     private fun goToMainActivity() {
