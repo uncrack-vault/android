@@ -82,7 +82,7 @@ dependencies {
     implementation ("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     // Kotlin components
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10")
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
 
