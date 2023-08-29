@@ -119,19 +119,17 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/card_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
             android:layout_marginTop="15dp"
             android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
             android:paddingBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardFilter"
             tools:listitem="@layout/card_layout" />
