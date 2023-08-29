@@ -1,6 +1,5 @@
 package com.geekymusketeers.uncrack.ui.fragments.account
 
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
@@ -21,7 +19,6 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
-import com.geekymusketeers.uncrack.databinding.SavepasswordModalBinding
 import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
@@ -29,40 +26,38 @@ import com.geekymusketeers.uncrack.viewModel.AccountViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.floor
 
 
 class AddFragment : Fragment() {
 
-    private  var _binding : FragmentAddBinding? = null
+    private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
-    private var selectedAccount: String? =null
+    private var selectedAccount: String? = null
     private lateinit var buttonLayout: ConstraintLayout
     private lateinit var buttonText: TextView
     private lateinit var buttonProgress: ProgressBar
 
-    private lateinit var viewModel : AccountViewModel
+    private lateinit var viewModel: AccountViewModel
     private lateinit var myViewModel: AddEditViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentAddBinding.inflate(inflater,container,false)
+        _binding = FragmentAddBinding.inflate(inflater, container, false)
 
         initialization()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
         init()
 
-        binding.accType.afterTextChanged{
+        binding.accType.afterTextChanged {
             selectedAccount = it
-            when(it.lowercase(Locale.ROOT)){
+            when (it.lowercase(Locale.ROOT)) {
                 "paypal" -> setImageOnAccountNameChange(R.drawable.paypal)
                 "instagram" -> setImageOnAccountNameChange(R.drawable.instagram)
                 "facebook" -> setImageOnAccountNameChange(R.drawable.facebook)
@@ -97,7 +92,7 @@ class AddFragment : Fragment() {
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
 
-            if (email.isEmpty() && password.isEmpty()){
+            if (email.isEmpty() && password.isEmpty()) {
                 binding.apply {
                     emailHelperTV.text = getString(R.string.please_enter_the_email_id)
                     emailHelperTV.visibility = View.VISIBLE
@@ -105,50 +100,30 @@ class AddFragment : Fragment() {
                     passwordHelperTV.visibility = View.VISIBLE
                 }
                 return@setOnClickListener
-            }
-            else if (email.isEmpty()){
+            } else if (email.isEmpty()) {
                 binding.apply {
                     emailHelperTV.text = getString(R.string.please_enter_the_email_id)
                     emailHelperTV.visibility = View.VISIBLE
                 }
                 return@setOnClickListener
-            }
-            else if (password.isEmpty()){
+            } else if (password.isEmpty()) {
                 binding.apply {
                     passwordHelperTV.text = getString(R.string.please_enter_the_password)
                     passwordHelperTV.visibility = View.VISIBLE
                 }
                 return@setOnClickListener
-            }
-            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                Toast.makeText(requireContext(),"Please check your Email Id", Toast.LENGTH_SHORT).show()
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(requireContext(), "Please check your Email Id", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             }
 
-            val saveDialog = SavepasswordModalBinding.inflate(layoutInflater)
-            val bottomSheet = requireContext().createBottomSheet()
-
-            saveDialog.apply {
-                optionsHeading.text = getString(R.string.confirm_changes)
-                optionsContent.text = getString(R.string.save_text)
-                positiveOption.text = getString(R.string.save_changes)
-                negativeOption.text = getString(R.string.dont_save)
-
-                positiveOption.setOnClickListener {
-                    bottomSheet.dismiss()
-                    binding.progressAnimation.progressParent.visibility = View.VISIBLE
-                    lifecycleScope.launch(Dispatchers.Main){
-                        delay(1000L)
-                        insertDataToDB()
-                        transaction()
-                    }
-                }
-                negativeOption.setOnClickListener {
-                    bottomSheet.dismiss()
-                }
+            binding.progressAnimation.progressParent.visibility = View.VISIBLE
+            lifecycleScope.launch(Dispatchers.Main) {
+                delay(1000L)
+                insertDataToDB()
+                transaction()
             }
-            saveDialog.root.setBottomSheet(bottomSheet)
-
 
         }
         binding.back.setOnClickListener {
@@ -158,7 +133,7 @@ class AddFragment : Fragment() {
         }
         // Account List
         val accounts = resources.getStringArray(R.array.accounts)
-        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.list_items,accounts)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.list_items, accounts)
         binding.accType.setAdapter(arrayAdapter)
 
         return binding.root
@@ -175,7 +150,7 @@ class AddFragment : Fragment() {
     private fun transaction() {
         val frag = HomeFragment()
         val trans = fragmentManager?.beginTransaction()
-        trans?.replace(R.id.fragment,frag)?.commit()
+        trans?.replace(R.id.fragment, frag)?.commit()
     }
 
     private fun initialization() {
@@ -196,30 +171,29 @@ class AddFragment : Fragment() {
     }
 
     private fun init() {
-        myViewModel.saveStatus.observe(viewLifecycleOwner){
+        myViewModel.saveStatus.observe(viewLifecycleOwner) {
 
-            if (it == 2){
+            if (it == 2) {
                 Toast.makeText(requireContext(), "Successful Saved", Toast.LENGTH_SHORT).show()
                 // Moving into HomeFragment after saving
                 val frag = HomeFragment()
                 val trans = fragmentManager?.beginTransaction()
-                trans?.replace(R.id.fragment,frag)?.commit()
+                trans?.replace(R.id.fragment, frag)?.commit()
 
-            }else if (it == 6){
+            } else if (it == 6) {
                 Toast.makeText(requireContext(), "Failed to save", Toast.LENGTH_SHORT).show()
             }
         }
 
     }
 
-    private fun setImageOnAccountNameChange(imageID: Int){
+    private fun setImageOnAccountNameChange(imageID: Int) {
         binding.accountLogo.apply {
             setImageResource(imageID)
             visibility = View.VISIBLE
         }
         binding.remainingLayout.visibility = View.VISIBLE
     }
-
 
 
     private fun handleBackButtonPress() {
@@ -254,7 +228,7 @@ class AddFragment : Fragment() {
                     bottomSheet.dismiss()
                     val frag = HomeFragment()
                     val trans = fragmentManager?.beginTransaction()
-                    trans?.replace(R.id.fragment,frag)?.commit()
+                    trans?.replace(R.id.fragment, frag)?.commit()
                 }
                 negativeOption.setOnClickListener {
                     bottomSheet.dismiss()
@@ -262,11 +236,10 @@ class AddFragment : Fragment() {
                 }
             }
             dialog.root.setBottomSheet(bottomSheet)
-        }
-        else {
+        } else {
             val frag = HomeFragment()
             val trans = fragmentManager?.beginTransaction()
-            trans?.replace(R.id.fragment,frag)?.commit()
+            trans?.replace(R.id.fragment, frag)?.commit()
         }
     }
 
@@ -299,17 +272,18 @@ class AddFragment : Fragment() {
         val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
         val encryptedPassword = encryption.encryptOrNull(password)
 
-        val account = Account(0,company, email, category,userName, encryptedPassword,note,currentDate)
+        val account =
+            Account(0, company, email, category, userName, encryptedPassword, note, currentDate)
 
         lifecycleScope.launch {
-            myViewModel.saveData(viewModel,account)
+            myViewModel.saveData(viewModel, account)
         }
 
     }
 
-    private fun AutoCompleteTextView.afterTextChanged(afterTextChanged: (String) -> Unit){
+    private fun AutoCompleteTextView.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
-        this.addTextChangedListener(object: TextWatcher {
+        this.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
