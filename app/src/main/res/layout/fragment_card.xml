@@ -3,155 +3,185 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.card.CardFragment">
 
-    <LinearLayout
-        android:id="@+id/empty_card_list"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="26dp"
+            android:fontFamily="@font/dm_sans_bold"
+            android:gravity="center_horizontal"
+            android:text="My Cards"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:background="@drawable/bottom_bg"
         android:orientation="vertical"
-        android:visibility="gone"
-        tools:layout_editor_absoluteY="15dp">
+        android:padding="8dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/card_lottieAnimationView"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+        <EditText
+            android:id="@+id/cardFilter"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/search_bar_drawable"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:hint="Search..."
+            android:inputType="textEmailAddress"
+            android:paddingStart="16dp"
+            android:paddingEnd="10dp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/listempty" />
+            tools:ignore="RtlSymmetry" />
 
-        <TextView
-            android:id="@+id/card_title"
+        <ImageView
+            android:id="@+id/card_clearText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:fontFamily="@font/dm_sans_bold"
-            android:text="@string/empty_list"
-            android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/clear_text"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/cardFilter"
+            app:layout_constraintEnd_toEndOf="@+id/cardFilter"
+            app:layout_constraintTop_toTopOf="@+id/cardFilter" />
 
-        <TextView
-            android:id="@+id/card_sub_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:fontFamily="@font/dm_sans"
-            android:text="@string/you_have_no_cards_saved_till_now"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+        <LinearLayout
+            android:id="@+id/empty_card_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:layout_editor_absoluteY="15dp">
 
-    </LinearLayout>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/card_lottieAnimationView"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/listempty" />
 
-    <!--ToolBar-->
-    <include
-        android:id="@+id/include"
-        layout="@layout/my_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/dm_sans_bold"
+                android:text="@string/empty_list"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
 
-    <EditText
-        android:id="@+id/cardFilter"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/edittext_box"
-        android:drawableStart="@drawable/search"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/dm_sans_medium"
-        android:hint="Search for Cards"
-        android:inputType="textEmailAddress"
-        android:paddingStart="16dp"
-        android:paddingEnd="10dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
-        tools:ignore="RtlSymmetry" />
+            <TextView
+                android:id="@+id/card_sub_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/dm_sans"
+                android:text="@string/you_have_no_cards_saved_till_now"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
-    <ImageView
-        android:id="@+id/card_clearText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/clear_text"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/cardFilter"
-        app:layout_constraintEnd_toEndOf="@+id/cardFilter"
-        app:layout_constraintTop_toTopOf="@+id/cardFilter" />
+        </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/card_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginTop="15dp"
-        android:clipToPadding="false"
-        android:nestedScrollingEnabled="false"
-        android:paddingBottom="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardFilter"
-        tools:listitem="@layout/card_layout" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/card_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:paddingBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardFilter"
+            tools:listitem="@layout/card_layout" />
 
 
-    <LinearLayout
-        android:id="@+id/card_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
-        android:animateLayoutChanges="true"
-        android:background="@drawable/fab_drawable"
-        android:backgroundTint="@color/black"
-        android:clipToPadding="false"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:outlineProvider="none"
-        android:outlineSpotShadowColor="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+            android:id="@+id/card_fab"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="20dp"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/fab_drawable"
+            android:backgroundTint="@color/black"
+            android:clipToPadding="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:outlineProvider="none"
+            android:outlineSpotShadowColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/card_fab_circle"
-            style="@style/Widget.MaterialComponents.FloatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/normal_button"
-            app:backgroundTint="@color/black"
-            app:borderWidth="0dp"
-            app:elevation="0dp"
-            app:fabSize="normal"
-            app:srcCompat="@drawable/add"
-            app:tint="@color/white" />
 
-        <TextView
-            android:id="@+id/fab_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/dm_sans_bold"
-            android:paddingEnd="10dp"
-            android:text="Save card"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/fab_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dm_sans_medium"
+                android:layout_marginStart="92dp"
+                android:text="@string/add_a_new_card"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/add_image"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                app:backgroundTint="@color/black"
+                app:srcCompat="@drawable/add"
+                app:tint="@color/white"
+                android:contentDescription="@string/add_icon" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

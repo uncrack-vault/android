@@ -3,32 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.auth.master_key.CreateMasterKeyFragment">
 
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/create_masterkey"
-        app:lottie_repeatMode="reverse" />
 
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_shape"
+        android:background="@drawable/bottom_bg"
         android:orientation="vertical"
-        android:padding="32dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -50,32 +36,56 @@
             android:text="@string/set_up_a_master_key_to_secure_all_your_credentials"
             android:textColor="@color/black"
             android:textAlignment="center"
-            android:layout_marginBottom="50dp"
-            android:textSize="15sp"/>
+            android:layout_marginBottom="20dp"
+            android:textSize="14sp"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/masterKey_box"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        <TextView
+            android:id="@+id/masterKey_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:text="@string/master_key"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp"
-            android:textColorHint="@color/hint_color"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toEndOf="@+id/headerLayout"
-            app:layout_constraintHorizontal_bias="0.0">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/masterKey"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/edittext_field"
                 android:fontFamily="@font/dm_sans"
+                android:hint="@string/demo_master_key"
                 android:inputType="text"
-                android:hint="@string/master_key"
                 android:lines="1"
-                android:textColor="@color/black" />
+                android:paddingStart="16dp"
+                android:paddingEnd="15dp"
+                android:textColorHint="@color/hint_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/passwordToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/masterKey"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/visibility_on" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/masterKeyHelperTV"
@@ -88,29 +98,54 @@
             android:visibility="gone"
             tools:text="Please Enter the First Name." />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/confirm_masterKey_box"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
+        <TextView
+            android:id="@+id/confirmMasterKey_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textColorHint="@color/hint_color"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toEndOf="@+id/headerLayout"
-            app:layout_constraintHorizontal_bias="0.0">
+            android:fontFamily="@font/dm_sans_medium"
+            android:text="Confirm Master Key"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <com.google.android.material.textfield.TextInputEditText
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <EditText
                 android:id="@+id/confirm_masterKey"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/edittext_field"
                 android:fontFamily="@font/dm_sans"
+                android:hint="@string/demo_master_key"
                 android:inputType="text"
-                android:hint="@string/confirm_master_key"
                 android:lines="1"
-                android:textColor="@color/black" />
+                android:paddingStart="14dp"
+                android:textColorHint="@color/hint_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/confirmPasswordToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/confirm_masterKey"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/visibility_on" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <TextView
             android:id="@+id/confirmMasterKeyHelperTV"
@@ -131,4 +166,15 @@
             android:layout_marginTop="40dp" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/typing"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

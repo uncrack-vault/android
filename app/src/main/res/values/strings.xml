@@ -10,11 +10,11 @@
     <string name="email">Email</string>
     <string name="username">UserName <font color='#808080'> (optional)</font></string>
     <string name="add_password">Password</string>
-    <string name="select_the_account">Select the Account</string>
+    <string name="select_the_account">Select</string>
     <string name="edit_email">Email <font color='#FF0000'>*</font></string>
     <string name="edit_username">UserName</string>
     <string name="edit_password">Password <font color='#FF0000'>*</font></string>
-    <string name="v1_4">v1.4</string>
+    <string name="v2.0.0">v2.0.0</string>
     <string name="description_about_the_option">Description about the option</string>
     <string name="Password_Strength">Check Password Strength</string>
     <string name="password_strength_des">You can check the strength of the password that you have saved for any particular account.</string>
@@ -71,18 +71,18 @@
     <string name="my_cards">My Cards</string>
     <string name="you_have_no_cards_saved_till_now">You have no Cards saved till now</string>
     <string name="empty_list">Empty List</string>
-    <string name="my_passwords">My Passwords</string>
+    <string name="my_passwords">My passwords</string>
     <string name="password_generator">Password Generator</string>
-    <string name="include_numbers">Numbers</string>
-    <string name="include_lowercase_letters">Letters (lowercase)</string>
-    <string name="include_uppercase_letters">Letters (uppercase)</string>
-    <string name="include_symbols">Symbols</string>
-    <string name="password_length">Set your Password Length</string>
+    <string name="include_numbers">Include numbers</string>
+    <string name="include_lowercase_letters">Include lowercase letters</string>
+    <string name="include_uppercase_letters">Include uppercase letters</string>
+    <string name="include_symbols">Include symbols</string>
+    <string name="password_length">Password Length</string>
     <string name="wait_a_second">Wait a Second</string>
     <string name="are_you_sure">Are you sure you want to share your credentials with other\'s?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="made_with_v1_2">Made with ♥ v1.6</string>
+    <string name="made_with_v1_2">Made with ♥ v2.0.0</string>
     <string name="settings">Settings</string>
     <string name="about_app_text">I see a lot of people are tried of memorizing all their passwords, me also sometimes forgot the login credentials. So, after thinking about this situations, this app is build, to help user\'s to store their passwords and other information in a secured and organized manner.</string>
     <string name="about_app_text_second">UnCrack is a offline password manager that securely stores all your login credentials and other important information, so you never have to worry about forgetting passwords or searching for lost information. Keep your digital life organized and protected with UnCrack.</string>
@@ -91,16 +91,16 @@
     <string name="update_your_master_key">Update your Master Key</string>
     <string name="set_up_a_master_key_to_secure_all_your_credentials">Set up a master key to secure your credentials with end-to-end encryption</string>
     <string name="master_key">Master Key</string>
-    <string name="end_to_end_encryption">End-to-end encryption</string>
+    <string name="end_to_end_encryption">End-to-End Encryption</string>
     <string name="confirm_master_key">Confirm Master Key</string>
-    <string name="enter_your_master_key_to_continue">Kindly provide your Master Key to proceed 👋.</string>
+    <string name="enter_your_master_key_to_continue">Kindly provide your master key to proceed 👋.</string>
     <string name="save_master_key">Save Master Key</string>
-    <string name="master_key_cannot_be_blank">Please set a Master Key</string>
+    <string name="master_key_cannot_be_blank">Please enter your Master Key</string>
     <string name="at_least_6_letter_long">Your master key should be at least 6 letters long</string>
     <string name="incorrect_password">Incorrect Password! Please check your Master Key</string>
     <string name="change_master_key">Change Master Key</string>
     <string name="old_password">Old Master Key</string>
-    <string name="create_master_key">Create Master Key</string>
+    <string name="create_master_key">Create new Master Key</string>
     <string name="old_master_key_cannot_be_blank">Old Master Key cannot be blank</string>
     <string name="old_master_key_is_incorrect">The Old Master Key is incorrect</string>
     <string name="name">Name</string>
@@ -109,6 +109,35 @@
     <string name="confirm_master_key_cannot_be_blank">Please Enter your Master Key to confirm</string>
     <string name="enter_correct_master_key">Please enter the correct Master Key</string>
     <string name="master_key_matches">Master Key matches</string>
+    <string name="search">Search...</string>
+    <string name="add_icon">add_icon</string>
+    <string name="image_logo">image_logo</string>
+    <string name="add_a_new_password">Add a new password</string>
+    <string name="new_password">New Password</string>
+    <string name="password_information">Password Information</string>
+    <string name="demo_note">Your note</string>
+    <string name="demo_password">Your password</string>
+    <string name="demo_username">Your username</string>
+    <string name="demo_email">Your email</string>
+    <string name="account_name">Account name</string>
+    <string name="work">Work</string>
+    <string name="social">Social</string>
+    <string name="mail">Mail</string>
+    <string name="others">Others</string>
+    <string name="generate_password">Generate Password</string>
+    <string name="generate">Generate</string>
+    <string name="add_a_new_card">Add a new card</string>
+    <string name="new_card">New Card</string>
+    <string name="card_information">Card Information</string>
+    <string name="card_name">Card Name</string>
+    <string name="your_card_number">Your Card Number</string>
+    <string name="card_number">Card Number</string>
+    <string name="demo_master_key">Your Master Key</string>
+    <string name="your_old_master_key">Your Old Master Key</string>
+    <string name="your_new_master_key">Your new Master Key</string>
+    <string name="enter_your_previous_master_key_to_confirm_it_is_really_you_who_wants_to_change_the_password">Enter your previous master key to confirm it is really you who wants to change the password</string>
+    <string name="set_an_app_lock_master_key_to_secure_all_your_credentials">Set an app lock master key to secure all your credentials</string>
+    <string name="remove_card">Remove Card</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

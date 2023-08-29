@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/v1_4"
+            android:text="@string/v2.0.0"
             android:layout_marginTop="5dp"
             android:textColor="@color/black"
             android:textSize="15sp"

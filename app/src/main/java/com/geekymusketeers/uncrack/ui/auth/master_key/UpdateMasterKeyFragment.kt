@@ -56,8 +56,8 @@ class UpdateMasterKeyFragment : Fragment() {
         buttonLayout.setOnClickListener {
             updateKeyViewModel.getMasterKey().observe(viewLifecycleOwner) {masterKey ->
 
-                val oldMasterKey = binding.layoutOldMasterKey.editText?.text.toString()
-                val updatedMasterKey = binding.layoutMasterKey.editText?.text.toString()
+                val oldMasterKey = binding.layoutOldMasterKey.text.toString()
+                val updatedMasterKey = binding.layoutMasterKey.text.toString()
                 val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
                 val correctOldMasterKey = encryption.decryptOrNull(masterKey[0].password)
                 showProgress()
@@ -117,7 +117,7 @@ class UpdateMasterKeyFragment : Fragment() {
 
     private fun updateKey() {
 
-        val updatedKey = binding.layoutMasterKey.editText?.text.toString()
+        val updatedKey = binding.layoutMasterKey.text.toString()
 
         val encrypt = Encryption.getDefault("Key", "Salt", ByteArray(16))
         val encryptedUpdatedKey = encrypt.encryptOrNull(updatedKey)

@@ -66,7 +66,7 @@ class CardFragment : Fragment() {
                 demoCardName.text = currentCard.cardHolderName
                 cvv.text = decryCVV
 
-                deleteOption.text = "Remove Card"
+                deleteOption.text = getString(R.string.remove_card)
                 deleteOption.setTextColor(
                     ContextCompat.getColor(requireContext(),R.color.white)
                 )
@@ -117,20 +117,10 @@ class CardFragment : Fragment() {
         binding.cardFab.setOnClickListener {
             goToCardAddFragment()
         }
-        binding.cardFabCircle.setOnClickListener {
-            goToCardAddFragment()
-        }
-
-        setUpFab()
         setCardFilter()
         cardClearText()
-        init()
         return binding.root
 
-    }
-
-    private fun init() {
-        binding.include.toolbarTitle.text = getString(R.string.my_cards)
     }
 
     private fun cardClearText() {
@@ -187,33 +177,6 @@ class CardFragment : Fragment() {
             cardAdapter.setCardData(cardList)
         }
     }
-
-    private fun setUpFab() {
-        binding.cardRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0 && binding.fabText.visibility == View.VISIBLE) {
-                    binding.fabText.visibility = View.GONE
-                } else if (dy < 0 && binding.fabText.visibility != View.VISIBLE) {
-                    binding.fabText.visibility = View.VISIBLE
-                }
-            }
-        })
-    }
-
-//    override fun onResume() {
-//        super.onResume()
-//        cardViewModel.readAllCardData.observe(viewLifecycleOwner) { card ->
-//            cardAdapter.setCardData(card)
-//            if (card.isEmpty()) {
-//                binding.emptyCardList.visibility = View.VISIBLE
-//            } else {
-//                binding.emptyCardList.visibility = View.GONE
-//            }
-//
-//        }
-//    }
-
     private fun goToCardAddFragment() {
         val fragment = CardDetialsAddFragment()
         val transaction = fragmentManager?.beginTransaction()

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -48,6 +49,7 @@ class HomeFragment : Fragment() {
     private lateinit var accountAdapter: AccountAdapter
     private lateinit var recyclerView: RecyclerView
     private var accountList = mutableListOf<Account>()
+    private var isPasswordVisible = false
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -56,10 +58,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentHomeBinding.inflate(inflater,container,false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.VISIBLE
-        
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility =
+            View.VISIBLE
+
         deleteViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory
@@ -68,7 +71,7 @@ class HomeFragment : Fragment() {
 
 
 
-        accountAdapter = AccountAdapter(requireContext()){ currentAccount ->
+        accountAdapter = AccountAdapter(requireContext()) { currentAccount ->
 
             val dialog = ViewpasswordModalBinding.inflate(layoutInflater)
             val bottomSheet = requireContext().createBottomSheet()
@@ -80,9 +83,9 @@ class HomeFragment : Fragment() {
                 accountEmail.text = currentAccount.email
                 accountUsername.text = "UserName:  " + currentAccount.username
                 accountNote.text = "Note: " + currentAccount.note
-                accountDateTime.text = "Last Updated: "+currentAccount.dateTime
+                accountDateTime.text = "Last Updated: " + currentAccount.dateTime
                 accountCategory.text = currentAccount.category
-                when(accountCategory.text){
+                when (accountCategory.text) {
                     "Work" -> categoryImage.setImageResource(R.drawable.work_icon)
                     "Social" -> categoryImage.setImageResource(R.drawable.social_icon)
                     "Mail" -> categoryImage.setImageResource(R.drawable.email_icon)
@@ -103,12 +106,15 @@ class HomeFragment : Fragment() {
                             circularProgressBar.progressBarColor = colorRed
                             strengthLevel.text = "Weak"
                         }
+
                         in 4..6 -> {
-                            val colorYellow = ContextCompat.getColor(requireContext(), R.color.yellow)
+                            val colorYellow =
+                                ContextCompat.getColor(requireContext(), R.color.yellow)
                             strengthLevel.setTextColor(colorYellow)
                             circularProgressBar.progressBarColor = colorYellow
                             strengthLevel.text = "Fair"
                         }
+
                         in 7..9 -> {
                             val colorGreen = ContextCompat.getColor(requireContext(), R.color.green)
                             strengthLevel.setTextColor(colorGreen)
@@ -118,15 +124,32 @@ class HomeFragment : Fragment() {
                     }
                 }
 
+                // Show Password
+                passwordToggle.setOnClickListener {
+                    Util.hideKeyboard(requireActivity())
+                    val showPasswordResId =
+                        if (isPasswordVisible) R.drawable.visibility_on else R.drawable.visibility_off
+                    isPasswordVisible = isPasswordVisible.not()
+                    val passwordTransMethod = if (isPasswordVisible) null else PasswordTransformationMethod()
+
+                    passwordToggle.setImageResource(showPasswordResId)
+                    accountPassword.transformationMethod = passwordTransMethod
+                }
+
                 // Copy password to clipboard
                 CopyPassword.setOnClickListener {
                     val clipboard: ClipboardManager? = ContextCompat.getSystemService(
                         requireContext(),
                         ClipboardManager::class.java
                     )
-                    val clip = ClipData.newPlainText("Copy Password", accountPassword.text.toString())
+                    val clip =
+                        ClipData.newPlainText("Copy Password", accountPassword.text.toString())
                     clipboard?.setPrimaryClip(clip)
-                    Toast.makeText(requireContext(),"Password Copied to Clipboard",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Password Copied to Clipboard",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 // Share button feature
@@ -146,17 +169,19 @@ class HomeFragment : Fragment() {
                             val email = currentAccount.email
                             val userName = currentAccount.username
                             val note = currentAccount.note
-                            if (userName.isEmpty() && note.isEmpty()){
-                                val shareNoteWithoutUserName = "${"Email: $email"}\n${"Password: $decryptedViewPassword"}"
-                                val myIntent= Intent(Intent.ACTION_SEND)
+                            if (userName.isEmpty() && note.isEmpty()) {
+                                val shareNoteWithoutUserName =
+                                    "${"Email: $email"}\n${"Password: $decryptedViewPassword"}"
+                                val myIntent = Intent(Intent.ACTION_SEND)
                                 myIntent.type = "text/plane"
-                                myIntent.putExtra(Intent.EXTRA_TEXT,shareNoteWithoutUserName)
+                                myIntent.putExtra(Intent.EXTRA_TEXT, shareNoteWithoutUserName)
                                 context?.startActivity(myIntent)
-                            }else{
-                                val shareNote = "${"Email: $email"}\n${"UserName: $userName"}\n${"Password: $decryptedViewPassword"}\n${"Note: $note"}"
-                                val myIntent= Intent(Intent.ACTION_SEND)
+                            } else {
+                                val shareNote =
+                                    "${"Email: $email"}\n${"UserName: $userName"}\n${"Password: $decryptedViewPassword"}\n${"Note: $note"}"
+                                val myIntent = Intent(Intent.ACTION_SEND)
                                 myIntent.type = "text/plane"
-                                myIntent.putExtra(Intent.EXTRA_TEXT,shareNote)
+                                myIntent.putExtra(Intent.EXTRA_TEXT, shareNote)
                                 context?.startActivity(myIntent)
                             }
 
@@ -170,10 +195,10 @@ class HomeFragment : Fragment() {
 
                 }
 
-                if(currentAccount.username.isNotEmpty()) {
+                if (currentAccount.username.isNotEmpty()) {
                     accountUsername.visibility = View.VISIBLE
                 }
-                if (currentAccount.note.isNotEmpty()){
+                if (currentAccount.note.isNotEmpty()) {
                     accountNote.visibility = View.VISIBLE
                 }
 
@@ -196,9 +221,10 @@ class HomeFragment : Fragment() {
                 positiveOption.setOnClickListener {
                     bottomSheet.dismiss()
                     lifecycleScope.launch {
-                        deleteViewModel.deleteEntry(viewModel,currentAccount)
+                        deleteViewModel.deleteEntry(viewModel, currentAccount)
                     }
-                    Toast.makeText(requireContext(),"Successfully Deleted",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Successfully Deleted", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 negativeOption.setOnClickListener {
                     bottomSheet.dismiss()
@@ -262,20 +288,10 @@ class HomeFragment : Fragment() {
             goToAddFragment()
         }
 
-        binding.fabCircle.setOnClickListener {
-            goToAddFragment()
-        }
-
         setFilter()
-        setUpFab()
         clearText()
-        init()
 
         return binding.root
-    }
-
-    private fun init() {
-        binding.include.toolbarTitle.text = getString(R.string.my_passwords)
     }
 
     private fun calculatePasswordScore(password: String): Int {
@@ -351,14 +367,14 @@ class HomeFragment : Fragment() {
 
     private fun filter(search: String) {
         val filterList = mutableListOf<Account>()
-        if (search.isNotEmpty()){
-            for (account in accountList){
-                if (getBaseStringForFiltering(account.company.lowercase()).contains(search)){
+        if (search.isNotEmpty()) {
+            for (account in accountList) {
+                if (getBaseStringForFiltering(account.company.lowercase()).contains(search)) {
                     filterList.add(account)
                 }
             }
             accountAdapter.setData(filterList)
-        }else{
+        } else {
             accountAdapter.setData(accountList)
         }
     }
@@ -367,35 +383,20 @@ class HomeFragment : Fragment() {
     private fun goToAddFragment() {
         val fragment = AddFragment()
         val transaction = fragmentManager?.beginTransaction()
-        transaction?.replace(R.id.fragment,fragment)?.addToBackStack( "tag" )?.commit()
+        transaction?.replace(R.id.fragment, fragment)?.addToBackStack("tag")?.commit()
     }
 
 
     override fun onResume() {
         super.onResume()
-            viewModel.readAllData.observe(viewLifecycleOwner) { account ->
-                accountAdapter.setData(account)
-                if (account.isEmpty()) {
-                    binding.emptyList.visibility = View.VISIBLE
-                } else {
-                    binding.emptyList.visibility = View.GONE
-                }
-
+        viewModel.readAllData.observe(viewLifecycleOwner) { account ->
+            accountAdapter.setData(account)
+            if (account.isEmpty()) {
+                binding.emptyList.visibility = View.VISIBLE
+            } else {
+                binding.emptyList.visibility = View.GONE
             }
+
+        }
     }
-
-    private fun setUpFab() {
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0 && binding.fabText.visibility == View.VISIBLE) {
-                    binding.fabText.visibility = View.GONE
-                } else if (dy < 0 && binding.fabText.visibility != View.VISIBLE) {
-                    binding.fabText.visibility = View.VISIBLE
-                }
-            }
-        })
-    }
-
-
 }

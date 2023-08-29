@@ -8,6 +8,8 @@
     android:layout_marginHorizontal="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     app:cardBackgroundColor="#54A0F8"
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp">
@@ -28,15 +30,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_holder_name">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tap to see details"
-                android:textColor="@color/white"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="140dp"
-                android:textSize="15sp"
-                android:fontFamily="@font/dm_sans"/>
 
             <ImageView
                 android:id="@+id/type"

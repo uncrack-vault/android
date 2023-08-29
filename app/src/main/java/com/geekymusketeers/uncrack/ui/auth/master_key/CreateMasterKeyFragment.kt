@@ -2,7 +2,7 @@ package com.geekymusketeers.uncrack.ui.auth.master_key
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,12 +19,11 @@ import com.geekymusketeers.uncrack.data.model.Key
 import com.geekymusketeers.uncrack.databinding.FragmentCreateMasterKeyBinding
 import com.geekymusketeers.uncrack.ui.MainActivity
 import com.geekymusketeers.uncrack.util.Encryption
-import com.geekymusketeers.uncrack.util.Util
+import com.geekymusketeers.uncrack.util.Util.Companion.hideKeyboard
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 
 class CreateMasterKeyFragment : Fragment() {
 
@@ -35,6 +33,8 @@ class CreateMasterKeyFragment : Fragment() {
     private lateinit var buttonText: TextView
     private lateinit var buttonProgress: ProgressBar
     private lateinit var keyViewModel: KeyViewModel
+    private var isPasswordVisible = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,19 +54,11 @@ class CreateMasterKeyFragment : Fragment() {
 
         keyViewModel.run {
             enableButtonLiveData.observe(viewLifecycleOwner){ enable ->
-//                binding.btnSaveMasterKey.progressButtonBg.isVisible = it
                 binding.btnSaveMasterKey.root.isEnabled = enable
-//                Util.log("enableButtonLiveData: $it")
                 val buttonBackground = if (enable) R.color.black else R.color.deep_grey
                 binding.btnSaveMasterKey.root.setBackgroundColor(
                     ContextCompat.getColor(requireContext(), buttonBackground)
                 )
-//                binding.btnSaveMasterKey.root.isClickable = it
-//                if (it) {
-//                    binding.btnSaveMasterKey.root.visibility = View.VISIBLE
-//                } else {
-//                    binding.btnSaveMasterKey.root.visibility = View.GONE
-//                }
             }
         }
     }
@@ -131,6 +123,34 @@ class CreateMasterKeyFragment : Fragment() {
             }
 
         }
+        binding.passwordToggle.setOnClickListener {
+            togglePassword()
+        }
+        binding.confirmPasswordToggle.setOnClickListener {
+            confirmTogglePassword()
+        }
+    }
+
+    private fun confirmTogglePassword() {
+        hideKeyboard(requireActivity())
+        val showPasswordResId =
+            if (isPasswordVisible) R.drawable.visibility_on else R.drawable.visibility_off
+        isPasswordVisible = isPasswordVisible.not()
+        val passwordTransMethod = if (isPasswordVisible) null else PasswordTransformationMethod()
+
+        binding.confirmPasswordToggle.setImageResource(showPasswordResId)
+        binding.confirmMasterKey.transformationMethod = passwordTransMethod
+    }
+
+    private fun togglePassword() {
+        hideKeyboard(requireActivity())
+        val showPasswordResId =
+            if (isPasswordVisible) R.drawable.visibility_on else R.drawable.visibility_off
+        isPasswordVisible = isPasswordVisible.not()
+        val passwordTransMethod = if (isPasswordVisible) null else PasswordTransformationMethod()
+
+        binding.passwordToggle.setImageResource(showPasswordResId)
+        binding.masterKey.transformationMethod = passwordTransMethod
     }
 
     private fun goToMainActivity() {
