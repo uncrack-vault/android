@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -48,6 +49,7 @@ class HomeFragment : Fragment() {
     private lateinit var accountAdapter: AccountAdapter
     private lateinit var recyclerView: RecyclerView
     private var accountList = mutableListOf<Account>()
+    private var isPasswordVisible = false
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -120,6 +122,18 @@ class HomeFragment : Fragment() {
                             strengthLevel.text = "Strong"
                         }
                     }
+                }
+
+                // Show Password
+                passwordToggle.setOnClickListener {
+                    Util.hideKeyboard(requireActivity())
+                    val showPasswordResId =
+                        if (isPasswordVisible) R.drawable.visibility_on else R.drawable.visibility_off
+                    isPasswordVisible = isPasswordVisible.not()
+                    val passwordTransMethod = if (isPasswordVisible) null else PasswordTransformationMethod()
+
+                    passwordToggle.setImageResource(showPasswordResId)
+                    accountPassword.transformationMethod = passwordTransMethod
                 }
 
                 // Copy password to clipboard
