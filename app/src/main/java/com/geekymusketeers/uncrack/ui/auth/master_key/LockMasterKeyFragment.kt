@@ -23,7 +23,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
 class LockMasterKeyFragment : Fragment() {
 
     private var _binding : FragmentLockMasterKeyBinding?= null
@@ -63,7 +62,7 @@ class LockMasterKeyFragment : Fragment() {
                 } else {
                     if (inputMasterKey == correctMasterKey) {
                         lifecycleScope.launch(Dispatchers.Main) {
-                            delay(800L)
+                            delay(1000L)
                             goToMainActivity()
                         }
                     }
