@@ -137,6 +137,7 @@
     <string name="your_new_master_key">Your new Master Key</string>
     <string name="enter_your_previous_master_key_to_confirm_it_is_really_you_who_wants_to_change_the_password">Enter your previous master key to confirm it is really you who wants to change the password</string>
     <string name="set_an_app_lock_master_key_to_secure_all_your_credentials">Set an app lock master key to secure all your credentials</string>
+    <string name="remove_card">Remove Card</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

@@ -66,7 +66,7 @@ class CardFragment : Fragment() {
                 demoCardName.text = currentCard.cardHolderName
                 cvv.text = decryCVV
 
-                deleteOption.text = "Remove Card"
+                deleteOption.text = getString(R.string.remove_card)
                 deleteOption.setTextColor(
                     ContextCompat.getColor(requireContext(),R.color.white)
                 )
@@ -117,7 +117,6 @@ class CardFragment : Fragment() {
         binding.cardFab.setOnClickListener {
             goToCardAddFragment()
         }
-        setUpFab()
         setCardFilter()
         cardClearText()
         return binding.root
@@ -177,19 +176,6 @@ class CardFragment : Fragment() {
         }else{
             cardAdapter.setCardData(cardList)
         }
-    }
-
-    private fun setUpFab() {
-        binding.cardRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0 && binding.fabText.visibility == View.VISIBLE) {
-                    binding.fabText.visibility = View.GONE
-                } else if (dy < 0 && binding.fabText.visibility != View.VISIBLE) {
-                    binding.fabText.visibility = View.VISIBLE
-                }
-            }
-        })
     }
     private fun goToCardAddFragment() {
         val fragment = CardDetialsAddFragment()
