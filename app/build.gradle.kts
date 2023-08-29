@@ -83,7 +83,7 @@ dependencies {
 
     // Kotlin components
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21")
-    api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+    api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
 
     // Lottie Animation
