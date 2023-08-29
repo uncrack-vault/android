@@ -87,7 +87,7 @@ dependencies {
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
 
     // Lottie Animation
-    implementation ("com.airbnb.android:lottie:6.0.0")
+    implementation ("com.airbnb.android:lottie:6.1.0")
 
     // Password Strength Meter
     implementation ("nu.aaro.gustav:passwordstrengthmeter:0.4")
