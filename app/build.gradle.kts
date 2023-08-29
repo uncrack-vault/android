@@ -5,6 +5,7 @@ plugins {
     id ("kotlin-kapt")
     id ("com.google.gms.google-services")
     id ("com.google.firebase.crashlytics")
+    id ("com.google.devtools.ksp")
 
 }
 
@@ -69,7 +70,7 @@ dependencies {
     // Room
     implementation ("androidx.room:room-runtime:$roomVersion")
     annotationProcessor ("androidx.room:room-compiler:$roomVersion")
-    kapt ("androidx.room:room-compiler:$roomVersion")
+    ksp ("androidx.room:room-compiler:$roomVersion")
     implementation ("androidx.room:room-ktx:$roomVersion")
 
     //ViewModel
