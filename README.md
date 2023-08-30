@@ -1,6 +1,6 @@
 <div align="center">
 </br>
-<img src="art/uncrack_github.svg" width="200" />
+<img src="art/github_logo.svg" width="200" />
 
 </div>
 
@@ -69,6 +69,8 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - LiveData was used to save and store values for viewModel calls and response of method calls.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 - [Password Strength Meter](https://github.com/gustavaa/AndroidPasswordStrengthMeter) - Password strength meter is an easy-to-implement and flexible password strength indicator for Android.
+- [Firebase Crashlytics](https://firebase.google.com/docs/crashlytics?hl=en&authuser=0) - Firebase Crashlytics is a lightweight, real-time crash reporter that helps you track crashes.
+- [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging?hl=en&authuser=0) - Firebase Cloud Messaging (FCM) is a cross-platform messaging solution that lets you reliably send messages.
 
 # 👀 Package Structure 
 
