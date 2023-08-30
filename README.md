@@ -82,7 +82,8 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
     │   └── room            # For saving data.
     |
     ├── adapter             # All Adapters for recyclerViews              
-    │   
+    │ 
+    |── service             # Notification Service
     |
     ├── ui                  # UI/View layer
     |   ├── auth            # For Security
