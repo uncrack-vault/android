@@ -12,9 +12,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/logo_uncrack"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo"
+        android:roundIcon="@drawable/logo_uncrack"
         android:supportsRtl="true"
         android:theme="@style/Theme.UnCrack"
         tools:targetApi="31">
