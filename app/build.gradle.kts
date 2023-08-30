@@ -98,6 +98,9 @@ dependencies {
     implementation ("com.google.firebase:firebase-analytics-ktx:21.3.0")
     implementation("com.google.firebase:firebase-messaging-ktx:23.2.1")
 
+    // In-app update
+    implementation ("com.google.android.play:core:1.10.3")
+
     // Circular Progress bar
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
 
