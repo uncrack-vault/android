@@ -128,7 +128,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="16dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:cardBackgroundColor="#54A0F8"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="5dp"
@@ -161,12 +161,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/dm_sans"
-                            tools:text="@string/cvv_hint"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="@+id/demo_cvv_text"
-                            app:layout_constraintTop_toBottomOf="@+id/demo_cvv_text" />
+                            app:layout_constraintTop_toBottomOf="@+id/demo_cvv_text"
+                            tools:text="@string/cvv_hint" />
 
 
                         <ImageView
@@ -174,12 +174,12 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginBottom="8dp"
+                            android:contentDescription="cardType"
                             android:src="@drawable/ic_visa"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.89"
-                            app:layout_constraintStart_toEndOf="@+id/demo_cvv_text"
-                            android:contentDescription="cardType" />
+                            app:layout_constraintStart_toEndOf="@+id/demo_cvv_text" />
 
                         <LinearLayout
                             android:id="@+id/demo_card_number"
@@ -201,10 +201,10 @@
                                 android:fontFamily="@font/dm_sans"
                                 android:lines="1"
                                 android:padding="6dp"
-                                tools:text="****"
                                 android:textColor="@color/white"
                                 android:textSize="22sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="****" />
 
                             <TextView
                                 android:id="@+id/card_number_two"
@@ -214,10 +214,10 @@
                                 android:fontFamily="@font/dm_sans"
                                 android:lines="1"
                                 android:padding="6dp"
-                                tools:text="****"
                                 android:textColor="@color/white"
                                 android:textSize="22sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="****" />
 
                             <TextView
                                 android:id="@+id/card_number_three"
@@ -227,10 +227,10 @@
                                 android:fontFamily="@font/dm_sans"
                                 android:lines="1"
                                 android:padding="6dp"
-                                tools:text="****"
                                 android:textColor="@color/white"
                                 android:textSize="22sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="****" />
 
                             <TextView
                                 android:id="@+id/card_number_four"
@@ -240,10 +240,10 @@
                                 android:fontFamily="@font/dm_sans"
                                 android:lines="1"
                                 android:padding="6dp"
-                                tools:text="****"
                                 android:textColor="@color/white"
                                 android:textSize="22sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="****" />
 
                         </LinearLayout>
 
@@ -278,10 +278,10 @@
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:gravity="center"
-                                tools:text="**"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="**" />
 
                             <TextView
                                 android:id="@+id/demo_slash"
@@ -293,10 +293,10 @@
                                 android:layout_marginEnd="5dp"
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:gravity="center"
-                                tools:text="/"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="/" />
 
                             <TextView
                                 android:id="@+id/demo_expiry_year"
@@ -306,10 +306,10 @@
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:gravity="center"
-                                tools:text="****"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="****" />
 
                         </LinearLayout>
 
@@ -356,7 +356,7 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="16dp"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"

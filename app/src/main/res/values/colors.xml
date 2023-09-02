@@ -12,6 +12,7 @@
     <color name="yellow">#DAA811</color>
     <color name="green">#00FF00</color>
     <color name="mastercard">#633EF8</color>
+    <color name="rupay">#0027FF</color>
     <color name="hint_color">#8E8C8C</color>
     <color name="card_shadow_color">#B0D6FF</color>
     <color name="colorSlideAct">#ef5059</color>

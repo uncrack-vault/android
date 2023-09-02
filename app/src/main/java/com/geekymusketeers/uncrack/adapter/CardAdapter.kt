@@ -74,7 +74,19 @@ class CardAdapter(private val context: Context,
 
                     findViewById<ImageView>(R.id.type).setImageResource(R.drawable.ic_mastercard)
                 }
+            }
+            "rupay" -> {
+                holder.itemView.apply {
+                    findViewById<MaterialCardView>(R.id.atm_card).backgroundTintList = ColorStateList.valueOf(
+                        ResourcesCompat.getColor(
+                            resources,
+                            R.color.rupay,
+                            null
+                        )
+                    )
 
+                    findViewById<ImageView>(R.id.type).setImageResource(R.drawable.rupay_logo)
+                }
             }
         }
 

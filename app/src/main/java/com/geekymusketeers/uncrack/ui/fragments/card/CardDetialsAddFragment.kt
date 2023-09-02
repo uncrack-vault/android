@@ -122,6 +122,16 @@ class CardDetialsAddFragment : Fragment() {
                     )
                     setImageOnAccountNameChange(R.drawable.ic_mastercard)
                 }
+                "rupay" -> {
+                    binding.demoAddCard.backgroundTintList = ColorStateList.valueOf(
+                        ResourcesCompat.getColor(
+                            resources,
+                            R.color.mastercard,
+                            null
+                        )
+                    )
+                    setImageOnAccountNameChange(R.drawable.rupay_logo)
+                }
 
             }
         }

@@ -164,5 +164,6 @@
     <string-array name="cards">
         <item>VISA</item>
         <item>MasterCard</item>
+        <item>RuPay</item>
     </string-array>
 </resources>

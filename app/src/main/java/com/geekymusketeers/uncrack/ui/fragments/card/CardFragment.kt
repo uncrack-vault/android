@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack.ui.fragments.card
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -88,6 +89,16 @@ class CardFragment : Fragment() {
                             )
                         )
                         cardType.setImageResource(R.drawable.ic_mastercard)
+                    }
+                    "rupay" -> {
+                        viewCard.backgroundTintList = ColorStateList.valueOf(
+                            ResourcesCompat.getColor(
+                                resources,
+                                R.color.rupay,
+                                null
+                            )
+                        )
+                        cardType.setImageResource(R.drawable.rupay_logo)
                     }
                 }
             }
