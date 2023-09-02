@@ -115,6 +115,7 @@
                         android:inputType="none"
                         android:background="@drawable/edittext_field"
                         android:paddingStart="16dp"
+                        android:paddingEnd="15sp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -127,7 +128,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="16dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:cardBackgroundColor="#54A0F8"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="5dp"
@@ -160,7 +161,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/dm_sans"
-                            android:text="@string/cvv_hint"
+                            tools:text="@string/cvv_hint"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -177,7 +178,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.89"
-                            app:layout_constraintStart_toEndOf="@+id/demo_cvv_text" />
+                            app:layout_constraintStart_toEndOf="@+id/demo_cvv_text"
+                            android:contentDescription="cardType" />
 
                         <LinearLayout
                             android:id="@+id/demo_card_number"
@@ -199,7 +201,7 @@
                                 android:fontFamily="@font/dm_sans"
                                 android:lines="1"
                                 android:padding="6dp"
-                                android:text="****"
+                                tools:text="****"
                                 android:textColor="@color/white"
                                 android:textSize="22sp"
                                 android:textStyle="bold" />
@@ -212,7 +214,7 @@
                                 android:fontFamily="@font/dm_sans"
                                 android:lines="1"
                                 android:padding="6dp"
-                                android:text="****"
+                                tools:text="****"
                                 android:textColor="@color/white"
                                 android:textSize="22sp"
                                 android:textStyle="bold" />
@@ -225,7 +227,7 @@
                                 android:fontFamily="@font/dm_sans"
                                 android:lines="1"
                                 android:padding="6dp"
-                                android:text="****"
+                                tools:text="****"
                                 android:textColor="@color/white"
                                 android:textSize="22sp"
                                 android:textStyle="bold" />
@@ -238,7 +240,7 @@
                                 android:fontFamily="@font/dm_sans"
                                 android:lines="1"
                                 android:padding="6dp"
-                                android:text="****"
+                                tools:text="****"
                                 android:textColor="@color/white"
                                 android:textSize="22sp"
                                 android:textStyle="bold" />
@@ -276,7 +278,7 @@
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:gravity="center"
-                                android:text="**"
+                                tools:text="**"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -291,7 +293,7 @@
                                 android:layout_marginEnd="5dp"
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:gravity="center"
-                                android:text="/"
+                                tools:text="/"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -304,7 +306,7 @@
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:gravity="center"
-                                android:text="****"
+                                tools:text="****"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -354,7 +356,7 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="16dp"
                     android:orientation="vertical"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -399,6 +401,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="15dp"
+                        android:paddingEnd="15sp"
                         android:textColor="@color/red"
                         android:textSize="13sp"
                         android:visibility="gone"
@@ -445,9 +448,9 @@
                             android:layout_height="50dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="14dp"
-                            android:text="/"
                             android:textAlignment="center"
-                            android:textSize="30sp" />
+                            android:textSize="30sp"
+                            tools:text="/" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/year_box"
@@ -513,6 +516,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="15dp"
+                        android:paddingEnd="15sp"
                         android:textColor="@color/red"
                         android:textSize="13sp"
                         android:visibility="gone"
@@ -552,6 +556,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="15dp"
+                        android:paddingEnd="15sp"
                         android:textColor="@color/red"
                         android:textSize="13sp"
                         android:visibility="gone"
