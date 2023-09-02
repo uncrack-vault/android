@@ -154,7 +154,8 @@ class CardDetialsAddFragment : Fragment() {
                 stopProgress()
                 return@setOnClickListener
             } else if (cardName.isEmpty()) {
-                binding.cardNameHelperTV.text = getString(R.string.please_enter_the_card_holder_name)
+                binding.cardNameHelperTV.text =
+                    getString(R.string.please_enter_the_card_holder_name)
                 binding.cardNameHelperTV.visibility = View.VISIBLE
                 validation()
                 stopProgress()
@@ -237,6 +238,7 @@ class CardDetialsAddFragment : Fragment() {
                             cardNumberFour.text = ""
                         }
                     }
+
                     in 5..8 -> {
                         binding.apply {
                             cardNumberOne.text = s.toString().substring(0, 4)
@@ -246,6 +248,7 @@ class CardDetialsAddFragment : Fragment() {
                         }
 
                     }
+
                     in 10..13 -> {
                         binding.apply {
                             cardNumberOne.text = s.toString().substring(0, 4)
@@ -254,6 +257,7 @@ class CardDetialsAddFragment : Fragment() {
                             cardNumberFour.text = ""
                         }
                     }
+
                     in 15..19 -> {
                         binding.apply {
                             cardNumberOne.text = s.toString().substring(0, 4)
@@ -272,7 +276,7 @@ class CardDetialsAddFragment : Fragment() {
                             s?.delete(s.toString().length - 1, s.toString().length)
                     }
                 }
-                if (str == 19){
+                if (str == 19) {
                     binding.expiryMonth.requestFocus()
                 }
             }
@@ -296,7 +300,7 @@ class CardDetialsAddFragment : Fragment() {
                     expiryMonth.error = null
                     expiryYear.error = null
                 }
-                if (s?.length == 4){
+                if (s?.length == 4) {
                     binding.CardHolderName.requestFocus()
                 }
             }
@@ -317,7 +321,7 @@ class CardDetialsAddFragment : Fragment() {
                     expiryMonth.error = null
                     expiryYear.error = null
                 }
-                if (s?.length == 2){
+                if (s?.length == 2) {
                     binding.expiryYear.requestFocus()
                 }
             }
@@ -334,9 +338,6 @@ class CardDetialsAddFragment : Fragment() {
         binding.CardHolderName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 binding.demoCardHolderName.text = s.toString()
-                if (s.toString().length >= 2) {
-                    binding.CVV.requestFocus()
-                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
