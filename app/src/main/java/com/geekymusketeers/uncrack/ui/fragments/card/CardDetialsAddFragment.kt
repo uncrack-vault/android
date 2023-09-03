@@ -107,34 +107,35 @@ class CardDetialsAddFragment : Fragment() {
         binding.cardType.afterTextChanged {
             selectedCard = it
             when (it.lowercase(Locale.getDefault())) {
-                "visa" -> setImageOnAccountNameChange(R.drawable.ic_visa)
+                "visa" -> {
+                    binding.demoAddCard.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.visa_bg,
+                        null
+                    )
+                    setImageOnAccountNameChange(R.drawable.ic_visa)
+                }
                 "mastercard" -> {
-                    binding.demoAddCard.backgroundTintList = ColorStateList.valueOf(
-                        ResourcesCompat.getColor(
-                            resources,
-                            R.color.mastercard,
-                            null
-                        )
+                    binding.demoAddCard.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.mastercard_bg,
+                        null
                     )
                     setImageOnAccountNameChange(R.drawable.ic_mastercard)
                 }
                 "rupay" -> {
-                    binding.demoAddCard.backgroundTintList = ColorStateList.valueOf(
-                        ResourcesCompat.getColor(
-                            resources,
-                            R.color.rupay,
-                            null
-                        )
+                    binding.demoAddCard.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.rupay_bg,
+                        null
                     )
                     setImageOnAccountNameChange(R.drawable.rupay_logo)
                 }
                 "american express" -> {
-                    binding.demoAddCard.backgroundTintList = ColorStateList.valueOf(
-                        ResourcesCompat.getColor(
-                            resources,
-                            R.color.americanexpress,
-                            null
-                        )
+                    binding.demoAddCard.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.americanexpress_bg,
+                        null
                     )
                     setImageOnAccountNameChange(R.drawable.amex_logo)
                 }

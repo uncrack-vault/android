@@ -79,34 +79,35 @@ class CardFragment : Fragment() {
                 }
 
                 when(currentCard.cardType.toLowerCase().trim()){
-                    "visa" -> cardType.setImageResource(R.drawable.ic_visa)
+                    "visa" -> {
+                        viewCard.background = ResourcesCompat.getDrawable(
+                            resources,
+                            R.drawable.visa_bg,
+                            null
+                        )
+                        cardType.setImageResource(R.drawable.ic_visa)
+                    }
                     "mastercard" -> {
-                        viewCard.backgroundTintList = ColorStateList.valueOf(
-                            ResourcesCompat.getColor(
-                                resources,
-                                R.color.mastercard,
-                                null
-                            )
+                        viewCard.background = ResourcesCompat.getDrawable(
+                            resources,
+                            R.drawable.mastercard_bg,
+                            null
                         )
                         cardType.setImageResource(R.drawable.ic_mastercard)
                     }
                     "rupay" -> {
-                        viewCard.backgroundTintList = ColorStateList.valueOf(
-                            ResourcesCompat.getColor(
-                                resources,
-                                R.color.rupay,
-                                null
-                            )
+                        viewCard.background = ResourcesCompat.getDrawable(
+                            resources,
+                            R.drawable.rupay_bg,
+                            null
                         )
                         cardType.setImageResource(R.drawable.rupay_logo)
                     }
                     "american express" -> {
-                        viewCard.backgroundTintList = ColorStateList.valueOf(
-                            ResourcesCompat.getColor(
-                                resources,
-                                R.color.americanexpress,
-                                null
-                            )
+                        viewCard.background = ResourcesCompat.getDrawable(
+                            resources,
+                            R.drawable.americanexpress_bg,
+                            null
                         )
                         cardType.setImageResource(R.drawable.amex_logo)
                     }

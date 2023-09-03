@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
@@ -61,28 +62,27 @@ class CardAdapter(private val context: Context,
 
         when(currentCard.cardType.toLowerCase().trim()){
 
-            "visa" -> holder.itemView.findViewById<ImageView>(R.id.type).setImageResource(R.drawable.ic_visa)
+            "visa" -> holder.itemView.apply {
+                findViewById<MaterialCardView>(R.id.atm_card).background = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.visa_bg
+                )
+                findViewById<ImageView>(R.id.type).setImageResource(R.drawable.ic_visa)
+            }
             "mastercard" -> {
                 holder.itemView.apply {
-                    findViewById<MaterialCardView>(R.id.atm_card).backgroundTintList = ColorStateList.valueOf(
-                        ResourcesCompat.getColor(
-                            resources,
-                            R.color.mastercard,
-                            null
-                        )
+                    findViewById<MaterialCardView>(R.id.atm_card).background = ContextCompat.getDrawable(
+                        context,
+                        R.drawable.mastercard_bg
                     )
-
                     findViewById<ImageView>(R.id.type).setImageResource(R.drawable.ic_mastercard)
                 }
             }
             "rupay" -> {
                 holder.itemView.apply {
-                    findViewById<MaterialCardView>(R.id.atm_card).backgroundTintList = ColorStateList.valueOf(
-                        ResourcesCompat.getColor(
-                            resources,
-                            R.color.rupay,
-                            null
-                        )
+                    findViewById<MaterialCardView>(R.id.atm_card).background = ContextCompat.getDrawable(
+                        context,
+                        R.drawable.rupay_bg
                     )
 
                     findViewById<ImageView>(R.id.type).setImageResource(R.drawable.rupay_logo)
@@ -90,12 +90,9 @@ class CardAdapter(private val context: Context,
             }
             "american express" -> {
                 holder.itemView.apply {
-                    findViewById<MaterialCardView>(R.id.atm_card).backgroundTintList = ColorStateList.valueOf(
-                        ResourcesCompat.getColor(
-                            resources,
-                            R.color.americanexpress,
-                            null
-                        )
+                    findViewById<MaterialCardView>(R.id.atm_card).background = ContextCompat.getDrawable(
+                        context,
+                        R.drawable.americanexpress_bg
                     )
 
                     findViewById<ImageView>(R.id.type).setImageResource(R.drawable.amex_logo)
