@@ -50,7 +50,7 @@ class CardAdapter(private val context: Context,
 
         val decryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
         val decryptedNumber = decryption.decryptOrNull(currentCard.cardNumber)
-        val maskedCardNumber = decryptedNumber.chunked(4).joinToString(" ") { "****" } + " " + decryptedNumber.takeLast(2)
+        val maskedCardNumber = "**** **** **** ** " + decryptedNumber.takeLast(2)
         val decryptedMonth = decryption.decryptOrNull(currentCard.expirationMonth)
         val decryptedYear = decryption.decryptOrNull(currentCard.expirationYear)
 
