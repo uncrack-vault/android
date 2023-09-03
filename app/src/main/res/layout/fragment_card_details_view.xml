@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color"
+    tools:context=".ui.fragments.card.CardDetailsViewFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/back_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/dm_sans_bold"
+            android:gravity="center_horizontal"
+            android:text="My Password"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_bg"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:text="@string/information"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:visibility="visible"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:cardBackgroundColor="#54A0F8">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <TextView
+                            android:id="@+id/demo_cvv_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/cvv"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="@+id/demo_expiry_date"
+                            app:layout_constraintTop_toBottomOf="@+id/demo_expiry_date" />
+
+                        <TextView
+                            android:id="@+id/demo_cvv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/dm_sans"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@+id/demo_cvv_text"
+                            app:layout_constraintTop_toBottomOf="@+id/demo_cvv_text"
+                            tools:text="@string/cvv_hint" />
+
+
+                        <ImageView
+                            android:id="@+id/demo_card_type"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="8dp"
+                            android:contentDescription="cardType"
+                            android:src="@drawable/ic_visa"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.89"
+                            app:layout_constraintStart_toEndOf="@+id/demo_cvv_text" />
+
+                        <LinearLayout
+                            android:id="@+id/demo_card_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/card_number_one"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="12dp"
+                                android:fontFamily="@font/dm_sans"
+                                android:lines="1"
+                                android:padding="6dp"
+                                android:textColor="@color/white"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                tools:text="****" />
+
+                            <TextView
+                                android:id="@+id/card_number_two"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="12dp"
+                                android:fontFamily="@font/dm_sans"
+                                android:lines="1"
+                                android:padding="6dp"
+                                android:textColor="@color/white"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                tools:text="****" />
+
+                            <TextView
+                                android:id="@+id/card_number_three"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="12dp"
+                                android:fontFamily="@font/dm_sans"
+                                android:lines="1"
+                                android:padding="6dp"
+                                android:textColor="@color/white"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                tools:text="****" />
+
+                            <TextView
+                                android:id="@+id/card_number_four"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="12dp"
+                                android:fontFamily="@font/dm_sans"
+                                android:lines="1"
+                                android:padding="6dp"
+                                android:textColor="@color/white"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                tools:text="****" />
+
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/demo_expiry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/expiry_date"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="@+id/demo_card_number"
+                            app:layout_constraintTop_toBottomOf="@+id/demo_card_number" />
+
+                        <LinearLayout
+                            android:id="@+id/demo_expiry_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintStart_toStartOf="@+id/demo_expiry"
+                            app:layout_constraintTop_toBottomOf="@+id/demo_expiry">
+
+                            <TextView
+                                android:id="@+id/demo_expiry_month"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                tools:text="**" />
+
+                            <TextView
+                                android:id="@+id/demo_slash"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                tools:text="/" />
+
+                            <TextView
+                                android:id="@+id/demo_expiry_year"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                tools:text="****" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/card_holder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="48dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/card_holder_name"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@id/demo_expiry"
+                            app:layout_constraintTop_toBottomOf="@+id/demo_card_number" />
+
+                        <TextView
+                            android:id="@+id/demo_card_holder_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:maxLines="1"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/card_holder"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/card_holder"
+                            app:layout_constraintTop_toBottomOf="@+id/card_holder" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:id="@+id/remainingCardLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/demo_add_card">
+
+                    <!--Card Number-->
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <EditText
+                            android:id="@+id/card_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@drawable/edittext_field"
+                            android:fontFamily="@font/dm_sans"
+                            android:hint="@string/your_card_number"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            android:enabled="false"
+                            android:textColor="@color/deep_grey"
+                            android:textColorHint="@color/hint_color"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.048"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <ImageView
+                            android:id="@+id/passwordToggle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingHorizontal="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/copy_icon"
+                            tools:contentDescription="password_toggle" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <!--Expiry Date-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/expire_month"
+                            android:layout_width="120dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/edittext_field"
+                            android:fontFamily="@font/dm_sans"
+                            android:hint="@string/month"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:layout_gravity="center"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            android:enabled="false"
+                            android:textColor="@color/deep_grey"
+                            android:textColorHint="@color/hint_color"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="8dp"
+                            android:textAlignment="center"
+                            android:textSize="35sp"
+                            tools:text="/" />
+
+                        <EditText
+                            android:id="@+id/expire_year"
+                            android:layout_width="120dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/edittext_field"
+                            android:fontFamily="@font/dm_sans"
+                            android:hint="@string/year"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            android:enabled="false"
+                            android:textColor="@color/deep_grey"
+                            android:textColorHint="@color/hint_color"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </LinearLayout>
+
+
+                    <!--Card Holder Name-->
+
+                    <EditText
+                        android:id="@+id/card_holder_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/edittext_field"
+                        android:fontFamily="@font/dm_sans"
+                        android:hint="@string/your_name"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:layout_marginTop="20dp"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:enabled="false"
+                        android:textColor="@color/deep_grey"
+                        android:textColorHint="@color/hint_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.048"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <!--        CVV-->
+                    <EditText
+                        android:id="@+id/cvv"
+                        android:layout_width="120dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/edittext_field"
+                        android:fontFamily="@font/dm_sans"
+                        android:hint="@string/your_cvv"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:layout_gravity="start"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:layout_marginTop="20dp"
+                        android:enabled="false"
+                        android:textColor="@color/deep_grey"
+                        android:textColorHint="@color/hint_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <include
+                        android:id="@+id/btn_edit"
+                        layout="@layout/primary_progress_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
