@@ -88,6 +88,19 @@ class CardAdapter(private val context: Context,
                     findViewById<ImageView>(R.id.type).setImageResource(R.drawable.rupay_logo)
                 }
             }
+            "american express" -> {
+                holder.itemView.apply {
+                    findViewById<MaterialCardView>(R.id.atm_card).backgroundTintList = ColorStateList.valueOf(
+                        ResourcesCompat.getColor(
+                            resources,
+                            R.color.americanexpress,
+                            null
+                        )
+                    )
+
+                    findViewById<ImageView>(R.id.type).setImageResource(R.drawable.amex_logo)
+                }
+            }
         }
 
     }

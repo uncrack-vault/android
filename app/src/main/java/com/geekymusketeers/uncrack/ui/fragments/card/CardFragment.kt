@@ -100,6 +100,16 @@ class CardFragment : Fragment() {
                         )
                         cardType.setImageResource(R.drawable.rupay_logo)
                     }
+                    "american express" -> {
+                        viewCard.backgroundTintList = ColorStateList.valueOf(
+                            ResourcesCompat.getColor(
+                                resources,
+                                R.color.americanexpress,
+                                null
+                            )
+                        )
+                        cardType.setImageResource(R.drawable.amex_logo)
+                    }
                 }
             }
             dialog.root.setBottomSheet(bottomSheet)

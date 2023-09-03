@@ -165,5 +165,6 @@
         <item>VISA</item>
         <item>MasterCard</item>
         <item>RuPay</item>
+        <item>American Express</item>
     </string-array>
 </resources>
