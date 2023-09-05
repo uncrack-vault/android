@@ -129,12 +129,12 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="16dp"
                     android:visibility="gone"
-                    tools:cardBackgroundColor="#54A0F8"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:cardBackgroundColor="#54A0F8">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -385,7 +385,6 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/dm_sans"
                             android:hint="@string/hint_card_number"
-
                             android:imeOptions="actionNext"
                             android:inputType="phone"
                             android:lines="1"
