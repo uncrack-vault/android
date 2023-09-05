@@ -1,5 +1,7 @@
 package com.geekymusketeers.uncrack.ui.fragments.card
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -26,7 +29,7 @@ class CardDetailsViewFragment : Fragment() {
     private lateinit var buttonLayout: ConstraintLayout
     private lateinit var buttonText: TextView
     private lateinit var buttonProgress: ProgressBar
-    private lateinit var currentCard : Card
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +41,16 @@ class CardDetailsViewFragment : Fragment() {
         fetchData()
         binding.back.setOnClickListener {
             handleBackButton()
+        }
+
+        binding.copyBtn.setOnClickListener {
+            val clipboard: ClipboardManager? = ContextCompat.getSystemService(
+                requireContext(),
+                ClipboardManager::class.java
+            )
+            val clip = ClipData.newPlainText("Card Number", binding.viewCardNumber.text.toString())
+            clipboard?.setPrimaryClip(clip)
+            Toast.makeText(requireContext(),"Card Number Copied", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
