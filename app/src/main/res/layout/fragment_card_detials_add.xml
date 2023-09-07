@@ -366,32 +366,37 @@
 
                     <!--Card Number-->
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/card_number_box"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:textColorHint="@android:color/black"
-                        app:boxBackgroundColor="@color/white"
-                        app:endIconMode="clear_text"
-                        app:helperTextEnabled="true"
-                        app:layout_constraintEnd_toEndOf="@+id/headerLayout"
-                        app:startIconDrawable="@drawable/card_icon">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="start"
+                        android:orientation="horizontal">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/cardNumber"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/dm_sans"
-                            android:hint="@string/hint_card_number"
-                            android:imeOptions="actionNext"
-                            android:inputType="phone"
-                            android:lines="1"
-                            android:maxLength="19"
-                            android:textColor="@color/black" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/card_number"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/cardNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/edittext_field"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/dm_sans"
+                        android:hint="@string/your_card_number"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:textColorHint="@color/hint_color" />
 
                     <TextView
                         android:id="@+id/cardNumberHelperTV"
@@ -412,101 +417,103 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
+                        android:gravity="start"
                         android:orientation="horizontal">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/month_box"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/expiry"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/expiryMonth"
                             android:layout_width="120dp"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="10dp"
-                            android:textColorHint="@android:color/black"
-                            app:boxBackgroundColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/email_box"
-                            app:layout_constraintStart_toStartOf="@+id/email_box"
-                            app:layout_constraintTop_toBottomOf="@+id/email_box"
-                            app:startIconDrawable="@drawable/calander">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/expiryMonth"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:fontFamily="@font/dm_sans"
-                                android:hint="@string/hint_month"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:lines="1"
-                                android:maxLength="2"
-                                android:textColor="@color/black" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/edittext_field"
+                            android:fontFamily="@font/dm_sans"
+                            android:hint="@string/month"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/hint_color" />
 
 
                         <TextView
                             android:layout_width="20dp"
                             android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
+                            android:layout_marginStart="20dp"
                             android:layout_marginTop="14dp"
                             android:textAlignment="center"
                             android:textSize="30sp"
                             tools:text="/" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/year_box"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        <EditText
+                            android:id="@+id/expiryYear"
                             android:layout_width="120dp"
-                            android:layout_height="70dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:textColorHint="@android:color/black"
-                            app:boxBackgroundColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/email_box"
-                            app:layout_constraintStart_toStartOf="@+id/email_box"
-                            app:layout_constraintTop_toBottomOf="@+id/email_box"
-                            app:startIconDrawable="@drawable/calander">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/expiryYear"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:fontFamily="@font/dm_sans"
-                                android:hint="@string/hint_year"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:lines="1"
-                                android:maxLength="4"
-                                android:textColor="@color/black" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/edittext_field"
+                            android:fontFamily="@font/dm_sans"
+                            android:hint="@string/year"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/hint_color" />
 
                     </LinearLayout>
 
 
                     <!--Card Holder Name-->
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/card_name_box"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:textColorHint="@color/black"
-                        app:boxBackgroundColor="@color/white"
-                        app:endIconMode="clear_text"
-                        app:layout_constraintEnd_toEndOf="@+id/email_box"
-                        app:layout_constraintStart_toStartOf="@+id/email_box"
-                        app:layout_constraintTop_toBottomOf="@+id/email_box"
-                        app:startIconDrawable="@drawable/person">
+                        android:gravity="start"
+                        android:orientation="horizontal">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/Card_Holder_Name"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/dm_sans"
-                            android:hint="@string/hint_card_holder_name"
-                            android:inputType="text"
-                            android:lines="1"
-                            android:textColor="@color/black" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/holder_name"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/Card_Holder_Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/edittext_field"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/dm_sans"
+                        android:hint="@string/your_name"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/hint_color" />
 
                     <TextView
                         android:id="@+id/cardNameHelperTV"
@@ -523,30 +530,38 @@
 
 
                     <!--        CVV-->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/cvv_box"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        android:layout_width="120dp"
-                        android:layout_height="70dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:textColorHint="@android:color/black"
-                        app:boxBackgroundColor="@color/white"
-                        app:layout_constraintEnd_toEndOf="@+id/email_box"
-                        app:layout_constraintStart_toStartOf="@+id/email_box"
-                        app:layout_constraintTop_toBottomOf="@+id/email_box"
-                        app:startIconDrawable="@drawable/key">
+                        android:gravity="start"
+                        android:orientation="horizontal">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/CVV"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/dm_sans"
-                            android:hint="@string/hint_cvv"
-                            android:inputType="number"
-                            android:lines="1"
-                            android:maxLength="3"
-                            android:textColor="@color/black" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/cvv"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/CVV"
+                        android:layout_width="120dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/edittext_field"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/dm_sans"
+                        android:hint="@string/your_cvv"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/hint_color" />
 
                     <TextView
                         android:id="@+id/cardCVVHelperTV"
