@@ -1,9 +1,6 @@
 package com.geekymusketeers.uncrack.ui.fragments.card
 
-import android.animation.AnimatorInflater
-import android.animation.AnimatorSet
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
@@ -12,7 +9,6 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -111,18 +107,38 @@ class CardDetialsAddFragment : Fragment() {
         binding.cardType.afterTextChanged {
             selectedCard = it
             when (it.lowercase(Locale.getDefault())) {
-                "visa" -> setImageOnAccountNameChange(R.drawable.ic_visa)
+                "visa" -> {
+                    binding.demoAddCard.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.visa_bg,
+                        null
+                    )
+                    setImageOnAccountNameChange(R.drawable.ic_visa)
+                }
                 "mastercard" -> {
-                    binding.demoAddCard.backgroundTintList = ColorStateList.valueOf(
-                        ResourcesCompat.getColor(
-                            resources,
-                            R.color.mastercard,
-                            null
-                        )
+                    binding.demoAddCard.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.mastercard_bg,
+                        null
                     )
                     setImageOnAccountNameChange(R.drawable.ic_mastercard)
                 }
-
+                "rupay" -> {
+                    binding.demoAddCard.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.rupay_bg,
+                        null
+                    )
+                    setImageOnAccountNameChange(R.drawable.rupay_logo)
+                }
+                "american express" -> {
+                    binding.demoAddCard.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.americanexpress_bg,
+                        null
+                    )
+                    setImageOnAccountNameChange(R.drawable.amex_logo)
+                }
             }
         }
     }

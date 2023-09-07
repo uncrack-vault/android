@@ -130,7 +130,7 @@
     <string name="new_card">New Card</string>
     <string name="card_information">Card Information</string>
     <string name="card_name">Card Name</string>
-    <string name="your_card_number">Your Card Number</string>
+    <string name="your_card_number">Your card number</string>
     <string name="card_number">Card Number</string>
     <string name="demo_master_key">Your Master Key</string>
     <string name="your_old_master_key">Your Old Master Key</string>
@@ -139,6 +139,14 @@
     <string name="set_an_app_lock_master_key_to_secure_all_your_credentials">Set an app lock master key to secure all your credentials</string>
     <string name="remove_card">Remove Card</string>
     <string name="default_notification_channel_id">uncrack</string>
+    <string name="information">Information</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="your_name">Your name</string>
+    <string name="your_cvv">CVV</string>
+    <string name="edit">Edit</string>
+    <string name="expiry">Expiry Date</string>
+    <string name="holder_name">Card Holder Name</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
@@ -164,5 +172,7 @@
     <string-array name="cards">
         <item>VISA</item>
         <item>MasterCard</item>
+        <item>RuPay</item>
+        <item>American Express</item>
     </string-array>
 </resources>

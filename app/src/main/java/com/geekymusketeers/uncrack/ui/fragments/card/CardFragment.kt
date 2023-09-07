@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack.ui.fragments.card
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -47,52 +48,7 @@ class CardFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentCardBinding.inflate(inflater, container, false)
         cardViewModel = ViewModelProvider(this)[CardViewModel::class.java]
-        cardAdapter = CardAdapter(requireContext()){ currentCard ->
-
-            val dialog = ViewcardmodalBinding.inflate(layoutInflater)
-            val bottomSheet = requireContext().createBottomSheet()
-
-            dialog.apply {
-
-                val decry = Encryption.getDefault("Key", "Salt", ByteArray(16))
-                val decryNumber = decry.decryptOrNull(currentCard.cardNumber)
-                val decryMonth = decry.decryptOrNull(currentCard.expirationMonth)
-                val decryYear = decry.decryptOrNull(currentCard.expirationYear)
-                val decryCVV = decry.decryptOrNull(currentCard.cvv)
-
-                cardNumber.text = decryNumber
-                expiryMonth.text = decryMonth
-                expiryYear.text = decryYear
-                demoCardName.text = currentCard.cardHolderName
-                cvv.text = decryCVV
-
-                deleteOption.text = getString(R.string.remove_card)
-                deleteOption.setTextColor(
-                    ContextCompat.getColor(requireContext(),R.color.white)
-                )
-
-                deleteOption.setOnClickListener {
-                    bottomSheet.dismiss()
-                    cardViewModel.deleteCard(currentCard)
-                    Toast.makeText(requireContext(),"Successfully Deleted",Toast.LENGTH_SHORT).show()
-                }
-
-                when(currentCard.cardType.toLowerCase().trim()){
-                    "visa" -> cardType.setImageResource(R.drawable.ic_visa)
-                    "mastercard" -> {
-                        viewCard.backgroundTintList = ColorStateList.valueOf(
-                            ResourcesCompat.getColor(
-                                resources,
-                                R.color.mastercard,
-                                null
-                            )
-                        )
-                        cardType.setImageResource(R.drawable.ic_mastercard)
-                    }
-                }
-            }
-            dialog.root.setBottomSheet(bottomSheet)
-        }
+        cardAdapter = CardAdapter(requireContext())
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.VISIBLE
 
         // Setting up RecyclerView
