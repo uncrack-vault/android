@@ -7,18 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.ViewModelProvider
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Card
 import com.geekymusketeers.uncrack.databinding.FragmentCardDetailsViewBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
+import com.geekymusketeers.uncrack.viewModel.CardViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Locale
 
@@ -26,9 +25,8 @@ class CardDetailsViewFragment : Fragment() {
 
     private var _binding: FragmentCardDetailsViewBinding? = null
     private val binding get() = _binding!!
-    private lateinit var buttonLayout: ConstraintLayout
-    private lateinit var buttonText: TextView
-    private lateinit var buttonProgress: ProgressBar
+    private lateinit var cardViewModel: CardViewModel
+    private lateinit var currentCard: Card
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +34,8 @@ class CardDetailsViewFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentCardDetailsViewBinding.inflate(inflater,container,false)
+        cardViewModel = ViewModelProvider(this)[CardViewModel::class.java]
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
-        initialization()
         fetchData()
         binding.back.setOnClickListener {
             handleBackButton()
@@ -54,6 +52,14 @@ class CardDetailsViewFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun deleteCard(currentCard: Card) {
+        binding.delete.setOnClickListener {
+            cardViewModel.deleteCard(currentCard)
+            Toast.makeText(requireContext(),"Successfully Deleted",Toast.LENGTH_SHORT).show()
+            transaction()
+        }
     }
 
     private fun showCard(cardType: String) {
@@ -126,6 +132,8 @@ class CardDetailsViewFragment : Fragment() {
             demoCvv.text = cardCVV
         }
         showCard(cardType)
+        currentCard = Card(0,cardType,cardNumber,cardHolderName,cardExpireMonth,cardExpireYear,cardCVV)
+        deleteCard(currentCard)
     }
 
     private fun handleBackButton() {
@@ -168,17 +176,4 @@ class CardDetailsViewFragment : Fragment() {
         val trans = fragmentManager?.beginTransaction()
         trans?.replace(R.id.fragment, frag)?.commit()
     }
-
-    private fun initialization() {
-        binding.apply {
-            btnEdit.apply {
-                this@CardDetailsViewFragment.buttonLayout = this.progressButtonBg
-                this@CardDetailsViewFragment.buttonText = this.buttonText
-                this@CardDetailsViewFragment.buttonText.text = getString(R.string.edit)
-                this@CardDetailsViewFragment.buttonProgress = this.buttonProgress
-            }
-
-        }
-    }
-
 }
