@@ -121,7 +121,8 @@ class CardDetailsViewFragment : Fragment() {
 
         binding.apply {
             viewCardNumber.setText(cardNumber)
-            demoCardNumber.text = cardNumber
+            val formattedCardNumber = cardNumber.chunked(4).joinToString(" ")
+            demoCardNumber.text = formattedCardNumber
             viewCardHolderName.setText(cardHolderName)
             demoCardHolderName.text = cardHolderName
             viewExpireMonth.setText(cardExpireMonth)

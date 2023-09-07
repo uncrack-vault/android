@@ -64,6 +64,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,6 +163,7 @@
                             android:layout_marginTop="25dp"
                             android:layout_marginStart="15dp"
                             android:textStyle="bold"
+                            android:lines="1"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -275,6 +286,23 @@
 
                     <!--Card Number-->
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/card_number"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -285,22 +313,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:background="@drawable/edittext_field"
+                            android:enabled="false"
                             android:fontFamily="@font/dm_sans"
-                            android:drawableStart="@drawable/card_icon"
-                            android:drawablePadding="10dp"
                             android:hint="@string/your_card_number"
                             android:lines="1"
                             android:paddingStart="14dp"
                             android:paddingEnd="14dp"
-                            android:enabled="false"
                             android:textColor="@color/black"
                             android:textColorHint="@color/hint_color"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.048"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/copyBtn"
@@ -321,7 +345,24 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/expiry"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:orientation="horizontal">
 
                         <EditText
@@ -329,7 +370,6 @@
                             android:layout_width="120dp"
                             android:layout_height="60dp"
                             android:background="@drawable/edittext_field"
-                            android:drawableStart="@drawable/calander"
                             android:fontFamily="@font/dm_sans"
                             android:hint="@string/month"
                             android:inputType="number"
@@ -338,13 +378,8 @@
                             android:paddingStart="14dp"
                             android:paddingEnd="14dp"
                             android:enabled="false"
-                            android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/hint_color"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textColorHint="@color/hint_color" />
 
 
                         <TextView
@@ -362,7 +397,6 @@
                             android:layout_height="60dp"
                             android:background="@drawable/edittext_field"
                             android:fontFamily="@font/dm_sans"
-                            android:drawableStart="@drawable/calander"
                             android:hint="@string/year"
                             android:inputType="number"
                             android:lines="1"
@@ -371,18 +405,31 @@
                             android:paddingStart="14dp"
                             android:paddingEnd="14dp"
                             android:enabled="false"
-                            android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/hint_color"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textColorHint="@color/hint_color" />
 
                     </LinearLayout>
 
 
                     <!--Card Holder Name-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/holder_name"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
 
                     <EditText
                         android:id="@+id/view_card_holder_name"
@@ -390,50 +437,57 @@
                         android:layout_height="60dp"
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
-                        android:drawableStart="@drawable/person"
-                        android:drawablePadding="10dp"
                         android:hint="@string/your_name"
                         android:inputType="text"
                         android:lines="1"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="20dp"
                         android:paddingStart="14dp"
                         android:paddingEnd="14dp"
                         android:enabled="false"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/hint_color"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.048"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        android:textColorHint="@color/hint_color" />
 
                     <!--        CVV-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:text="@string/cvv"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
                     <EditText
                         android:id="@+id/view_cvv"
                         android:layout_width="120dp"
                         android:layout_height="60dp"
                         android:background="@drawable/edittext_field"
                         android:fontFamily="@font/dm_sans"
-                        android:drawableStart="@drawable/key"
-                        android:drawablePadding="10dp"
                         android:hint="@string/your_cvv"
                         android:inputType="number"
                         android:lines="1"
                         android:paddingStart="14dp"
                         android:paddingEnd="14dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="20dp"
                         android:enabled="false"
-                        android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/hint_color"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textColorHint="@color/hint_color" />
 
                 </LinearLayout>
             </LinearLayout>
+
+        </ScrollView>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
