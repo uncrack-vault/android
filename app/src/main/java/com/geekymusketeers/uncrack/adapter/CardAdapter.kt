@@ -21,10 +21,7 @@ import com.geekymusketeers.uncrack.util.Encryption
 import com.google.android.material.card.MaterialCardView
 import java.util.EventListener
 
-class CardAdapter(
-    private val context: Context,
-    private val listener: (Card) -> Unit):
-    RecyclerView.Adapter<CardAdapter.CardViewHolder>()
+class CardAdapter(private val context: Context): RecyclerView.Adapter<CardAdapter.CardViewHolder>()
 {
     private var cardList = emptyList<Card>()
 
