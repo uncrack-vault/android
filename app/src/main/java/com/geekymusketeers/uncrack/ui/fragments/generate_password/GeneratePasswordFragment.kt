@@ -3,11 +3,14 @@ package com.geekymusketeers.uncrack.ui.fragments.generate_password
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.databinding.FragmentCardBinding
 import com.geekymusketeers.uncrack.databinding.FragmentGeneratePasswordBinding
 import com.geekymusketeers.uncrack.util.Util
 import com.google.android.material.slider.LabelFormatter
@@ -17,33 +20,42 @@ import nu.aaro.gustav.passwordstrengthmeter.PasswordStrengthCalculator
 import java.util.*
 
 
-class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
+class GeneratePasswordFragment : Fragment() {
 
+    private var _binding: FragmentGeneratePasswordBinding? = null
+    private val binding get() = _binding!!
+    var passwordLength = 13
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentGeneratePasswordBinding.inflate(inflater, container, false)
+        setUpViews()
 
-        val binding = FragmentGeneratePasswordBinding.bind(view)
+        return binding.root
+    }
 
-        var passwordLength = 13
-
-
-        binding.passwordInputMeter.setPasswordStrengthCalculator(object : PasswordStrengthCalculator{
-            override fun calculatePasswordSecurityLevel(password: String?): Int {
-                return if (password!=null){
-                    getPasswordScope(password)
-                }else{
-                    0
+    private fun setUpViews() {
+        binding.apply {
+            passwordInputMeter.setPasswordStrengthCalculator(object : PasswordStrengthCalculator{
+                override fun calculatePasswordSecurityLevel(password: String?): Int {
+                    return if (password!=null){
+                        getPasswordScope(password)
+                    }else{
+                        0
+                    }
                 }
-            }
-            override fun getMinimumLength(): Int {
-                return 1
-            }
-            override fun passwordAccepted(level: Int): Boolean {
-                return true
-            }
-            override fun onPasswordAccepted(password: String?) {}
-        })
+                override fun getMinimumLength(): Int {
+                    return 1
+                }
+                override fun passwordAccepted(level: Int): Boolean {
+                    return true
+                }
+                override fun onPasswordAccepted(password: String?) {}
+            })
+        }
 
         val generatedPassword = generatePassword(passwordLength,
             includeUpperCaseLetters = binding.cbUppercase.isChecked,
@@ -51,54 +63,52 @@ class GeneratePasswordFragment : Fragment(R.layout.fragment_generate_password) {
             includeSymbols = binding.cbSymbols.isChecked,
             includeNumbers = binding.cbNumbers.isChecked)
 
-        binding.passwordInputMeter.setEditText(binding.etGeneratedPassword)
-        binding.etGeneratedPassword.setText(generatedPassword)
+        binding.apply {
+            passwordInputMeter.setEditText(binding.etGeneratedPassword)
+            etGeneratedPassword.setText(generatedPassword)
+            sliderPasswordStrength.addOnSliderTouchListener(object : Slider.OnSliderTouchListener{
+                override fun onStartTrackingTouch(slider: Slider) {
 
-        binding.sliderPasswordStrength.addOnSliderTouchListener(object : Slider.OnSliderTouchListener{
-            override fun onStartTrackingTouch(slider: Slider) {
-
-            }
-
-            override fun onStopTrackingTouch(slider: Slider) {
-                passwordLength = slider.value.toInt()
-            }
-        })
-
-        binding.sliderPasswordStrength.addOnChangeListener(object : Slider.OnChangeListener{
-            override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
-                slider.setLabelFormatter(LabelFormatter {
-                    return@LabelFormatter value.toInt().toString()
-                })
-            }
-        })
-
-        binding.btnGeneratePassword.setOnClickListener {
-
-            val generatedPassword = generatePassword(passwordLength,
-                includeUpperCaseLetters = binding.cbUppercase.isChecked,
-                includeLowerCaseLetters = binding.cbLowercase.isChecked,
-                includeSymbols = binding.cbSymbols.isChecked,
-                includeNumbers = binding.cbNumbers.isChecked)
-
-            if (generatedPassword.isBlank()){
-                if (passwordLength==0){
-                    Toast.makeText(requireContext(),"Password length cannot be zero", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(),"Please check at least one item", Toast.LENGTH_SHORT).show()
                 }
-            }else{
-                binding.etGeneratedPassword.setText(generatedPassword)
-            }
-        }
 
-        binding.btnCopyPassword.setOnClickListener {
-            val clipboard: ClipboardManager? = ContextCompat.getSystemService(
-                requireContext(),
-                ClipboardManager::class.java
-            )
-            val clip = ClipData.newPlainText("Generated Password", binding.etGeneratedPassword.text.toString())
-            clipboard?.setPrimaryClip(clip)
-            Toast.makeText(requireContext(),"Password Copied", Toast.LENGTH_SHORT).show()
+                override fun onStopTrackingTouch(slider: Slider) {
+                    passwordLength = slider.value.toInt()
+                }
+            })
+            sliderPasswordStrength.addOnChangeListener(object : Slider.OnChangeListener{
+                override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
+                    slider.setLabelFormatter(LabelFormatter {
+                        return@LabelFormatter value.toInt().toString()
+                    })
+                }
+            })
+            btnGeneratePassword.setOnClickListener {
+
+                val generatedPassword = generatePassword(passwordLength,
+                    includeUpperCaseLetters = binding.cbUppercase.isChecked,
+                    includeLowerCaseLetters = binding.cbLowercase.isChecked,
+                    includeSymbols = binding.cbSymbols.isChecked,
+                    includeNumbers = binding.cbNumbers.isChecked)
+
+                if (generatedPassword.isBlank()){
+                    if (passwordLength==0){
+                        Toast.makeText(requireContext(),"Password length cannot be zero", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(),"Please check at least one item", Toast.LENGTH_SHORT).show()
+                    }
+                }else{
+                    binding.etGeneratedPassword.setText(generatedPassword)
+                }
+            }
+            btnCopyPassword.setOnClickListener {
+                val clipboard: ClipboardManager? = ContextCompat.getSystemService(
+                    requireContext(),
+                    ClipboardManager::class.java
+                )
+                val clip = ClipData.newPlainText("Generated Password", binding.etGeneratedPassword.text.toString())
+                clipboard?.setPrimaryClip(clip)
+                Toast.makeText(requireContext(),"Password Copied", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

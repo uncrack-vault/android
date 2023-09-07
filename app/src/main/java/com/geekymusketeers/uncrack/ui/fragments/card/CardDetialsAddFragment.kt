@@ -49,7 +49,7 @@ class CardDetialsAddFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentCardDetialsAddBinding.inflate(inflater, container, false)
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).visibility = View.GONE
