@@ -57,6 +57,10 @@ I see a lot of people are tried of memorizing all their passwords, me also somet
 
 - The app has a simple and user-friendly interface that makes it easy for users to manage their login information and passwords.
 
+# ✨ Design 
+
+![1_Uncrack](https://github.com/aritra-tech/UnCrack/assets/80090908/3d455bbb-2da0-4cd0-8b56-816f8f603a96)   ![6_Uncrack](https://github.com/aritra-tech/UnCrack/assets/80090908/43ab4e9b-7b7b-4b45-990e-967775f76917)  ![3_Uncrack](https://github.com/aritra-tech/UnCrack/assets/80090908/2e115c42-e165-4a88-b2ea-6a4a29368b1f)   ![7_Uncrack](https://github.com/aritra-tech/UnCrack/assets/80090908/ab9259c1-87c6-4255-b27d-0d93d6285584)     ![5_Uncrack](https://github.com/aritra-tech/UnCrack/assets/80090908/d71ebd26-f263-4c96-8a1c-9526b3685365)    ![8_Uncrack 1](https://github.com/aritra-tech/UnCrack/assets/80090908/b83f1345-a473-425c-b425-2eab73393a8a)
+
 
 # 🛠 Made With 
 
