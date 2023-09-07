@@ -20,6 +20,7 @@ import com.geekymusketeers.uncrack.ui.fragments.card.CardDetailsViewFragment
 import com.geekymusketeers.uncrack.util.Encryption
 import com.google.android.material.card.MaterialCardView
 import java.util.EventListener
+import java.util.Locale
 
 class CardAdapter(private val context: Context): RecyclerView.Adapter<CardAdapter.CardViewHolder>()
 {
@@ -73,7 +74,7 @@ class CardAdapter(private val context: Context): RecyclerView.Adapter<CardAdapte
             }
         }
 
-        when(currentCard.cardType.toLowerCase().trim()){
+        when(currentCard.cardType.lowercase(Locale.ROOT).trim()){
 
             "visa" -> holder.binding.apply {
                 atmCard.background = ContextCompat.getDrawable(

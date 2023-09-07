@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.databinding.ItemLayoutBinding
 import com.geekymusketeers.uncrack.ui.fragments.account.EditFragment
+import java.util.Locale
 
 class AccountAdapter(private val context: Context,
                      private val listener: (Account) -> Unit):
@@ -21,16 +23,13 @@ class AccountAdapter(private val context: Context,
 
     private var accountList = emptyList<Account>()
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-
-    }
+    class ViewHolder(val binding: ItemLayoutBinding):
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_layout,
-                parent,
-                false
+            ItemLayoutBinding.inflate(
+                LayoutInflater.from(parent.context),parent,false
             )
         )
     }
@@ -40,41 +39,43 @@ class AccountAdapter(private val context: Context,
         val currentAccount = accountList[position]
 
 
-        holder.itemView.setOnClickListener {
+        holder.binding.root.setOnClickListener {
 
             listener(currentAccount)
         }
 
-        holder.itemView.findViewById<TextView>(R.id.txtCompany).text = currentAccount.company
-        holder.itemView.findViewById<TextView>(R.id.txtEmail).text = currentAccount.email
-
+        holder.binding.apply { 
+            txtCompany.text = currentAccount.company
+            txtEmail.text = currentAccount.email
+        }
+        
+        
         //  For setting icons of company according to users choice
+        when (currentAccount.company.lowercase(Locale.ROOT).trim()) {
 
-        when (currentAccount.company.toLowerCase().trim()) {
-
-            "paypal" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.paypal)
-            "instagram" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.instagram)
-            "facebook" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.facebook)
-            "linkedin" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.linkedin)
-            "snapchat" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.snapchat)
-            "youtube" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.youtube)
-            "dropbox" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.dropbox)
-            "twitter" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.twitter)
-            "google drive" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.drive)
-            "netflix" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.netflix_logo)
-            "amazon prime" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.amazon_logo)
-            "spotify" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.spotify)
-            "discord" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.discord)
-            "github" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.cl_github)
-            "gmail" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.cl_gmail)
-            "paytm" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.cl_paytm)
-            "quora" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.cl_quora)
-            "reddit" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.cl_reddit)
-            "others" -> holder.itemView.findViewById<ImageView>(R.id.img_company).setImageResource(R.drawable.general_account)
+            "paypal" -> holder.binding.imgCompany.setImageResource(R.drawable.paypal)
+            "instagram" -> holder.binding.imgCompany.setImageResource(R.drawable.instagram)
+            "facebook" -> holder.binding.imgCompany.setImageResource(R.drawable.facebook)
+            "linkedin" -> holder.binding.imgCompany.setImageResource(R.drawable.linkedin)
+            "snapchat" -> holder.binding.imgCompany.setImageResource(R.drawable.snapchat)
+            "youtube" -> holder.binding.imgCompany.setImageResource(R.drawable.youtube)
+            "dropbox" -> holder.binding.imgCompany.setImageResource(R.drawable.dropbox)
+            "twitter" -> holder.binding.imgCompany.setImageResource(R.drawable.twitter)
+            "google drive" -> holder.binding.imgCompany.setImageResource(R.drawable.drive)
+            "netflix" -> holder.binding.imgCompany.setImageResource(R.drawable.netflix_logo)
+            "amazon prime" -> holder.binding.imgCompany.setImageResource(R.drawable.amazon_logo)
+            "spotify" -> holder.binding.imgCompany.setImageResource(R.drawable.spotify)
+            "discord" -> holder.binding.imgCompany.setImageResource(R.drawable.discord)
+            "github" -> holder.binding.imgCompany.setImageResource(R.drawable.cl_github)
+            "gmail" -> holder.binding.imgCompany.setImageResource(R.drawable.cl_gmail)
+            "paytm" -> holder.binding.imgCompany.setImageResource(R.drawable.cl_paytm)
+            "quora" -> holder.binding.imgCompany.setImageResource(R.drawable.cl_quora)
+            "reddit" -> holder.binding.imgCompany.setImageResource(R.drawable.cl_reddit)
+            "others" -> holder.binding.imgCompany.setImageResource(R.drawable.general_account)
         }
 
 
-        holder.itemView.findViewById<ImageView>(R.id.button_edit).setOnClickListener {
+        holder.binding.buttonEdit.setOnClickListener {
 
             // Passing data to Edit fragments
             val bundle = Bundle()
@@ -100,9 +101,7 @@ class AccountAdapter(private val context: Context,
 
     }
 
-    override fun getItemCount(): Int {
-        return accountList.size
-    }
+    override fun getItemCount() = accountList.size
 
     fun setData(account: List<Account>){
         accountList = account
