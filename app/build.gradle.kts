@@ -50,9 +50,9 @@ dependencies {
 
     val roomVersion = "2.5.2"
     val viewModelVersion = "2.5.1"
-    val navVersion = "2.5.3"
+    val navVersion = "2.7.2"
 
-    implementation ("androidx.core:core-ktx:1.7.0")
+    implementation ("androidx.core:core-ktx:1.10.1")
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("com.google.android.material:material:1.9.0")
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -83,7 +83,7 @@ dependencies {
     implementation ("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     // Kotlin components
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
 
