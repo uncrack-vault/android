@@ -10,6 +10,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ProgressBar
@@ -66,7 +67,22 @@ class CardDetialsAddFragment : Fragment() {
         val accounts = resources.getStringArray(R.array.cards)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.list_items, accounts)
         binding.cardType.setAdapter(arrayAdapter)
+
+        // Setting FLAG_SECURE to prevent screenshots
+        activity?.window?.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
+
+
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Clearing FLAG_SECURE when the fragment is destroyed
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
     }
 
     private fun handleBackButton() {

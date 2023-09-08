@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -51,7 +52,20 @@ class CardDetailsViewFragment : Fragment() {
             Toast.makeText(requireContext(),"Card Number Copied", Toast.LENGTH_SHORT).show()
         }
 
+        // Setting FLAG_SECURE to prevent screenshots
+        activity?.window?.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
+
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Clearing FLAG_SECURE when the fragment is destroyed
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
     }
 
     private fun deleteCard(currentCard: Card) {

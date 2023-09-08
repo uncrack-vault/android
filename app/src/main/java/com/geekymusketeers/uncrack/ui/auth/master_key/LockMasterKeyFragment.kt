@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +43,21 @@ class LockMasterKeyFragment : Fragment() {
 
         initialization()
         clickHandlers()
+
+        // Setting FLAG_SECURE to prevent screenshots
+        activity?.window?.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
+
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Clearing FLAG_SECURE when the fragment is destroyed
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
     }
 
     private fun clickHandlers() {
