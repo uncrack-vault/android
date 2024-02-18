@@ -50,7 +50,7 @@ dependencies {
 
     val roomVersion = "2.5.2"
     val viewModelVersion = "2.5.1"
-    val navVersion = "2.7.2"
+    val navVersion = "2.7.7"
 
     implementation ("androidx.core:core-ktx:1.10.1")
     implementation ("androidx.appcompat:appcompat:1.6.1")
