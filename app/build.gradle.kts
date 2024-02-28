@@ -6,7 +6,7 @@ plugins {
     id ("com.google.gms.google-services")
     id ("com.google.firebase.crashlytics")
     id ("com.google.devtools.ksp")
-
+    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -115,6 +115,17 @@ dependencies {
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22")
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.49")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    implementation("androidx.hilt:hilt-work:1.2.0")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    // Datastore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // Lottie Animation
     implementation ("com.airbnb.android:lottie:6.3.0")
