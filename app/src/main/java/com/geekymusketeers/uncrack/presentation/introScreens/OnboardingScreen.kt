@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation
+package com.geekymusketeers.uncrack.presentation.introScreens
 
 import androidx.compose.runtime.Composable
 
