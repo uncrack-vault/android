@@ -21,6 +21,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.presentation.HomeScreen
+import com.geekymusketeers.uncrack.presentation.OnboardingScreen
 import com.geekymusketeers.uncrack.presentation.PasswordScreen
 import com.geekymusketeers.uncrack.presentation.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.ShieldScreen
@@ -41,7 +42,8 @@ fun Navigation() {
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = listOf(
-        "splash_screen"
+        "splash_screen",
+        "onboarding_screen"
     )
 
     Scaffold(
@@ -63,7 +65,13 @@ fun Navigation() {
         ) {
 
             composable(route = "splash_screen") {
-                SplashScreen()
+                SplashScreen(
+                    navController
+                )
+            }
+
+            composable(route = "onboarding_screen") {
+                OnboardingScreen()
             }
 
             composable(route = "home_screen") {
