@@ -42,7 +42,6 @@ fun Navigation() {
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = listOf(
-        "splash_screen",
         "onboarding_screen"
     )
 
@@ -57,18 +56,12 @@ fun Navigation() {
     ) {
         NavHost(
             navController = navController,
-            startDestination = "splash_screen",
+            startDestination = "home_screen",
             enterTransition = { FadeIn },
             exitTransition = { FadeOut },
             popEnterTransition = { FadeIn },
             popExitTransition = { FadeOut }
         ) {
-
-            composable(route = "splash_screen") {
-                SplashScreen(
-                    navController
-                )
-            }
 
             composable(route = "onboarding_screen") {
                 OnboardingScreen(
