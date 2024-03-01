@@ -1,8 +1,158 @@
 package com.geekymusketeers.uncrack.presentation.introScreens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.geekymusketeers.uncrack.components.OnboardingComponent
+import com.geekymusketeers.uncrack.presentation.introScreens.model.OnBoardingItem
+import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
+import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainer
+import com.geekymusketeers.uncrack.ui.theme.OnSurface20
+import com.geekymusketeers.uncrack.ui.theme.OnSurface40
+import com.geekymusketeers.uncrack.ui.theme.Primary
+import com.geekymusketeers.uncrack.ui.theme.navigationTopBarHeight
+import com.geekymusketeers.uncrack.ui.theme.normal16
+import com.geekymusketeers.uncrack.util.onClick
+import kotlinx.coroutines.launch
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun OnboardingScreen(
+    navController: NavHostController
+) {
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+    val pages = OnBoardingItem.onboardingScreenItems(context)
+    val pagerState = rememberPagerState(pageCount = { pages.size })
+    val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+
+    val buttonsState = remember {
+        derivedStateOf {
+            when (pagerState.currentPage) {
+                0 -> listOf("Next")
+                1 -> listOf("Next")
+                2 -> listOf("Login")
+                else -> listOf("")
+            }
+        }
+    }
+
+    Column(
+        modifier = Modifier.padding(
+            start = 16.dp,
+            end = 16.dp,
+            top = navigationTopBarHeight,
+            bottom = bottomPadding
+        ),
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+
+        if (pagerState.currentPage != pages.lastIndex) {
+            Text(
+                modifier = Modifier
+                    .padding(vertical = 20.dp)
+                    .onClick {
+                        navController.navigate("")
+                    }
+                    .align(Alignment.End),
+                text = "Skip",
+                style = normal16.copy(OnSurface20)
+            )
+        }
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        HorizontalPager(state = pagerState) {index ->
+            OnboardingComponent(item = pages[index])
+        }
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 20.dp)
+        ) {
+            PageIndicator(
+                modifier = Modifier.fillMaxWidth(),
+                pagesSize = pages.size,
+                selectedPage = pagerState.currentPage
+            )
+
+            Button(
+                onClick = {
+                    scope.launch {
+                        if (pagerState.currentPage == pages.lastIndex) {
+                            navController.navigate("")
+                        } else {
+                            pagerState.animateScrollToPage(
+                                page = pagerState.currentPage + 1
+                            )
+                        }
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = OnPrimaryContainer
+                ),
+            ) {
+                Text(
+                    text = buttonsState.value[0],
+                    color = Color.White,
+                    fontFamily = DMSansFontFamily,
+                    fontSize = 14.sp
+                )
+            }
+        }
+    }
+}
 
 @Composable
-fun OnboardingScreen() {
-
+fun PageIndicator(
+    modifier: Modifier = Modifier,
+    pagesSize: Int,
+    selectedPage: Int,
+    selectedColor: Color = Primary,
+    unselectedColor: Color = OnSurface40,
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+    ) {
+        repeat(times = pagesSize) { page ->
+            Box(
+                modifier = Modifier
+                    .size(8.dp)
+                    .clip(CircleShape)
+                    .background(color = if (page == selectedPage) selectedColor else unselectedColor)
+            )
+        }
+    }
 }

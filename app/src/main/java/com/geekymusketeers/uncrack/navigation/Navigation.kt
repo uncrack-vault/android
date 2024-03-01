@@ -71,7 +71,9 @@ fun Navigation() {
             }
 
             composable(route = "onboarding_screen") {
-                OnboardingScreen()
+                OnboardingScreen(
+                    navController
+                )
             }
 
             composable(route = "home_screen") {
