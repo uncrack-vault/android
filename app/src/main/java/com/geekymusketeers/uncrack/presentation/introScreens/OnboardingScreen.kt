@@ -1,5 +1,11 @@
 package com.geekymusketeers.uncrack.presentation.introScreens
 
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,27 +33,50 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.components.OnboardingComponent
+import com.geekymusketeers.uncrack.presentation.authScreens.LoginScreens
 import com.geekymusketeers.uncrack.presentation.introScreens.model.OnBoardingItem
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainer
 import com.geekymusketeers.uncrack.ui.theme.OnSurface20
 import com.geekymusketeers.uncrack.ui.theme.OnSurface40
 import com.geekymusketeers.uncrack.ui.theme.Primary
+import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.navigationTopBarHeight
 import com.geekymusketeers.uncrack.ui.theme.normal16
+import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import com.geekymusketeers.uncrack.util.onClick
 import kotlinx.coroutines.launch
 
+class OnboardingScreen : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(
+                Color.White.toArgb(), Color.White.toArgb()
+            ),
+            navigationBarStyle = SystemBarStyle.light(
+                Color.White.toArgb(), Color.White.toArgb()
+            )
+        )
+        super.onCreate(savedInstanceState)
+
+        setContent {
+            UnCrackTheme {
+                OnboardingContent()
+            }
+        }
+    }
+}
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnboardingScreen(
-    navController: NavHostController
-) {
+fun OnboardingContent() {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val pages = OnBoardingItem.onboardingScreenItems(context)
@@ -80,7 +109,13 @@ fun OnboardingScreen(
                 modifier = Modifier
                     .padding(vertical = 20.dp)
                     .onClick {
-                        navController.navigate("")
+                        context
+                            .findActivity()
+                            ?.apply {
+                                val loginIntent = Intent(this, LoginScreens::class.java)
+                                startActivity(loginIntent)
+                                finish()
+                            }
                     }
                     .align(Alignment.End),
                 text = "Skip",
@@ -90,7 +125,7 @@ fun OnboardingScreen(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        HorizontalPager(state = pagerState) {index ->
+        HorizontalPager(state = pagerState) { index ->
             OnboardingComponent(item = pages[index])
         }
 
@@ -111,7 +146,13 @@ fun OnboardingScreen(
                 onClick = {
                     scope.launch {
                         if (pagerState.currentPage == pages.lastIndex) {
-                            navController.navigate("")
+                            context
+                                .findActivity()
+                                ?.apply {
+                                    val loginIntent = Intent(this, LoginScreens::class.java)
+                                    startActivity(loginIntent)
+                                    finish()
+                                }
                         } else {
                             pagerState.animateScrollToPage(
                                 page = pagerState.currentPage + 1
