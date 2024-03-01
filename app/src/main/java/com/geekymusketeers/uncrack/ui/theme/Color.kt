@@ -2,7 +2,7 @@ package com.geekymusketeers.uncrack.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-
+val Primary = Color(0xFFFF646E)
 val PrimaryDark: Color = Color(0xFFA2C9FF)
 val OnPrimaryDark: Color = Color(0xFF1B72C0)
 val PrimaryContainerDark: Color = Color(0xFF2F4156)
