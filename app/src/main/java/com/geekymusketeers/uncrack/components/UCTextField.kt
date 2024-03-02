@@ -29,7 +29,7 @@ import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.normal16
 
 @Composable
-fun IONTextField(
+fun UCTextField(
     modifier: Modifier = Modifier,
     headerText: String = "",
     hintText: String = "",
