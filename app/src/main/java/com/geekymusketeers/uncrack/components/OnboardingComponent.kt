@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainer
-import com.geekymusketeers.uncrack.ui.theme.OnSurface60
+import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.bold22
 import com.geekymusketeers.uncrack.ui.theme.medium16
 
@@ -37,7 +37,7 @@ fun OnboardingComponent(
         Text(
             modifier = Modifier.padding(horizontal = 30.dp),
             text = item.title,
-            style = bold22.copy(OnPrimaryContainer),
+            style = bold22.copy(OnPrimaryContainerLight),
             textAlign = TextAlign.Center
         )
 
@@ -47,7 +47,7 @@ fun OnboardingComponent(
             modifier = Modifier.padding(horizontal = 30.dp),
             text = item.text,
             textAlign = TextAlign.Center,
-            style = medium16.copy(OnSurface60)
+            style = medium16.copy(SurfaceTintLight)
         )
     }
 }

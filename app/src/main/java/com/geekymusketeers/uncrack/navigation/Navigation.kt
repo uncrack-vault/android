@@ -24,12 +24,12 @@ import com.geekymusketeers.uncrack.presentation.homeScreen.HomeScreen
 import com.geekymusketeers.uncrack.presentation.passwordScreen.PasswordScreen
 import com.geekymusketeers.uncrack.presentation.profileScreen.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shieldScreen.ShieldScreen
-import com.geekymusketeers.uncrack.ui.theme.Background
+import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.FadeIn
 import com.geekymusketeers.uncrack.ui.theme.FadeOut
-import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainer
-import com.geekymusketeers.uncrack.ui.theme.OnSurface40
+import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
+import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -88,7 +88,7 @@ fun ShowBottomNavigation(
 ) {
     if (backStackEntry.value?.destination?.route !in screensWithoutNavigationBar) {
         NavigationBar(
-            containerColor = Background
+            containerColor = BackgroundLight
         ) {
 
             val bottomNavItems = listOf(
@@ -122,9 +122,9 @@ fun ShowBottomNavigation(
                             imageVector = item.icon,
                             contentDescription = item.name,
                             tint = if (backStackEntry.value?.destination?.route == item.route)
-                                OnPrimaryContainer
+                                OnPrimaryContainerLight
                             else
-                                OnSurface40
+                                OnSurfaceVariantLight
                         )
                     },
                     label = {
@@ -132,9 +132,9 @@ fun ShowBottomNavigation(
                             text = item.name,
                             fontFamily = DMSansFontFamily,
                             color = if (backStackEntry.value?.destination?.route == item.route)
-                                OnPrimaryContainer
+                                OnPrimaryContainerLight
                             else
-                                OnSurface40,
+                                OnSurfaceVariantLight,
                             fontWeight = if (backStackEntry.value?.destination?.route == item.route)
                                 FontWeight.SemiBold
                             else

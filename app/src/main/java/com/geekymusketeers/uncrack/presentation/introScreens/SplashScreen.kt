@@ -31,7 +31,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.ui.theme.Background
+import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import kotlinx.coroutines.delay
 
 @SuppressLint("CustomSplashScreen")
@@ -85,7 +85,7 @@ fun SplashContent(activity: Activity) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Background),
+                .background(BackgroundLight),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {

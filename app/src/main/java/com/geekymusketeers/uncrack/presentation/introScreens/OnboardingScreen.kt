@@ -43,9 +43,8 @@ import com.geekymusketeers.uncrack.components.OnboardingComponent
 import com.geekymusketeers.uncrack.presentation.authScreens.login.LoginScreens
 import com.geekymusketeers.uncrack.presentation.introScreens.model.OnBoardingItem
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
-import com.geekymusketeers.uncrack.ui.theme.OnSurface20
-import com.geekymusketeers.uncrack.ui.theme.OnSurface40
-import com.geekymusketeers.uncrack.ui.theme.Primary
+import com.geekymusketeers.uncrack.ui.theme.OnSurfaceLight
+import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.ui.theme.navigationTopBarHeight
 import com.geekymusketeers.uncrack.ui.theme.normal16
@@ -118,7 +117,7 @@ fun OnboardingContent() {
                     }
                     .align(Alignment.End),
                 text = stringResource(R.string.skip),
-                style = normal16.copy(OnSurface20)
+                style = normal16.copy(OnSurfaceLight)
             )
         }
 
@@ -180,8 +179,8 @@ fun PageIndicator(
     modifier: Modifier = Modifier,
     pagesSize: Int,
     selectedPage: Int,
-    selectedColor: Color = Primary,
-    unselectedColor: Color = OnSurface40,
+    selectedColor: Color = PrimaryDark,
+    unselectedColor: Color = OnSurfaceVariantLight,
 ) {
     Row(
         modifier = modifier,
