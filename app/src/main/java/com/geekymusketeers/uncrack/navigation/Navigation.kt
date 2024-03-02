@@ -40,7 +40,7 @@ fun Navigation() {
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = listOf(
-        "onboarding_screen"
+        "add_password_screen"
     )
 
     Scaffold(

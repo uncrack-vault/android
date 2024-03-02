@@ -35,17 +35,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.OnboardingComponent
-import com.geekymusketeers.uncrack.presentation.authScreens.LoginScreens
+import com.geekymusketeers.uncrack.presentation.authScreens.login.LoginScreens
 import com.geekymusketeers.uncrack.presentation.introScreens.model.OnBoardingItem
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
-import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainer
 import com.geekymusketeers.uncrack.ui.theme.OnSurface20
 import com.geekymusketeers.uncrack.ui.theme.OnSurface40
 import com.geekymusketeers.uncrack.ui.theme.Primary
-import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
+import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.ui.theme.navigationTopBarHeight
 import com.geekymusketeers.uncrack.ui.theme.normal16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
@@ -67,9 +68,7 @@ class OnboardingScreen : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            UnCrackTheme {
-                OnboardingContent()
-            }
+            OnboardingContent()
         }
     }
 }
@@ -118,7 +117,7 @@ fun OnboardingContent() {
                             }
                     }
                     .align(Alignment.End),
-                text = "Skip",
+                text = stringResource(R.string.skip),
                 style = normal16.copy(OnSurface20)
             )
         }
@@ -134,7 +133,8 @@ fun OnboardingContent() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 20.dp)
+                .padding(horizontal = 16.dp, vertical = 20.dp),
+            contentAlignment = Alignment.CenterEnd
         ) {
             PageIndicator(
                 modifier = Modifier.fillMaxWidth(),
@@ -161,7 +161,7 @@ fun OnboardingContent() {
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = OnPrimaryContainer
+                    containerColor = PrimaryDark
                 ),
             ) {
                 Text(

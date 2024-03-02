@@ -149,6 +149,7 @@
     <string name="holder_name">Card Holder Name</string>
     <string name="register">Register</string>
     <string name="already_have_an_account">Already have an account</string>
+    <string name="skip">Skip</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

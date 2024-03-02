@@ -42,6 +42,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".presentation.introScreens.OnboardingScreen"
+            android:exported="true"
+            android:theme="@style/Theme.UnCrack">
+        </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

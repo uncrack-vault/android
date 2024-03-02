@@ -30,7 +30,7 @@ fun OnboardingComponent(
             contentDescription = "onboardimage",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(380.dp)
+                .height(240.dp)
         )
         Spacer(modifier = Modifier.padding(24.dp))
 
