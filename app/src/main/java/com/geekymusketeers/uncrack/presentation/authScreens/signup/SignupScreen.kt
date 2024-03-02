@@ -13,18 +13,23 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.IconButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.geekymusketeers.uncrack.R
@@ -68,6 +73,10 @@ fun SignupContent() {
 
     val password by remember {
         mutableStateOf("")
+    }
+
+    var passwordVisibility by remember {
+        mutableStateOf(false)
     }
 
     Scaffold(
@@ -124,12 +133,21 @@ fun SignupContent() {
                 hintText = stringResource(R.string.password_hint),
                 value = password,
                 onValueChange = {},
+                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    Image(
-                        modifier = Modifier.size(24.dp),
-                        painter = painterResource(id = R.drawable.visibility_on),
-                        contentDescription = null
-                    )
+                    val image = if (passwordVisibility)
+                        painterResource(id = R.drawable.visibility_on)
+                    else painterResource(id = R.drawable.visibility_off)
+
+                    IconButton(onClick =
+                    { passwordVisibility = passwordVisibility.not() }
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            painter = image,
+                            contentDescription = null
+                        )
+                    }
                 }
             )
 

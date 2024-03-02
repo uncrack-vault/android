@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
@@ -47,6 +48,7 @@ fun UCTextField(
     trailingIcon: @Composable (() -> Unit)? = null,
     value: String,
     shape: Shape = RoundedCornerShape(10.dp),
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onValueChange: (String) -> Unit
 ) {
     Column(
@@ -73,6 +75,7 @@ fun UCTextField(
             maxLines = maxLines,
             minLines = minLines,
             leadingIcon = leadingIcon,
+            visualTransformation = visualTransformation,
             trailingIcon = trailingIcon
         ) { onValueChange(it) } // Use String instead of MutableState<String>
     }
@@ -107,6 +110,7 @@ fun TextEditField(
     singleLine: Boolean = false,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     minLines: Int = 1,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     onValueChange: (String) -> Unit
@@ -134,6 +138,7 @@ fun TextEditField(
         enabled = enabled,
         shape = shape,
         maxLines = maxLines,
-        minLines = minLines
+        minLines = minLines,
+        visualTransformation = visualTransformation
     )
 }
