@@ -20,18 +20,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.presentation.HomeScreen
-import com.geekymusketeers.uncrack.presentation.OnboardingScreen
-import com.geekymusketeers.uncrack.presentation.PasswordScreen
-import com.geekymusketeers.uncrack.presentation.ProfileScreen
-import com.geekymusketeers.uncrack.presentation.ShieldScreen
-import com.geekymusketeers.uncrack.presentation.SplashScreen
-import com.geekymusketeers.uncrack.ui.theme.Background
+import com.geekymusketeers.uncrack.presentation.homeScreen.HomeScreen
+import com.geekymusketeers.uncrack.presentation.passwordScreen.PasswordScreen
+import com.geekymusketeers.uncrack.presentation.profileScreen.ProfileScreen
+import com.geekymusketeers.uncrack.presentation.shieldScreen.ShieldScreen
+import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.FadeIn
 import com.geekymusketeers.uncrack.ui.theme.FadeOut
-import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainer
-import com.geekymusketeers.uncrack.ui.theme.OnSurface40
+import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
+import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -42,8 +40,7 @@ fun Navigation() {
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = listOf(
-        "splash_screen",
-        "onboarding_screen"
+        "add_password_screen"
     )
 
     Scaffold(
@@ -57,22 +54,12 @@ fun Navigation() {
     ) {
         NavHost(
             navController = navController,
-            startDestination = "splash_screen",
+            startDestination = "home_screen",
             enterTransition = { FadeIn },
             exitTransition = { FadeOut },
             popEnterTransition = { FadeIn },
             popExitTransition = { FadeOut }
         ) {
-
-            composable(route = "splash_screen") {
-                SplashScreen(
-                    navController
-                )
-            }
-
-            composable(route = "onboarding_screen") {
-                OnboardingScreen()
-            }
 
             composable(route = "home_screen") {
                 HomeScreen()
@@ -101,7 +88,7 @@ fun ShowBottomNavigation(
 ) {
     if (backStackEntry.value?.destination?.route !in screensWithoutNavigationBar) {
         NavigationBar(
-            containerColor = Background
+            containerColor = BackgroundLight
         ) {
 
             val bottomNavItems = listOf(
@@ -135,9 +122,9 @@ fun ShowBottomNavigation(
                             imageVector = item.icon,
                             contentDescription = item.name,
                             tint = if (backStackEntry.value?.destination?.route == item.route)
-                                OnPrimaryContainer
+                                OnPrimaryContainerLight
                             else
-                                OnSurface40
+                                OnSurfaceVariantLight
                         )
                     },
                     label = {
@@ -145,9 +132,9 @@ fun ShowBottomNavigation(
                             text = item.name,
                             fontFamily = DMSansFontFamily,
                             color = if (backStackEntry.value?.destination?.route == item.route)
-                                OnPrimaryContainer
+                                OnPrimaryContainerLight
                             else
-                                OnSurface40,
+                                OnSurfaceVariantLight,
                             fontWeight = if (backStackEntry.value?.destination?.route == item.route)
                                 FontWeight.SemiBold
                             else

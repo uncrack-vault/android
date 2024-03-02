@@ -15,8 +15,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
-import com.geekymusketeers.uncrack.ui.theme.OnPrimaryDark
-import com.geekymusketeers.uncrack.ui.theme.OnSurface60
+import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 
 @Composable
 fun UCButton(
@@ -37,7 +37,7 @@ fun UCButton(
             .then(modifier),
         onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(
-            containerColor = OnPrimaryDark
+            containerColor = PrimaryLight
         ),
         enabled = enabled
     ) {
@@ -46,7 +46,7 @@ fun UCButton(
         }
         Text(
             text = text,
-            color = if (enabled) Color.White else OnSurface60,
+            color = if (enabled) Color.White else SurfaceTintLight,
             fontFamily = DMSansFontFamily,
             fontSize = 14.sp
         )

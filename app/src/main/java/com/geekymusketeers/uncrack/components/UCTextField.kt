@@ -22,10 +22,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
-import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainer
-import com.geekymusketeers.uncrack.ui.theme.OnSurface20
-import com.geekymusketeers.uncrack.ui.theme.OnSurface60
-import com.geekymusketeers.uncrack.ui.theme.SecondarySurface
+import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
+import com.geekymusketeers.uncrack.ui.theme.OnSurfaceLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.normal16
 
 @Composable
@@ -36,8 +36,8 @@ fun IONTextField(
     keyboardType: KeyboardType = KeyboardType.Text,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = keyboardType),
-    textColor: Color = OnSurface20,
-    backgroundColor: Color = SecondarySurface,
+    textColor: Color = OnSurfaceLight,
+    backgroundColor: Color = SurfaceVariantLight,
     textStyle: TextStyle = normal16,
     enabled: Boolean = true,
     singleLine: Boolean = false,
@@ -87,7 +87,7 @@ fun TextHeader(text: String) {
             lineHeight = 24.sp,
             fontFamily = DMSansFontFamily,
             fontWeight = FontWeight(500),
-            color = OnPrimaryContainer,
+            color = OnPrimaryContainerLight,
         )
     )
 }
@@ -97,8 +97,8 @@ fun TextEditField(
     hintText: String = "",
     value: String = "",
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    textColor: Color = OnSurface20,
-    backgroundColor: Color = SecondarySurface,
+    textColor: Color = OnSurfaceLight,
+    backgroundColor: Color = SurfaceVariantLight,
     keyboardType: KeyboardType = KeyboardType.Text,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = keyboardType),
     textStyle: TextStyle = normal16,
@@ -124,7 +124,7 @@ fun TextEditField(
             Text(
                 modifier = Modifier.wrapContentHeight(align = Alignment.CenterVertically),
                 text = hintText,
-                color = OnSurface60,
+                color = SurfaceTintLight,
                 fontFamily = DMSansFontFamily
             )
         },

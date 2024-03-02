@@ -1,5 +1,13 @@
-package com.geekymusketeers.uncrack.presentation
+package com.geekymusketeers.uncrack.presentation.introScreens
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -18,17 +26,36 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.ui.theme.Background
+import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import kotlinx.coroutines.delay
 
+@SuppressLint("CustomSplashScreen")
+class SplashScreen : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(
+                Color.White.toArgb(), Color.White.toArgb()
+            ),
+            navigationBarStyle = SystemBarStyle.light(
+                Color.White.toArgb(), Color.White.toArgb()
+            )
+        )
+        super.onCreate(savedInstanceState)
+
+        setContent {
+            SplashContent(this@SplashScreen)
+        }
+    }
+}
 @Composable
-fun SplashScreen(
-    navController: NavHostController
-) {
+fun SplashContent(activity: Activity) {
 
     var animation by remember {
         mutableStateOf(false)
@@ -41,25 +68,31 @@ fun SplashScreen(
         label = ""
     )
 
-    LaunchedEffect(true) {
+    LaunchedEffect(Unit) {
         animation = true
-        delay(1000L)
-        navController.popBackStack()
-        navController.navigate(route = "onboarding_screen")
+
+        // TODO: Need to change the logic for old and new user
+        val intent = Intent(activity, OnboardingScreen::class.java)
+
+        activity.run {
+            delay(2000L)
+            startActivity(intent)
+            finish()
+        }
     }
 
     Surface {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Background),
+                .background(BackgroundLight),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             Image(
                 modifier = Modifier
                     .alpha(alphaAnimation.value)
-                    .size(240.dp),
+                    .size(120.dp),
                 painter = painterResource(id = R.drawable.dark_uncrack_cutout),
                 contentDescription = "uncrack_logo"
             )
