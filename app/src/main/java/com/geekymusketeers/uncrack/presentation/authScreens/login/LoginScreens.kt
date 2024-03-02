@@ -25,7 +25,6 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.geekymusketeers.uncrack.R
@@ -33,7 +32,6 @@ import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
-import com.geekymusketeers.uncrack.ui.theme.bold36
 
 class LoginScreens : ComponentActivity() {
 
@@ -57,7 +55,6 @@ class LoginScreens : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun LoginContent() {
 
@@ -87,7 +84,7 @@ fun LoginContent() {
                 color = Color.Black
             )
 
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(60.dp))
 
             UCTextField(
                 modifier = Modifier
@@ -126,7 +123,8 @@ fun LoginContent() {
                 text = "Login",
                 onClick = {
                     // TODO: Perform req operation and navigate to Home Screen
-                }
+                },
+                enabled = false
             )
         }
     }

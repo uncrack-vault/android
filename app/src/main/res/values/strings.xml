@@ -154,6 +154,8 @@
     <string name="email_hint">johndoe123@gmail.com</string>
     <string name="password_header">Enter your password</string>
     <string name="password_hint">****************</string>
+    <string name="name_header">Enter your name</string>
+    <string name="name_hint">John Doe</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
