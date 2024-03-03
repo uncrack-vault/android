@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.geekymusketeers.uncrack.data.model.SettingsItem
+import com.geekymusketeers.uncrack.domain.model.SettingsItem
 import com.geekymusketeers.uncrack.databinding.SettingsItemBinding
 
 class SettingsItemAdapter(

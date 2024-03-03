@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.geekymusketeers.uncrack.util.Util
-import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.domain.model.Account
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

@@ -17,7 +17,7 @@ import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.util.Encryption

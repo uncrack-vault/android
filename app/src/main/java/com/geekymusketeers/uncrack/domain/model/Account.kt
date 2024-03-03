@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.data.model
+package com.geekymusketeers.uncrack.domain.model
 
 import android.os.Parcelable
 import androidx.room.Entity

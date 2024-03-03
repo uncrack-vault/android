@@ -2,8 +2,8 @@ package com.geekymusketeers.uncrack.data.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.geekymusketeers.uncrack.data.model.Account
-import com.geekymusketeers.uncrack.data.model.Card
+import com.geekymusketeers.uncrack.domain.model.Account
+import com.geekymusketeers.uncrack.domain.model.Card
 
 @Dao
 interface CardDao {

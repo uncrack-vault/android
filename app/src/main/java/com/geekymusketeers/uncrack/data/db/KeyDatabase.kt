@@ -1,11 +1,11 @@
-package com.geekymusketeers.uncrack.data.room
+package com.geekymusketeers.uncrack.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.geekymusketeers.uncrack.data.model.Card
-import com.geekymusketeers.uncrack.data.model.Key
+import com.geekymusketeers.uncrack.data.room.KeyDao
+import com.geekymusketeers.uncrack.domain.model.Key
 
 @Database(entities = [Key::class],
     version = 3)

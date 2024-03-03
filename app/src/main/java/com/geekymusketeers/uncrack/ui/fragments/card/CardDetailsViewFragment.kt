@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.data.model.Card
+import com.geekymusketeers.uncrack.domain.model.Card
 import com.geekymusketeers.uncrack.databinding.FragmentCardDetailsViewBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet

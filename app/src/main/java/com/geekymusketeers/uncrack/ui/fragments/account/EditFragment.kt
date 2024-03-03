@@ -23,7 +23,7 @@ import com.geekymusketeers.uncrack.databinding.FragmentEditBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
-import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.databinding.EditpasswordModalBinding
 import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.viewModel.AccountViewModel
