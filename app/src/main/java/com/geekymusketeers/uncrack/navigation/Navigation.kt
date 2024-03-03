@@ -31,6 +31,7 @@ import com.geekymusketeers.uncrack.ui.theme.FadeOut
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
+import com.geekymusketeers.uncrack.util.BackPressHandler
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -42,6 +43,8 @@ fun Navigation() {
     val screensWithoutNavigationBar = listOf(
         "add_password_screen"
     )
+
+    BackPressHandler()
 
     Scaffold(
         bottomBar = {
