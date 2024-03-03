@@ -5,16 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.IconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,7 +37,10 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
+import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
+import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
+import com.geekymusketeers.uncrack.ui.theme.medium16
 
 class LoginScreens : ComponentActivity() {
 
@@ -141,12 +144,26 @@ fun LoginContent() {
             UCButton(
                 modifier = Modifier
                     .fillMaxWidth(),
-                text = "Login",
+                text = stringResource(R.string.login),
                 onClick = {
                     // TODO: Perform req operation and navigate to Home Screen
                 },
                 enabled = false
             )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row {
+                Text(
+                    text = stringResource(R.string.don_t_have_an_account),
+                    style = medium16.copy(color = OnPrimaryContainerLight)
+                )
+
+                Text(
+                    text = stringResource(R.string.create),
+                    style = medium16.copy(color = PrimaryLight)
+                )
+            }
         }
     }
 }
