@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentLockMasterKeyBinding
-import com.geekymusketeers.uncrack.ui.MainActivity
+import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.ui.auth.MasterKeyActivity
 import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util
