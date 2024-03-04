@@ -74,7 +74,7 @@ class OnboardingScreen : ComponentActivity() {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnboardingContent() {
+fun OnboardingContent(modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val pages = OnBoardingItem.onboardingScreenItems(context)
@@ -93,7 +93,7 @@ fun OnboardingContent() {
     }
 
     Column(
-        modifier = Modifier.padding(
+        modifier = modifier.padding(
             start = 16.dp,
             end = 16.dp,
             top = navigationTopBarHeight,
@@ -176,11 +176,11 @@ fun OnboardingContent() {
 
 @Composable
 fun PageIndicator(
-    modifier: Modifier = Modifier,
     pagesSize: Int,
     selectedPage: Int,
+    modifier: Modifier = Modifier,
     selectedColor: Color = PrimaryDark,
-    unselectedColor: Color = OnSurfaceVariantLight,
+    unselectedColor: Color = OnSurfaceVariantLight
 ) {
     Row(
         modifier = modifier,

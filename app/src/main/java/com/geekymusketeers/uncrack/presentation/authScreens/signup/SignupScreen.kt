@@ -64,7 +64,7 @@ class SignupScreen : ComponentActivity() {
 }
 
 @Composable
-fun SignupContent() {
+fun SignupContent(modifier: Modifier = Modifier) {
 
     val name by remember {
         mutableStateOf("")
@@ -83,7 +83,7 @@ fun SignupContent() {
     }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) { paddingValues ->
         Column(
             modifier = Modifier

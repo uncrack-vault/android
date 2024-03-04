@@ -9,6 +9,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,21 +33,24 @@ import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Navigation() {
+fun Navigation(modifier: Modifier = Modifier) {
 
     val navController = rememberNavController()
     val backStackEntry = navController.currentBackStackEntryAsState()
 
-    val screensWithoutNavigationBar = listOf(
+    val screensWithoutNavigationBar = persistentListOf(
         "add_password_screen"
     )
 
     BackPressHandler()
 
     Scaffold(
+        modifier = modifier,
         bottomBar = {
             ShowBottomNavigation(
                 backStackEntry,
@@ -86,11 +90,13 @@ fun Navigation() {
 @Composable
 fun ShowBottomNavigation(
     backStackEntry: State<NavBackStackEntry?>,
-    screensWithoutNavigationBar: List<String>,
-    navController: NavHostController
+    screensWithoutNavigationBar: ImmutableList<String>,
+    navController: NavHostController,
+    modifier: Modifier = Modifier
 ) {
     if (backStackEntry.value?.destination?.route !in screensWithoutNavigationBar) {
         NavigationBar(
+            modifier = modifier,
             containerColor = BackgroundLight
         ) {
 

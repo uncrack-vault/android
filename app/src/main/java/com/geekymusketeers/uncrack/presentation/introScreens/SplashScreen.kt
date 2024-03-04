@@ -55,7 +55,7 @@ class SplashScreen : ComponentActivity() {
     }
 }
 @Composable
-fun SplashContent(activity: Activity) {
+fun SplashContent(activity: Activity, modifier: Modifier = Modifier) {
 
     var animation by remember {
         mutableStateOf(false)
@@ -83,7 +83,7 @@ fun SplashContent(activity: Activity) {
 
     Surface {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .background(BackgroundLight),
             horizontalAlignment = Alignment.CenterHorizontally,

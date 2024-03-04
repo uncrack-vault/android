@@ -66,7 +66,7 @@ class LoginScreens : ComponentActivity() {
 
 @Preview
 @Composable
-fun LoginContent() {
+private fun LoginContent() {
 
     val email by remember {
         mutableStateOf("")

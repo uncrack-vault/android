@@ -31,6 +31,7 @@ import com.geekymusketeers.uncrack.ui.theme.normal16
 
 @Composable
 fun UCTextField(
+    value: String,
     modifier: Modifier = Modifier,
     headerText: String = "",
     hintText: String = "",
@@ -46,7 +47,6 @@ fun UCTextField(
     minLines: Int = 1,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
-    value: String,
     shape: Shape = RoundedCornerShape(10.dp),
     visualTransformation: VisualTransformation = VisualTransformation.None,
     onValueChange: (String) -> Unit
@@ -82,8 +82,9 @@ fun UCTextField(
 }
 
 @Composable
-fun TextHeader(text: String) {
+fun TextHeader(text: String, modifier: Modifier = Modifier) {
     Text(
+        modifier = modifier,
         text = text,
         style = TextStyle(
             fontSize = 16.sp,
@@ -97,6 +98,8 @@ fun TextHeader(text: String) {
 
 @Composable
 fun TextEditField(
+    shape: Shape,
+    modifier: Modifier = Modifier,
     hintText: String = "",
     value: String = "",
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -106,7 +109,6 @@ fun TextEditField(
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = keyboardType),
     textStyle: TextStyle = normal16,
     enabled: Boolean = true,
-    shape: Shape,
     singleLine: Boolean = false,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     minLines: Int = 1,
@@ -116,7 +118,7 @@ fun TextEditField(
     onValueChange: (String) -> Unit
 ) {
     OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         value = value,
         keyboardOptions = keyboardOptions,
         onValueChange = {
