@@ -142,6 +142,12 @@ dependencies {
     // In-app update
     implementation ("com.google.android.play:core:1.10.3")
 
+    // Compose-lint
+    lintChecks("com.slack.lint.compose:compose-lint-checks:1.3.1")
+
+    //kotlinx.collections.immutable
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
+
     // Circular Progress bar
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
 
