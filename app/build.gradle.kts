@@ -145,4 +145,6 @@ dependencies {
     // Circular Progress bar
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
 
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
 }
