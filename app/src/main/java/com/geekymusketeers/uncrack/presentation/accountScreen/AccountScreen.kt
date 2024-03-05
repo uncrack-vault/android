@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.geekymusketeers.uncrack.BuildConfig
 import com.geekymusketeers.uncrack.components.AccountOption
 import com.geekymusketeers.uncrack.components.ProfileContainer
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
@@ -79,8 +80,29 @@ fun AccountScreen(navController: NavHostController) {
             items(AccountItems.entries.subList(0,3)) {
                 AccountOption(it) { onClick ->
                     when(onClick) {
-                        AccountItems.MASTER_KEY -> {}
                         AccountItems.BIOMETRIC -> {}
+                        AccountItems.MASTER_KEY -> {}
+                        AccountItems.BLOCK_SS -> {}
+                        else -> {}
+                    }
+                }
+            }
+
+            item {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 18.dp, bottom = 18.dp),
+                    text = "Backup",
+                    style = medium14.copy(color = OnPrimaryContainerLight)
+                )
+            }
+
+            items(AccountItems.entries.subList(3, AccountItems.entries.size)) {
+                AccountOption(it) { onClick ->
+                    when(onClick) {
+                        AccountItems.EXPORT_IMPORT -> {}
+                        AccountItems.BACKUP_RESTORE -> {}
                         else -> {}
                     }
                 }
@@ -100,10 +122,29 @@ fun AccountScreen(navController: NavHostController) {
                 AccountOption(it) { onClick ->
                     when(onClick) {
                         AccountItems.THEME -> {}
+                        AccountItems.PASSWORD_GENERATOR -> {}
                         AccountItems.INVITE_FRIENDS -> {}
                         AccountItems.RATE_UNCRACK -> {}
                         AccountItems.SEND_FEEDBACK -> {}
                         AccountItems.PRIVACY_POLICY -> {}
+                        else -> {}
+                    }
+                }
+            }
+
+            item {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 18.dp, bottom = 18.dp),
+                    text = "Danger Zone",
+                    style = medium14.copy(color = OnPrimaryContainerLight)
+                )
+            }
+
+            items(AccountItems.entries.subList(3, AccountItems.entries.size)) {
+                AccountOption(it) { onClick ->
+                    when(onClick) {
                         AccountItems.LOG_OUT -> {}
                         AccountItems.DELETE_ACCOUNT -> {}
                         else -> {}
@@ -113,7 +154,7 @@ fun AccountScreen(navController: NavHostController) {
 
             item {
                 Text(
-                    text = "App Version: ",
+                    text = "App Version: ${BuildConfig.VERSION_NAME}",
                     style = normal14.copy(color = SurfaceTintLight)
                 )
             }
