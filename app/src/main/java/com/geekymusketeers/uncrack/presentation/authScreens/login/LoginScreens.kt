@@ -30,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.geekymusketeers.uncrack.R
@@ -64,9 +63,8 @@ class LoginScreens : ComponentActivity() {
     }
 }
 
-@Preview
 @Composable
-private fun LoginContent() {
+fun LoginContent(modifier: Modifier = Modifier) {
 
     val email by remember {
         mutableStateOf("")
@@ -81,7 +79,7 @@ private fun LoginContent() {
     }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) { paddingValues ->
         Column(
             modifier = Modifier
