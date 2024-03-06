@@ -10,23 +10,109 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.BuildConfig
+import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.AccountOption
 import com.geekymusketeers.uncrack.components.ProfileContainer
+import com.geekymusketeers.uncrack.components.ThemeDialog
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
+import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.medium14
 import com.geekymusketeers.uncrack.ui.theme.medium32
 import com.geekymusketeers.uncrack.ui.theme.normal14
+import com.geekymusketeers.uncrack.ui.theme.normal16
 
 @Composable
-fun AccountScreen(navController: NavHostController) {
+fun AccountScreen(
+    navController: NavHostController
+) {
+
+    var openThemeDialog by remember { mutableStateOf(false) }
+    var openLogoutDialog by remember { mutableStateOf(false) }
+
+    when {
+        openThemeDialog -> {
+            ThemeDialog(onDismissRequest = { openThemeDialog = false })
+        }
+
+        openLogoutDialog -> {
+            AlertDialog(
+                onDismissRequest = { openLogoutDialog = false },
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.logout),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                },
+                title = {
+                    Text(
+                        text = stringResource(R.string.logout),
+                        style = normal16.copy(color = OnPrimaryContainerLight)
+                    )
+                },
+                text = {
+                    Text(
+                        text = stringResource(R.string.are_you_sure_you_want_to_logout),
+                        style = normal16.copy(color = OnSurfaceVariantLight)
+                    )
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            // TODO: IMPL the logout logic
+                            openLogoutDialog = false
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Transparent,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    ) {
+                        Text(
+                            "Logout",
+                            style = medium14
+                        )
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            openLogoutDialog = false
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Transparent,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(R.string.cancel),
+                            style = medium14
+                        )
+                    }
+                },
+                containerColor = MaterialTheme.colorScheme.background
+            )
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -145,7 +231,9 @@ fun AccountScreen(navController: NavHostController) {
             items(AccountItems.entries.subList(3, AccountItems.entries.size)) {
                 AccountOption(it) { onClick ->
                     when(onClick) {
-                        AccountItems.LOG_OUT -> {}
+                        AccountItems.LOG_OUT -> {
+                            openLogoutDialog = true
+                        }
                         AccountItems.DELETE_ACCOUNT -> {}
                         else -> {}
                     }
