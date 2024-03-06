@@ -47,7 +47,7 @@ fun Navigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val backStackEntry = navController.currentBackStackEntryAsState()
 
-    val screensWithoutNavigationBar = listOf(
+    val screensWithoutNavigationBar = persistentListOf(
         "add_password_screen",
         "profile_screen",
         "update_master_key_screen",
