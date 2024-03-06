@@ -176,7 +176,9 @@ fun AccountScreen(
                 AccountOption(it) { onClick ->
                     when(onClick) {
                         AccountItems.BIOMETRIC -> {}
-                        AccountItems.MASTER_KEY -> {}
+                        AccountItems.CHANGE_MASTER_KEY -> {
+                            navController.navigate("update_master_key_screen")
+                        }
                         AccountItems.BLOCK_SS -> {}
                         else -> {}
                     }

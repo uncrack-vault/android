@@ -5,7 +5,7 @@ import com.geekymusketeers.uncrack.R
 // TODO: Need to change icons for some of the items
 enum class AccountItems(val itemsName: String, val icon: Int) {
     // Security
-    MASTER_KEY("Change master password", R.drawable.lock),
+    CHANGE_MASTER_KEY("Change master password", R.drawable.lock),
     BIOMETRIC("Unlock with biometric", R.drawable.fingerprint),
     BLOCK_SS("Block screenshots", R.drawable.block_ss),
 

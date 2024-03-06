@@ -21,7 +21,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.presentation.accountScreen.AccountScreen
-import com.geekymusketeers.uncrack.presentation.homeScreen.HomeScreen
+import com.geekymusketeers.uncrack.presentation.home.HomeScreen
+import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
+import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
+import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.passwordScreen.PasswordScreen
 import com.geekymusketeers.uncrack.presentation.profileScreen.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shieldScreen.ShieldScreen
@@ -42,7 +45,10 @@ fun Navigation() {
 
     val screensWithoutNavigationBar = listOf(
         "add_password_screen",
-        "profile_screen"
+        "profile_screen",
+        "update_master_key_screen",
+        "create_new_master_key_screen",
+        "confirm_master_key_screen"
     )
 
     Scaffold(
@@ -81,6 +87,18 @@ fun Navigation() {
 
             composable(route = "account_screen") {
                 AccountScreen(navController)
+            }
+
+            composable(route = "update_master_key_screen") {
+                UpdateMasterKey()
+            }
+
+            composable(route = "create_new_master_key_screen") {
+                CreateMasterKeyScreen()
+            }
+
+            composable(route = "confirm_master_key_screen") {
+                ConfirmMasterKeyScreen()
             }
         }
     }
