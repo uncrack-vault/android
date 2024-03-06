@@ -285,7 +285,11 @@ fun AccountScreen(
 
             item {
                 Text(
-                    text = "App Version: ${BuildConfig.VERSION_NAME}",
+                    text = "Version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+                    style = normal14.copy(color = SurfaceTintLight)
+                )
+                Text(
+                    text = stringResource(R.string.by_aritra_das),
                     style = normal14.copy(color = SurfaceTintLight)
                 )
             }
