@@ -150,6 +150,9 @@
     <string name="register">Register</string>
     <string name="already_have_an_account">Already have an account</string>
     <string name="skip">Skip</string>
+    <string name="cancel">Cancel</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="logout">Logout?</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
