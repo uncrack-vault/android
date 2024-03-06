@@ -33,25 +33,27 @@ fun UpdateMasterKey(
     modifier: Modifier = Modifier
 ) {
 
+
+    var oldMasterKey by remember {
+        mutableStateOf("")
+    }
+
+    var newMasterKey by remember {
+        mutableStateOf("")
+    }
+
+    var confirmMasterKey by remember {
+        mutableStateOf("")
+    }
+
+    var passwordVisibility by remember {
+        mutableStateOf(false)
+    }
+
+
     Scaffold(
         modifier.fillMaxSize()
     ) { paddingValues ->
-
-        var oldMasterKey by remember {
-            mutableStateOf("")
-        }
-
-        var newMasterKey by remember {
-            mutableStateOf("")
-        }
-
-        var confirmMasterKey by remember {
-            mutableStateOf("")
-        }
-
-        var passwordVisibility by remember {
-            mutableStateOf(false)
-        }
 
         Column(
             modifier = Modifier
@@ -64,7 +66,7 @@ fun UpdateMasterKey(
                 style = bold30.copy(color = Color.Black)
             )
 
-            Spacer(modifier = Modifier.height(60.dp))
+            Spacer(modifier = Modifier.height(50.dp))
 
             UCTextField(
                 modifier = Modifier
