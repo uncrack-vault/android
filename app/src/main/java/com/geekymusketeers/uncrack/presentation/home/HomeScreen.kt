@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.homeScreen
+package com.geekymusketeers.uncrack.presentation.home
 
 import androidx.compose.runtime.Composable
 

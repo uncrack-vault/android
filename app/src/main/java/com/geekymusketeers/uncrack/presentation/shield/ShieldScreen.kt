@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.shieldScreen
+package com.geekymusketeers.uncrack.presentation.shield
 
 import androidx.compose.runtime.Composable
 

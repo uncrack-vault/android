@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.introScreens
+package com.geekymusketeers.uncrack.presentation.intro
 
 import android.annotation.SuppressLint
 import android.app.Activity

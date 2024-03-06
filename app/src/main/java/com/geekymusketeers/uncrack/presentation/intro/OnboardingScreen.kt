@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.introScreens
+package com.geekymusketeers.uncrack.presentation.intro
 
 import android.content.Intent
 import android.os.Bundle
@@ -40,8 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.OnboardingComponent
-import com.geekymusketeers.uncrack.presentation.authScreens.login.LoginScreens
-import com.geekymusketeers.uncrack.presentation.introScreens.model.OnBoardingItem
+import com.geekymusketeers.uncrack.presentation.auth.login.LoginScreens
+import com.geekymusketeers.uncrack.presentation.intro.model.OnBoardingItem
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight

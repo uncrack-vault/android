@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.geekymusketeers.uncrack.presentation.accountScreen.AccountItems
+import com.geekymusketeers.uncrack.presentation.account.AccountItems
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceLight
 import com.geekymusketeers.uncrack.ui.theme.normal16
 

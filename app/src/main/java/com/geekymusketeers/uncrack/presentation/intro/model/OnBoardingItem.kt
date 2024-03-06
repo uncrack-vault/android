@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.introScreens.model
+package com.geekymusketeers.uncrack.presentation.intro.model
 
 import android.content.Context
 import com.geekymusketeers.uncrack.R

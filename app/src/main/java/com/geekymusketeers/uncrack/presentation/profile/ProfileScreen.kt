@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.profileScreen
+package com.geekymusketeers.uncrack.presentation.profile
 
 import androidx.compose.runtime.Composable
 

@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.accountScreen
+package com.geekymusketeers.uncrack.presentation.account
 
 import android.content.Intent
 import android.graphics.Bitmap

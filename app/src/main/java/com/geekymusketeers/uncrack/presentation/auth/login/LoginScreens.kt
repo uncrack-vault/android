@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.authScreens.signup
+package com.geekymusketeers.uncrack.presentation.auth.login
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 
-class SignupScreen : ComponentActivity() {
+class LoginScreens : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -26,13 +26,13 @@ class SignupScreen : ComponentActivity() {
 
         setContent {
             UnCrackTheme {
-                SignupContent()
+                LoginContent()
             }
         }
     }
 }
 
 @Composable
-fun SignupContent() {
+fun LoginContent() {
 
 }
