@@ -1,5 +1,10 @@
 package com.geekymusketeers.uncrack.presentation.accountScreen
 
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.provider.MediaStore
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -40,12 +46,15 @@ import com.geekymusketeers.uncrack.ui.theme.medium14
 import com.geekymusketeers.uncrack.ui.theme.medium32
 import com.geekymusketeers.uncrack.ui.theme.normal14
 import com.geekymusketeers.uncrack.ui.theme.normal16
+import com.geekymusketeers.uncrack.util.Util
+import java.io.ByteArrayOutputStream
 
 @Composable
 fun AccountScreen(
     navController: NavHostController
 ) {
 
+    val context = LocalContext.current
     var openThemeDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
 
@@ -207,11 +216,43 @@ fun AccountScreen(
             items(AccountItems.entries.subList(3, AccountItems.entries.size)) {
                 AccountOption(it) { onClick ->
                     when(onClick) {
-                        AccountItems.THEME -> {}
+                        AccountItems.THEME -> {
+                            openThemeDialog = true
+                        }
+
                         AccountItems.PASSWORD_GENERATOR -> {}
-                        AccountItems.INVITE_FRIENDS -> {}
-                        AccountItems.RATE_UNCRACK -> {}
-                        AccountItems.SEND_FEEDBACK -> {}
+
+                        AccountItems.INVITE_FRIENDS -> {
+                            val send = Util.SEND_APP
+                            val b = BitmapFactory.decodeResource(context.resources, R.drawable.banner_uncrack)
+                            val share = Intent(Intent.ACTION_SEND)
+                            share.type = "image/jpeg"
+                            val bytes = ByteArrayOutputStream()
+                            b.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+                            share.putExtra(Intent.EXTRA_TEXT, send)
+                            val path = MediaStore.Images.Media.insertImage(
+                                context.contentResolver,
+                                b,
+                                "Invite",
+                                null
+                            )
+                            val imageUri = Uri.parse(path)
+                            share.putExtra(Intent.EXTRA_STREAM, imageUri)
+                            context.startActivity(Intent.createChooser(share, "Select"))
+                        }
+
+                        AccountItems.RATE_UNCRACK -> {
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data = Uri.parse(Util.PLAYSTORE_URL)
+                            context.startActivity(intent)
+                        }
+
+                        AccountItems.SEND_FEEDBACK -> {
+                            val openURL = Intent(Intent.ACTION_VIEW)
+                            openURL.data = Uri.parse(context.resources.getString(R.string.mailTo))
+                            context.startActivity(openURL)
+                        }
+
                         AccountItems.PRIVACY_POLICY -> {}
                         else -> {}
                     }
