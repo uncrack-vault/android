@@ -8,11 +8,8 @@ import android.os.*
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.geekymusketeers.uncrack.databinding.ActivitySplashBinding
 import com.geekymusketeers.uncrack.util.Util
-import com.geekymusketeers.uncrack.ui.MainActivity
 import com.geekymusketeers.uncrack.ui.auth.MasterKeyActivity
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 import com.geekymusketeers.uncrack.viewModel.ViewModelFactory

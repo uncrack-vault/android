@@ -22,7 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.adapter.AccountAdapter
-import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
 import com.geekymusketeers.uncrack.databinding.ParagraphModalBinding
 import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding

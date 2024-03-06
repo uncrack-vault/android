@@ -16,10 +16,7 @@ import com.geekymusketeers.uncrack.ui.theme.bold22
 import com.geekymusketeers.uncrack.ui.theme.medium16
 
 @Composable
-fun OnboardingComponent(
-    modifier: Modifier = Modifier,
-    item: OnBoardingItem
-) {
+fun OnboardingComponent(item: OnBoardingItem, modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier.then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally,

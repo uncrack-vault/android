@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.geekymusketeers.uncrack.data.model.Card
-import com.geekymusketeers.uncrack.data.repository.CardRepository
-import com.geekymusketeers.uncrack.data.room.CardDatabase
+import com.geekymusketeers.uncrack.domain.model.Card
+import com.geekymusketeers.uncrack.domain.repository.CardRepository
+import com.geekymusketeers.uncrack.data.db.CardDatabase
 import kotlinx.coroutines.launch
 
 class CardViewModel(application: Application) : AndroidViewModel(application) {

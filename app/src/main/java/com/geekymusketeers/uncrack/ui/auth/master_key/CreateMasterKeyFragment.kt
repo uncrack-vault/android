@@ -16,9 +16,9 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.data.model.Key
+import com.geekymusketeers.uncrack.domain.model.Key
 import com.geekymusketeers.uncrack.databinding.FragmentCreateMasterKeyBinding
-import com.geekymusketeers.uncrack.ui.MainActivity
+import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util.Companion.hideKeyboard
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel

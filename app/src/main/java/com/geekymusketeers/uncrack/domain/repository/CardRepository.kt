@@ -1,7 +1,7 @@
-package com.geekymusketeers.uncrack.data.repository
+package com.geekymusketeers.uncrack.domain.repository
 
 import androidx.lifecycle.LiveData
-import com.geekymusketeers.uncrack.data.model.Card
+import com.geekymusketeers.uncrack.domain.model.Card
 import com.geekymusketeers.uncrack.data.room.CardDao
 
 class CardRepository(private val cardDao: CardDao) {

@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.geekymusketeers.uncrack.data.model.Key
+import com.geekymusketeers.uncrack.domain.model.Key
 
 @Dao
 interface KeyDao {

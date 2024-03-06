@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.data.model
+package com.geekymusketeers.uncrack.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

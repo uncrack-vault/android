@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.geekymusketeers.uncrack.data.room.AccountDatabase
-import com.geekymusketeers.uncrack.data.model.Account
-import com.geekymusketeers.uncrack.data.repository.AccountRepository
+import com.geekymusketeers.uncrack.data.db.AccountDatabase
+import com.geekymusketeers.uncrack.domain.model.Account
+import com.geekymusketeers.uncrack.domain.repository.AccountRepository
 import kotlinx.coroutines.launch
 
 class AccountViewModel(application: Application) : AndroidViewModel(application) {

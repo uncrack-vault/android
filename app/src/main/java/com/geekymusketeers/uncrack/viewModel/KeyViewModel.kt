@@ -3,12 +3,11 @@ package com.geekymusketeers.uncrack.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.geekymusketeers.uncrack.data.model.Key
-import com.geekymusketeers.uncrack.data.repository.KeyRepository
-import com.geekymusketeers.uncrack.data.room.KeyDatabase
+import com.geekymusketeers.uncrack.domain.model.Key
+import com.geekymusketeers.uncrack.domain.repository.KeyRepository
+import com.geekymusketeers.uncrack.data.db.KeyDatabase
 import kotlinx.coroutines.launch
 
 class KeyViewModel(application: Application) : AndroidViewModel(application) {

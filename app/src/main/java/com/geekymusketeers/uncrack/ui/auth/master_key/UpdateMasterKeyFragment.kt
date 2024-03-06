@@ -13,7 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.data.model.Key
+import com.geekymusketeers.uncrack.domain.model.Key
 import com.geekymusketeers.uncrack.databinding.FragmentUpdateMasterKeyBinding
 import com.geekymusketeers.uncrack.ui.fragments.settings.SecurityFragment
 import com.geekymusketeers.uncrack.util.Encryption

@@ -1,36 +1,35 @@
-package com.geekymusketeers.uncrack.data.room
+package com.geekymusketeers.uncrack.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.data.room.CardDao
+import com.geekymusketeers.uncrack.domain.model.Card
 
 @Database(
-    entities = [Account::class],
-    version = 4
+    entities = [Card::class],
+    version = 2
 )
-abstract class AccountDatabase : RoomDatabase(){
+abstract class CardDatabase : RoomDatabase() {
 
-    abstract fun accountDao() : AccountDao
+    abstract fun cardDao() : CardDao
 
     companion object{
         @Volatile
-        var INSTANCE : AccountDatabase? = null
-
+        var INSTANCE : CardDatabase? = null
         @Synchronized
-        fun getDatabase(context:Context)  : AccountDatabase {
+        fun getCardDatabase(context: Context) : CardDatabase {
 
             val tempInstance = INSTANCE
-
             if (tempInstance!=null){
                 return tempInstance
             }
-            synchronized(this) {
+            synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    AccountDatabase::class.java,
-                    "account_database"
+                    CardDatabase::class.java,
+                    "card_database"
                 ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
