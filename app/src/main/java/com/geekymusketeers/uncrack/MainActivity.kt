@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.ui
+package com.geekymusketeers.uncrack
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

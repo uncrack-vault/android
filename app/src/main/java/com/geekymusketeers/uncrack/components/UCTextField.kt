@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
@@ -29,7 +30,8 @@ import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.normal16
 
 @Composable
-fun IONTextField(
+fun UCTextField(
+    value: String,
     modifier: Modifier = Modifier,
     headerText: String = "",
     hintText: String = "",
@@ -45,8 +47,8 @@ fun IONTextField(
     minLines: Int = 1,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
-    value: String,
     shape: Shape = RoundedCornerShape(10.dp),
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onValueChange: (String) -> Unit
 ) {
     Column(
@@ -73,14 +75,16 @@ fun IONTextField(
             maxLines = maxLines,
             minLines = minLines,
             leadingIcon = leadingIcon,
+            visualTransformation = visualTransformation,
             trailingIcon = trailingIcon
         ) { onValueChange(it) } // Use String instead of MutableState<String>
     }
 }
 
 @Composable
-fun TextHeader(text: String) {
+fun TextHeader(text: String, modifier: Modifier = Modifier) {
     Text(
+        modifier = modifier,
         text = text,
         style = TextStyle(
             fontSize = 16.sp,
@@ -94,6 +98,8 @@ fun TextHeader(text: String) {
 
 @Composable
 fun TextEditField(
+    shape: Shape,
+    modifier: Modifier = Modifier,
     hintText: String = "",
     value: String = "",
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -103,16 +109,16 @@ fun TextEditField(
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = keyboardType),
     textStyle: TextStyle = normal16,
     enabled: Boolean = true,
-    shape: Shape,
     singleLine: Boolean = false,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     minLines: Int = 1,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     onValueChange: (String) -> Unit
 ) {
     OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         value = value,
         keyboardOptions = keyboardOptions,
         onValueChange = {
@@ -134,6 +140,7 @@ fun TextEditField(
         enabled = enabled,
         shape = shape,
         maxLines = maxLines,
-        minLines = minLines
+        minLines = minLines,
+        visualTransformation = visualTransformation
     )
 }

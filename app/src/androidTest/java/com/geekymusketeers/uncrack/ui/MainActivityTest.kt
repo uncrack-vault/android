@@ -1,11 +1,8 @@
 package com.geekymusketeers.uncrack.ui
 
-import android.widget.AdapterView
-import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.ViewInteraction
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.typeText
@@ -16,8 +13,8 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
-import org.hamcrest.Matchers
 import org.junit.Rule
 import org.junit.Test
 

@@ -21,8 +21,8 @@ import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 
 @Composable
 fun UCStrokeButton(
-    modifier: Modifier = Modifier,
     text: String,
+    modifier: Modifier = Modifier,
     strokeColor: Color = BackgroundDark,
     textColor: Color = BackgroundDark,
     leadingIcon: Painter? = null,

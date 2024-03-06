@@ -1,8 +1,8 @@
-package com.geekymusketeers.uncrack.data.repository
+package com.geekymusketeers.uncrack.domain.repository
 
 import androidx.lifecycle.LiveData
 import com.geekymusketeers.uncrack.data.room.AccountDao
-import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.domain.model.Account
 
 
 class AccountRepository(private val accountDao: AccountDao) {

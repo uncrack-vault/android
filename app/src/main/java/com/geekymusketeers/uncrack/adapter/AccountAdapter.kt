@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.databinding.ItemLayoutBinding
 import com.geekymusketeers.uncrack.ui.fragments.account.EditFragment
 import java.util.Locale

@@ -150,6 +150,15 @@
     <string name="register">Register</string>
     <string name="already_have_an_account">Already have an account</string>
     <string name="skip">Skip</string>
+    <string name="email_header">Enter your email</string>
+    <string name="email_hint">johndoe123@gmail.com</string>
+    <string name="password_header">Enter your password</string>
+    <string name="password_hint">****************</string>
+    <string name="name_header">Enter your name</string>
+    <string name="name_hint">John Doe</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="create">Create</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.data.model.Card
+import com.geekymusketeers.uncrack.domain.model.Card
 import com.geekymusketeers.uncrack.databinding.FragmentCardDetialsAddBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.util.Encryption

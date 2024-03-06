@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.data.model.Card
+import com.geekymusketeers.uncrack.domain.model.Card
 import com.geekymusketeers.uncrack.databinding.CardLayoutBinding
 import com.geekymusketeers.uncrack.ui.fragments.account.EditFragment
 import com.geekymusketeers.uncrack.ui.fragments.card.CardDetailsViewFragment

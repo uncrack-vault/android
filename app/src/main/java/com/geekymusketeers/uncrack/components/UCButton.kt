@@ -20,8 +20,8 @@ import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 
 @Composable
 fun UCButton(
-    modifier: Modifier = Modifier,
     text: String,
+    modifier: Modifier = Modifier,
     enabled: Boolean = true,
     trailingIcon: Painter? = null,
     leadingIcon: Painter? = null,
