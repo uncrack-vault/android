@@ -1,11 +1,11 @@
-package com.geekymusketeers.uncrack.data.room
+package com.geekymusketeers.uncrack.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.geekymusketeers.uncrack.domain.model.Key
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface KeyDao {
@@ -14,5 +14,5 @@ interface KeyDao {
     suspend fun setMasterKey(key: Key)
 
     @Query("SELECT * FROM master_key")
-    fun getMasterKey(): LiveData<List<Key>>
+    fun getMasterKey(): Flow<List<Key>>
 }

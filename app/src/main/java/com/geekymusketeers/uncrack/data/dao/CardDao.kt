@@ -1,8 +1,7 @@
-package com.geekymusketeers.uncrack.data.room
+package com.geekymusketeers.uncrack.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.domain.model.Card
 
 @Dao

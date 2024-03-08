@@ -21,27 +21,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.ui.theme.bold30
 import com.geekymusketeers.uncrack.ui.theme.normal20
+import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 
 @Composable
 fun ConfirmMasterKeyScreen(
+    navController: NavHostController,
+    masterKeyViewModel: KeyViewModel,
     modifier: Modifier = Modifier
 ) {
 
-    var confirmMasterKey by remember {
-        mutableStateOf("")
-    }
 
-    var passwordVisibility by remember {
-        mutableStateOf(false)
-    }
+    var confirmMasterKey by remember { mutableStateOf("") }
 
+    var passwordVisibility by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier.fillMaxSize()
@@ -105,10 +104,4 @@ fun ConfirmMasterKeyScreen(
             )
         }
     }
-}
-
-@Preview
-@Composable
-private fun ConfirmMasterKeyPreview() {
-    ConfirmMasterKeyScreen()
 }
