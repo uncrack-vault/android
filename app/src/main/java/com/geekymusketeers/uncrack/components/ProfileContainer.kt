@@ -21,13 +21,16 @@ import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.R
 
 @Composable
-fun ProfileContainer(onEditButtonClick: () -> Unit) {
+fun ProfileContainer(
+    modifier: Modifier = Modifier,
+    onEditButtonClick: () -> Unit
+) {
     Box(contentAlignment = Alignment.BottomEnd) {
         Image(
             painter = painterResource(id = R.drawable.no_user_profile_picture),
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = Modifier
+            modifier = modifier
                 .size(120.dp)
                 .clip(CircleShape)
         )

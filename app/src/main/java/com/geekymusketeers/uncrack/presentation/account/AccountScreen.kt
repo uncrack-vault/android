@@ -50,9 +50,7 @@ import com.geekymusketeers.uncrack.util.Util
 import java.io.ByteArrayOutputStream
 
 @Composable
-fun AccountScreen(
-    navController: NavHostController
-) {
+fun AccountScreen(navController: NavHostController, modifier: Modifier = Modifier) {
 
     val context = LocalContext.current
     var openThemeDialog by remember { mutableStateOf(false) }
@@ -124,7 +122,7 @@ fun AccountScreen(
     }
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
