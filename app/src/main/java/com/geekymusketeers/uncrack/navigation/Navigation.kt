@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -37,12 +38,16 @@ import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
+import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Navigation(modifier: Modifier = Modifier) {
+fun Navigation(
+    modifier: Modifier = Modifier,
+    masterKeyViewModel: KeyViewModel = hiltViewModel()
+) {
 
     val navController = rememberNavController()
     val backStackEntry = navController.currentBackStackEntryAsState()
@@ -101,11 +106,17 @@ fun Navigation(modifier: Modifier = Modifier) {
             }
 
             composable(route = "create_new_master_key_screen") {
-                CreateMasterKeyScreen()
+                CreateMasterKeyScreen(
+                    navController,
+                    masterKeyViewModel
+                )
             }
 
             composable(route = "confirm_master_key_screen") {
-                ConfirmMasterKeyScreen()
+                ConfirmMasterKeyScreen(
+                    navController,
+                    masterKeyViewModel
+                )
             }
         }
     }
