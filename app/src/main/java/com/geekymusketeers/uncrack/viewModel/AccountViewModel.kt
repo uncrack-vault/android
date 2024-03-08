@@ -10,9 +10,10 @@ import com.geekymusketeers.uncrack.domain.repository.AccountRepository
 import com.geekymusketeers.uncrack.util.runIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class AccountViewModel(
+class AccountViewModel @Inject constructor(
     private val repository: AccountRepository
 ) : ViewModel() {
 
