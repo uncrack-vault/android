@@ -1,5 +1,6 @@
 package com.geekymusketeers.uncrack.presentation.intro
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -67,14 +68,14 @@ class OnboardingScreen : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            OnboardingContent()
+            OnboardingContent(this@OnboardingScreen)
         }
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnboardingContent(modifier: Modifier = Modifier) {
+fun OnboardingContent(activity: Activity, modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val pages = OnBoardingItem.onboardingScreenItems(context)
@@ -110,7 +111,7 @@ fun OnboardingContent(modifier: Modifier = Modifier) {
                         context
                             .findActivity()
                             ?.apply {
-                                val loginIntent = Intent(this, LoginScreens::class.java)
+                                val loginIntent = Intent(activity, LoginScreens::class.java)
                                 startActivity(loginIntent)
                                 finish()
                             }
@@ -148,7 +149,7 @@ fun OnboardingContent(modifier: Modifier = Modifier) {
                             context
                                 .findActivity()
                                 ?.apply {
-                                    val loginIntent = Intent(this, LoginScreens::class.java)
+                                    val loginIntent = Intent(activity, LoginScreens::class.java)
                                     startActivity(loginIntent)
                                     finish()
                                 }

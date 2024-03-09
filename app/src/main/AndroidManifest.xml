@@ -48,6 +48,16 @@
             android:theme="@style/Theme.UnCrack">
         </activity>
 
+        <activity android:name=".presentation.auth.login.LoginScreens"
+            android:exported="true"
+            android:theme="@style/Theme.UnCrack">
+        </activity>
+
+        <activity android:name=".presentation.auth.signup.SignupScreen"
+            android:exported="true"
+            android:theme="@style/Theme.UnCrack">
+        </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
