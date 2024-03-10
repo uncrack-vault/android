@@ -39,6 +39,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.AccountOption
 import com.geekymusketeers.uncrack.components.ProfileContainer
 import com.geekymusketeers.uncrack.components.ThemeDialog
+import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
@@ -50,7 +51,11 @@ import com.geekymusketeers.uncrack.util.Util
 import java.io.ByteArrayOutputStream
 
 @Composable
-fun AccountScreen(navController: NavHostController, modifier: Modifier = Modifier) {
+fun AccountScreen(
+    navController: NavHostController,
+    themeViewModel: ThemeViewModel,
+    modifier: Modifier = Modifier
+) {
 
     val context = LocalContext.current
     var openThemeDialog by remember { mutableStateOf(false) }
@@ -177,7 +182,9 @@ fun AccountScreen(navController: NavHostController, modifier: Modifier = Modifie
                         AccountItems.CHANGE_MASTER_KEY -> {
                             navController.navigate("update_master_key_screen")
                         }
-                        AccountItems.BLOCK_SS -> {}
+                        AccountItems.BLOCK_SS -> {
+                            themeViewModel.blockScreenShort()
+                        }
                         else -> {}
                     }
                 }

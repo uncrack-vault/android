@@ -32,6 +32,7 @@ import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.password.PasswordScreen
 import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
+import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.FadeIn
@@ -49,7 +50,8 @@ import kotlinx.collections.immutable.persistentListOf
 fun Navigation(
     modifier: Modifier = Modifier,
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
-    passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel()
+    passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
+    themeViewModel: ThemeViewModel = hiltViewModel()
 ) {
 
     val navController = rememberNavController()
@@ -101,7 +103,10 @@ fun Navigation(
             }
 
             composable(route = "account_screen") {
-                AccountScreen(navController)
+                AccountScreen(
+                    navController,
+                    themeViewModel
+                )
             }
 
             composable(route = "update_master_key_screen") {
