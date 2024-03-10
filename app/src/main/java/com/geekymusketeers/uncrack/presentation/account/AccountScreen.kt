@@ -220,7 +220,9 @@ fun AccountScreen(navController: NavHostController, modifier: Modifier = Modifie
                             openThemeDialog = true
                         }
 
-                        AccountItems.PASSWORD_GENERATOR -> {}
+                        AccountItems.PASSWORD_GENERATOR -> {
+                            navController.navigate("password_generator_screen")
+                        }
 
                         AccountItems.INVITE_FRIENDS -> {
                             val send = Util.SEND_APP

@@ -23,6 +23,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.presentation.account.AccountScreen
+import com.geekymusketeers.uncrack.presentation.account.PasswordGenerator
+import com.geekymusketeers.uncrack.presentation.account.PasswordGeneratorViewModel
 import com.geekymusketeers.uncrack.presentation.home.HomeScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
@@ -46,7 +48,8 @@ import kotlinx.collections.immutable.persistentListOf
 @Composable
 fun Navigation(
     modifier: Modifier = Modifier,
-    masterKeyViewModel: KeyViewModel = hiltViewModel()
+    masterKeyViewModel: KeyViewModel = hiltViewModel(),
+    passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel()
 ) {
 
     val navController = rememberNavController()
@@ -102,7 +105,10 @@ fun Navigation(
             }
 
             composable(route = "update_master_key_screen") {
-                UpdateMasterKey()
+                UpdateMasterKey(
+                    navController,
+                    masterKeyViewModel
+                )
             }
 
             composable(route = "create_new_master_key_screen") {
@@ -116,6 +122,13 @@ fun Navigation(
                 ConfirmMasterKeyScreen(
                     navController,
                     masterKeyViewModel
+                )
+            }
+
+            composable(route = "password_generator_screen") {
+                PasswordGenerator(
+                    navController,
+                    passwordGeneratorViewModel
                 )
             }
         }
