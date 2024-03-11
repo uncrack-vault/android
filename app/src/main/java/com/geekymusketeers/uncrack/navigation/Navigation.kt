@@ -62,7 +62,8 @@ fun Navigation(
         "profile_screen",
         "update_master_key_screen",
         "create_new_master_key_screen",
-        "confirm_master_key_screen"
+        "confirm_master_key_screen",
+        "password_generator_screen"
     )
 
     BackPressHandler()
@@ -171,7 +172,7 @@ fun ShowBottomNavigation(
                 ),
                 BottomNavItem(
                     name = "Profile",
-                    route = "profile_screen",
+                    route = "account_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.person_icon)
                 )
             )
