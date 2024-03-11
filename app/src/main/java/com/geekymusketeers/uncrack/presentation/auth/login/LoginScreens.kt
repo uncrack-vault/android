@@ -1,5 +1,7 @@
 package com.geekymusketeers.uncrack.presentation.auth.login
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -27,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +37,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
@@ -42,6 +46,7 @@ import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
+import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,15 +66,16 @@ class LoginScreens : ComponentActivity() {
 
         setContent {
             UnCrackTheme {
-                LoginContent()
+                LoginContent(this@LoginScreens)
             }
         }
     }
 }
 
 @Composable
-fun LoginContent(modifier: Modifier = Modifier) {
+fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
 
+    val context = LocalContext.current
     val email by remember {
         mutableStateOf("")
     }
@@ -149,8 +155,11 @@ fun LoginContent(modifier: Modifier = Modifier) {
                 text = stringResource(R.string.login),
                 onClick = {
                     // TODO: Perform req operation and navigate to Home Screen
+                    context.findActivity()?.apply {
+                        startActivity(Intent(activity, MainActivity::class.java))
+                    }
                 },
-                enabled = false
+//                enabled = false
             )
 
             Spacer(modifier = Modifier.height(15.dp))

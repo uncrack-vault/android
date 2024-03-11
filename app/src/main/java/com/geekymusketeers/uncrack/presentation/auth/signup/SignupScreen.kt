@@ -40,7 +40,9 @@ import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignupScreen : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
