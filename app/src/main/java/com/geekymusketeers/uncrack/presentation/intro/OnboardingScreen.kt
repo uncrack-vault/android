@@ -47,12 +47,15 @@ import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
+import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.navigationTopBarHeight
 import com.geekymusketeers.uncrack.ui.theme.normal16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import com.geekymusketeers.uncrack.util.onClick
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class OnboardingScreen : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +71,9 @@ class OnboardingScreen : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            OnboardingContent(this@OnboardingScreen)
+            UnCrackTheme {
+                OnboardingContent(this@OnboardingScreen)
+            }
         }
     }
 }

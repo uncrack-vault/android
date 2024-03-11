@@ -32,8 +32,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
+import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
+@AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : ComponentActivity() {
 
@@ -50,7 +53,9 @@ class SplashScreen : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            SplashContent(this@SplashScreen)
+            UnCrackTheme {
+                SplashContent(this@SplashScreen)
+            }
         }
     }
 }

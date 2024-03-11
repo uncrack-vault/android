@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 @HiltViewModel
-class PasswordGeneratorViewModel : ViewModel() {
+class PasswordGeneratorViewModel @Inject constructor() : ViewModel() {
     
     private val _password = MutableLiveData<String>()
     val password: LiveData<String> = _password
