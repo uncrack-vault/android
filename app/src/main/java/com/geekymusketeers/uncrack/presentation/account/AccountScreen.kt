@@ -43,6 +43,7 @@ import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
+import com.geekymusketeers.uncrack.ui.theme.bold18
 import com.geekymusketeers.uncrack.ui.theme.medium14
 import com.geekymusketeers.uncrack.ui.theme.medium32
 import com.geekymusketeers.uncrack.ui.theme.normal14
@@ -158,7 +159,7 @@ fun AccountScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
@@ -169,9 +170,9 @@ fun AccountScreen(
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 16.dp, end = 18.dp, bottom = 18.dp),
-                    text = "Security",
-                    style = medium14.copy(color = OnPrimaryContainerLight)
+                        .padding(start = 16.dp, end = 18.dp, top = 18.dp),
+                    text = stringResource(id = R.string.security),
+                    style = bold18.copy(color = OnPrimaryContainerLight)
                 )
             }
 
@@ -194,13 +195,13 @@ fun AccountScreen(
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 16.dp, end = 18.dp, bottom = 18.dp),
-                    text = "Backup",
-                    style = medium14.copy(color = OnPrimaryContainerLight)
+                        .padding(start = 16.dp, end = 18.dp, top = 18.dp),
+                    text = stringResource(R.string.backup),
+                    style = bold18.copy(color = OnPrimaryContainerLight)
                 )
             }
 
-            items(AccountItems.entries.subList(3, AccountItems.entries.size)) {
+            items(AccountItems.entries.subList(3,5)) {
                 AccountOption(it) { onClick ->
                     when(onClick) {
                         AccountItems.EXPORT_IMPORT -> {}
@@ -214,13 +215,13 @@ fun AccountScreen(
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 16.dp, end = 18.dp, bottom = 18.dp),
-                    text = "General",
-                    style = medium14.copy(color = OnPrimaryContainerLight)
+                        .padding(start = 16.dp, end = 18.dp, top = 18.dp),
+                    text = stringResource(R.string.general),
+                    style = bold18.copy(color = OnPrimaryContainerLight)
                 )
             }
 
-            items(AccountItems.entries.subList(3, AccountItems.entries.size)) {
+            items(AccountItems.entries.subList(5,11)) {
                 AccountOption(it) { onClick ->
                     when(onClick) {
                         AccountItems.THEME -> {
@@ -272,13 +273,13 @@ fun AccountScreen(
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 16.dp, end = 18.dp, bottom = 18.dp),
-                    text = "Danger Zone",
-                    style = medium14.copy(color = OnPrimaryContainerLight)
+                        .padding(start = 16.dp, end = 18.dp, top = 18.dp),
+                    text = stringResource(R.string.danger_zone),
+                    style = bold18.copy(color = OnPrimaryContainerLight)
                 )
             }
 
-            items(AccountItems.entries.subList(3, AccountItems.entries.size)) {
+            items(AccountItems.entries.subList(11, AccountItems.entries.size)) {
                 AccountOption(it) { onClick ->
                     when(onClick) {
                         AccountItems.LOG_OUT -> {

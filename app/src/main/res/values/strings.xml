@@ -170,6 +170,9 @@
     <string name="special_symbols">Special symbols</string>
     <string name="include">Include:</string>
     <string name="copy">Copy</string>
+    <string name="backup">Backup</string>
+    <string name="general">General</string>
+    <string name="danger_zone">Danger Zone</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
