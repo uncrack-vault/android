@@ -36,7 +36,8 @@ import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.bold20
-import com.geekymusketeers.uncrack.ui.theme.medium20
+import com.geekymusketeers.uncrack.ui.theme.medium24
+import com.geekymusketeers.uncrack.ui.theme.normal16
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -82,19 +83,22 @@ fun PasswordGenerator(
 
             Text(
                 text = stringResource(id = R.string.password_length),
-                style = medium20.copy(OnPrimaryContainerLight)
+                style = medium24.copy(OnPrimaryContainerLight)
             )
 
             Spacer(modifier = Modifier.height(5.dp))
 
             passwordLength?.let {
                 Slider(
+                    modifier = Modifier.fillMaxWidth(),
                     value = it.toFloat(),
                     onValueChange = { password ->
                         passwordGeneratorViewModel.updatePasswordLength(password.toInt())
                     },
                     valueRange = 0f..32f,
-                    colors = SliderDefaults.colors(PrimaryLight)
+                    colors = SliderDefaults.colors(
+                        activeTrackColor = PrimaryLight
+                    )
                 )
             }
 
@@ -102,38 +106,35 @@ fun PasswordGenerator(
 
             Text(
                 text = stringResource(R.string.include),
-                style = medium20.copy(OnPrimaryContainerLight)
+                style = medium24.copy(OnPrimaryContainerLight)
             )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
+
+            SwitchItem(
+                label = stringResource(R.string.numbers),
+                checked = includeNumbers
             ) {
-                SwitchItem(
-                    label = stringResource(R.string.numbers),
-                    checked = includeNumbers
-                ) {
-                    passwordGeneratorViewModel.updateIncludeNumbers(it)
-                }
-                SwitchItem(
-                    label = stringResource(R.string.uppercase_letters),
-                    checked = includeUppercase
-                ) {
-                    passwordGeneratorViewModel.updateIncludeUppercase(it)
-                }
-                SwitchItem(
-                    label = stringResource(R.string.lowercase_letters),
-                    checked = includeLowercase
-                ) {
-                    passwordGeneratorViewModel.updateIncludeLowercase(it)
-                }
-                SwitchItem(
-                    label = stringResource(R.string.special_symbols),
-                    checked = includeSpecialChars
-                ) {
-                    passwordGeneratorViewModel.updateIncludeSpecialChars(it)
-                }
+                passwordGeneratorViewModel.updateIncludeNumbers(it)
             }
+            SwitchItem(
+                label = stringResource(R.string.uppercase_letters),
+                checked = includeUppercase
+            ) {
+                passwordGeneratorViewModel.updateIncludeUppercase(it)
+            }
+            SwitchItem(
+                label = stringResource(R.string.lowercase_letters),
+                checked = includeLowercase
+            ) {
+                passwordGeneratorViewModel.updateIncludeLowercase(it)
+            }
+            SwitchItem(
+                label = stringResource(R.string.special_symbols),
+                checked = includeSpecialChars
+            ) {
+                passwordGeneratorViewModel.updateIncludeSpecialChars(it)
+            }
+
 
             Spacer(modifier = Modifier.weight(1f))
 
@@ -171,11 +172,15 @@ fun SwitchItem(
 ) {
     Row(
         modifier = modifier
-            .padding(vertical = 8.dp)
             .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = label, modifier = Modifier.weight(1f))
+        Text(
+            text = label,
+            style = normal16.copy(OnPrimaryContainerLight)
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
 
         Switch(
             checked = checked,
