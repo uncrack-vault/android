@@ -146,6 +146,9 @@ dependencies {
     // Compose-lint
     lintChecks("com.slack.lint.compose:compose-lint-checks:1.3.1")
 
+    // Timber
+    implementation ("com.jakewharton.timber:timber:5.0.1")
+
     //kotlinx.collections.immutable
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
 

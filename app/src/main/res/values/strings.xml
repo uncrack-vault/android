@@ -168,11 +168,15 @@
     <string name="uppercase_letters">Uppercase letters</string>
     <string name="lowercase_letters">Lowercase letters</string>
     <string name="special_symbols">Special symbols</string>
-    <string name="include">Include:</string>
+    <string name="include_following">Include following:</string>
     <string name="copy">Copy</string>
     <string name="backup">Backup</string>
     <string name="general">General</string>
     <string name="danger_zone">Danger Zone</string>
+    <string name="update_master_key">Update Master Key</string>
+    <string name="old_master_key">Old Master Key</string>
+    <string name="new_master_key">New Master Key</string>
+    <string name="password_generated_length">Password Length  %1$s</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
