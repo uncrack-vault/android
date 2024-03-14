@@ -30,7 +30,6 @@ import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.domain.model.Key
 import com.geekymusketeers.uncrack.ui.theme.bold30
-import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 
 @Composable
@@ -68,7 +67,7 @@ fun CreateMasterKeyScreen(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.master_key),
                 hintText = stringResource(id = R.string.password_hint),
-                value = masterKeyObserver ?: "",
+                value = masterKeyObserver,
                 onValueChange = {
                     masterKeyViewModel.setMasterKey(it)
                 },
@@ -98,7 +97,7 @@ fun CreateMasterKeyScreen(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.confirm_master_key),
                 hintText = stringResource(id = R.string.password_hint),
-                value = confirmMasterKeyObserver ?: "",
+                value = confirmMasterKeyObserver,
                 onValueChange = {
                     masterKeyViewModel.setConfirmMasterKey(it)
                 },
