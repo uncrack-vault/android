@@ -1,10 +1,7 @@
 package com.geekymusketeers.uncrack.presentation.account
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
-import android.provider.MediaStore
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -48,8 +45,8 @@ import com.geekymusketeers.uncrack.ui.theme.medium14
 import com.geekymusketeers.uncrack.ui.theme.medium32
 import com.geekymusketeers.uncrack.ui.theme.normal14
 import com.geekymusketeers.uncrack.ui.theme.normal16
+import com.geekymusketeers.uncrack.util.Constants.INVITE
 import com.geekymusketeers.uncrack.util.Util
-import java.io.ByteArrayOutputStream
 
 @Composable
 fun AccountScreen(
@@ -233,22 +230,12 @@ fun AccountScreen(
                         }
 
                         AccountItems.INVITE_FRIENDS -> {
-                            val send = Util.SEND_APP
-                            val b = BitmapFactory.decodeResource(context.resources, R.drawable.banner_uncrack)
-                            val share = Intent(Intent.ACTION_SEND)
-                            share.type = "image/jpeg"
-                            val bytes = ByteArrayOutputStream()
-                            b.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-                            share.putExtra(Intent.EXTRA_TEXT, send)
-                            val path = MediaStore.Images.Media.insertImage(
-                                context.contentResolver,
-                                b,
-                                "Invite",
-                                null
-                            )
-                            val imageUri = Uri.parse(path)
-                            share.putExtra(Intent.EXTRA_STREAM, imageUri)
-                            context.startActivity(Intent.createChooser(share, "Select"))
+                            val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                                putExtra(Intent.EXTRA_TEXT, INVITE)
+                                type = "text/plain"
+                            }
+                            val shareIntent = Intent.createChooser(sendIntent, null)
+                            context.startActivity(shareIntent)
                         }
 
                         AccountItems.RATE_UNCRACK -> {
@@ -293,10 +280,12 @@ fun AccountScreen(
 
             item {
                 Text(
+                    modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
                     text = "Version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
                     style = normal14.copy(color = SurfaceTintLight)
                 )
                 Text(
+                    modifier = Modifier.padding(bottom = 150.dp),
                     text = stringResource(R.string.by_aritra_das),
                     style = normal14.copy(color = SurfaceTintLight)
                 )
