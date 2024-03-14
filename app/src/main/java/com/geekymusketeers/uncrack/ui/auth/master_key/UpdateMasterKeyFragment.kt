@@ -67,60 +67,60 @@ class UpdateMasterKeyFragment : Fragment() {
     }
 
     private fun clickHandlers() {
-        buttonLayout.setOnClickListener {
-            updateKeyViewModel.getMasterKey().observe(viewLifecycleOwner) {masterKey ->
-
-                val oldMasterKey = binding.layoutOldMasterKey.text.toString()
-                val updatedMasterKey = binding.layoutMasterKey.text.toString()
-                val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
-                val correctOldMasterKey = encryption.decryptOrNull(masterKey[0].password)
-                showProgress()
-
-                if (oldMasterKey.isEmpty() || oldMasterKey.isBlank()) {
-                    binding.apply {
-                        oldMasterKeyHelperTV.text = getString(R.string.old_master_key_cannot_be_blank)
-                        oldMasterKeyHelperTV.visibility = View.VISIBLE
-                    }
-                    stopProgress()
-                }
-                else {
-                    if (oldMasterKey!=correctOldMasterKey){
-                        binding.apply {
-                            oldMasterKeyHelperTV.text = getString(R.string.old_master_key_is_incorrect)
-                            oldMasterKeyHelperTV.visibility = View.VISIBLE
-                        }
-                        stopProgress()
-                    }
-                    else {
-                        if (updatedMasterKey.isBlank() || updatedMasterKey.isEmpty()) {
-                            binding.apply {
-                                updatedMasterKeyHelperTV.text = getString(R.string.master_key_cannot_be_blank)
-                                updatedMasterKeyHelperTV.visibility = View.VISIBLE
-                            }
-                            stopProgress()
-                        }
-                        else {
-                            if (updatedMasterKey.length <= 5) {
-                                binding.apply {
-                                    updatedMasterKeyHelperTV.text = getString(R.string.at_least_6_letter_long)
-                                    updatedMasterKeyHelperTV.visibility = View.VISIBLE
-                                }
-                                stopProgress()
-                            }
-                            else {
-                                lifecycleScope.launch(Dispatchers.Main) {
-                                    delay(800L)
-                                    updateKey()
-                                    Toast.makeText(requireContext(),"Successfully Updated the Master Key",Toast.LENGTH_SHORT).show()
-                                    goToSecurityFragment()
-                                }
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
+//        buttonLayout.setOnClickListener {
+//            updateKeyViewModel.getMasterKey().observe(viewLifecycleOwner) {masterKey ->
+//
+//                val oldMasterKey = binding.layoutOldMasterKey.text.toString()
+//                val updatedMasterKey = binding.layoutMasterKey.text.toString()
+//                val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
+//                val correctOldMasterKey = encryption.decryptOrNull(masterKey[0].password)
+//                showProgress()
+//
+//                if (oldMasterKey.isEmpty() || oldMasterKey.isBlank()) {
+//                    binding.apply {
+//                        oldMasterKeyHelperTV.text = getString(R.string.old_master_key_cannot_be_blank)
+//                        oldMasterKeyHelperTV.visibility = View.VISIBLE
+//                    }
+//                    stopProgress()
+//                }
+//                else {
+//                    if (oldMasterKey!=correctOldMasterKey){
+//                        binding.apply {
+//                            oldMasterKeyHelperTV.text = getString(R.string.old_master_key_is_incorrect)
+//                            oldMasterKeyHelperTV.visibility = View.VISIBLE
+//                        }
+//                        stopProgress()
+//                    }
+//                    else {
+//                        if (updatedMasterKey.isBlank() || updatedMasterKey.isEmpty()) {
+//                            binding.apply {
+//                                updatedMasterKeyHelperTV.text = getString(R.string.master_key_cannot_be_blank)
+//                                updatedMasterKeyHelperTV.visibility = View.VISIBLE
+//                            }
+//                            stopProgress()
+//                        }
+//                        else {
+//                            if (updatedMasterKey.length <= 5) {
+//                                binding.apply {
+//                                    updatedMasterKeyHelperTV.text = getString(R.string.at_least_6_letter_long)
+//                                    updatedMasterKeyHelperTV.visibility = View.VISIBLE
+//                                }
+//                                stopProgress()
+//                            }
+//                            else {
+//                                lifecycleScope.launch(Dispatchers.Main) {
+//                                    delay(800L)
+//                                    updateKey()
+//                                    Toast.makeText(requireContext(),"Successfully Updated the Master Key",Toast.LENGTH_SHORT).show()
+//                                    goToSecurityFragment()
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//
+//            }
+//        }
     }
 
     private fun goToSecurityFragment() {

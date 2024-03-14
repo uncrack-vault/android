@@ -4,36 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.geekymusketeers.uncrack.data.room.KeyDao
+import com.geekymusketeers.uncrack.data.dao.KeyDao
 import com.geekymusketeers.uncrack.domain.model.Key
 
-@Database(entities = [Key::class],
-    version = 3)
+@Database(
+    entities = [Key::class],
+    version = 3,
+    exportSchema = false
+)
 abstract class KeyDatabase : RoomDatabase() {
-
-    abstract fun keyDao(): KeyDao
-
-    companion object {
-        @Volatile
-        var INSTANCE : KeyDatabase? = null
-
-        @Synchronized
-        fun getDatabase(context: Context) : KeyDatabase {
-
-            val tempInstance = INSTANCE
-
-            if (tempInstance!=null) {
-                return tempInstance
-            }
-            synchronized(this) {
-                val instance = Room.databaseBuilder (
-                    context.applicationContext,
-                    KeyDatabase::class.java,
-                    "masterKey_database"
-                ).fallbackToDestructiveMigration().build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }
+    abstract val keyDao: KeyDao
 }

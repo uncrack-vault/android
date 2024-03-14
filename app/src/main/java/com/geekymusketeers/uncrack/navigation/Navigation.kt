@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -21,10 +22,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.presentation.homeScreen.HomeScreen
-import com.geekymusketeers.uncrack.presentation.passwordScreen.PasswordScreen
-import com.geekymusketeers.uncrack.presentation.profileScreen.ProfileScreen
-import com.geekymusketeers.uncrack.presentation.shieldScreen.ShieldScreen
+import com.geekymusketeers.uncrack.presentation.account.AccountScreen
+import com.geekymusketeers.uncrack.presentation.account.PasswordGenerator
+import com.geekymusketeers.uncrack.presentation.account.PasswordGeneratorViewModel
+import com.geekymusketeers.uncrack.presentation.home.HomeScreen
+import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
+import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
+import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
+import com.geekymusketeers.uncrack.presentation.password.PasswordScreen
+import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
+import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
+import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.FadeIn
@@ -33,18 +41,29 @@ import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
+import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Navigation(modifier: Modifier = Modifier) {
+fun Navigation(
+    modifier: Modifier = Modifier,
+    masterKeyViewModel: KeyViewModel = hiltViewModel(),
+    passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
+    themeViewModel: ThemeViewModel = hiltViewModel()
+) {
 
     val navController = rememberNavController()
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = persistentListOf(
-        "add_password_screen"
+        "add_password_screen",
+        "profile_screen",
+        "update_master_key_screen",
+        "create_new_master_key_screen",
+        "confirm_master_key_screen",
+        "password_generator_screen"
     )
 
     BackPressHandler()
@@ -83,6 +102,41 @@ fun Navigation(modifier: Modifier = Modifier) {
             composable(route = "profile_screen") {
                 ProfileScreen()
             }
+
+            composable(route = "account_screen") {
+                AccountScreen(
+                    navController,
+                    themeViewModel
+                )
+            }
+
+            composable(route = "update_master_key_screen") {
+                UpdateMasterKey(
+                    navController,
+                    masterKeyViewModel
+                )
+            }
+
+            composable(route = "create_new_master_key_screen") {
+                CreateMasterKeyScreen(
+                    navController,
+                    masterKeyViewModel
+                )
+            }
+
+            composable(route = "confirm_master_key_screen") {
+                ConfirmMasterKeyScreen(
+                    navController,
+                    masterKeyViewModel
+                )
+            }
+
+            composable(route = "password_generator_screen") {
+                PasswordGenerator(
+                    navController,
+                    passwordGeneratorViewModel
+                )
+            }
         }
     }
 }
@@ -118,7 +172,7 @@ fun ShowBottomNavigation(
                 ),
                 BottomNavItem(
                     name = "Profile",
-                    route = "profile_screen",
+                    route = "account_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.person_icon)
                 )
             )

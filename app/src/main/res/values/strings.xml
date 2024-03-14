@@ -150,6 +150,9 @@
     <string name="register">Register</string>
     <string name="already_have_an_account">Already have an account</string>
     <string name="skip">Skip</string>
+    <string name="cancel">Cancel</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="logout">Logout?</string>
     <string name="email_header">Enter your email</string>
     <string name="email_hint">johndoe123@gmail.com</string>
     <string name="password_header">Enter your password</string>
@@ -159,6 +162,21 @@
     <string name="login">Login</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="create">Create</string>
+    <string name="by_aritra_das">By Aritra Das 💙</string>
+    <string name="save">Save</string>
+    <string name="numbers">Numbers</string>
+    <string name="uppercase_letters">Uppercase letters</string>
+    <string name="lowercase_letters">Lowercase letters</string>
+    <string name="special_symbols">Special symbols</string>
+    <string name="include_following">Include following:</string>
+    <string name="copy">Copy</string>
+    <string name="backup">Backup</string>
+    <string name="general">General</string>
+    <string name="danger_zone">Danger Zone</string>
+    <string name="update_master_key">Update Master Key</string>
+    <string name="old_master_key">Old Master Key</string>
+    <string name="new_master_key">New Master Key</string>
+    <string name="password_generated_length">Password Length  %1$s</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

@@ -32,7 +32,7 @@
             android:theme="@style/Theme.UnCrack"/>
 
         <activity
-            android:name=".presentation.introScreens.SplashScreen"
+            android:name=".presentation.intro.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.UnCrack">
             <intent-filter>
@@ -43,7 +43,17 @@
         </activity>
 
         <activity
-            android:name=".presentation.introScreens.OnboardingScreen"
+            android:name=".presentation.intro.OnboardingScreen"
+            android:exported="true"
+            android:theme="@style/Theme.UnCrack">
+        </activity>
+
+        <activity android:name=".presentation.auth.login.LoginScreens"
+            android:exported="true"
+            android:theme="@style/Theme.UnCrack">
+        </activity>
+
+        <activity android:name=".presentation.auth.signup.SignupScreen"
             android:exported="true"
             android:theme="@style/Theme.UnCrack">
         </activity>

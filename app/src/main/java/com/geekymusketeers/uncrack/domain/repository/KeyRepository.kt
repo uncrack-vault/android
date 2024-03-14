@@ -1,14 +1,11 @@
 package com.geekymusketeers.uncrack.domain.repository
 
-import androidx.lifecycle.LiveData
 import com.geekymusketeers.uncrack.domain.model.Key
-import com.geekymusketeers.uncrack.data.room.KeyDao
+import kotlinx.coroutines.flow.Flow
 
-class KeyRepository(private val keyDao: KeyDao) {
+interface KeyRepository {
 
-    fun getMasterKey(): LiveData<List<Key>> = keyDao.getMasterKey()
+    suspend fun setMasterKey(key: Key)
 
-    suspend fun setMasterKey(key: Key) {
-        keyDao.setMasterKey(key)
-    }
+    fun getMasterKey(): Flow<List<Key>>
 }

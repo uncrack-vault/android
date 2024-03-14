@@ -12,7 +12,7 @@ import com.geekymusketeers.uncrack.databinding.ActivitySplashBinding
 import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.ui.auth.MasterKeyActivity
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
-import com.geekymusketeers.uncrack.viewModel.ViewModelFactory
+//import com.geekymusketeers.uncrack.viewModel.ViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplashBinding
     private var cancellationSignal: CancellationSignal? = null
     private lateinit var biometricPrompt: BiometricPrompt
-    private val keyViewModel by viewModels<KeyViewModel> { ViewModelFactory() }
+//    private val keyViewModel by viewModels<KeyViewModel> { ViewModelFactory() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,28 +60,28 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun handleMasterKey() {
-        keyViewModel.getMasterKey().observe(this) {
-            when {
-                it.isEmpty() -> {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        delay(1000)
-                        val intent = Intent(this@SplashActivity, MasterKeyActivity::class.java)
-                        intent.putExtra("flow","createMasterKey")
-                        startActivity(intent)
-                        finish()
-                    }
-                }
-                else -> {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        delay(1000)
-                        val intent = Intent(this@SplashActivity, MasterKeyActivity::class.java)
-                        intent.putExtra("flow","askForMasterKey")
-                        startActivity(intent)
-                        finish()
-                    }
-                }
-            }
-        }
+//        keyViewModel.getMasterKey().observe(this) {
+//            when {
+//                it.isEmpty() -> {
+//                    CoroutineScope(Dispatchers.Main).launch {
+//                        delay(1000)
+//                        val intent = Intent(this@SplashActivity, MasterKeyActivity::class.java)
+//                        intent.putExtra("flow","createMasterKey")
+//                        startActivity(intent)
+//                        finish()
+//                    }
+//                }
+//                else -> {
+//                    CoroutineScope(Dispatchers.Main).launch {
+//                        delay(1000)
+//                        val intent = Intent(this@SplashActivity, MasterKeyActivity::class.java)
+//                        intent.putExtra("flow","askForMasterKey")
+//                        startActivity(intent)
+//                        finish()
+//                    }
+//                }
+//            }
+//        }
     }
 
     private fun showDialog() {

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.geekymusketeers.uncrack.data.room.CardDao
+import com.geekymusketeers.uncrack.data.dao.CardDao
 import com.geekymusketeers.uncrack.domain.model.Card
 
 @Database(

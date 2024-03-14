@@ -1,7 +1,7 @@
 package com.geekymusketeers.uncrack.components
 
 import androidx.compose.runtime.Composable
-import com.geekymusketeers.uncrack.presentation.introScreens.model.OnBoardingItem
+import com.geekymusketeers.uncrack.presentation.intro.model.OnBoardingItem
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text

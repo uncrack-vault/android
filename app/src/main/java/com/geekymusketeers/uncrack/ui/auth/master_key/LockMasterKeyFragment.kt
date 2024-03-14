@@ -62,35 +62,35 @@ class LockMasterKeyFragment : Fragment() {
 
     private fun clickHandlers() {
         buttonLayout.setOnClickListener {
-            checkKeyViewModel.getMasterKey().observe(viewLifecycleOwner) { key ->
-                val inputMasterKey = binding.inputMasterKey.text.toString()
-                showProgress()
-                val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
-                val correctMasterKey = encryption.decryptOrNull(key[0].password)
-                if (inputMasterKey.isEmpty() || inputMasterKey.isBlank()){
-                    binding.apply {
-                        inputMasterKeyHelperTV.text = getString(R.string.master_key_cannot_be_blank)
-                        inputMasterKeyHelperTV.visibility = View.VISIBLE
-                    }
-                    stopProgress()
-                    return@observe
-                } else {
-                    if (inputMasterKey == correctMasterKey) {
-                        lifecycleScope.launch(Dispatchers.Main) {
-                            delay(1000L)
-                            goToMainActivity()
-                        }
-                    }
-                    else {
-                        binding.apply {
-                            inputMasterKeyHelperTV.text = getString(R.string.incorrect_password)
-                            inputMasterKeyHelperTV.visibility = View.VISIBLE
-                        }
-                        stopProgress()
-                        return@observe
-                    }
-                }
-            }
+//            checkKeyViewModel.getMasterKey().observe(viewLifecycleOwner) { key ->
+//                val inputMasterKey = binding.inputMasterKey.text.toString()
+//                showProgress()
+//                val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
+//                val correctMasterKey = encryption.decryptOrNull(key[0].password)
+//                if (inputMasterKey.isEmpty() || inputMasterKey.isBlank()){
+//                    binding.apply {
+//                        inputMasterKeyHelperTV.text = getString(R.string.master_key_cannot_be_blank)
+//                        inputMasterKeyHelperTV.visibility = View.VISIBLE
+//                    }
+//                    stopProgress()
+//                    return@observe
+//                } else {
+//                    if (inputMasterKey == correctMasterKey) {
+//                        lifecycleScope.launch(Dispatchers.Main) {
+//                            delay(1000L)
+//                            goToMainActivity()
+//                        }
+//                    }
+//                    else {
+//                        binding.apply {
+//                            inputMasterKeyHelperTV.text = getString(R.string.incorrect_password)
+//                            inputMasterKeyHelperTV.visibility = View.VISIBLE
+//                        }
+//                        stopProgress()
+//                        return@observe
+//                    }
+//                }
+//            }
         }
 
         binding.passwordToggle.setOnClickListener {

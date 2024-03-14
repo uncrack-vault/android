@@ -44,6 +44,7 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.4"
@@ -145,10 +146,15 @@ dependencies {
     // Compose-lint
     lintChecks("com.slack.lint.compose:compose-lint-checks:1.3.1")
 
+    // Timber
+    implementation ("com.jakewharton.timber:timber:5.0.1")
+
     //kotlinx.collections.immutable
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
 
     // Circular Progress bar
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
 
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
 }
