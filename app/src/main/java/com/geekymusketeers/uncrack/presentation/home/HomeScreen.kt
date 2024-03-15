@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -33,6 +32,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.CategoryCard
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
@@ -43,6 +44,7 @@ import com.geekymusketeers.uncrack.ui.theme.normal16
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
 
@@ -92,7 +94,12 @@ fun HomeScreen(
                 onSearch = {},
                 active = false,
                 onActiveChange = {},
-                placeholder = { Text(text = "Search here", style = normal16)},
+                placeholder = {
+                    Text(
+                        text = "Search here",
+                        style = normal16
+                    )
+                },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) }
             ) { }
 
@@ -110,7 +117,9 @@ fun HomeScreen(
                 Text(
                     modifier = Modifier
                         .padding(top = 4.dp)
-                        .clickable { },
+                        .clickable {
+                            navController.navigate("category_screen")
+                        },
                     text = "See all",
                     style = normal14.copy(Color.Gray)
                 )
@@ -161,5 +170,8 @@ fun HomeScreen(
 @Preview
 @Composable
 private fun HomeScreenPrev() {
-    HomeScreen(modifier = Modifier)
+    HomeScreen(
+        navController = rememberNavController(),
+        modifier = Modifier
+    )
 }

@@ -25,6 +25,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.presentation.account.AccountScreen
 import com.geekymusketeers.uncrack.presentation.account.PasswordGenerator
 import com.geekymusketeers.uncrack.presentation.account.PasswordGeneratorViewModel
+import com.geekymusketeers.uncrack.presentation.category.CategoryScreen
 import com.geekymusketeers.uncrack.presentation.home.HomeScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
@@ -63,7 +64,8 @@ fun Navigation(
         "update_master_key_screen",
         "create_new_master_key_screen",
         "confirm_master_key_screen",
-        "password_generator_screen"
+        "password_generator_screen",
+        "category_screen"
     )
 
     BackPressHandler()
@@ -88,7 +90,9 @@ fun Navigation(
         ) {
 
             composable(route = "home_screen") {
-                HomeScreen()
+                HomeScreen(
+                    navController
+                )
             }
 
             composable(route = "password_screen") {
@@ -135,6 +139,12 @@ fun Navigation(
                 PasswordGenerator(
                     navController,
                     passwordGeneratorViewModel
+                )
+            }
+
+            composable(route = "category_screen") {
+                CategoryScreen(
+                    navController
                 )
             }
         }
