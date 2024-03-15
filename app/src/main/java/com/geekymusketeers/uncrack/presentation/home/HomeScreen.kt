@@ -119,7 +119,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(20.dp))
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(40.dp),
+                horizontalArrangement = Arrangement.spacedBy(28.dp),
             ) {
                 CategoryCard(
                     icon = R.drawable.category_social,
