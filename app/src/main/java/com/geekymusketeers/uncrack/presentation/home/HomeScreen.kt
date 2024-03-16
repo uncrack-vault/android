@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -110,7 +111,7 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Manager Passwords",
+                    text = stringResource(R.string.manager_passwords),
                     style = bold20.copy(Color.Black)
                 )
 
@@ -132,7 +133,7 @@ fun HomeScreen(
             ) {
                 CategoryCard(
                     icon = R.drawable.category_social,
-                    text = "Social",
+                    text = stringResource(id = R.string.social),
                     onClick = {
 
                     }
@@ -140,7 +141,7 @@ fun HomeScreen(
 
                 CategoryCard(
                     icon = R.drawable.category_brower,
-                    text = "Browser",
+                    text = stringResource(R.string.browser),
                     onClick = {
 
                     }
@@ -148,7 +149,7 @@ fun HomeScreen(
 
                 CategoryCard(
                     icon = R.drawable.category_card,
-                    text = "Card",
+                    text = stringResource(R.string.card),
                     onClick = {
 
                     }
@@ -158,11 +159,11 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(30.dp))
 
             Text(
-                text = "Favourites",
+                text = stringResource(R.string.favourites),
                 style = bold20.copy(Color.Black)
             )
 
-
+            // TODO: FAV list
         }
     }
 }

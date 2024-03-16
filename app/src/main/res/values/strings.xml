@@ -177,6 +177,10 @@
     <string name="old_master_key">Old Master Key</string>
     <string name="new_master_key">New Master Key</string>
     <string name="password_generated_length">Password Length  %1$s</string>
+    <string name="manager_passwords">Manager Passwords</string>
+    <string name="browser">Browser</string>
+    <string name="card">Card</string>
+    <string name="favourites">Favourites</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
