@@ -13,18 +13,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -38,18 +29,14 @@ import androidx.navigation.compose.rememberNavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.CategoryCard
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
-import com.geekymusketeers.uncrack.ui.theme.bold20
-import com.geekymusketeers.uncrack.ui.theme.normal14
-import com.geekymusketeers.uncrack.ui.theme.normal16
+import com.geekymusketeers.uncrack.ui.theme.medium24
+import com.geekymusketeers.uncrack.ui.theme.normal22
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-
-    var searchQuery by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
         modifier = modifier.fillMaxWidth()
@@ -67,44 +54,30 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center
+                ) {
 
-                Text(
-                    modifier = Modifier.padding(top = 16.dp),
-                    text = "Hello, Aritra",
-                    style = bold20.copy(Color.Black)
-                )
+                    Image(
+                        painter = painterResource(id = R.drawable.no_user_profile_picture),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(56.dp)
+                            .clip(CircleShape)
+                            .clickable { navController.navigate("profile_screen") }
+                    )
 
-                Image(
-                    painter = painterResource(id = R.drawable.no_user_profile_picture),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(56.dp)
-                        .clip(CircleShape)
-                )
+                    Text(
+                        modifier = Modifier.padding(top = 16.dp),
+                        text = "Hello, Aritra",
+                        style = medium24.copy(Color.Black)
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
-
-            SearchBar(
-                modifier = Modifier.fillMaxWidth(),
-                query = searchQuery,
-                onQueryChange = {
-                    searchQuery = it
-                },
-                onSearch = {},
-                active = false,
-                onActiveChange = {},
-                placeholder = {
-                    Text(
-                        text = "Search here",
-                        style = normal16
-                    )
-                },
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) }
-            ) { }
-
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(50.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -112,17 +85,7 @@ fun HomeScreen(
             ) {
                 Text(
                     text = stringResource(R.string.manager_passwords),
-                    style = bold20.copy(Color.Black)
-                )
-
-                Text(
-                    modifier = Modifier
-                        .padding(top = 4.dp)
-                        .clickable {
-                            navController.navigate("category_screen")
-                        },
-                    text = "See all",
-                    style = normal14.copy(Color.Gray)
+                    style = normal22.copy(Color.Black)
                 )
             }
 
@@ -159,8 +122,8 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(30.dp))
 
             Text(
-                text = stringResource(R.string.favourites),
-                style = bold20.copy(Color.Black)
+                text = stringResource(R.string.recently_used),
+                style = normal22.copy(Color.Black)
             )
 
             // TODO: FAV list
