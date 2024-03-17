@@ -180,7 +180,7 @@
     <string name="manager_passwords">Manager Passwords</string>
     <string name="browser">Browser</string>
     <string name="card">Card</string>
-    <string name="favourites">Favourites</string>
+    <string name="recently_used">Recently Used</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
