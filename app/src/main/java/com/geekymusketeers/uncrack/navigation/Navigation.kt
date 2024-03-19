@@ -32,6 +32,7 @@ import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
+import com.geekymusketeers.uncrack.presentation.vault.AddPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.VaultScreen
 import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
@@ -43,6 +44,7 @@ import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
+import com.geekymusketeers.uncrack.viewModel.VaultViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -52,7 +54,8 @@ fun Navigation(
     modifier: Modifier = Modifier,
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
-    themeViewModel: ThemeViewModel = hiltViewModel()
+    themeViewModel: ThemeViewModel = hiltViewModel(),
+    vaultViewModel: VaultViewModel = hiltViewModel()
 ) {
 
     val navController = rememberNavController()
@@ -96,7 +99,14 @@ fun Navigation(
             }
 
             composable(route = "vault_screen") {
-                VaultScreen()
+                VaultScreen(
+                    onFabClicked = { navController.navigate("add_password_screen")},
+                    vaultViewModel = vaultViewModel
+                )
+            }
+
+            composable(route = "add_password_screen") {
+                AddPasswordScreen()
             }
 
             composable(route = "shield_screen") {
