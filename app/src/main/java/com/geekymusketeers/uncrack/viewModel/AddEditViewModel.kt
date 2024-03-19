@@ -25,7 +25,7 @@ class AddEditViewModel : ViewModel() {
     // Save Data
 
     suspend fun saveData(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account : Account
     ) = viewModelScope.launch {
 
@@ -48,7 +48,7 @@ class AddEditViewModel : ViewModel() {
     }
 
     private suspend fun saveInRoomDB(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account: Account
     ) : Int {
 
@@ -61,7 +61,7 @@ class AddEditViewModel : ViewModel() {
     // Update Data
 
     suspend fun updateData(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account: Account
     ) = viewModelScope.launch {
 
@@ -73,7 +73,7 @@ class AddEditViewModel : ViewModel() {
     }
 
     private suspend fun updateInRoomDB(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account: Account
     ): Int {
 
@@ -92,7 +92,7 @@ class AddEditViewModel : ViewModel() {
     // Delete Data
 
     suspend fun deleteEntry(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account: Account
     ) = viewModelScope.launch {
 
@@ -112,7 +112,7 @@ class AddEditViewModel : ViewModel() {
     }
 
     private suspend fun deleteInRoomDB(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account: Account
     ): Int {
 
