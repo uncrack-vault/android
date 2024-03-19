@@ -25,13 +25,14 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.presentation.account.AccountScreen
 import com.geekymusketeers.uncrack.presentation.account.PasswordGenerator
 import com.geekymusketeers.uncrack.presentation.account.PasswordGeneratorViewModel
+import com.geekymusketeers.uncrack.presentation.category.CategoryScreen
 import com.geekymusketeers.uncrack.presentation.home.HomeScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
-import com.geekymusketeers.uncrack.presentation.password.PasswordScreen
 import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
+import com.geekymusketeers.uncrack.presentation.vault.VaultScreen
 import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
@@ -63,7 +64,8 @@ fun Navigation(
         "update_master_key_screen",
         "create_new_master_key_screen",
         "confirm_master_key_screen",
-        "password_generator_screen"
+        "password_generator_screen",
+        "category_screen"
     )
 
     BackPressHandler()
@@ -88,11 +90,13 @@ fun Navigation(
         ) {
 
             composable(route = "home_screen") {
-                HomeScreen()
+                HomeScreen(
+                    navController
+                )
             }
 
-            composable(route = "password_screen") {
-                PasswordScreen()
+            composable(route = "vault_screen") {
+                VaultScreen()
             }
 
             composable(route = "shield_screen") {
@@ -137,6 +141,12 @@ fun Navigation(
                     passwordGeneratorViewModel
                 )
             }
+
+            composable(route = "category_screen") {
+                CategoryScreen(
+                    navController
+                )
+            }
         }
     }
 }
@@ -161,8 +171,8 @@ fun ShowBottomNavigation(
                     icon = ImageVector.vectorResource(id = R.drawable.home_icon)
                 ),
                 BottomNavItem(
-                    name = "Passwords",
-                    route = "password_screen",
+                    name = "Vault",
+                    route = "vault_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.password)
                 ),
                 BottomNavItem(
