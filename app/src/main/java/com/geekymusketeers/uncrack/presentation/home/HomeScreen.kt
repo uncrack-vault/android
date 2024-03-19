@@ -28,7 +28,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.CategoryCard
-import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.medium24
 import com.geekymusketeers.uncrack.ui.theme.normal22
 
@@ -46,8 +46,8 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .background(SurfaceVariantLight)
                 .padding(16.dp)
-                .background(BackgroundLight)
         ) {
 
             Row(
