@@ -29,7 +29,7 @@ import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.getBaseStringForFiltering
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
-import com.geekymusketeers.uncrack.viewModel.VaultViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch

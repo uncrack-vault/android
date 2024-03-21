@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.viewModel
+package com.geekymusketeers.uncrack.presentation.vault.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

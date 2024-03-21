@@ -26,7 +26,7 @@ import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.databinding.EditpasswordModalBinding
 import com.geekymusketeers.uncrack.util.Encryption
-import com.geekymusketeers.uncrack.viewModel.VaultViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip

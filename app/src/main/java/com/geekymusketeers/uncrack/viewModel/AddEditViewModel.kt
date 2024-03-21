@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.domain.model.Account
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

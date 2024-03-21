@@ -30,12 +30,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.components.VaultCard
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.medium30
 import com.geekymusketeers.uncrack.ui.theme.normal16
-import com.geekymusketeers.uncrack.viewModel.VaultViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
