@@ -181,6 +181,7 @@
     <string name="browser">Browser</string>
     <string name="card">Card</string>
     <string name="recently_used">Recently Used</string>
+    <string name="username_hint">johndoe</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

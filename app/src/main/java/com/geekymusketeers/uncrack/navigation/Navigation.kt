@@ -32,7 +32,7 @@ import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
-import com.geekymusketeers.uncrack.presentation.vault.AddPasswordScreen
+import com.geekymusketeers.uncrack.presentation.vault.AddEditPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.VaultScreen
 import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
@@ -44,7 +44,7 @@ import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
-import com.geekymusketeers.uncrack.viewModel.VaultViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -62,7 +62,7 @@ fun Navigation(
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = persistentListOf(
-        "add_password_screen",
+        "add_edit_password_screen",
         "profile_screen",
         "update_master_key_screen",
         "create_new_master_key_screen",
@@ -105,8 +105,10 @@ fun Navigation(
                 )
             }
 
-            composable(route = "add_password_screen") {
-                AddPasswordScreen()
+            composable(route = "add_edit_password_screen") {
+                AddEditPasswordScreen(
+                    navController
+                )
             }
 
             composable(route = "shield_screen") {
