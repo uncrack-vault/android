@@ -34,6 +34,7 @@ import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
 import com.geekymusketeers.uncrack.presentation.vault.AddEditPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.VaultScreen
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
@@ -55,7 +56,8 @@ fun Navigation(
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
     themeViewModel: ThemeViewModel = hiltViewModel(),
-    vaultViewModel: VaultViewModel = hiltViewModel()
+    vaultViewModel: VaultViewModel = hiltViewModel(),
+    addEditViewModel: AddEditViewModel = hiltViewModel()
 ) {
 
     val navController = rememberNavController()
@@ -107,7 +109,8 @@ fun Navigation(
 
             composable(route = "add_edit_password_screen") {
                 AddEditPasswordScreen(
-                    navController
+                    navController,
+                    addEditViewModel
                 )
             }
 

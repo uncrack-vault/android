@@ -15,6 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -30,16 +31,22 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditPasswordScreen(
     navController: NavHostController,
+    addEditViewModel: AddEditViewModel,
     modifier: Modifier = Modifier
 ) {
 
     var passwordVisibility by remember { mutableStateOf(false) }
+    val email by addEditViewModel.email.observeAsState("")
+    val username by addEditViewModel.username.observeAsState("")
+    val password by addEditViewModel.password.observeAsState("")
+    val isAdded by addEditViewModel.isAdded.observeAsState(false)
 
     Scaffold(
         modifier.fillMaxSize(),
@@ -73,9 +80,9 @@ fun AddEditPasswordScreen(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.email),
                 hintText = stringResource(id = R.string.email_hint),
-                value = "",
+                value = email,
                 onValueChange = {
-
+                    addEditViewModel.setEmail(it)
                 },
             )
 
@@ -86,8 +93,9 @@ fun AddEditPasswordScreen(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.username),
                 hintText = stringResource(R.string.username_hint),
-                value = "",
+                value = username,
                 onValueChange = {
+                    addEditViewModel.setUserName(it)
                 }
             )
 
@@ -98,8 +106,9 @@ fun AddEditPasswordScreen(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.password),
                 hintText = stringResource(R.string.password_hint),
-                value = "",
+                value = password,
                 onValueChange = {
+                    addEditViewModel.setPassword(it)
                 },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
@@ -129,6 +138,7 @@ fun AddEditPasswordScreen(
                 onClick = {
 
                 },
+                enabled = isAdded
             )
         }
     }
