@@ -8,16 +8,16 @@ import kotlinx.coroutines.flow.Flow
 
 class AccountRepositoryImpl(
     private val accountDao: AccountDao
-): AccountRepository {
-    override suspend fun addAccount(account: Account){
+) : AccountRepository {
+    override suspend fun addAccount(account: Account) {
         accountDao.addAccount(account)
     }
 
-    override suspend fun editAccount(account: Account){
+    override suspend fun editAccount(account: Account) {
         accountDao.editAccount(account)
     }
 
-    override suspend fun deleteAccount(account: Account){
+    override suspend fun deleteAccount(account: Account) {
         accountDao.deleteAccount(account)
     }
 

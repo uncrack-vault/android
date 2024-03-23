@@ -19,6 +19,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,6 +32,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
+import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 
@@ -64,7 +66,8 @@ fun AddEditPasswordScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(16.dp)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             Image(
@@ -136,7 +139,18 @@ fun AddEditPasswordScreen(
                     .fillMaxWidth(),
                 text = stringResource(R.string.save),
                 onClick = {
-
+                    // TODO: Need to change the logic
+                          val account = Account(
+                              id = 0,
+                              company = "Instagram",
+                              email = email,
+                              category = "Social",
+                              username = username,
+                              password = password,
+                              note = "Hello",
+                              dateTime = ""
+                          )
+                    addEditViewModel.addAccount(account)
                 },
                 enabled = isAdded
             )

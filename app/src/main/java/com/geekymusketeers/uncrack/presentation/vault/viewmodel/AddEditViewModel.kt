@@ -3,12 +3,17 @@ package com.geekymusketeers.uncrack.presentation.vault.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.geekymusketeers.uncrack.domain.model.Account
+import com.geekymusketeers.uncrack.domain.repository.AccountRepository
 import com.geekymusketeers.uncrack.util.UtilsKt.validateEmail
+import com.geekymusketeers.uncrack.util.runIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AddEditViewModel @Inject constructor(): ViewModel() {
+class AddEditViewModel @Inject constructor(
+    private val repository: AccountRepository
+): ViewModel() {
 
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
@@ -35,6 +40,10 @@ class AddEditViewModel @Inject constructor(): ViewModel() {
     fun setPassword(password: String) {
         _password.value = password
         checkIfAdded()
+    }
+
+    fun addAccount(account: Account) = runIO {
+        repository.addAccount(account)
     }
 
     private fun checkIfAdded() {

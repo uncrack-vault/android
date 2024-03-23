@@ -102,7 +102,7 @@ fun Navigation(
 
             composable(route = "vault_screen") {
                 VaultScreen(
-                    onFabClicked = { navController.navigate("add_password_screen")},
+                    onFabClicked = { navController.navigate("add_edit_password_screen")},
                     vaultViewModel = vaultViewModel
                 )
             }
