@@ -34,6 +34,7 @@ import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
 import com.geekymusketeers.uncrack.presentation.vault.AddEditPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.VaultScreen
+import com.geekymusketeers.uncrack.presentation.vault.ViewPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
@@ -111,6 +112,12 @@ fun Navigation(
                 AddEditPasswordScreen(
                     navController,
                     addEditViewModel
+                )
+            }
+
+            composable(route = "view_password_screen") {
+                ViewPasswordScreen(
+                    navController
                 )
             }
 
