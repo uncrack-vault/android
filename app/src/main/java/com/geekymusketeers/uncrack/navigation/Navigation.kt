@@ -17,10 +17,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.NavType.Companion.IntType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.presentation.account.AccountScreen
 import com.geekymusketeers.uncrack.presentation.account.PasswordGenerator
@@ -65,13 +68,14 @@ fun Navigation(
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = persistentListOf(
-        "add_edit_password_screen",
-        "profile_screen",
-        "update_master_key_screen",
-        "create_new_master_key_screen",
-        "confirm_master_key_screen",
-        "password_generator_screen",
-        "category_screen"
+        Screen.AddEditPasswordScreen.name,
+        Screen.ProfileScreen.name,
+        Screen.UpdateMasterKeyScreen.name,
+        Screen.CreateMasterKeyScreen.name,
+        Screen.ConfirmMasterKeyScreen.name,
+        Screen.PasswordGeneratorScreen.name,
+        Screen.CategoryScreen.name,
+        "${Screen.ViewPasswordScreen.name}/{id}"
     )
 
     BackPressHandler()
@@ -95,76 +99,82 @@ fun Navigation(
             popExitTransition = { FadeOut }
         ) {
 
-            composable(route = "home_screen") {
+            composable(route = Screen.HomeScreen.name) {
                 HomeScreen(
                     navController
                 )
             }
 
-            composable(route = "vault_screen") {
+            composable(route = Screen.VaultScreen.name) {
                 VaultScreen(
-                    onFabClicked = { navController.navigate("add_edit_password_screen")},
-                    vaultViewModel = vaultViewModel
+                    onFabClicked = { navController.navigate(Screen.AddEditPasswordScreen.name)},
+                    vaultViewModel = vaultViewModel,
+                    navigateToViewPasswordScreen = { id ->
+                        navController.navigate("${Screen.ViewPasswordScreen.name}/$id")
+                    }
                 )
             }
 
-            composable(route = "add_edit_password_screen") {
+            composable(route = Screen.AddEditPasswordScreen.name) {
                 AddEditPasswordScreen(
                     navController,
                     addEditViewModel
                 )
             }
 
-            composable(route = "view_password_screen") {
+            composable(
+                route = "${Screen.ViewPasswordScreen.name}/{id}",
+                arguments = listOf(navArgument("id") { type = IntType})
+            ) {
                 ViewPasswordScreen(
                     navController
                 )
             }
 
-            composable(route = "shield_screen") {
+            composable(route = Screen.ShieldScreen.name) {
                 ShieldScreen()
             }
 
-            composable(route = "profile_screen") {
+            composable(route = Screen.ProfileScreen.name) {
                 ProfileScreen()
             }
 
-            composable(route = "account_screen") {
+            composable(route = Screen.AccountScreen.name) {
                 AccountScreen(
                     navController,
                     themeViewModel
                 )
             }
 
-            composable(route = "update_master_key_screen") {
+            composable(route = Screen.UpdateMasterKeyScreen.name) {
                 UpdateMasterKey(
                     navController,
                     masterKeyViewModel
                 )
             }
 
-            composable(route = "create_new_master_key_screen") {
+            composable(route = Screen.CreateMasterKeyScreen.name) {
                 CreateMasterKeyScreen(
                     navController,
                     masterKeyViewModel
                 )
             }
 
-            composable(route = "confirm_master_key_screen") {
+            composable(route = Screen.ConfirmMasterKeyScreen.name) {
                 ConfirmMasterKeyScreen(
                     navController,
                     masterKeyViewModel
                 )
             }
 
-            composable(route = "password_generator_screen") {
+            composable(route = Screen.PasswordGeneratorScreen.name) {
                 PasswordGenerator(
                     navController,
                     passwordGeneratorViewModel
                 )
             }
 
-            composable(route = "category_screen") {
+            composable(route = Screen.CategoryScreen.name) {
                 CategoryScreen(
                     navController
                 )
