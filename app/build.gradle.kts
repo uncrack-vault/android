@@ -95,7 +95,7 @@ dependencies {
 
     // Firebase
     implementation ("com.google.firebase:firebase-crashlytics-ktx:18.4.1")
-    implementation ("com.google.firebase:firebase-analytics-ktx:21.3.0")
+    implementation ("com.google.firebase:firebase-analytics-ktx:21.6.1")
     implementation("com.google.firebase:firebase-messaging-ktx:23.2.1")
 
     // In-app update
