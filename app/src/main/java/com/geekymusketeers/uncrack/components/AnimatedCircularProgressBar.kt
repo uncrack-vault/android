@@ -25,6 +25,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.ui.theme.medium18
+import com.geekymusketeers.uncrack.ui.theme.normal12
+import com.geekymusketeers.uncrack.ui.theme.normal14
 import com.geekymusketeers.uncrack.ui.theme.normal20
 
 
@@ -39,7 +41,7 @@ fun AnimatedCircularProgressIndicator(
 ) {
 
     val stroke = with(LocalDensity.current) {
-        Stroke(width = 6.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round)
+        Stroke(width = 2.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round)
     }
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
@@ -97,9 +99,9 @@ private fun ProgressStatus(
 ) {
     Text(modifier = modifier, text = buildAnnotatedString {
         val emphasisSpan =
-            normal20.copy(color = if (currentValue == maxValue) completedColor else progressIndicatorColor)
+            normal12.copy(color = if (currentValue == maxValue) completedColor else progressIndicatorColor)
                 .toSpanStyle()
-        val defaultSpan = medium18.copy(color = progressBackgroundColor).toSpanStyle()
+        val defaultSpan = normal12.copy(color = progressBackgroundColor).toSpanStyle()
         append(AnnotatedString("$currentValue", spanStyle = emphasisSpan))
         append(AnnotatedString(text = "/", spanStyle = defaultSpan))
         append(AnnotatedString(text = "$maxValue", spanStyle = defaultSpan))

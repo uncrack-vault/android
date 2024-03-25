@@ -43,6 +43,7 @@ fun UCTextField(
     textStyle: TextStyle = normal16,
     enabled: Boolean = true,
     singleLine: Boolean = false,
+    readOnly: Boolean = false,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     minLines: Int = 1,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -69,6 +70,7 @@ fun UCTextField(
             backgroundColor = backgroundColor,
             textStyle = textStyle,
             enabled = enabled,
+            readOnly = readOnly,
             shape = shape,
             keyboardOptions = keyboardOptions,
             singleLine = singleLine,
@@ -99,6 +101,7 @@ fun TextHeader(text: String, modifier: Modifier = Modifier) {
 @Composable
 fun TextEditField(
     shape: Shape,
+    readOnly: Boolean,
     modifier: Modifier = Modifier,
     hintText: String = "",
     value: String = "",
@@ -139,6 +142,7 @@ fun TextEditField(
         trailingIcon = trailingIcon,
         enabled = enabled,
         shape = shape,
+        readOnly = readOnly,
         maxLines = maxLines,
         minLines = minLines,
         visualTransformation = visualTransformation

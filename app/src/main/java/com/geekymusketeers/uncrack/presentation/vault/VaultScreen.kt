@@ -42,7 +42,8 @@ import com.geekymusketeers.uncrack.ui.theme.normal16
 fun VaultScreen(
     onFabClicked: () -> Unit,
     vaultViewModel: VaultViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigateToViewPasswordScreen: (id: Int) -> Unit
 ) {
 
     val accounts = vaultViewModel.accountModel
@@ -110,7 +111,12 @@ fun VaultScreen(
             ) {
                 if (accounts.isNotEmpty()) {
                     items(accounts) {accountModel ->
-                        VaultCard(accountModel)
+                        VaultCard(
+                            accountModel = accountModel,
+                            onClick = {
+                                navigateToViewPasswordScreen(accountModel.id)
+                            }
+                        )
                     }
                 } else {
                     item {

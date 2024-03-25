@@ -25,14 +25,20 @@ import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.medium18
 import com.geekymusketeers.uncrack.ui.theme.normal12
+import com.geekymusketeers.uncrack.util.onClick
 
 @Composable
-fun VaultCard(accountModel: Account, modifier: Modifier = Modifier) {
+fun VaultCard(
+    accountModel: Account,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
 
     Row(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
+            .onClick { onClick() }
             .background(Color.White)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
