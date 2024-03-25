@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,7 +28,7 @@ fun UCTopAppBar(
     navigationIcon: ImageVector = Icons.AutoMirrored.Filled.ArrowBack,
     shouldShowBackButton: Boolean = true,
     fontSize: TextUnit = 22.sp,
-    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
+    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
     onBackPress: () -> Unit = {},
 ) {
     TopAppBar(
