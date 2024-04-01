@@ -23,6 +23,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -44,6 +45,7 @@ import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
@@ -55,16 +57,19 @@ import com.geekymusketeers.uncrack.ui.theme.normal30
 @Composable
 fun ViewPasswordScreen(
     navController: NavHostController,
+    accountId: Int,
+    viewPasswordViewModel: ViewPasswordViewModel,
     modifier: Modifier = Modifier
 ) {
 
     var passwordVisibility by remember { mutableStateOf(false) }
-    val progressValue by remember {
-        mutableFloatStateOf(0f)
-    }
+    val progressValue by remember { mutableFloatStateOf(0f) }
+    val progressMessage by rememberSaveable { mutableStateOf("") }
+    val username = viewPasswordViewModel.accountModel.username
+    val password = viewPasswordViewModel.accountModel.password
 
-    val progressMessage by rememberSaveable {
-        mutableStateOf("")
+    LaunchedEffect(Unit) {
+        viewPasswordViewModel.getAccountById(accountId)
     }
 
     Scaffold(
@@ -210,7 +215,7 @@ fun ViewPasswordScreen(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.username),
                 hintText = stringResource(R.string.username_hint),
-                value = "",
+                value = username,
                 onValueChange = {},
                 readOnly = true
             )
@@ -222,7 +227,7 @@ fun ViewPasswordScreen(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.password),
                 hintText = stringResource(R.string.password_hint),
-                value = "",
+                value = password,
                 onValueChange = {},
                 readOnly = true,
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),

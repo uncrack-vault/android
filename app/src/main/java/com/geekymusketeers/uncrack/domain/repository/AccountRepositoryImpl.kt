@@ -25,4 +25,8 @@ class AccountRepositoryImpl(
         return accountDao.readAllAccount()
     }
 
+    override fun getAccountById(accountId: Int): Flow<Account> {
+        return accountDao.getAccountById(accountId)
+    }
+
 }

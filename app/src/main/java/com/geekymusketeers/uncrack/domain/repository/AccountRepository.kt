@@ -12,4 +12,6 @@ interface AccountRepository {
     suspend fun deleteAccount(account: Account)
 
     fun getAllAccounts(): Flow<List<Account>>
+
+    fun getAccountById(accountId: Int) : Flow<Account>
 }
