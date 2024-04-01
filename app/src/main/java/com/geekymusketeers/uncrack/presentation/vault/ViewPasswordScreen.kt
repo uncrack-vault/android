@@ -78,7 +78,8 @@ fun ViewPasswordScreen(
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 title = "",
-                onBackPress = { navController.popBackStack() }
+                onBackPress = { navController.popBackStack() },
+                shouldShowFavAndEditButton = false
             )
         }
     ) { paddingValues ->
