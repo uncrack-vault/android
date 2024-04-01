@@ -17,7 +17,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.NavType.Companion.IntType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -50,6 +49,7 @@ import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -61,7 +61,8 @@ fun Navigation(
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
     themeViewModel: ThemeViewModel = hiltViewModel(),
     vaultViewModel: VaultViewModel = hiltViewModel(),
-    addEditViewModel: AddEditViewModel = hiltViewModel()
+    addEditViewModel: AddEditViewModel = hiltViewModel(),
+    viewPasswordViewModel: ViewPasswordViewModel = hiltViewModel()
 ) {
 
     val navController = rememberNavController()
@@ -107,7 +108,7 @@ fun Navigation(
 
             composable(route = Screen.VaultScreen.name) {
                 VaultScreen(
-                    onFabClicked = { navController.navigate(Screen.AddEditPasswordScreen.name)},
+                    onFabClicked = { navController.navigate(Screen.AddEditPasswordScreen.name) },
                     vaultViewModel = vaultViewModel,
                     navigateToViewPasswordScreen = { id ->
                         navController.navigate("${Screen.ViewPasswordScreen.name}/$id")
@@ -124,10 +125,13 @@ fun Navigation(
 
             composable(
                 route = "${Screen.ViewPasswordScreen.name}/{id}",
-                arguments = listOf(navArgument("id") { type = IntType})
-            ) {
+                arguments = listOf(navArgument("id") { type = IntType })
+            ) { backStackEntry ->
+                val id = backStackEntry.arguments?.getInt("id") ?: 0
                 ViewPasswordScreen(
-                    navController
+                    navController,
+                    accountId = id,
+                    viewPasswordViewModel
                 )
             }
 
