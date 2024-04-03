@@ -20,18 +20,33 @@ object UtilsKt {
             }
     }
 
-    fun calculatePasswordStrength(password: String): Float {
-        val length = password.length
-        val hasUpperCase = password.any { it.isUpperCase() }
-        val hasLowerCase = password.any { it.isLowerCase() }
-        val hasDigit = password.any { it.isDigit() }
-
+    fun calculatePasswordStrength(password: String): Int {
         var score = 0
-        if (length >= 8) score++
-        if (hasUpperCase) score++
-        if (hasLowerCase) score++
-        if (hasDigit) score++
-
-        return score.toFloat() / 4f
+        // Check for password length
+        if (password.length >= 8) {
+            score += 1
+        }
+        // Check for uppercase letters
+        if (password.matches(Regex(".*[A-Z].*"))) {
+            score += 1
+        }
+        // Check for lowercase letters
+        if (password.matches(Regex(".*[a-z].*"))) {
+            score += 1
+        }
+        // Check for digits
+        if (password.matches(Regex(".*\\d.*"))) {
+            score += 1
+        }
+        // Check for special characters
+        if (password.matches(Regex(".*[!@#\$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*"))) {
+            score += 1
+        }
+        // Check for consecutive characters
+        if (!password.matches(Regex("(.)\\1{2,}"))) {
+            score += 1
+        }
+        // Calculate the password score out of 9
+        return ((score.toFloat() / 6.toFloat()) * 9).toInt()
     }
 }

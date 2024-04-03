@@ -1,6 +1,5 @@
 package com.geekymusketeers.uncrack.presentation.vault
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +17,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -26,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -54,6 +53,7 @@ import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.normal12
 import com.geekymusketeers.uncrack.ui.theme.normal30
 import com.geekymusketeers.uncrack.util.UtilsKt.calculatePasswordStrength
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,6 +64,7 @@ fun ViewPasswordScreen(
     modifier: Modifier = Modifier
 ) {
 
+    var passwordStrength by remember { mutableIntStateOf(0) }
     var passwordVisibility by remember { mutableStateOf(false) }
     var progressValue by remember { mutableFloatStateOf(0f) }
     var progressMessage by rememberSaveable { mutableStateOf("") }
@@ -75,9 +76,13 @@ fun ViewPasswordScreen(
     }
 
     LaunchedEffect(password) {
-        val strength = calculatePasswordStrength(password)
-        progressValue = strength
-        progressMessage = strength.toString()
+        passwordStrength = calculatePasswordStrength(password)
+        Timber.d("Strength $passwordStrength")
+        val mappedScore = (passwordStrength * 100) / 9
+        progressValue = mappedScore.toFloat()
+        Timber.d("Progress value $progressValue")
+        progressMessage = passwordStrength.toString()
+        Timber.d("Progress message $progressMessage")
     }
 
     Scaffold(
@@ -163,20 +168,16 @@ fun ViewPasswordScreen(
                     Box(contentAlignment = Alignment.Center) {
 
                         CircularProgressIndicator(
-                            modifier = Modifier.size(52.dp),
-                            progress = animateFloatAsState(
-                                targetValue = progressValue,
-                                animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
-                                label = "Password strength"
-                            ).value,
+                            progress = { progressValue },
+                            modifier = Modifier.size(42.dp),
                             color = when {
-                                progressValue <= 0.3 -> Color.Red
-                                progressValue <= 0.7 -> Color.Yellow
+                                passwordStrength <= 3 -> Color.Red
+                                passwordStrength <= 7 -> Color.Yellow
                                 else -> Color.Green
                             },
-                            strokeWidth = 10.dp,
+                            strokeWidth = 5.dp,
+                            trackColor = SurfaceTintLight,
                             strokeCap = StrokeCap.Round,
-                            trackColor = SurfaceTintLight
                         )
 
                         Text(
