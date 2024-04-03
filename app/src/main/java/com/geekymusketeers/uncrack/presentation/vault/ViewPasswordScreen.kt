@@ -45,6 +45,7 @@ import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
+import com.geekymusketeers.uncrack.navigation.Screen
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
@@ -52,6 +53,7 @@ import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.normal12
 import com.geekymusketeers.uncrack.ui.theme.normal30
+import com.geekymusketeers.uncrack.util.UtilsKt.calculatePasswordStrength
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,13 +65,19 @@ fun ViewPasswordScreen(
 ) {
 
     var passwordVisibility by remember { mutableStateOf(false) }
-    val progressValue by remember { mutableFloatStateOf(0f) }
-    val progressMessage by rememberSaveable { mutableStateOf("") }
+    var progressValue by remember { mutableFloatStateOf(0f) }
+    var progressMessage by rememberSaveable { mutableStateOf("") }
     val username = viewPasswordViewModel.accountModel.username
     val password = viewPasswordViewModel.accountModel.password
 
     LaunchedEffect(Unit) {
         viewPasswordViewModel.getAccountById(accountId)
+    }
+
+    LaunchedEffect(password) {
+        val strength = calculatePasswordStrength(password)
+        progressValue = strength
+        progressMessage = strength.toString()
     }
 
     Scaffold(
@@ -79,7 +87,9 @@ fun ViewPasswordScreen(
                 modifier = Modifier.fillMaxWidth(),
                 title = "",
                 onBackPress = { navController.popBackStack() },
-                shouldShowFavAndEditButton = false
+                shouldShowFavAndEditButton = false,
+                onEditPress = { navController.navigate(Screen.AddEditPasswordScreen.name) },
+                onDeletePress = { }
             )
         }
     ) { paddingValues ->
@@ -153,14 +163,18 @@ fun ViewPasswordScreen(
                     Box(contentAlignment = Alignment.Center) {
 
                         CircularProgressIndicator(
-                            modifier = Modifier.size(32.dp),
+                            modifier = Modifier.size(52.dp),
                             progress = animateFloatAsState(
                                 targetValue = progressValue,
                                 animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
                                 label = "Password strength"
                             ).value,
-                            color = OnPrimaryContainerLight,
-                            strokeWidth = 2.dp,
+                            color = when {
+                                progressValue <= 0.3 -> Color.Red
+                                progressValue <= 0.7 -> Color.Yellow
+                                else -> Color.Green
+                            },
+                            strokeWidth = 10.dp,
                             strokeCap = StrokeCap.Round,
                             trackColor = SurfaceTintLight
                         )
