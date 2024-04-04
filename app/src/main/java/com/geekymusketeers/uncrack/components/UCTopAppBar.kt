@@ -33,6 +33,8 @@ fun UCTopAppBar(
     fontSize: TextUnit = 22.sp,
     colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
     onBackPress: () -> Unit = {},
+    onEditPress: () -> Unit = {},
+    onDeletePress: () -> Unit = {}
 ) {
     TopAppBar(
         modifier = modifier,
@@ -61,13 +63,13 @@ fun UCTopAppBar(
         actions = {
             if (shouldShowFavAndEditButton.not()) {
                 IconButton(onClick = {
-                    /*TODO*/
+                    onEditPress()
                 }) {
                     Icon(painter = painterResource(id = R.drawable.edit), contentDescription = null)
                 }
 
                 IconButton(onClick = {
-                    /*TODO*/
+                    onDeletePress()
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.delete_icon),

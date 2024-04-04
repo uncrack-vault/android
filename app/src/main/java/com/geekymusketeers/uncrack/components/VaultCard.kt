@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,7 +41,7 @@ fun VaultCard(
             .background(Color.White)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.spacedBy(32.dp)
     ) {
         Image(
             modifier = Modifier.size(42.dp),
@@ -50,12 +49,7 @@ fun VaultCard(
             contentDescription = null
         )
 
-        Spacer(modifier = Modifier.width(16.dp))
-
-        Column(
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.Start
-        ) {
+        Column {
             Text(
                 text = accountModel.company,
                 style = medium18.copy(Color.Black)
