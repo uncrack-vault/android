@@ -34,7 +34,8 @@ import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
-import com.geekymusketeers.uncrack.presentation.vault.AddEditPasswordScreen
+import com.geekymusketeers.uncrack.presentation.vault.AddPasswordScreen
+import com.geekymusketeers.uncrack.presentation.vault.EditPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.VaultScreen
 import com.geekymusketeers.uncrack.presentation.vault.ViewPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
@@ -69,7 +70,8 @@ fun Navigation(
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = persistentListOf(
-        Screen.AddEditPasswordScreen.name,
+        Screen.AddPasswordScreen.name,
+        Screen.EditPasswordScreen.name,
         Screen.ProfileScreen.name,
         Screen.UpdateMasterKeyScreen.name,
         Screen.CreateMasterKeyScreen.name,
@@ -108,7 +110,7 @@ fun Navigation(
 
             composable(route = Screen.VaultScreen.name) {
                 VaultScreen(
-                    onFabClicked = { navController.navigate(Screen.AddEditPasswordScreen.name) },
+                    onFabClicked = { navController.navigate(Screen.AddPasswordScreen.name) },
                     vaultViewModel = vaultViewModel,
                     navigateToViewPasswordScreen = { id ->
                         navController.navigate("${Screen.ViewPasswordScreen.name}/$id")
@@ -116,10 +118,17 @@ fun Navigation(
                 )
             }
 
-            composable(route = Screen.AddEditPasswordScreen.name) {
-                AddEditPasswordScreen(
+            composable(route = Screen.AddPasswordScreen.name) {
+                AddPasswordScreen(
                     navController,
                     addEditViewModel
+                )
+            }
+
+            composable(route = Screen.EditPasswordScreen.name) {
+                EditPasswordScreen(
+                    navController,
+                    viewPasswordViewModel
                 )
             }
 

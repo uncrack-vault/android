@@ -38,7 +38,7 @@ import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddEditPasswordScreen(
+fun AddPasswordScreen(
     navController: NavHostController,
     addEditViewModel: AddEditViewModel,
     modifier: Modifier = Modifier
@@ -151,8 +151,9 @@ fun AddEditPasswordScreen(
                               dateTime = ""
                           )
                     addEditViewModel.addAccount(account)
+                    navController.popBackStack()
                 },
-                enabled = isAdded
+//                enabled = isAdded
             )
         }
     }

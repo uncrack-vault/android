@@ -93,7 +93,7 @@ fun ViewPasswordScreen(
                 title = "",
                 onBackPress = { navController.popBackStack() },
                 shouldShowFavAndEditButton = false,
-                onEditPress = { navController.navigate(Screen.AddEditPasswordScreen.name) },
+                onEditPress = { navController.navigate(Screen.EditPasswordScreen.name) },
                 onDeletePress = { }
             )
         }
