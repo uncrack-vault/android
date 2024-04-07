@@ -40,6 +40,7 @@ import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 @Composable
 fun EditPasswordScreen(
     navController: NavHostController,
+    accountID: Int,
     viewPasswordViewModel: ViewPasswordViewModel,
     modifier : Modifier = Modifier
 ) {
@@ -50,6 +51,9 @@ fun EditPasswordScreen(
     val accountPassword = viewPasswordViewModel.accountModel.password
     val accountUserName = viewPasswordViewModel.accountModel.username
 
+    LaunchedEffect(Unit) {
+        viewPasswordViewModel.getAccountById(accountID)
+    }
 
     Scaffold(
         modifier.fillMaxSize(),
@@ -140,9 +144,18 @@ fun EditPasswordScreen(
                     .fillMaxWidth(),
                 text = stringResource(R.string.save),
                 onClick = {
-                    // TODO: Add the logic to update password
-
-                    navController.popBackStack()
+                    // TODO: Update the logic
+                    val updateAccount = Account(
+                        id = 0,
+                        company = "Instagram",
+                        email = accountEmail,
+                        category = "Social",
+                        username = accountUserName,
+                        password = accountPassword,
+                        note = "Hello",
+                        dateTime = ""
+                    )
+                    viewPasswordViewModel.updateAccount(updateAccount)
                 },
 //                enabled = isAdded
             )

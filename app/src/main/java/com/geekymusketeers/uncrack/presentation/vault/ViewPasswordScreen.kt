@@ -61,7 +61,8 @@ fun ViewPasswordScreen(
     navController: NavHostController,
     accountId: Int,
     viewPasswordViewModel: ViewPasswordViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigateToEditPasswordScreen: (accountID: Int) -> Unit
 ) {
 
     var passwordStrength by remember { mutableIntStateOf(0) }
@@ -77,7 +78,6 @@ fun ViewPasswordScreen(
 
     LaunchedEffect(password) {
         passwordStrength = calculatePasswordStrength(password)
-        Timber.d("Strength $passwordStrength")
         val mappedScore = (passwordStrength * 100) / 9
         progressValue = mappedScore.toFloat()
         Timber.d("Progress value $progressValue")
@@ -93,7 +93,7 @@ fun ViewPasswordScreen(
                 title = "",
                 onBackPress = { navController.popBackStack() },
                 shouldShowFavAndEditButton = false,
-                onEditPress = { navController.navigate(Screen.EditPasswordScreen.name) },
+                onEditPress = { navigateToEditPasswordScreen(accountId) },
                 onDeletePress = { }
             )
         }

@@ -71,7 +71,7 @@ fun Navigation(
 
     val screensWithoutNavigationBar = persistentListOf(
         Screen.AddPasswordScreen.name,
-        Screen.EditPasswordScreen.name,
+        "${Screen.EditPasswordScreen.name}/{accountID}",
         Screen.ProfileScreen.name,
         Screen.UpdateMasterKeyScreen.name,
         Screen.CreateMasterKeyScreen.name,
@@ -125,9 +125,14 @@ fun Navigation(
                 )
             }
 
-            composable(route = Screen.EditPasswordScreen.name) {
+            composable(
+                route = "${Screen.EditPasswordScreen.name}/{accountID}",
+                arguments = listOf(navArgument("accountID") {type = IntType})
+            ) {backStackEntry ->
+                val accountId = backStackEntry.arguments?.getInt("accountID") ?: 0
                 EditPasswordScreen(
                     navController,
+                    accountId,
                     viewPasswordViewModel
                 )
             }
@@ -140,7 +145,10 @@ fun Navigation(
                 ViewPasswordScreen(
                     navController,
                     accountId = id,
-                    viewPasswordViewModel
+                    viewPasswordViewModel,
+                    navigateToEditPasswordScreen = { accountID ->
+                        navController.navigate("${Screen.EditPasswordScreen.name}/$accountID")
+                    }
                 )
             }
 
