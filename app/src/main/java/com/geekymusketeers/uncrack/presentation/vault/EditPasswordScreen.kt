@@ -1,7 +1,9 @@
 package com.geekymusketeers.uncrack.presentation.vault
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,6 +37,7 @@ import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
+import com.geekymusketeers.uncrack.util.UtilsKt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -125,14 +128,23 @@ fun EditPasswordScreen(
                         painterResource(id = R.drawable.visibility_on)
                     else painterResource(id = R.drawable.visibility_off)
 
-                    IconButton(onClick =
-                    { passwordVisibility = passwordVisibility.not() }
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Icon(
-                            modifier = Modifier.size(24.dp),
-                            painter = image,
-                            contentDescription = null
-                        )
+                        IconButton(onClick = { passwordVisibility = passwordVisibility.not() }) {
+                            Icon(
+                                modifier = Modifier.size(24.dp),
+                                painter = image,
+                                contentDescription = null
+                            )
+                        }
+
+                        IconButton(onClick = { UtilsKt.generateRandomPassword(12) }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.dice),
+                                contentDescription = null
+                            )
+                        }
                     }
                 }
             )

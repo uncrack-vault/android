@@ -1,7 +1,9 @@
 package com.geekymusketeers.uncrack.presentation.vault
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,8 +35,10 @@ import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.domain.model.Account
+import com.geekymusketeers.uncrack.presentation.account.PasswordGeneratorViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
+import com.geekymusketeers.uncrack.util.UtilsKt.generateRandomPassword
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -120,14 +124,23 @@ fun AddPasswordScreen(
                         painterResource(id = R.drawable.visibility_on)
                     else painterResource(id = R.drawable.visibility_off)
 
-                    IconButton(onClick =
-                    { passwordVisibility = passwordVisibility.not() }
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Icon(
-                            modifier = Modifier.size(24.dp),
-                            painter = image,
-                            contentDescription = null
-                        )
+                        IconButton(onClick = { passwordVisibility = passwordVisibility.not() }) {
+                            Icon(
+                                modifier = Modifier.size(24.dp),
+                                painter = image,
+                                contentDescription = null
+                            )
+                        }
+
+                        IconButton(onClick = { generateRandomPassword(12) }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.dice),
+                                contentDescription = null
+                            )
+                        }
                     }
                 }
             )
@@ -140,16 +153,16 @@ fun AddPasswordScreen(
                 text = stringResource(R.string.save),
                 onClick = {
                     // TODO: Need to change the logic
-                          val account = Account(
-                              id = 0,
-                              company = "Instagram",
-                              email = email,
-                              category = "Social",
-                              username = username,
-                              password = password,
-                              note = "Hello",
-                              dateTime = ""
-                          )
+                    val account = Account(
+                        id = 0,
+                        company = "Instagram",
+                        email = email,
+                        category = "Social",
+                        username = username,
+                        password = password,
+                        note = "Hello",
+                        dateTime = ""
+                    )
                     addEditViewModel.addAccount(account)
                     navController.popBackStack()
                 },

@@ -49,4 +49,11 @@ object UtilsKt {
         // Calculate the password score out of 9
         return ((score.toFloat() / 6.toFloat()) * 9).toInt()
     }
+
+    fun generateRandomPassword(length: Int): String {
+        val charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+"
+        return (1..length)
+            .map { charset.random() }
+            .joinToString("")
+    }
 }
