@@ -6,9 +6,9 @@
     <string name="password">Password</string>
     <string name="company">Company</string>
     <string name="let_s_go">Let\'s go</string>
-    <string name="mailTo">mailto:aritrarick2002@gmail.com?Subject=Your%20feedback%20is%20important%20to%20us%21</string>
+    <string name="mailTo">mailto:uncrack.manager@gmail.com?Subject=Your%20feedback%20is%20important%20to%20us%21</string>
     <string name="email">Email</string>
-    <string name="username">UserName <font color='#808080'> (optional)</font></string>
+    <string name="username">UserName</string>
     <string name="add_password">Password</string>
     <string name="select_the_account">Select</string>
     <string name="edit_email">Email <font color='#FF0000'>*</font></string>
@@ -181,6 +181,9 @@
     <string name="browser">Browser</string>
     <string name="card">Card</string>
     <string name="recently_used">Recently Used</string>
+    <string name="username_hint">johndoe</string>
+    <string name="not_favourite">Not favourite</string>
+    <string name="password_strength">Pass Strength</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

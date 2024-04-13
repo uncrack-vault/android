@@ -17,10 +17,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType.Companion.IntType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.presentation.account.AccountScreen
 import com.geekymusketeers.uncrack.presentation.account.PasswordGenerator
@@ -32,7 +34,11 @@ import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
+import com.geekymusketeers.uncrack.presentation.vault.AddPasswordScreen
+import com.geekymusketeers.uncrack.presentation.vault.EditPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.VaultScreen
+import com.geekymusketeers.uncrack.presentation.vault.ViewPasswordScreen
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
@@ -43,6 +49,8 @@ import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
 import com.geekymusketeers.uncrack.viewModel.KeyViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -52,20 +60,25 @@ fun Navigation(
     modifier: Modifier = Modifier,
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
-    themeViewModel: ThemeViewModel = hiltViewModel()
+    themeViewModel: ThemeViewModel = hiltViewModel(),
+    vaultViewModel: VaultViewModel = hiltViewModel(),
+    addEditViewModel: AddEditViewModel = hiltViewModel(),
+    viewPasswordViewModel: ViewPasswordViewModel = hiltViewModel()
 ) {
 
     val navController = rememberNavController()
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = persistentListOf(
-        "add_password_screen",
-        "profile_screen",
-        "update_master_key_screen",
-        "create_new_master_key_screen",
-        "confirm_master_key_screen",
-        "password_generator_screen",
-        "category_screen"
+        Screen.AddPasswordScreen.name,
+        "${Screen.EditPasswordScreen.name}/{accountID}",
+        Screen.ProfileScreen.name,
+        Screen.UpdateMasterKeyScreen.name,
+        Screen.CreateMasterKeyScreen.name,
+        Screen.ConfirmMasterKeyScreen.name,
+        Screen.PasswordGeneratorScreen.name,
+        Screen.CategoryScreen.name,
+        "${Screen.ViewPasswordScreen.name}/{id}"
     )
 
     BackPressHandler()
@@ -89,60 +102,100 @@ fun Navigation(
             popExitTransition = { FadeOut }
         ) {
 
-            composable(route = "home_screen") {
+            composable(route = Screen.HomeScreen.name) {
                 HomeScreen(
                     navController
                 )
             }
 
-            composable(route = "vault_screen") {
-                VaultScreen()
+            composable(route = Screen.VaultScreen.name) {
+                VaultScreen(
+                    onFabClicked = { navController.navigate(Screen.AddPasswordScreen.name) },
+                    vaultViewModel = vaultViewModel,
+                    navigateToViewPasswordScreen = { id ->
+                        navController.navigate("${Screen.ViewPasswordScreen.name}/$id")
+                    }
+                )
             }
 
-            composable(route = "shield_screen") {
+            composable(route = Screen.AddPasswordScreen.name) {
+                AddPasswordScreen(
+                    navController,
+                    addEditViewModel
+                )
+            }
+
+            composable(
+                route = "${Screen.EditPasswordScreen.name}/{accountID}",
+                arguments = listOf(navArgument("accountID") {type = IntType})
+            ) {backStackEntry ->
+                val accountId = backStackEntry.arguments?.getInt("accountID") ?: 0
+                EditPasswordScreen(
+                    navController,
+                    accountId,
+                    viewPasswordViewModel
+                )
+            }
+
+            composable(
+                route = "${Screen.ViewPasswordScreen.name}/{id}",
+                arguments = listOf(navArgument("id") { type = IntType })
+            ) { backStackEntry ->
+                val id = backStackEntry.arguments?.getInt("id") ?: 0
+                ViewPasswordScreen(
+                    navController,
+                    accountId = id,
+                    viewPasswordViewModel,
+                    navigateToEditPasswordScreen = { accountID ->
+                        navController.navigate("${Screen.EditPasswordScreen.name}/$accountID")
+                    }
+                )
+            }
+
+            composable(route = Screen.ShieldScreen.name) {
                 ShieldScreen()
             }
 
-            composable(route = "profile_screen") {
+            composable(route = Screen.ProfileScreen.name) {
                 ProfileScreen()
             }
 
-            composable(route = "account_screen") {
+            composable(route = Screen.AccountScreen.name) {
                 AccountScreen(
                     navController,
                     themeViewModel
                 )
             }
 
-            composable(route = "update_master_key_screen") {
+            composable(route = Screen.UpdateMasterKeyScreen.name) {
                 UpdateMasterKey(
                     navController,
                     masterKeyViewModel
                 )
             }
 
-            composable(route = "create_new_master_key_screen") {
+            composable(route = Screen.CreateMasterKeyScreen.name) {
                 CreateMasterKeyScreen(
                     navController,
                     masterKeyViewModel
                 )
             }
 
-            composable(route = "confirm_master_key_screen") {
+            composable(route = Screen.ConfirmMasterKeyScreen.name) {
                 ConfirmMasterKeyScreen(
                     navController,
                     masterKeyViewModel
                 )
             }
 
-            composable(route = "password_generator_screen") {
+            composable(route = Screen.PasswordGeneratorScreen.name) {
                 PasswordGenerator(
                     navController,
                     passwordGeneratorViewModel
                 )
             }
 
-            composable(route = "category_screen") {
+            composable(route = Screen.CategoryScreen.name) {
                 CategoryScreen(
                     navController
                 )

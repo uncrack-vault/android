@@ -24,4 +24,7 @@ interface AccountDao {
 
     @Query("SELECT * FROM account_table ORDER BY id ASC")
     fun readAllAccount(): Flow<List<Account>>
+
+    @Query("SELECT * FROM account_table WHERE id = :accountId")
+    fun getAccountById(accountId: Int) : Flow<Account>
 }

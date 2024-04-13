@@ -36,6 +36,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.AccountOption
 import com.geekymusketeers.uncrack.components.ProfileContainer
 import com.geekymusketeers.uncrack.components.ThemeDialog
+import com.geekymusketeers.uncrack.navigation.Screen
 import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
@@ -144,7 +145,7 @@ fun AccountScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 ProfileContainer {
-                    navController.navigate("profile_screen")
+                    navController.navigate(Screen.ProfileScreen.name)
                 }
 
                 Spacer(modifier = Modifier.height(15.dp))
@@ -178,7 +179,7 @@ fun AccountScreen(
                     when(onClick) {
                         AccountItems.BIOMETRIC -> {}
                         AccountItems.CHANGE_MASTER_KEY -> {
-                            navController.navigate("update_master_key_screen")
+                            navController.navigate(Screen.UpdateMasterKeyScreen.name)
                         }
                         AccountItems.BLOCK_SS -> {
                             themeViewModel.blockScreenShort()
@@ -226,7 +227,7 @@ fun AccountScreen(
                         }
 
                         AccountItems.PASSWORD_GENERATOR -> {
-                            navController.navigate("password_generator_screen")
+                            navController.navigate(Screen.PasswordGeneratorScreen.name)
                         }
 
                         AccountItems.INVITE_FRIENDS -> {

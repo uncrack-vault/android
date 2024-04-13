@@ -12,12 +12,15 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,9 +29,12 @@ fun UCTopAppBar(
     title: String = "",
     navigationIcon: ImageVector = Icons.AutoMirrored.Filled.ArrowBack,
     shouldShowBackButton: Boolean = true,
+    shouldShowFavAndEditButton: Boolean = true,
     fontSize: TextUnit = 22.sp,
-    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
+    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
     onBackPress: () -> Unit = {},
+    onEditPress: () -> Unit = {},
+    onDeletePress: () -> Unit = {}
 ) {
     TopAppBar(
         modifier = modifier,
@@ -49,6 +55,24 @@ fun UCTopAppBar(
                 }) {
                     Icon(
                         imageVector = navigationIcon,
+                        contentDescription = null
+                    )
+                }
+            }
+        },
+        actions = {
+            if (shouldShowFavAndEditButton.not()) {
+                IconButton(onClick = {
+                    onEditPress()
+                }) {
+                    Icon(painter = painterResource(id = R.drawable.edit), contentDescription = null)
+                }
+
+                IconButton(onClick = {
+                    onDeletePress()
+                }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.delete_icon),
                         contentDescription = null
                     )
                 }

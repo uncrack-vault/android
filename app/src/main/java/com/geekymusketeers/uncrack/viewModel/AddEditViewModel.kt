@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.domain.model.Account
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -25,7 +26,7 @@ class AddEditViewModel : ViewModel() {
     // Save Data
 
     suspend fun saveData(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account : Account
     ) = viewModelScope.launch {
 
@@ -48,7 +49,7 @@ class AddEditViewModel : ViewModel() {
     }
 
     private suspend fun saveInRoomDB(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account: Account
     ) : Int {
 
@@ -61,7 +62,7 @@ class AddEditViewModel : ViewModel() {
     // Update Data
 
     suspend fun updateData(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account: Account
     ) = viewModelScope.launch {
 
@@ -73,7 +74,7 @@ class AddEditViewModel : ViewModel() {
     }
 
     private suspend fun updateInRoomDB(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account: Account
     ): Int {
 
@@ -92,7 +93,7 @@ class AddEditViewModel : ViewModel() {
     // Delete Data
 
     suspend fun deleteEntry(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account: Account
     ) = viewModelScope.launch {
 
@@ -112,7 +113,7 @@ class AddEditViewModel : ViewModel() {
     }
 
     private suspend fun deleteInRoomDB(
-        accountsViewModel: AccountViewModel,
+        accountsViewModel: VaultViewModel,
         account: Account
     ): Int {
 

@@ -26,17 +26,15 @@ import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
 import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.databinding.EditpasswordModalBinding
 import com.geekymusketeers.uncrack.util.Encryption
-import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.crypto.SecretKey
 
 
 class EditFragment : Fragment() {
@@ -48,7 +46,7 @@ class EditFragment : Fragment() {
     private lateinit var buttonText: TextView
     private lateinit var buttonProgress: ProgressBar
 
-    private lateinit var accountViewModel: AccountViewModel
+    private lateinit var vaultViewModel: VaultViewModel
     private lateinit var editViewModel: AddEditViewModel
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -200,7 +198,7 @@ class EditFragment : Fragment() {
 
 
     private fun initialization() {
-        accountViewModel = ViewModelProvider(this)[AccountViewModel::class.java]
+        vaultViewModel = ViewModelProvider(this)[VaultViewModel::class.java]
         editViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AddEditViewModel::class.java]
         binding.apply {
             btnEdit.apply {
@@ -336,7 +334,7 @@ class EditFragment : Fragment() {
                 account.dateTime = currentDate
             }
             lifecycleScope.launch {
-                editViewModel.updateData(accountViewModel,account)
+                editViewModel.updateData(vaultViewModel,account)
             }
         }
     }
