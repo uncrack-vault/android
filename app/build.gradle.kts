@@ -106,6 +106,7 @@ dependencies {
     //ViewModel
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelVersion")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:$viewModelVersion")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 
     // Navigation Component
     implementation ("androidx.navigation:navigation-fragment:$navVersion")
@@ -124,6 +125,10 @@ dependencies {
     kapt("androidx.hilt:hilt-compiler:1.2.0")
     implementation("androidx.work:work-runtime-ktx:2.9.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    // Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
 
     // Datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
