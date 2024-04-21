@@ -6,7 +6,8 @@ sealed class AuthUIEvent {
     data class SignUpPasswordChanged(val value: String): AuthUIEvent()
     object SignUp: AuthUIEvent()
 
-    data class SignInEmail(val value: String): AuthUIEvent()
-    data class SignInPassword(val value: String): AuthUIEvent()
+    data class SignInNameChanged(val value: String): AuthUIEvent()
+    data class SignInEmailChanged(val value: String): AuthUIEvent()
+    data class SignInPasswordChanged(val value: String): AuthUIEvent()
     object SignIn: AuthUIEvent()
 }
