@@ -3,6 +3,7 @@ package com.geekymusketeers.uncrack.presentation.auth.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -22,6 +23,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,20 +39,28 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
+import com.geekymusketeers.uncrack.data.remote.request.AuthResult
+import com.geekymusketeers.uncrack.presentation.auth.AuthUIEvent
+import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
+import com.geekymusketeers.uncrack.presentation.auth.signup.SignupScreen
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.onClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginScreens : ComponentActivity() {
+
+    private lateinit var authViewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -65,27 +75,50 @@ class LoginScreens : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            authViewModel = hiltViewModel()
             UnCrackTheme {
-                LoginContent(this@LoginScreens)
+                LoginContent(this@LoginScreens, authViewModel)
             }
         }
     }
 }
 
 @Composable
-fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
+fun LoginContent(
+    activity: Activity,
+    authViewModel: AuthViewModel,
+    modifier: Modifier = Modifier
+) {
 
+    val state = authViewModel.state
     val context = LocalContext.current
-    val email by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
 
     var passwordVisibility by remember {
         mutableStateOf(false)
+    }
+
+    LaunchedEffect(authViewModel, context) {
+        authViewModel.authResults.collect { result ->
+            when (result) {
+                is AuthResult.Authorized -> {
+
+                }
+
+                is AuthResult.Unauthorized -> {
+                    Toast.makeText(
+                        context, "Your are not authorized",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                is AuthResult.UnknownError -> {
+                    Toast.makeText(
+                        context, "Error occured",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 
     Scaffold(
@@ -113,9 +146,9 @@ fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
-                value = email,
+                value = state.signInEmail,
                 onValueChange = {
-
+                    authViewModel.onEvent(AuthUIEvent.SignInEmailChanged(it))
                 }
             )
 
@@ -126,8 +159,10 @@ fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.password_header),
                 hintText = stringResource(R.string.password_hint),
-                value = password,
-                onValueChange = { password = it },
+                value = state.signInPassword,
+                onValueChange = {
+                    authViewModel.onEvent(AuthUIEvent.SignInPasswordChanged(it))
+                },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
 
@@ -154,12 +189,11 @@ fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
                     .fillMaxWidth(),
                 text = stringResource(R.string.login),
                 onClick = {
-                    // TODO: Perform req operation and navigate to Home Screen
+                    authViewModel.onEvent(AuthUIEvent.SignIn)
                     context.findActivity()?.apply {
                         startActivity(Intent(activity, MainActivity::class.java))
                     }
                 },
-//                enabled = false
             )
 
             Spacer(modifier = Modifier.height(15.dp))
@@ -175,6 +209,11 @@ fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
 
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
+                    modifier = Modifier.onClick {
+                        context.findActivity()?.apply {
+                            startActivity(Intent(activity, SignupScreen::class.java))
+                        }
+                    },
                     text = stringResource(R.string.create),
                     style = medium16.copy(color = PrimaryLight)
                 )

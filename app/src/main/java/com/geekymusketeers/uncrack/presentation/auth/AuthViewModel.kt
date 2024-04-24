@@ -23,7 +23,7 @@ class AuthViewModel @Inject constructor(
     val authResults = resultChannel.receiveAsFlow()
 
     init {
-
+        authenticate()
     }
 
     fun onEvent(event: AuthUIEvent) {
@@ -38,7 +38,7 @@ class AuthViewModel @Inject constructor(
                 state = state.copy(signInPassword = event.value)
             }
             is AuthUIEvent.SignIn -> {
-
+                signIn()
             }
             is AuthUIEvent.SignUpNameChanged -> {
                 state = state.copy(signUpName = event.value)
@@ -50,7 +50,7 @@ class AuthViewModel @Inject constructor(
                 state = state.copy(signUpPassword = event.value)
             }
             is AuthUIEvent.SignUp -> {
-
+                signUp()
             }
         }
     }

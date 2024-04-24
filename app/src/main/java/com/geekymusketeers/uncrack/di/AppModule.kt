@@ -34,7 +34,7 @@ object AppModule {
     @Singleton
     fun provideApi(): UnCrackApi {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.0.2:8080/")
+            .baseUrl("http://10.0.2.2")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create()
