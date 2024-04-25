@@ -87,4 +87,11 @@ object UtilsKt {
             AccountType.BEHANCE to R.drawable.new_behance,
         )
     }
+    fun getCommunitiesAccounts(): Map<AccountType, Int> {
+        return mapOf(
+            AccountType.REDDIT to R.drawable.cl_reddit,
+            AccountType.MEETUP to R.drawable.meetup,
+            AccountType.PINTEREST to R.drawable.pinterest
+        )
+    }
 }

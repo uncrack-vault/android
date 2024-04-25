@@ -14,6 +14,9 @@ enum class AccountType(val text: String) {
     DISCORD("Discord"),
     DRIBBLE("Dribble"),
     BEHANCE("Behance"),
+    REDDIT("Reddit"),
+    MEETUP("Meetup"),
+    PINTEREST("Pinterest"),
     OTHER("Other");
 
     companion object {

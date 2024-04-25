@@ -25,6 +25,7 @@ import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.medium20
 import com.geekymusketeers.uncrack.util.UtilsKt.getCommunicationAccounts
+import com.geekymusketeers.uncrack.util.UtilsKt.getCommunitiesAccounts
 import com.geekymusketeers.uncrack.util.UtilsKt.getCrowdSourcingAccounts
 import com.geekymusketeers.uncrack.util.UtilsKt.getPortfolioAccounts
 import com.geekymusketeers.uncrack.util.UtilsKt.getSocialAccounts
@@ -152,6 +153,34 @@ fun AccountSelectionScreen(
             ) {
 
                 val crowdSourcingAccountMap = getPortfolioAccounts()
+
+                items(crowdSourcingAccountMap.size) { index ->
+                    val entry = crowdSourcingAccountMap.entries.elementAt(index)
+                    val accountText = entry.key
+                    val iconId = entry.value
+
+                    AccountCard(
+                        icon = iconId,
+                        text = accountText.name,
+                    ) {}
+
+                }
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = "Communities",
+                style = medium20.copy(Color.Black)
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+
+                val crowdSourcingAccountMap = getCommunitiesAccounts()
 
                 items(crowdSourcingAccountMap.size) { index ->
                     val entry = crowdSourcingAccountMap.entries.elementAt(index)
