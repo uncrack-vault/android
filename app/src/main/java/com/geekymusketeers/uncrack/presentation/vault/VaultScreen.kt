@@ -29,6 +29,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.components.EmptyState
 import com.geekymusketeers.uncrack.components.VaultCard
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
@@ -120,7 +122,10 @@ fun VaultScreen(
                     }
                 } else {
                     item {
-
+                        EmptyState(
+                            stateTitle = "Hey Aritra, \n currently there are no passwords saved",
+                            image = R.drawable.vault_empty_state
+                        )
                     }
                 }
             }
