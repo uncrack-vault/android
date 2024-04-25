@@ -6,6 +6,7 @@ sealed class Screen(val name: String) {
     data object VaultScreen : Screen("vault_screen")
     data object ShieldScreen : Screen("shield_screen")
     data object AccountScreen : Screen("account_screen")
+    data object AccountSelectionScreen : Screen("account_selection_screen")
     data object AddPasswordScreen : Screen("add_password_screen")
     data object EditPasswordScreen : Screen("edit_password_screen")
     data object ViewPasswordScreen : Screen("view_password_screen")

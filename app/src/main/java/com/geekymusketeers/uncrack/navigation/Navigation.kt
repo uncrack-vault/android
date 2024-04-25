@@ -34,6 +34,7 @@ import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
+import com.geekymusketeers.uncrack.presentation.vault.AccountSelectionScreen
 import com.geekymusketeers.uncrack.presentation.vault.AddPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.EditPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.VaultScreen
@@ -70,6 +71,7 @@ fun Navigation(
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = persistentListOf(
+        Screen.AccountSelectionScreen.name,
         Screen.AddPasswordScreen.name,
         "${Screen.EditPasswordScreen.name}/{accountID}",
         Screen.ProfileScreen.name,
@@ -110,11 +112,17 @@ fun Navigation(
 
             composable(route = Screen.VaultScreen.name) {
                 VaultScreen(
-                    onFabClicked = { navController.navigate(Screen.AddPasswordScreen.name) },
+                    onFabClicked = { navController.navigate(Screen.AccountSelectionScreen.name) },
                     vaultViewModel = vaultViewModel,
                     navigateToViewPasswordScreen = { id ->
                         navController.navigate("${Screen.ViewPasswordScreen.name}/$id")
                     }
+                )
+            }
+
+            composable(route = Screen.AccountSelectionScreen.name) {
+                AccountSelectionScreen(
+                    navController
                 )
             }
 

@@ -3,6 +3,8 @@ package com.geekymusketeers.uncrack.util
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.domain.model.AccountType
 import java.util.regex.Pattern
 
 object UtilsKt {
@@ -55,5 +57,34 @@ object UtilsKt {
         return (1..length)
             .map { charset.random() }
             .joinToString("")
+    }
+
+    fun getSocialAccounts(): Map<AccountType, Int> {
+        return mapOf(
+            AccountType.INSTAGRAM to R.drawable.instagram,
+            AccountType.FACEBOOK to R.drawable.facebook,
+            AccountType.LINKEDIN to R.drawable.linkedin,
+            AccountType.SNAPCHAT to R.drawable.snapchat,
+            AccountType.TWITTER to R.drawable.twitter
+        )
+    }
+    fun getCrowdSourcingAccounts(): Map<AccountType, Int> {
+        return mapOf(
+            AccountType.BUYMEACOFFEE to R.drawable.new_buy_me_a_coffee,
+            AccountType.PATREON to R.drawable.patreon,
+        )
+    }
+    fun getCommunicationAccounts(): Map<AccountType, Int> {
+        return mapOf(
+            AccountType.SLACK to R.drawable.slack,
+            AccountType.TELEGRAM to R.drawable.telegram,
+            AccountType.DISCORD to R.drawable.new_discord,
+        )
+    }
+    fun getPortfolioAccounts(): Map<AccountType, Int> {
+        return mapOf(
+            AccountType.DRIBBLE to R.drawable.dribbble,
+            AccountType.BEHANCE to R.drawable.new_behance,
+        )
     }
 }
