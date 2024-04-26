@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -52,8 +50,7 @@ fun AccountSelectionScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(SurfaceVariantLight)
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState()),
+                .padding(16.dp),
             horizontalAlignment = Alignment.Start
         ) {
 
@@ -77,7 +74,7 @@ fun AccountSelectionScreen(
 
                     AccountCard(
                         icon = iconId,
-                        text = accountText.name,
+                        text = accountText.text,
                     ) {}
 
                 }
@@ -105,7 +102,7 @@ fun AccountSelectionScreen(
 
                     AccountCard(
                         icon = iconId,
-                        text = accountText.name,
+                        text = accountText.text,
                     ) {}
 
                 }
@@ -133,7 +130,7 @@ fun AccountSelectionScreen(
 
                     AccountCard(
                         icon = iconId,
-                        text = accountText.name,
+                        text = accountText.text,
                     ) {}
 
                 }
@@ -161,7 +158,7 @@ fun AccountSelectionScreen(
 
                     AccountCard(
                         icon = iconId,
-                        text = accountText.name,
+                        text = accountText.text,
                     ) {}
 
                 }
@@ -189,7 +186,7 @@ fun AccountSelectionScreen(
 
                     AccountCard(
                         icon = iconId,
-                        text = accountText.name,
+                        text = accountText.text,
                     ) {}
 
                 }

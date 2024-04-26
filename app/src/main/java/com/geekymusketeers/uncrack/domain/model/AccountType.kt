@@ -20,32 +20,8 @@ enum class AccountType(val text: String) {
     OTHER("Other");
 
     companion object {
-
         fun getAccountTypeFromString(accountName: String): AccountType {
-            return when (accountName) {
-                "Instagram" -> {
-                    INSTAGRAM
-                }
-                "Facebook" -> {
-                    FACEBOOK
-                }
-                "LinkedIn" -> {
-                    LINKEDIN
-                }
-                "Snapchat" -> {
-                    SNAPCHAT
-                }
-                "Twitter" -> {
-                    TWITTER
-                }
-                "Messenger" -> {
-                    MESSENGER
-                }
-
-                else -> {
-                    OTHER
-                }
-            }
+            return entries.find { it.text.equals(accountName, ignoreCase = true) } ?: OTHER
         }
     }
 }
