@@ -184,6 +184,10 @@
     <string name="username_hint">johndoe</string>
     <string name="not_favourite">Not favourite</string>
     <string name="password_strength">Pass Strength</string>
+    <string name="communities">Communities</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="communication">Communication</string>
+    <string name="crowdsourcing">Crowdsourcing</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

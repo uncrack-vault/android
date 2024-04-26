@@ -16,8 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.AccountCard
 import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
@@ -55,7 +57,7 @@ fun AccountSelectionScreen(
         ) {
 
             Text(
-                text = "Social",
+                text = stringResource(id = R.string.social),
                 style = medium20.copy(Color.Black)
             )
 
@@ -83,7 +85,7 @@ fun AccountSelectionScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "Crowdsourcing",
+                text = stringResource(R.string.crowdsourcing),
                 style = medium20.copy(Color.Black)
             )
 
@@ -111,7 +113,7 @@ fun AccountSelectionScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "Communication",
+                text = stringResource(R.string.communication),
                 style = medium20.copy(Color.Black)
             )
 
@@ -139,7 +141,7 @@ fun AccountSelectionScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "Portfolio",
+                text = stringResource(R.string.portfolio),
                 style = medium20.copy(Color.Black)
             )
 
@@ -167,7 +169,7 @@ fun AccountSelectionScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "Communities",
+                text = stringResource(R.string.communities),
                 style = medium20.copy(Color.Black)
             )
 
@@ -188,7 +190,6 @@ fun AccountSelectionScreen(
                         icon = iconId,
                         text = accountText.text,
                     ) {}
-
                 }
             }
         }

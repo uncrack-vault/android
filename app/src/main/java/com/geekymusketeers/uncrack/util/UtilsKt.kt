@@ -65,7 +65,8 @@ object UtilsKt {
             AccountType.FACEBOOK to R.drawable.facebook,
             AccountType.LINKEDIN to R.drawable.linkedin,
             AccountType.SNAPCHAT to R.drawable.snapchat,
-            AccountType.TWITTER to R.drawable.twitter
+            AccountType.TWITTER to R.drawable.twitter,
+            AccountType.MESSENGER to R.drawable.messenger
         )
     }
     fun getCrowdSourcingAccounts(): Map<AccountType, Int> {
