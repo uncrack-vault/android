@@ -140,6 +140,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
 
     // In-app update
     implementation ("com.google.android.play:core:1.10.3")
