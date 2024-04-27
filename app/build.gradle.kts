@@ -135,10 +135,11 @@ dependencies {
     implementation ("nu.aaro.gustav:passwordstrengthmeter:0.4")
 
     // Firebase
-    (platform("com.google.firebase:firebase-bom:31.1.1"))
-    implementation ("com.google.firebase:firebase-crashlytics-ktx:18.6.2")
-    implementation ("com.google.firebase:firebase-analytics-ktx:21.5.1")
-    implementation("com.google.firebase:firebase-messaging-ktx:23.4.1")
+    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation ("com.google.firebase:firebase-crashlytics")
+    implementation ("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.firebase:firebase-auth")
 
     // In-app update
     implementation ("com.google.android.play:core:1.10.3")
