@@ -15,7 +15,6 @@ class AuthViewModel : ViewModel() {
         email: String,
         password: String,
         onSignedIn: (FirebaseUser) -> Unit,
-        onSignInError: (String) -> Unit
     ) = runIO {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -23,7 +22,7 @@ class AuthViewModel : ViewModel() {
                     val user = auth.currentUser
                     onSignedIn(user!!)
                 } else {
-                    onSignInError("Invalid email and password")
+                    //
                 }
             }
     }
@@ -33,7 +32,6 @@ class AuthViewModel : ViewModel() {
         email: String,
         password: String,
         onSignedUp: (FirebaseUser) -> Unit,
-        onSignUpError: (String) -> Unit
     ) = runIO {
         auth.createUserWithEmailAndPassword(email,password)
             .addOnCompleteListener { task ->
@@ -57,7 +55,7 @@ class AuthViewModel : ViewModel() {
                             .addOnFailureListener {  }
                     }
                 } else {
-                    onSignUpError("Please check your details")
+//                    onSignUpError("Please check your details")
                 }
             }
     }
