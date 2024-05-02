@@ -32,19 +32,27 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
+import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignupScreen : ComponentActivity() {
 
+    private val auth: FirebaseAuth by lazy { Firebase.auth }
+    private lateinit var authViewModel: AuthViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
 
         enableEdgeToEdge(
@@ -59,30 +67,30 @@ class SignupScreen : ComponentActivity() {
 
         setContent {
             UnCrackTheme {
-                SignupContent()
+                var newUser by remember { mutableStateOf(auth.currentUser) }
+                authViewModel = hiltViewModel()
+                SignupContent(
+                    authViewModel,
+                    onSignUp = { signUpUser ->
+                        newUser = signUpUser
+                    }
+                )
             }
         }
     }
 }
 
 @Composable
-fun SignupContent(modifier: Modifier = Modifier) {
+fun SignupContent(
+    authViewModel: AuthViewModel,
+    modifier: Modifier = Modifier,
+    onSignUp: (FirebaseUser) -> Unit
+) {
 
-    val name by remember {
-        mutableStateOf("")
-    }
-
-    val email by remember {
-        mutableStateOf("")
-    }
-
-    val password by remember {
-        mutableStateOf("")
-    }
-
-    var passwordVisibility by remember {
-        mutableStateOf(false)
-    }
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordVisibility by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -95,7 +103,7 @@ fun SignupContent(modifier: Modifier = Modifier) {
         ) {
 
             Text(
-                text = "Sign In",
+                text = "Sign Up",
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = DMSansFontFamily,
@@ -110,9 +118,7 @@ fun SignupContent(modifier: Modifier = Modifier) {
                 headerText = stringResource(R.string.name_header),
                 hintText = stringResource(R.string.name_hint),
                 value = name,
-                onValueChange = {
-
-                }
+                onValueChange = { name = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -124,9 +130,7 @@ fun SignupContent(modifier: Modifier = Modifier) {
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
                 value = email,
-                onValueChange = {
-
-                }
+                onValueChange = { email = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -137,7 +141,7 @@ fun SignupContent(modifier: Modifier = Modifier) {
                 headerText = stringResource(R.string.password_header),
                 hintText = stringResource(R.string.password_hint),
                 value = password,
-                onValueChange = {},
+                onValueChange = { password = it },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     val image = if (passwordVisibility)
@@ -163,9 +167,16 @@ fun SignupContent(modifier: Modifier = Modifier) {
                     .fillMaxWidth(),
                 text = stringResource(id = R.string.register),
                 onClick = {
-                    // TODO: Perform req operation and navigate to Home Screen
+                    authViewModel.signUp(
+                        name,
+                        email,
+                        password,
+                        onSignedUp = { signUpUser ->
+                            onSignUp(signUpUser)
+                        }
+                    )
                 },
-                enabled = false
+//                enabled = false
             )
 
             Spacer(modifier = Modifier.height(10.dp))
