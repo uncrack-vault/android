@@ -1,6 +1,7 @@
 package com.geekymusketeers.uncrack.presentation.auth
 
 import androidx.lifecycle.ViewModel
+import com.geekymusketeers.uncrack.domain.model.User
 import com.geekymusketeers.uncrack.util.runIO
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -38,15 +39,11 @@ class AuthViewModel : ViewModel() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
 
-                    val userProfile = hashMapOf(
-                        "name" to name,
-                        "email" to email,
-                        "password" to password
-                    )
+                    val userProfile = User(name, email, password)
 
-                    val firestore = FirebaseFirestore.getInstance()
+                    val userDB = FirebaseFirestore.getInstance()
                     user?.let {
-                        firestore.collection("users")
+                        userDB.collection("Users")
                             .document(it.uid)
                             .set(userProfile)
                             .addOnSuccessListener {
