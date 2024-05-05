@@ -30,9 +30,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.presentation.home.HomeScreen
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
@@ -72,18 +76,25 @@ fun SplashContent(activity: Activity, modifier: Modifier = Modifier) {
         ),
         label = ""
     )
+    val currentUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     LaunchedEffect(Unit) {
         animation = true
 
-        // TODO: Need to change the logic for old and new user
-        val intent = Intent(activity, OnboardingScreen::class.java)
-
-        activity.run {
-            delay(2000L)
-            startActivity(intent)
-            finish()
+        if (currentUser == null) {
+            activity.run {
+                delay(2000L)
+                startActivity(Intent(this, OnboardingScreen::class.java))
+                finish()
+            }
+        } else {
+            activity.run {
+                delay(2000)
+                startActivity(Intent(this,MainActivity::class.java))
+                finish()
+            }
         }
+
     }
 
     Surface {
