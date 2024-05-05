@@ -190,6 +190,8 @@
     <string name="crowdsourcing">Crowdsourcing</string>
     <string name="log_in">Log In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="get_started">Get Started</string>
+    <string name="create_an_account">Create an account</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

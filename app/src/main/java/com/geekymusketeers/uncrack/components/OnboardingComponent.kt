@@ -24,7 +24,7 @@ fun OnboardingComponent(item: OnBoardingItem, modifier: Modifier = Modifier) {
 
         Image(
             painter = painterResource(id = item.image),
-            contentDescription = "onboardimage",
+            contentDescription = "onboard image",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(240.dp)

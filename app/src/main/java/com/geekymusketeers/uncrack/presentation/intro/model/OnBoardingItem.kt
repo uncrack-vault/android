@@ -1,6 +1,5 @@
 package com.geekymusketeers.uncrack.presentation.intro.model
 
-import android.content.Context
 import com.geekymusketeers.uncrack.R
 
 data class OnBoardingItem(
@@ -10,19 +9,19 @@ data class OnBoardingItem(
 ) {
     companion object {
         // TODO: Need to fix the strings
-        fun onboardingScreenItems(context: Context) = listOf(
+        fun onboardingScreenItems() = listOf(
             OnBoardingItem(
-                "Heading",
+                "Control your security",
                 "Subtext",
                 R.drawable.logo_uncrack
             ),
             OnBoardingItem(
-                "Heading",
+                "Everything in a single click",
                 "Subtext",
                 R.drawable.logo_uncrack
             ),
             OnBoardingItem(
-                "Heading",
+                "Safe & Secure with us",
                 "Subtext",
                 R.drawable.logo_uncrack
             ),
