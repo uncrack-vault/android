@@ -191,7 +191,7 @@ fun SignupContent(
 //                enabled = false
             )
 
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.height(15.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
