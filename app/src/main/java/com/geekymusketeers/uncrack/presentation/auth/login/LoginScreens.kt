@@ -37,20 +37,32 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
+import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
+import com.geekymusketeers.uncrack.presentation.auth.signup.SignupScreen
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.onClick
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.sign
 
 @AndroidEntryPoint
 class LoginScreens : ComponentActivity() {
+
+    private val auth: FirebaseAuth by lazy { Firebase.auth }
+    private lateinit var userAuthViewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -66,27 +78,34 @@ class LoginScreens : ComponentActivity() {
 
         setContent {
             UnCrackTheme {
-                LoginContent(this@LoginScreens)
+                var user by remember {
+                    mutableStateOf(auth.currentUser)
+                }
+                userAuthViewModel = hiltViewModel()
+                LoginContent(
+                    this@LoginScreens,
+                    userAuthViewModel,
+                    onSignedIn = { signedInUser ->
+                        user = signedInUser
+                    }
+                )
             }
         }
     }
 }
 
 @Composable
-fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
+fun LoginContent(
+    activity: Activity,
+    viewModel: AuthViewModel,
+    modifier: Modifier = Modifier,
+    onSignedIn: (FirebaseUser) -> Unit
+) {
 
     val context = LocalContext.current
-    val email by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
-
-    var passwordVisibility by remember {
-        mutableStateOf(false)
-    }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordVisibility by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -99,7 +118,7 @@ fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
         ) {
 
             Text(
-                text = "Log In",
+                text = stringResource(R.string.log_in),
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = DMSansFontFamily,
@@ -114,9 +133,7 @@ fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
                 value = email,
-                onValueChange = {
-
-                }
+                onValueChange = { email = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -154,7 +171,13 @@ fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
                     .fillMaxWidth(),
                 text = stringResource(R.string.login),
                 onClick = {
-                    // TODO: Perform req operation and navigate to Home Screen
+                    viewModel.logIn(
+                        email,
+                        password,
+                        onSignedIn = { signedInUser ->
+                            onSignedIn(signedInUser)
+                        }
+                    )
                     context.findActivity()?.apply {
                         startActivity(Intent(activity, MainActivity::class.java))
                     }
@@ -174,7 +197,13 @@ fun LoginContent(activity: Activity, modifier: Modifier = Modifier) {
                 )
 
                 Spacer(modifier = Modifier.width(8.dp))
+
                 Text(
+                    modifier = Modifier.onClick {
+                        context.findActivity()?.apply {
+                            startActivity(Intent(activity, SignupScreen::class.java))
+                        }
+                    },
                     text = stringResource(R.string.create),
                     style = medium16.copy(color = PrimaryLight)
                 )

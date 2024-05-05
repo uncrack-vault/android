@@ -15,6 +15,51 @@ object UtilsKt {
         else -> null
     }
 
+    fun validateName(name: String?): Boolean {
+        return !name.isNullOrEmpty() &&
+                name.split(" ")
+                    .all { word -> word.isNotEmpty() && Pattern.matches("^([A-Za-z.]+)*", word) }
+    }
+
+    fun validatePassword(password: String): Boolean {
+        // Check if the password is empty
+        if (password.isEmpty()) {
+            return false
+        }
+
+        // Check if the password is at least 8 characters long
+        if (password.length < 8) {
+            return false
+        }
+
+        // Check if the password contains at least one uppercase letter
+        if (!password.contains(Regex("[A-Z]"))) {
+            return false
+        }
+
+        // Check if the password contains at least one lowercase letter
+        if (!password.contains(Regex("[a-z]"))) {
+            return false
+        }
+
+        // Check if the password contains at least one digit
+        if (!password.contains(Regex("\\d"))) {
+            return false
+        }
+
+        // Check if the password contains at least one special character
+        if (!password.contains(Regex("[^A-Za-z0-9]"))) {
+            return false
+        }
+
+        // Check if the password does not contain any whitespace
+        if (password.contains(" ")) {
+            return false
+        }
+
+        return true
+    }
+
     fun validateEmail(email: String?): Boolean {
         return !email.isNullOrEmpty() && email.split("")
             .all { word ->

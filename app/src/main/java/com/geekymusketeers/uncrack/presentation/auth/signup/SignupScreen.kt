@@ -1,10 +1,14 @@
 package com.geekymusketeers.uncrack.presentation.auth.signup
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -25,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,19 +38,30 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
+import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
+import com.geekymusketeers.uncrack.presentation.auth.login.LoginScreens
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
+import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.onClick
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignupScreen : ComponentActivity() {
 
+    private val auth: FirebaseAuth by lazy { Firebase.auth }
+    private lateinit var authViewModel: AuthViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
 
         enableEdgeToEdge(
@@ -59,30 +76,33 @@ class SignupScreen : ComponentActivity() {
 
         setContent {
             UnCrackTheme {
-                SignupContent()
+                var newUser by remember { mutableStateOf(auth.currentUser) }
+                authViewModel = hiltViewModel()
+                SignupContent(
+                    this@SignupScreen,
+                    authViewModel,
+                    onSignUp = { signUpUser ->
+                        newUser = signUpUser
+                    }
+                )
             }
         }
     }
 }
 
 @Composable
-fun SignupContent(modifier: Modifier = Modifier) {
+fun SignupContent(
+    activity: Activity,
+    authViewModel: AuthViewModel,
+    modifier: Modifier = Modifier,
+    onSignUp: (FirebaseUser) -> Unit
+) {
 
-    val name by remember {
-        mutableStateOf("")
-    }
-
-    val email by remember {
-        mutableStateOf("")
-    }
-
-    val password by remember {
-        mutableStateOf("")
-    }
-
-    var passwordVisibility by remember {
-        mutableStateOf(false)
-    }
+    val context = LocalContext.current
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordVisibility by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -95,7 +115,7 @@ fun SignupContent(modifier: Modifier = Modifier) {
         ) {
 
             Text(
-                text = "Sign In",
+                text = stringResource(R.string.sign_up),
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = DMSansFontFamily,
@@ -110,9 +130,7 @@ fun SignupContent(modifier: Modifier = Modifier) {
                 headerText = stringResource(R.string.name_header),
                 hintText = stringResource(R.string.name_hint),
                 value = name,
-                onValueChange = {
-
-                }
+                onValueChange = { name = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -124,9 +142,7 @@ fun SignupContent(modifier: Modifier = Modifier) {
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
                 value = email,
-                onValueChange = {
-
-                }
+                onValueChange = { email = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -137,7 +153,7 @@ fun SignupContent(modifier: Modifier = Modifier) {
                 headerText = stringResource(R.string.password_header),
                 hintText = stringResource(R.string.password_hint),
                 value = password,
-                onValueChange = {},
+                onValueChange = { password = it },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     val image = if (passwordVisibility)
@@ -163,20 +179,37 @@ fun SignupContent(modifier: Modifier = Modifier) {
                     .fillMaxWidth(),
                 text = stringResource(id = R.string.register),
                 onClick = {
-                    // TODO: Perform req operation and navigate to Home Screen
+                    authViewModel.signUp(
+                        name,
+                        email,
+                        password,
+                        onSignedUp = { signUpUser ->
+                            onSignUp(signUpUser)
+                        }
+                    )
                 },
-                enabled = false
+//                enabled = false
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(15.dp))
 
-            Row {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
                 Text(
                     text = stringResource(id = R.string.already_have_an_account),
                     style = medium16.copy(color = OnPrimaryContainerLight)
                 )
 
+                Spacer(modifier = Modifier.width(8.dp))
+
                 Text(
+                    modifier = Modifier.onClick {
+                        context.findActivity()?.apply {
+                            startActivity(Intent(activity, LoginScreens::class.java))
+                        }
+                    },
                     text = stringResource(id = R.string.login),
                     style = medium16.copy(color = PrimaryLight)
                 )
