@@ -103,17 +103,9 @@ fun LoginContent(
 ) {
 
     val context = LocalContext.current
-    var email by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
-
-    var passwordVisibility by remember {
-        mutableStateOf(false)
-    }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordVisibility by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -126,7 +118,7 @@ fun LoginContent(
         ) {
 
             Text(
-                text = "Log In",
+                text = stringResource(R.string.log_in),
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = DMSansFontFamily,
@@ -193,7 +185,7 @@ fun LoginContent(
 //                enabled = false
             )
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -205,6 +197,7 @@ fun LoginContent(
                 )
 
                 Spacer(modifier = Modifier.width(8.dp))
+
                 Text(
                     modifier = Modifier.onClick {
                         context.findActivity()?.apply {
