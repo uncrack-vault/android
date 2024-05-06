@@ -62,32 +62,21 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.Center
                 ) {
 
-                    Image(
-                        painter = painterResource(id = R.drawable.no_user_profile_picture),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(56.dp)
-                            .clip(CircleShape)
-                            .clickable { navController.navigate("profile_screen") }
-                    )
-
                     Text(
-                        modifier = Modifier.padding(top = 16.dp),
                         text = "Hello, ${user.name}",
                         style = medium24.copy(Color.Black)
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = stringResource(R.string.manager_passwords),
+                    text = stringResource(R.string.browse),
                     style = normal22.copy(Color.Black)
                 )
             }
