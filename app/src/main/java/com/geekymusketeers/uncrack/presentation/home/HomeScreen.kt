@@ -35,8 +35,11 @@ import com.geekymusketeers.uncrack.ui.theme.normal22
 @Composable
 fun HomeScreen(
     navController: NavHostController,
+    homeViewModel: HomeViewModel,
     modifier: Modifier = Modifier
 ) {
+
+    val user = homeViewModel.state.value
 
     Scaffold(
         modifier = modifier.fillMaxWidth()
@@ -71,7 +74,7 @@ fun HomeScreen(
 
                     Text(
                         modifier = Modifier.padding(top = 16.dp),
-                        text = "Hello, Aritra",
+                        text = "Hello, ${user.name}",
                         style = medium24.copy(Color.Black)
                     )
                 }
@@ -129,13 +132,4 @@ fun HomeScreen(
             // TODO: FAV list
         }
     }
-}
-
-@Preview
-@Composable
-private fun HomeScreenPrev() {
-    HomeScreen(
-        navController = rememberNavController(),
-        modifier = Modifier
-    )
 }

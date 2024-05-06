@@ -29,6 +29,7 @@ import com.geekymusketeers.uncrack.presentation.account.PasswordGenerator
 import com.geekymusketeers.uncrack.presentation.account.PasswordGeneratorViewModel
 import com.geekymusketeers.uncrack.presentation.category.CategoryScreen
 import com.geekymusketeers.uncrack.presentation.home.HomeScreen
+import com.geekymusketeers.uncrack.presentation.home.HomeViewModel
 import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
@@ -61,6 +62,7 @@ fun Navigation(
     modifier: Modifier = Modifier,
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
+    homeViewModel: HomeViewModel = hiltViewModel(),
     themeViewModel: ThemeViewModel = hiltViewModel(),
     vaultViewModel: VaultViewModel = hiltViewModel(),
     addEditViewModel: AddEditViewModel = hiltViewModel(),
@@ -106,7 +108,8 @@ fun Navigation(
 
             composable(route = Screen.HomeScreen.name) {
                 HomeScreen(
-                    navController
+                    navController,
+                    homeViewModel
                 )
             }
 
@@ -171,7 +174,8 @@ fun Navigation(
             composable(route = Screen.AccountScreen.name) {
                 AccountScreen(
                     navController,
-                    themeViewModel
+                    themeViewModel,
+                    homeViewModel
                 )
             }
 

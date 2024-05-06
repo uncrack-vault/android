@@ -37,6 +37,7 @@ import com.geekymusketeers.uncrack.components.AccountOption
 import com.geekymusketeers.uncrack.components.ProfileContainer
 import com.geekymusketeers.uncrack.components.ThemeDialog
 import com.geekymusketeers.uncrack.navigation.Screen
+import com.geekymusketeers.uncrack.presentation.home.HomeViewModel
 import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
@@ -53,12 +54,14 @@ import com.geekymusketeers.uncrack.util.Util
 fun AccountScreen(
     navController: NavHostController,
     themeViewModel: ThemeViewModel,
+    homeViewModel: HomeViewModel,
     modifier: Modifier = Modifier
 ) {
 
     val context = LocalContext.current
     var openThemeDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
+    val userData = homeViewModel.state.value
 
     when {
         openThemeDialog -> {
@@ -151,7 +154,7 @@ fun AccountScreen(
                 Spacer(modifier = Modifier.height(15.dp))
 
                 Text(
-                    text = "John Doe",
+                    text = userData.name,
                     style = medium32.copy(color = OnPrimaryContainerLight)
                 )
             }
