@@ -3,7 +3,6 @@ package com.geekymusketeers.uncrack.presentation.auth.signup
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -39,6 +38,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
@@ -103,6 +103,7 @@ fun SignupContent(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
+    val isRegisterButtonEnableObserve = authViewModel.isRegistrationEnabled.value
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -174,22 +175,27 @@ fun SignupContent(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            UCButton(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                text = stringResource(id = R.string.register),
-                onClick = {
-                    authViewModel.signUp(
-                        name,
-                        email,
-                        password,
-                        onSignedUp = { signUpUser ->
-                            onSignUp(signUpUser)
+            if (isRegisterButtonEnableObserve != null) {
+                UCButton(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = stringResource(id = R.string.register),
+                    onClick = {
+                        authViewModel.signUp(
+                            name,
+                            email,
+                            password,
+                            onSignedUp = { signUpUser ->
+                                onSignUp(signUpUser)
+                            }
+                        )
+                        context.findActivity()?.apply {
+                            startActivity(Intent(activity, MainActivity::class.java))
                         }
-                    )
-                },
-//                enabled = false
-            )
+                    },
+                    enabled = isRegisterButtonEnableObserve
+                )
+            }
 
             Spacer(modifier = Modifier.height(15.dp))
 
