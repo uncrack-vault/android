@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.ui.theme.normal16
+import com.geekymusketeers.uncrack.ui.theme.normal18
 import com.geekymusketeers.uncrack.util.onClick
 
 @Composable
@@ -48,7 +49,7 @@ fun AccountCard(
 
         Text(
             text = text,
-            style = normal16.copy(Color.Black)
+            style = normal18.copy(Color.Black)
         )
     }
 }
