@@ -42,7 +42,7 @@ fun VaultCard(
             .background(Color.White)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(32.dp)
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Image(
             modifier = Modifier.size(42.dp),
