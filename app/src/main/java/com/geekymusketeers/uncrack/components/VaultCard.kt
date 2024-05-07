@@ -24,6 +24,7 @@ import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.medium18
 import com.geekymusketeers.uncrack.ui.theme.normal12
+import com.geekymusketeers.uncrack.util.UtilsKt.getAccountImage
 import com.geekymusketeers.uncrack.util.onClick
 
 @Composable
@@ -45,7 +46,7 @@ fun VaultCard(
     ) {
         Image(
             modifier = Modifier.size(42.dp),
-            painter = rememberAsyncImagePainter(model = R.drawable.new_medium),
+            painter = getAccountImage(accountModel.company),
             contentDescription = null
         )
 

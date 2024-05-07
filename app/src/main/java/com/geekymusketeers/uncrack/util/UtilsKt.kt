@@ -3,6 +3,9 @@ package com.geekymusketeers.uncrack.util
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.domain.model.AccountType
 import java.util.regex.Pattern
@@ -139,5 +142,28 @@ object UtilsKt {
             AccountType.MEETUP to R.drawable.meetup,
             AccountType.PINTEREST to R.drawable.pinterest
         )
+    }
+    
+    @Composable
+    fun getAccountImage(accountName: String): Painter {
+        return when(accountName) {
+            "Instagram" -> painterResource(id = R.drawable.instagram)
+            "Facebook" -> painterResource(id = R.drawable.facebook)
+            "LinkedIn" -> painterResource(id = R.drawable.linkedin)
+            "Snapchat" -> painterResource(id = R.drawable.snapchat)
+            "Twitter" -> painterResource(id = R.drawable.twitter)
+            "Messenger" -> painterResource(id = R.drawable.messenger)
+            "Buy Me a Coffee" -> painterResource(id = R.drawable.new_buy_me_a_coffee)
+            "Patreon" -> painterResource(id = R.drawable.patreon)
+            "Slack" -> painterResource(id = R.drawable.slack)
+            "Telegram" -> painterResource(id = R.drawable.telegram)
+            "Discord" -> painterResource(id = R.drawable.new_discord)
+            "Dribble" -> painterResource(id = R.drawable.dribbble)
+            "Behance" -> painterResource(id = R.drawable.new_behance)
+            "Reddit" -> painterResource(id = R.drawable.cl_reddit)
+            "Meetup" -> painterResource(id = R.drawable.meetup)
+            "Pinterest" -> painterResource(id = R.drawable.pinterest)
+            else -> painterResource(id = R.drawable.uncrack_logo)
+        }
     }
 }
