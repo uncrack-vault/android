@@ -34,7 +34,8 @@ import com.geekymusketeers.uncrack.util.UtilsKt.getSocialAccounts
 @Composable
 fun AccountSelectionScreen(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    goToAddPasswordScreen: (Int, String) -> Unit
 ) {
     Scaffold(
         modifier.fillMaxSize(),
@@ -77,7 +78,9 @@ fun AccountSelectionScreen(
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
-                    ) {}
+                    ) {
+                        goToAddPasswordScreen(iconId,accountText.text)
+                    }
 
                 }
             }
@@ -105,7 +108,9 @@ fun AccountSelectionScreen(
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
-                    ) {}
+                    ) {
+                        goToAddPasswordScreen(iconId,accountText.text)
+                    }
 
                 }
             }
@@ -133,7 +138,9 @@ fun AccountSelectionScreen(
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
-                    ) {}
+                    ) {
+                        goToAddPasswordScreen(iconId,accountText.text)
+                    }
 
                 }
             }
@@ -161,7 +168,9 @@ fun AccountSelectionScreen(
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
-                    ) {}
+                    ) {
+                        goToAddPasswordScreen(iconId,accountText.text)
+                    }
 
                 }
             }
@@ -189,7 +198,9 @@ fun AccountSelectionScreen(
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
-                    ) {}
+                    ) {
+                        goToAddPasswordScreen(iconId,accountText.text)
+                    }
                 }
             }
         }
