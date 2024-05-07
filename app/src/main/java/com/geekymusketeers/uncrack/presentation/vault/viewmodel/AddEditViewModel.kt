@@ -24,6 +24,9 @@ class AddEditViewModel @Inject constructor(
     private val _password = MutableLiveData<String>()
     val password: LiveData<String> = _password
 
+    private val _note = MutableLiveData<String>()
+    val note: LiveData<String> = _note
+
     private val _isAdded = MutableLiveData(false)
     val isAdded: LiveData<Boolean> = _isAdded
 
@@ -40,6 +43,10 @@ class AddEditViewModel @Inject constructor(
     fun setPassword(password: String) {
         _password.value = password
         checkIfAdded()
+    }
+
+    fun setNote(note: String) {
+        _note.value = note
     }
 
     fun addAccount(account: Account) = runIO {

@@ -121,6 +121,7 @@ fun Navigation(
                 VaultScreen(
                     onFabClicked = { navController.navigate(Screen.AccountSelectionScreen.name) },
                     vaultViewModel = vaultViewModel,
+                    homeViewModel,
                     navigateToViewPasswordScreen = { id ->
                         navController.navigate("${Screen.ViewPasswordScreen.name}/$id")
                     }
