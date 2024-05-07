@@ -263,7 +263,7 @@ fun FontCard(family: String, size: String, style: TextStyle) {
 
 @Preview
 @Composable
-fun PreviewTypography() {
+private fun PreviewTypography() {
     UnCrackTheme {
         Surface {
             Row {

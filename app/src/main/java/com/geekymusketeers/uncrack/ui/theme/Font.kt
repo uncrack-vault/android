@@ -1,9 +1,5 @@
 package com.geekymusketeers.uncrack.ui.theme
 
-import androidx.compose.foundation.background
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -20,7 +16,3 @@ val DMSansFontFamily = FontFamily(
     Font(R.font.dmsans_extrabold, FontWeight.ExtraBold),
     Font(R.font.dmsans_black, FontWeight.Black),
 )
-
-@Composable
-fun Modifier.font16() =
-    this.background(MaterialTheme.colorScheme.onPrimaryContainer)
