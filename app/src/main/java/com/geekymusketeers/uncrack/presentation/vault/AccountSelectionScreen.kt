@@ -34,7 +34,8 @@ import com.geekymusketeers.uncrack.util.UtilsKt.getSocialAccounts
 @Composable
 fun AccountSelectionScreen(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    goToAddPasswordScreen: (Int, String, String) -> Unit
 ) {
     Scaffold(
         modifier.fillMaxSize(),
@@ -61,10 +62,10 @@ fun AccountSelectionScreen(
                 style = medium20.copy(Color.Black)
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
 
                 val socialAccountMap = getSocialAccounts()
@@ -73,26 +74,29 @@ fun AccountSelectionScreen(
                     val entry = socialAccountMap.entries.elementAt(index)
                     val accountText = entry.key
                     val iconId = entry.value
+                    val category = stringResource(id = R.string.social)
 
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
-                    ) {}
+                    ) {
+                        goToAddPasswordScreen(iconId,accountText.text, category)
+                    }
 
                 }
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             Text(
                 text = stringResource(R.string.crowdsourcing),
                 style = medium20.copy(Color.Black)
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
 
                 val crowdSourcingAccountMap = getCrowdSourcingAccounts()
@@ -101,26 +105,29 @@ fun AccountSelectionScreen(
                     val entry = crowdSourcingAccountMap.entries.elementAt(index)
                     val accountText = entry.key
                     val iconId = entry.value
+                    val category = stringResource(R.string.crowdsourcing)
 
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
-                    ) {}
+                    ) {
+                        goToAddPasswordScreen(iconId,accountText.text, category)
+                    }
 
                 }
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             Text(
                 text = stringResource(R.string.communication),
                 style = medium20.copy(Color.Black)
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
 
                 val crowdSourcingAccountMap = getCommunicationAccounts()
@@ -129,26 +136,29 @@ fun AccountSelectionScreen(
                     val entry = crowdSourcingAccountMap.entries.elementAt(index)
                     val accountText = entry.key
                     val iconId = entry.value
+                    val category = stringResource(R.string.communication)
 
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
-                    ) {}
+                    ) {
+                        goToAddPasswordScreen(iconId,accountText.text, category)
+                    }
 
                 }
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             Text(
                 text = stringResource(R.string.portfolio),
                 style = medium20.copy(Color.Black)
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
 
                 val crowdSourcingAccountMap = getPortfolioAccounts()
@@ -157,26 +167,29 @@ fun AccountSelectionScreen(
                     val entry = crowdSourcingAccountMap.entries.elementAt(index)
                     val accountText = entry.key
                     val iconId = entry.value
+                    val category = stringResource(R.string.portfolio)
 
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
-                    ) {}
+                    ) {
+                        goToAddPasswordScreen(iconId,accountText.text, category)
+                    }
 
                 }
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             Text(
                 text = stringResource(R.string.communities),
                 style = medium20.copy(Color.Black)
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
 
                 val crowdSourcingAccountMap = getCommunitiesAccounts()
@@ -185,11 +198,14 @@ fun AccountSelectionScreen(
                     val entry = crowdSourcingAccountMap.entries.elementAt(index)
                     val accountText = entry.key
                     val iconId = entry.value
+                    val category = stringResource(R.string.communities)
 
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
-                    ) {}
+                    ) {
+                        goToAddPasswordScreen(iconId,accountText.text, category)
+                    }
                 }
             }
         }

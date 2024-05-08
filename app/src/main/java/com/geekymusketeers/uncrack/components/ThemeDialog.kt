@@ -29,6 +29,7 @@ import com.geekymusketeers.uncrack.ui.theme.normal24
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThemeDialog(
+    modifier: Modifier = Modifier,
     onDismissRequest: () -> Unit
 ) {
 
@@ -36,7 +37,7 @@ fun ThemeDialog(
         onDismissRequest = { onDismissRequest() }
     ) {
         Column(
-            Modifier
+            modifier
                 .background(MaterialTheme.colorScheme.background, RoundedCornerShape(28.dp))
                 .padding(vertical = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,

@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.EmptyState
 import com.geekymusketeers.uncrack.components.VaultCard
+import com.geekymusketeers.uncrack.presentation.home.HomeViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryContainerLight
@@ -44,12 +45,14 @@ import com.geekymusketeers.uncrack.ui.theme.normal16
 fun VaultScreen(
     onFabClicked: () -> Unit,
     vaultViewModel: VaultViewModel,
+    homeViewModel: HomeViewModel,
     modifier: Modifier = Modifier,
     navigateToViewPasswordScreen: (id: Int) -> Unit
 ) {
 
     val accounts = vaultViewModel.accountModel
     var searchQuery by rememberSaveable { mutableStateOf("") }
+    val userObserver by homeViewModel.state
 
     LaunchedEffect(Unit) {
         vaultViewModel.getAccounts()
@@ -123,7 +126,7 @@ fun VaultScreen(
                 } else {
                     item {
                         EmptyState(
-                            stateTitle = "Hey Aritra, \n currently there are no passwords saved",
+                            stateTitle = "Hey ${userObserver.name}, \n currently there are no passwords saved",
                             image = R.drawable.vault_empty_state
                         )
                     }

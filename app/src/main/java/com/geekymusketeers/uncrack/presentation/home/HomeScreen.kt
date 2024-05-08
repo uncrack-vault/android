@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -39,7 +40,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
 
-    val user = homeViewModel.state.value
+    val user by homeViewModel.state
 
     Scaffold(
         modifier = modifier.fillMaxWidth()
