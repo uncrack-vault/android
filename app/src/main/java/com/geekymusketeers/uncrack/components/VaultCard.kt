@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,14 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
-import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.medium18
 import com.geekymusketeers.uncrack.ui.theme.normal12
 import com.geekymusketeers.uncrack.util.UtilsKt.getAccountImage
-import com.geekymusketeers.uncrack.util.onClick
 
 @Composable
 fun VaultCard(
@@ -38,7 +36,7 @@ fun VaultCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .onClick { onClick() }
+            .clickable { onClick() }
             .background(Color.White)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,

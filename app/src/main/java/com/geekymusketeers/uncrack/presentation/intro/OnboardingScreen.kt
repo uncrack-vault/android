@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,7 +50,6 @@ import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.navigationTopBarHeight
 import com.geekymusketeers.uncrack.ui.theme.normal16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
-import com.geekymusketeers.uncrack.util.onClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -98,7 +98,7 @@ fun OnboardingContent(activity: Activity, modifier: Modifier = Modifier) {
             Text(
                 modifier = Modifier
                     .padding(vertical = 20.dp)
-                    .onClick {
+                    .clickable {
                         context
                             .findActivity()
                             ?.apply {

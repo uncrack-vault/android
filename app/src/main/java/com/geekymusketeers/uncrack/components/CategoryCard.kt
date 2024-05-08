@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,7 +25,6 @@ import coil.request.ImageRequest
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.ui.theme.PrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.normal12
-import com.geekymusketeers.uncrack.util.onClick
 
 @Composable
 fun CategoryCard(
@@ -37,7 +37,7 @@ fun CategoryCard(
     val context = LocalContext.current
 
     Box(
-        modifier = modifier.onClick {
+        modifier = modifier.clickable {
             onClick()
         },
         contentAlignment = Alignment.TopEnd
