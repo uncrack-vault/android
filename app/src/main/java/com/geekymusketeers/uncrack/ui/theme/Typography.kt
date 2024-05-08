@@ -248,11 +248,11 @@ val black57 = generateTextStyle(FontWeight.Black, 57)
 
 
 @Composable
-fun FontCard(family: String, size: String, style: TextStyle) {
+fun FontCard(family: String, size: String, style: TextStyle, modifier: Modifier = Modifier) {
     Card(
         shape = CardDefaults.outlinedShape,
         colors = CardDefaults.outlinedCardColors(),
-        modifier = Modifier.padding(8.dp),
+        modifier = modifier.padding(8.dp),
     ) {
         Row(modifier = Modifier.padding(8.dp)) {
             Text(text = family, style = style)
