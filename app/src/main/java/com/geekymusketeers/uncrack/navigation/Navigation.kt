@@ -78,7 +78,7 @@ fun Navigation(
 
     val screensWithoutNavigationBar = persistentListOf(
         Screen.AccountSelectionScreen.name,
-        "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}",
+        "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}&accountCategory={accountCategory}",
         "${Screen.EditPasswordScreen.name}/{accountID}",
         Screen.ProfileScreen.name,
         Screen.UpdateMasterKeyScreen.name,
@@ -131,26 +131,29 @@ fun Navigation(
             composable(route = Screen.AccountSelectionScreen.name) {
                 AccountSelectionScreen(
                     navController
-                ) { accountIcon, accountName ->
-                    navController.navigate("${Screen.AddPasswordScreen.name}?accountIcon=$accountIcon&accountName=$accountName")
+                ) { accountIcon, accountName, accountCategory ->
+                    navController.navigate("${Screen.AddPasswordScreen.name}?accountIcon=$accountIcon&accountName=$accountName&accountCategory=$accountCategory")
                 }
             }
 
             composable(
-                route = "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}",
+                route = "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}&accountCategory={accountCategory}",
                 arguments = listOf(
                     navArgument("accountIcon") { type = IntType },
-                    navArgument("accountName") { type = StringType }
+                    navArgument("accountName") { type = StringType },
+                    navArgument("accountCategory") { type = StringType }
                 )
             ) {
 
                 val accountIconId = backStackEntry.value?.arguments?.getInt("accountIcon") ?: 0
                 val accountTextId = backStackEntry.value?.arguments?.getString("accountName") ?: ""
+                val accountCategoryId = backStackEntry.value?.arguments?.getString("accountCategory") ?: ""
 
                 AddPasswordScreen(
                     navController,
                     accountIconId,
                     accountTextId,
+                    accountCategoryId,
                     addEditViewModel
                 )
             }

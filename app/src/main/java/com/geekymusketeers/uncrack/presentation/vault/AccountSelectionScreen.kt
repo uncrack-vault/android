@@ -35,7 +35,7 @@ import com.geekymusketeers.uncrack.util.UtilsKt.getSocialAccounts
 fun AccountSelectionScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    goToAddPasswordScreen: (Int, String) -> Unit
+    goToAddPasswordScreen: (Int, String, String) -> Unit
 ) {
     Scaffold(
         modifier.fillMaxSize(),
@@ -74,12 +74,13 @@ fun AccountSelectionScreen(
                     val entry = socialAccountMap.entries.elementAt(index)
                     val accountText = entry.key
                     val iconId = entry.value
+                    val category = stringResource(id = R.string.social)
 
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
                     ) {
-                        goToAddPasswordScreen(iconId,accountText.text)
+                        goToAddPasswordScreen(iconId,accountText.text, category)
                     }
 
                 }
@@ -104,12 +105,13 @@ fun AccountSelectionScreen(
                     val entry = crowdSourcingAccountMap.entries.elementAt(index)
                     val accountText = entry.key
                     val iconId = entry.value
+                    val category = stringResource(R.string.crowdsourcing)
 
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
                     ) {
-                        goToAddPasswordScreen(iconId,accountText.text)
+                        goToAddPasswordScreen(iconId,accountText.text, category)
                     }
 
                 }
@@ -134,12 +136,13 @@ fun AccountSelectionScreen(
                     val entry = crowdSourcingAccountMap.entries.elementAt(index)
                     val accountText = entry.key
                     val iconId = entry.value
+                    val category = stringResource(R.string.communication)
 
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
                     ) {
-                        goToAddPasswordScreen(iconId,accountText.text)
+                        goToAddPasswordScreen(iconId,accountText.text, category)
                     }
 
                 }
@@ -164,12 +167,13 @@ fun AccountSelectionScreen(
                     val entry = crowdSourcingAccountMap.entries.elementAt(index)
                     val accountText = entry.key
                     val iconId = entry.value
+                    val category = stringResource(R.string.portfolio)
 
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
                     ) {
-                        goToAddPasswordScreen(iconId,accountText.text)
+                        goToAddPasswordScreen(iconId,accountText.text, category)
                     }
 
                 }
@@ -194,12 +198,13 @@ fun AccountSelectionScreen(
                     val entry = crowdSourcingAccountMap.entries.elementAt(index)
                     val accountText = entry.key
                     val iconId = entry.value
+                    val category = stringResource(R.string.communities)
 
                     AccountCard(
                         icon = iconId,
                         text = accountText.text,
                     ) {
-                        goToAddPasswordScreen(iconId,accountText.text)
+                        goToAddPasswordScreen(iconId,accountText.text, category)
                     }
                 }
             }

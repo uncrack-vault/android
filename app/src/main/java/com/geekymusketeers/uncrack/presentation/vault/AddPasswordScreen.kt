@@ -55,6 +55,7 @@ fun AddPasswordScreen(
     navController: NavHostController,
     accountIcon: Int,
     accountName: String,
+    accountCategory: String,
     addEditViewModel: AddEditViewModel,
     modifier: Modifier = Modifier
 ) {
@@ -187,7 +188,7 @@ fun AddPasswordScreen(
                         id = 0,
                         company = accountName,
                         email = email,
-                        category = "Social",
+                        category = accountCategory,
                         username = username,
                         password = password,
                         note = note,
