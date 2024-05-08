@@ -40,7 +40,6 @@ import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.navigation.Screen
-import com.geekymusketeers.uncrack.presentation.account.PasswordGeneratorViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.normal24
@@ -61,7 +60,8 @@ fun AddPasswordScreen(
 ) {
 
     val currentDateTime = LocalDateTime.now()
-    val formattedDateTime = DateTimeFormatter.ofPattern("dd/M/yyyy hh:mm:ss").format(currentDateTime)
+    val formattedDateTime =
+        DateTimeFormatter.ofPattern("dd/M/yyyy hh:mm:ss").format(currentDateTime)
     var passwordVisibility by remember { mutableStateOf(false) }
     val email by addEditViewModel.email.observeAsState("")
     val username by addEditViewModel.username.observeAsState("")
@@ -155,7 +155,10 @@ fun AddPasswordScreen(
                             )
                         }
 
-                        IconButton(onClick = { generateRandomPassword(12) }) {
+                        IconButton(onClick = {
+                            val generatedPassword = generateRandomPassword(12)
+                            addEditViewModel.setPassword(generatedPassword)
+                        }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.dice),
                                 contentDescription = null
