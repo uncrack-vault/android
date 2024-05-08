@@ -14,4 +14,6 @@ interface AccountRepository {
     fun getAllAccounts(): Flow<List<Account>>
 
     fun getAccountById(accountId: Int) : Flow<Account>
+
+    fun getAllPasswords(): Flow<List<String>>
 }

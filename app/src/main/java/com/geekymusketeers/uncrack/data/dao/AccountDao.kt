@@ -27,4 +27,7 @@ interface AccountDao {
 
     @Query("SELECT * FROM account_table WHERE id = :accountId")
     fun getAccountById(accountId: Int) : Flow<Account>
+
+    @Query("SELECT password FROM account_table")
+    fun getAllPasswords(): Flow<List<String>>
 }

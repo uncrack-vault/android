@@ -29,4 +29,7 @@ class AccountRepositoryImpl(
         return accountDao.getAccountById(accountId)
     }
 
+    override fun getAllPasswords(): Flow<List<String>> {
+        return accountDao.getAllPasswords()
+    }
 }
