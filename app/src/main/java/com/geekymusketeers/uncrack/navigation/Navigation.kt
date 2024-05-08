@@ -1,6 +1,8 @@
 package com.geekymusketeers.uncrack.navigation
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -18,6 +20,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType.Companion.IntType
+import androidx.navigation.NavType.Companion.StringType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -56,6 +59,7 @@ import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordView
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Navigation(
@@ -74,7 +78,7 @@ fun Navigation(
 
     val screensWithoutNavigationBar = persistentListOf(
         Screen.AccountSelectionScreen.name,
-        Screen.AddPasswordScreen.name,
+        "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}&accountCategory={accountCategory}",
         "${Screen.EditPasswordScreen.name}/{accountID}",
         Screen.ProfileScreen.name,
         Screen.UpdateMasterKeyScreen.name,
@@ -117,6 +121,7 @@ fun Navigation(
                 VaultScreen(
                     onFabClicked = { navController.navigate(Screen.AccountSelectionScreen.name) },
                     vaultViewModel = vaultViewModel,
+                    homeViewModel,
                     navigateToViewPasswordScreen = { id ->
                         navController.navigate("${Screen.ViewPasswordScreen.name}/$id")
                     }
@@ -126,20 +131,37 @@ fun Navigation(
             composable(route = Screen.AccountSelectionScreen.name) {
                 AccountSelectionScreen(
                     navController
-                )
+                ) { accountIcon, accountName, accountCategory ->
+                    navController.navigate("${Screen.AddPasswordScreen.name}?accountIcon=$accountIcon&accountName=$accountName&accountCategory=$accountCategory")
+                }
             }
 
-            composable(route = Screen.AddPasswordScreen.name) {
+            composable(
+                route = "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}&accountCategory={accountCategory}",
+                arguments = listOf(
+                    navArgument("accountIcon") { type = IntType },
+                    navArgument("accountName") { type = StringType },
+                    navArgument("accountCategory") { type = StringType }
+                )
+            ) {
+
+                val accountIconId = backStackEntry.value?.arguments?.getInt("accountIcon") ?: 0
+                val accountTextId = backStackEntry.value?.arguments?.getString("accountName") ?: ""
+                val accountCategoryId = backStackEntry.value?.arguments?.getString("accountCategory") ?: ""
+
                 AddPasswordScreen(
                     navController,
+                    accountIconId,
+                    accountTextId,
+                    accountCategoryId,
                     addEditViewModel
                 )
             }
 
             composable(
                 route = "${Screen.EditPasswordScreen.name}/{accountID}",
-                arguments = listOf(navArgument("accountID") {type = IntType})
-            ) {backStackEntry ->
+                arguments = listOf(navArgument("accountID") { type = IntType })
+            ) { backStackEntry ->
                 val accountId = backStackEntry.arguments?.getInt("accountID") ?: 0
                 EditPasswordScreen(
                     navController,

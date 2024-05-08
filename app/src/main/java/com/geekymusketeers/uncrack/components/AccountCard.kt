@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,8 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.ui.theme.normal16
-import com.geekymusketeers.uncrack.util.onClick
+import com.geekymusketeers.uncrack.ui.theme.normal18
 
 @Composable
 fun AccountCard(
@@ -33,7 +33,7 @@ fun AccountCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .onClick { onClick() }
+            .clickable { onClick() }
             .background(Color.White)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -48,7 +48,7 @@ fun AccountCard(
 
         Text(
             text = text,
-            style = normal16.copy(Color.Black)
+            style = normal18.copy(Color.Black)
         )
     }
 }

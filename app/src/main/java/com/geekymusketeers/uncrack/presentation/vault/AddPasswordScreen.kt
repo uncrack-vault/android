@@ -1,5 +1,7 @@
 package com.geekymusketeers.uncrack.presentation.vault
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,6 +16,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -35,23 +39,34 @@ import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.domain.model.Account
-import com.geekymusketeers.uncrack.presentation.account.PasswordGeneratorViewModel
+import com.geekymusketeers.uncrack.navigation.Screen
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
+import com.geekymusketeers.uncrack.ui.theme.normal24
 import com.geekymusketeers.uncrack.util.UtilsKt.generateRandomPassword
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddPasswordScreen(
     navController: NavHostController,
+    accountIcon: Int,
+    accountName: String,
+    accountCategory: String,
     addEditViewModel: AddEditViewModel,
     modifier: Modifier = Modifier
 ) {
 
+    val currentDateTime = LocalDateTime.now()
+    val formattedDateTime =
+        DateTimeFormatter.ofPattern("dd/M/yyyy hh:mm:ss").format(currentDateTime)
     var passwordVisibility by remember { mutableStateOf(false) }
     val email by addEditViewModel.email.observeAsState("")
     val username by addEditViewModel.username.observeAsState("")
     val password by addEditViewModel.password.observeAsState("")
+    val note by addEditViewModel.note.observeAsState("")
     val isAdded by addEditViewModel.isAdded.observeAsState(false)
 
     Scaffold(
@@ -76,8 +91,13 @@ fun AddPasswordScreen(
 
             Image(
                 modifier = Modifier.size(110.dp),
-                painter = rememberAsyncImagePainter(model = R.drawable.new_medium),
+                painter = rememberAsyncImagePainter(model = accountIcon),
                 contentDescription = null
+            )
+
+            Text(
+                text = accountName,
+                style = normal24.copy(Color.Black)
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -85,8 +105,8 @@ fun AddPasswordScreen(
             UCTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
+                maxLines = 1,
                 headerText = stringResource(id = R.string.email),
-                hintText = stringResource(id = R.string.email_hint),
                 value = email,
                 onValueChange = {
                     addEditViewModel.setEmail(it)
@@ -98,8 +118,8 @@ fun AddPasswordScreen(
             UCTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
+                maxLines = 1,
                 headerText = stringResource(id = R.string.username),
-                hintText = stringResource(R.string.username_hint),
                 value = username,
                 onValueChange = {
                     addEditViewModel.setUserName(it)
@@ -111,8 +131,8 @@ fun AddPasswordScreen(
             UCTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
+                maxLines = 1,
                 headerText = stringResource(id = R.string.password),
-                hintText = stringResource(R.string.password_hint),
                 value = password,
                 onValueChange = {
                     addEditViewModel.setPassword(it)
@@ -135,13 +155,28 @@ fun AddPasswordScreen(
                             )
                         }
 
-                        IconButton(onClick = { generateRandomPassword(12) }) {
+                        IconButton(onClick = {
+                            val generatedPassword = generateRandomPassword(12)
+                            addEditViewModel.setPassword(generatedPassword)
+                        }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.dice),
                                 contentDescription = null
                             )
                         }
                     }
+                }
+            )
+
+            Spacer(modifier = Modifier.height(21.dp))
+
+            UCTextField(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                headerText = stringResource(id = R.string.note),
+                value = note,
+                onValueChange = {
+                    addEditViewModel.setNote(it)
                 }
             )
 
@@ -152,19 +187,18 @@ fun AddPasswordScreen(
                     .fillMaxWidth(),
                 text = stringResource(R.string.save),
                 onClick = {
-                    // TODO: Need to change the logic
                     val account = Account(
                         id = 0,
-                        company = "Instagram",
+                        company = accountName,
                         email = email,
-                        category = "Social",
+                        category = accountCategory,
                         username = username,
                         password = password,
-                        note = "Hello",
-                        dateTime = ""
+                        note = note,
+                        dateTime = formattedDateTime
                     )
                     addEditViewModel.addAccount(account)
-                    navController.popBackStack()
+                    navController.navigate(Screen.VaultScreen.name)
                 },
 //                enabled = isAdded
             )
