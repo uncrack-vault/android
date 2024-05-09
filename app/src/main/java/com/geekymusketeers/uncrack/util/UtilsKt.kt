@@ -117,12 +117,14 @@ object UtilsKt {
             AccountType.MESSENGER to R.drawable.messenger
         )
     }
+
     fun getCrowdSourcingAccounts(): Map<AccountType, Int> {
         return mapOf(
             AccountType.BUYMEACOFFEE to R.drawable.new_buy_me_a_coffee,
             AccountType.PATREON to R.drawable.patreon,
         )
     }
+
     fun getCommunicationAccounts(): Map<AccountType, Int> {
         return mapOf(
             AccountType.SLACK to R.drawable.slack,
@@ -130,12 +132,14 @@ object UtilsKt {
             AccountType.DISCORD to R.drawable.new_discord,
         )
     }
+
     fun getPortfolioAccounts(): Map<AccountType, Int> {
         return mapOf(
             AccountType.DRIBBLE to R.drawable.dribbble,
             AccountType.BEHANCE to R.drawable.new_behance,
         )
     }
+
     fun getCommunitiesAccounts(): Map<AccountType, Int> {
         return mapOf(
             AccountType.REDDIT to R.drawable.cl_reddit,
@@ -143,10 +147,10 @@ object UtilsKt {
             AccountType.PINTEREST to R.drawable.pinterest
         )
     }
-    
+
     @Composable
     fun getAccountImage(accountName: String): Painter {
-        return when(accountName) {
+        return when (accountName) {
             "Instagram" -> painterResource(id = R.drawable.instagram)
             "Facebook" -> painterResource(id = R.drawable.facebook)
             "LinkedIn" -> painterResource(id = R.drawable.linkedin)
@@ -165,5 +169,43 @@ object UtilsKt {
             "Pinterest" -> painterResource(id = R.drawable.pinterest)
             else -> painterResource(id = R.drawable.uncrack_logo)
         }
+    }
+
+    fun calculateAllPasswordsScore(password: String): Int {
+
+        var score = 0
+
+        // Check for password length
+        if (password.length >= 8) {
+            score += 10
+        }
+
+        // Check for uppercase letters
+        if (password.matches(Regex(".*[A-Z].*"))) {
+            score += 10
+        }
+
+        // Check for lowercase letters
+        if (password.matches(Regex(".*[a-z].*"))) {
+            score += 1
+        }
+
+        // Check for digits
+        if (password.matches(Regex(".*\\d.*"))) {
+            score += 1
+        }
+
+        // Check for special characters
+        if (password.matches(Regex(".*[!@#\$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*"))) {
+            score += 1
+        }
+
+        // Check for consecutive characters
+        if (!password.matches(Regex("(.)\\1{2,}"))) {
+            score += 1
+        }
+
+        // Calculate the password score out of 100
+        return (score / 6) * 100
     }
 }

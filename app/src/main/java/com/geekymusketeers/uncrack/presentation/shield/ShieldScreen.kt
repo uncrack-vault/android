@@ -16,11 +16,14 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,13 +34,30 @@ import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.bold36
 import com.geekymusketeers.uncrack.ui.theme.normal14
+import timber.log.Timber
 
 @Composable
-fun ShieldScreen(
-    modifier: Modifier = Modifier
-) {
-    val progressValue by remember { mutableFloatStateOf(0f) }
-    val progressMessage by rememberSaveable { mutableStateOf("0") }
+fun ShieldScreen(shieldViewModel: ShieldViewModel, modifier: Modifier = Modifier) {
+
+    val passwordStrengthObserver by shieldViewModel.passwordStrengthScore.observeAsState(0)
+    var progressValue by remember { mutableFloatStateOf(0f) }
+    var progressMessage by remember { mutableStateOf("") }
+
+
+    val progressBarColor = when {
+        passwordStrengthObserver >= 100 -> Color.Green
+        passwordStrengthObserver >= 70 -> Color.Yellow
+        else -> Color.Red
+    }
+
+    LaunchedEffect(Unit) {
+        shieldViewModel.getPasswords()
+    }
+
+    LaunchedEffect(passwordStrengthObserver) {
+        progressValue = passwordStrengthObserver.toFloat() / 100
+        progressMessage = passwordStrengthObserver.toString()
+    }
 
     Scaffold(
         modifier = modifier.fillMaxWidth()
@@ -60,7 +80,7 @@ fun ShieldScreen(
                 CircularProgressIndicator(
                     progress = { progressValue },
                     modifier = Modifier.size(180.dp),
-                    color = Color.Green,
+                    color = progressBarColor,
                     strokeWidth = 10.dp,
                     trackColor = SurfaceTintLight,
                     strokeCap = StrokeCap.Round,

@@ -38,6 +38,7 @@ import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
+import com.geekymusketeers.uncrack.presentation.shield.ShieldViewModel
 import com.geekymusketeers.uncrack.presentation.vault.AccountSelectionScreen
 import com.geekymusketeers.uncrack.presentation.vault.AddPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.EditPasswordScreen
@@ -70,6 +71,7 @@ fun Navigation(
     themeViewModel: ThemeViewModel = hiltViewModel(),
     vaultViewModel: VaultViewModel = hiltViewModel(),
     addEditViewModel: AddEditViewModel = hiltViewModel(),
+    shieldViewModel: ShieldViewModel = hiltViewModel(),
     viewPasswordViewModel: ViewPasswordViewModel = hiltViewModel()
 ) {
 
@@ -186,7 +188,7 @@ fun Navigation(
             }
 
             composable(route = Screen.ShieldScreen.name) {
-                ShieldScreen()
+                ShieldScreen(shieldViewModel)
             }
 
             composable(route = Screen.ProfileScreen.name) {
