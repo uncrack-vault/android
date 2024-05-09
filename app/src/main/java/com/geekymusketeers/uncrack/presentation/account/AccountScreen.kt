@@ -229,10 +229,6 @@ fun AccountScreen(
                             openThemeDialog = true
                         }
 
-                        AccountItems.PASSWORD_GENERATOR -> {
-                            navController.navigate(Screen.PasswordGeneratorScreen.name)
-                        }
-
                         AccountItems.INVITE_FRIENDS -> {
                             val sendIntent = Intent(Intent.ACTION_SEND).apply {
                                 putExtra(Intent.EXTRA_TEXT, INVITE)

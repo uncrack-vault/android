@@ -107,7 +107,7 @@ fun Navigation(
     ) {
         NavHost(
             navController = navController,
-            startDestination = "home_screen",
+            startDestination = "vault_screen",
             enterTransition = { FadeIn },
             exitTransition = { FadeOut },
             popEnterTransition = { FadeIn },
@@ -261,17 +261,17 @@ fun ShowBottomNavigation(
 
             val bottomNavItems = listOf(
                 BottomNavItem(
-                    name = "Home",
-                    route = "home_screen",
-                    icon = ImageVector.vectorResource(id = R.drawable.home_icon)
-                ),
-                BottomNavItem(
                     name = "Vault",
                     route = "vault_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.password)
                 ),
                 BottomNavItem(
-                    name = "Shield",
+                    name = "Browse",
+                    route = "home_screen",
+                    icon = ImageVector.vectorResource(id = R.drawable.home_icon)
+                ),
+                BottomNavItem(
+                    name = "Tools",
                     route = "shield_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.shield)
                 ),
