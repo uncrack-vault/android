@@ -32,7 +32,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.presentation.home.HomeScreen
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.google.firebase.auth.FirebaseAuth

@@ -2,9 +2,9 @@ package com.geekymusketeers.uncrack.navigation
 
 sealed class Screen(val name: String) {
 
-    data object HomeScreen : Screen("home_screen")
+    data object BrowseScreen : Screen("home_screen")
     data object VaultScreen : Screen("vault_screen")
-    data object ShieldScreen : Screen("shield_screen")
+    data object ToolsScreen : Screen("shield_screen")
     data object AccountScreen : Screen("account_screen")
     data object AccountSelectionScreen : Screen("account_selection_screen")
     data object AddPasswordScreen : Screen("add_password_screen")

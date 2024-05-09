@@ -1,8 +1,6 @@
-package com.geekymusketeers.uncrack.presentation.home
+package com.geekymusketeers.uncrack.presentation.browse
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,36 +9,26 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.CategoryCard
+import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
-import com.geekymusketeers.uncrack.ui.theme.medium24
+import com.geekymusketeers.uncrack.ui.theme.medium28
 import com.geekymusketeers.uncrack.ui.theme.normal22
 
 @Composable
-fun HomeScreen(
+fun BrowseScreen(
     navController: NavHostController,
-    homeViewModel: HomeViewModel,
     modifier: Modifier = Modifier
 ) {
-
-    val user by homeViewModel.state
 
     Scaffold(
         modifier = modifier.fillMaxWidth()
@@ -54,33 +42,10 @@ fun HomeScreen(
                 .padding(16.dp)
         ) {
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.Center
-                ) {
-
-                    Text(
-                        text = "Hello, ${user.name}",
-                        style = medium24.copy(Color.Black)
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(30.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.browse),
-                    style = normal22.copy(Color.Black)
-                )
-            }
+            Text(
+                text = stringResource(R.string.browse),
+                style = medium28.copy(OnPrimaryContainerLight)
+            )
 
             Spacer(modifier = Modifier.height(20.dp))
 

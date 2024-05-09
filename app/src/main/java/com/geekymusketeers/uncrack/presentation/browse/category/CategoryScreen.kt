@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.category
+package com.geekymusketeers.uncrack.presentation.browse.category
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

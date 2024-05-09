@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.shield
+package com.geekymusketeers.uncrack.presentation.tools
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.navigation.Screen
-import com.geekymusketeers.uncrack.presentation.shield.viewModel.ShieldViewModel
+import com.geekymusketeers.uncrack.presentation.tools.viewModel.ShieldViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.medium18
@@ -43,7 +43,7 @@ import com.geekymusketeers.uncrack.ui.theme.medium28
 import com.geekymusketeers.uncrack.ui.theme.normal14
 
 @Composable
-fun ShieldScreen(
+fun ToolsScreen(
     navController: NavController,
     shieldViewModel: ShieldViewModel,
     modifier: Modifier = Modifier
@@ -96,7 +96,7 @@ fun ShieldScreen(
 
                 Image(
                     modifier = Modifier.size(30.dp),
-                    painter = painterResource(id = R.drawable.generate_password_icon),
+                    painter = painterResource(id = R.drawable.generate_password_new),
                     contentDescription = null
                 )
 
@@ -138,10 +138,9 @@ fun ShieldScreen(
                     .padding(horizontal = 16.dp, vertical = 17.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                //TODO: NEED TO CHANGE THE IMAGE
                 Image(
                     modifier = Modifier.size(30.dp),
-                    painter = painterResource(id = R.drawable.generate_password_icon),
+                    painter = painterResource(id = R.drawable.shield),
                     contentDescription = null
                 )
 
