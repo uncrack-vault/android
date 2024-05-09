@@ -28,8 +28,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.presentation.account.AccountScreen
-import com.geekymusketeers.uncrack.presentation.account.PasswordGenerator
-import com.geekymusketeers.uncrack.presentation.account.PasswordGeneratorViewModel
+import com.geekymusketeers.uncrack.presentation.shield.PasswordGenerator
+import com.geekymusketeers.uncrack.presentation.shield.viewModel.PasswordGeneratorViewModel
 import com.geekymusketeers.uncrack.presentation.category.CategoryScreen
 import com.geekymusketeers.uncrack.presentation.home.HomeScreen
 import com.geekymusketeers.uncrack.presentation.home.HomeViewModel
@@ -37,8 +37,9 @@ import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
+import com.geekymusketeers.uncrack.presentation.shield.PasswordHealthScreen
 import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
-import com.geekymusketeers.uncrack.presentation.shield.ShieldViewModel
+import com.geekymusketeers.uncrack.presentation.shield.viewModel.ShieldViewModel
 import com.geekymusketeers.uncrack.presentation.vault.AccountSelectionScreen
 import com.geekymusketeers.uncrack.presentation.vault.AddPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.EditPasswordScreen
@@ -88,7 +89,8 @@ fun Navigation(
         Screen.ConfirmMasterKeyScreen.name,
         Screen.PasswordGeneratorScreen.name,
         Screen.CategoryScreen.name,
-        "${Screen.ViewPasswordScreen.name}/{id}"
+        "${Screen.ViewPasswordScreen.name}/{id}",
+        Screen.PasswordHealthScreen.name
     )
 
     BackPressHandler()
@@ -188,7 +190,7 @@ fun Navigation(
             }
 
             composable(route = Screen.ShieldScreen.name) {
-                ShieldScreen(shieldViewModel)
+                ShieldScreen(navController,shieldViewModel)
             }
 
             composable(route = Screen.ProfileScreen.name) {
@@ -229,6 +231,10 @@ fun Navigation(
                     navController,
                     passwordGeneratorViewModel
                 )
+            }
+
+            composable(route = Screen.PasswordHealthScreen.name) {
+                PasswordHealthScreen(navController)
             }
 
             composable(route = Screen.CategoryScreen.name) {

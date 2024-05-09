@@ -1,18 +1,19 @@
 package com.geekymusketeers.uncrack.presentation.shield
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,37 +23,35 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.geekymusketeers.uncrack.components.ShieldCard
-import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
+import androidx.navigation.NavController
+import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.navigation.Screen
+import com.geekymusketeers.uncrack.presentation.shield.viewModel.ShieldViewModel
+import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
-import com.geekymusketeers.uncrack.ui.theme.bold36
+import com.geekymusketeers.uncrack.ui.theme.medium18
+import com.geekymusketeers.uncrack.ui.theme.medium28
 import com.geekymusketeers.uncrack.ui.theme.normal14
-import timber.log.Timber
 
 @Composable
-fun ShieldScreen(shieldViewModel: ShieldViewModel, modifier: Modifier = Modifier) {
+fun ShieldScreen(
+    navController: NavController,
+    shieldViewModel: ShieldViewModel,
+    modifier: Modifier = Modifier
+) {
 
     val passwordStrengthObserver by shieldViewModel.passwordStrengthScore.observeAsState(0)
     var progressValue by remember { mutableFloatStateOf(0f) }
     var progressMessage by remember { mutableStateOf("") }
-
-
-    val progressBarColor = when {
-        passwordStrengthObserver >= 100 -> Color.Green
-        passwordStrengthObserver >= 70 -> Color.Yellow
-        else -> Color.Red
-    }
-
-    LaunchedEffect(Unit) {
-        shieldViewModel.getPasswords()
-    }
 
     LaunchedEffect(passwordStrengthObserver) {
         progressValue = passwordStrengthObserver.toFloat() / 100
@@ -60,7 +59,7 @@ fun ShieldScreen(shieldViewModel: ShieldViewModel, modifier: Modifier = Modifier
     }
 
     Scaffold(
-        modifier = modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()
     ) { paddingValues ->
 
         Column(
@@ -69,49 +68,103 @@ fun ShieldScreen(shieldViewModel: ShieldViewModel, modifier: Modifier = Modifier
                 .padding(paddingValues)
                 .background(SurfaceVariantLight)
                 .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Box(
-                modifier = Modifier.padding(top = 30.dp),
-                contentAlignment = Alignment.Center
+            Text(
+                text = stringResource(R.string.tools),
+                style = medium28.copy(OnPrimaryContainerLight)
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(10.dp))
+                    .clickable {
+                        navController.navigate(Screen.PasswordGeneratorScreen.name)
+                    }
+                    .background(Color.White)
+                    .shadow(
+                        elevation = 5.dp,
+                        spotColor = Color(0x0D666666),
+                        ambientColor = Color(0x0D666666)
+                    )
+                    .padding(horizontal = 16.dp, vertical = 17.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
 
-                CircularProgressIndicator(
-                    progress = { progressValue },
-                    modifier = Modifier.size(180.dp),
-                    color = progressBarColor,
-                    strokeWidth = 10.dp,
-                    trackColor = SurfaceTintLight,
-                    strokeCap = StrokeCap.Round,
+                Image(
+                    modifier = Modifier.size(30.dp),
+                    painter = painterResource(id = R.drawable.generate_password_icon),
+                    contentDescription = null
                 )
 
-                Text(
-                    modifier = Modifier.padding(bottom = 20.dp),
-                    text = progressMessage,
-                    style = bold36,
-                    color = Color.Black,
-                )
+                Spacer(modifier = Modifier.width(15.dp))
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+                    horizontalAlignment = Alignment.Start,
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.password_generator),
+                        color = Color.Black,
+                        style = medium18
+                    )
 
-                Text(
-                    modifier = Modifier.padding(top = 90.dp),
-                    text = "OUT OF 100",
-                    style = normal14.copy(color = SurfaceTintLight)
-                )
+                    Text(
+                        text = stringResource(R.string.quickly_generate_your_new_secure_passwords),
+                        color = Color.Gray,
+                        style = normal14
+
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(14.dp))
 
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                verticalArrangement = Arrangement.spacedBy(22.dp),
-                horizontalArrangement = Arrangement.spacedBy(14.dp),
-                content = {
-                    items(4) {
-                        ShieldCard()
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(10.dp))
+                    .clickable {
+                        navController.navigate(Screen.PasswordHealthScreen.name)
                     }
+                    .background(Color.White)
+                    .shadow(
+                        elevation = 5.dp,
+                        spotColor = Color(0x0D666666),
+                        ambientColor = Color(0x0D666666)
+                    )
+                    .padding(horizontal = 16.dp, vertical = 17.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                //TODO: NEED TO CHANGE THE IMAGE
+                Image(
+                    modifier = Modifier.size(30.dp),
+                    painter = painterResource(id = R.drawable.generate_password_icon),
+                    contentDescription = null
+                )
+
+                Spacer(modifier = Modifier.width(15.dp))
+
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+                    horizontalAlignment = Alignment.Start,
+                ) {
+                    Text(
+                        text = stringResource(R.string.password_health),
+                        color = Color.Black,
+                        style = medium18
+                    )
+
+                    Text(
+                        text = stringResource(R.string.identify_passwords_health),
+                        color = Color.Gray,
+                        style = normal14
+
+                    )
                 }
-            )
+            }
         }
     }
 }

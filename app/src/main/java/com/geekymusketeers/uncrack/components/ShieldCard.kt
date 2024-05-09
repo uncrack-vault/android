@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
@@ -24,8 +25,7 @@ fun ShieldCard(modifier: Modifier = Modifier) {
 
     Row(
         modifier = modifier
-            .widthIn(min = 165.dp, 165.dp)
-            .heightIn(min = 99.dp, 99.dp)
+            .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
             .background(Color.White)
             .shadow(
@@ -41,15 +41,16 @@ fun ShieldCard(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.Start,
         ) {
             Text(
+                text = "Safe Password",
+                color = Color.Black,
+                style = medium14
+            )
+
+            Text(
                 text = "12",
                 color = Color.Green,
                 style = medium26
 
-            )
-            Text(
-                text = "Safe Password",
-                color = Color.Black,
-                style = medium14
             )
         }
     }

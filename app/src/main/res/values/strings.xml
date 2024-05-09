@@ -192,6 +192,10 @@
     <string name="sign_up">Sign Up</string>
     <string name="get_started">Get Started</string>
     <string name="create_an_account">Create an account</string>
+    <string name="tools">Tools</string>
+    <string name="quickly_generate_your_new_secure_passwords">Quickly generate your new secure passwords</string>
+    <string name="password_health">Password Health</string>
+    <string name="identify_passwords_health">Identify passwords health</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.shield
+package com.geekymusketeers.uncrack.presentation.shield.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +7,8 @@ import com.geekymusketeers.uncrack.domain.repository.AccountRepository
 import com.geekymusketeers.uncrack.util.UtilsKt.calculateAllPasswordsScore
 import com.geekymusketeers.uncrack.util.runIO
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,9 +23,12 @@ class ShieldViewModel @Inject constructor(
 
         var totalScore = 0
 
-        repository.getAllPasswords().collect { passwords ->
+        Timber.d("Get all passwords")
+        repository.getAllPasswords().collectLatest { passwords ->
             for (password in passwords) {
-                val score = passwordStrength(password)
+                Timber.d("Passwords are $password")
+                val score = calculateAllPasswordsScore(password)
+                Timber.d("Score of password $password and $score")
                 totalScore += score
             }
             _passwordStrengthScore.postValue(totalScore)
@@ -32,9 +37,9 @@ class ShieldViewModel @Inject constructor(
 
     private fun passwordStrength(password: String): Int {
         return when {
-            password.length >= 8 -> 100
-            password.length >= 6 -> 70
-            else -> 50
+            password.length >= 8 -> 10
+            password.length >= 6 -> 7
+            else -> 5
         }
     }
 }

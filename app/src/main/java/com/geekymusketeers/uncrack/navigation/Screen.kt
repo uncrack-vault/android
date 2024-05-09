@@ -15,5 +15,6 @@ sealed class Screen(val name: String) {
     data object CreateMasterKeyScreen : Screen("create_new_master_key_screen")
     data object ConfirmMasterKeyScreen : Screen("confirm_master_key_screen")
     data object PasswordGeneratorScreen : Screen("password_generator_screen")
+    data object PasswordHealthScreen : Screen("password_health_screen")
     data object CategoryScreen : Screen("category_screen")
 }

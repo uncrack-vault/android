@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.account
+package com.geekymusketeers.uncrack.presentation.shield
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -37,6 +37,7 @@ import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTopAppBar
+import com.geekymusketeers.uncrack.presentation.shield.viewModel.PasswordGeneratorViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
