@@ -45,18 +45,8 @@ import com.geekymusketeers.uncrack.ui.theme.normal14
 @Composable
 fun ToolsScreen(
     navController: NavController,
-    shieldViewModel: ShieldViewModel,
     modifier: Modifier = Modifier
 ) {
-
-    val passwordStrengthObserver by shieldViewModel.passwordStrengthScore.observeAsState(0)
-    var progressValue by remember { mutableFloatStateOf(0f) }
-    var progressMessage by remember { mutableStateOf("") }
-
-    LaunchedEffect(passwordStrengthObserver) {
-        progressValue = passwordStrengthObserver.toFloat() / 100
-        progressMessage = passwordStrengthObserver.toString()
-    }
 
     Scaffold(
         modifier = Modifier.fillMaxWidth()

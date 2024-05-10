@@ -16,30 +16,45 @@ class ShieldViewModel @Inject constructor(
     private val repository: AccountRepository
 ): ViewModel() {
 
-    private val _passwordStrengthScore = MutableLiveData<Int>()
-    val passwordStrengthScore: LiveData<Int> = _passwordStrengthScore
+    private val _strongPasswordCount = MutableLiveData<Int>()
+    val strongPasswordCount: LiveData<Int> = _strongPasswordCount
+
+    private val _weakPasswordCount = MutableLiveData<Int>()
+    val weakPasswordCount: LiveData<Int> = _weakPasswordCount
 
     fun getPasswords() = runIO {
 
-        var totalScore = 0
+        var strongPasswordCount = 0
+        var weakPasswordCount = 0
 
         Timber.d("Get all passwords")
         repository.getAllPasswords().collectLatest { passwords ->
             for (password in passwords) {
-                Timber.d("Passwords are $password")
-                val score = calculateAllPasswordsScore(password)
-                Timber.d("Score of password $password and $score")
-                totalScore += score
+                val strength = getPasswordStrength(password)
+                when(strength) {
+                    PasswordStrength.STRONG -> strongPasswordCount++
+                    PasswordStrength.WEAK -> weakPasswordCount++
+                }
             }
-            _passwordStrengthScore.postValue(totalScore)
+            _strongPasswordCount.postValue(strongPasswordCount)
+            _weakPasswordCount.postValue(weakPasswordCount)
         }
     }
 
-    private fun passwordStrength(password: String): Int {
+    private fun getPasswordStrength(password: String): PasswordStrength {
+        val hasLowerCase = password.any { it.isLowerCase() }
+        val hasUpperCase = password.any { it.isUpperCase() }
+        val hasDigit = password.any { it.isDigit() }
+        val hasSpecialCharacter = password.any { it !in ('a'..'z') && it !in ('A'..'Z') && it !in ('0'..'9') }
+
         return when {
-            password.length >= 8 -> 10
-            password.length >= 6 -> 7
-            else -> 5
+            hasLowerCase && hasUpperCase && hasDigit && hasSpecialCharacter -> PasswordStrength.STRONG
+            else -> PasswordStrength.WEAK
         }
     }
+}
+
+enum class PasswordStrength {
+    STRONG,
+    WEAK
 }

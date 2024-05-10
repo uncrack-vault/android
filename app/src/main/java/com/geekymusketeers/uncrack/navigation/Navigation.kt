@@ -189,7 +189,7 @@ fun Navigation(
             }
 
             composable(route = Screen.ToolsScreen.name) {
-                ToolsScreen(navController,shieldViewModel)
+                ToolsScreen(navController)
             }
 
             composable(route = Screen.ProfileScreen.name) {
@@ -233,7 +233,7 @@ fun Navigation(
             }
 
             composable(route = Screen.PasswordHealthScreen.name) {
-                PasswordHealthScreen(navController)
+                PasswordHealthScreen(navController, shieldViewModel)
             }
 
             composable(route = Screen.CategoryScreen.name) {

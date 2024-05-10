@@ -5,9 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +19,11 @@ import com.geekymusketeers.uncrack.ui.theme.medium14
 import com.geekymusketeers.uncrack.ui.theme.medium26
 
 @Composable
-fun ShieldCard(modifier: Modifier = Modifier) {
+fun ShieldCard(
+    count: Int,
+    modifier: Modifier = Modifier,
+    text: String = ""
+) {
 
     Row(
         modifier = modifier
@@ -41,13 +43,13 @@ fun ShieldCard(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.Start,
         ) {
             Text(
-                text = "Safe Password",
+                text = text,
                 color = Color.Black,
                 style = medium14
             )
 
             Text(
-                text = "12",
+                text = count.toString(),
                 color = Color.Green,
                 style = medium26
 
