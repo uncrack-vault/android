@@ -146,7 +146,7 @@ object UtilsKt {
 
     fun getCommunitiesAccounts(): Map<AccountType, Int> {
         return mapOf(
-            AccountType.REDDIT to R.drawable.cl_reddit,
+            AccountType.REDDIT to R.drawable.reddit,
             AccountType.MEETUP to R.drawable.meetup,
             AccountType.PINTEREST to R.drawable.pinterest
         )
@@ -168,7 +168,7 @@ object UtilsKt {
             "Discord" -> painterResource(id = R.drawable.new_discord)
             "Dribble" -> painterResource(id = R.drawable.dribbble)
             "Behance" -> painterResource(id = R.drawable.new_behance)
-            "Reddit" -> painterResource(id = R.drawable.cl_reddit)
+            "Reddit" -> painterResource(id = R.drawable.reddit)
             "Meetup" -> painterResource(id = R.drawable.meetup)
             "Pinterest" -> painterResource(id = R.drawable.pinterest)
             else -> painterResource(id = R.drawable.uncrack_logo)

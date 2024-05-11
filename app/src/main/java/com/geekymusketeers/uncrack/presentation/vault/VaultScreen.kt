@@ -107,7 +107,7 @@ fun VaultScreen(
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) }
             ) { }
 
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             LazyColumn(
                 modifier = Modifier

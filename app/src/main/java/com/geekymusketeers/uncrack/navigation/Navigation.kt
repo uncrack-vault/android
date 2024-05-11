@@ -264,11 +264,11 @@ fun ShowBottomNavigation(
                     route = "vault_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.password)
                 ),
-                BottomNavItem(
-                    name = "Browse",
-                    route = "home_screen",
-                    icon = ImageVector.vectorResource(id = R.drawable.browse)
-                ),
+//                BottomNavItem(
+//                    name = "Browse",
+//                    route = "home_screen",
+//                    icon = ImageVector.vectorResource(id = R.drawable.browse)
+//                ),
                 BottomNavItem(
                     name = "Tools",
                     route = "shield_screen",
