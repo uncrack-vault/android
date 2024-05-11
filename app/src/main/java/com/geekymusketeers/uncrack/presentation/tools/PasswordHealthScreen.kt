@@ -15,13 +15,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.ShieldCard
 import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.presentation.tools.viewModel.ShieldViewModel
-import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
+import com.geekymusketeers.uncrack.ui.theme.strongPassword
+import com.geekymusketeers.uncrack.ui.theme.weakPassword
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,8 +35,8 @@ fun PasswordHealthScreen(
     modifier: Modifier = Modifier
 ) {
 
-    val strongPassword by shieldViewModel.strongPasswordCount.observeAsState(0)
-    val weakPassword by shieldViewModel.weakPasswordCount.observeAsState(0)
+    val strongPasswordObserver by shieldViewModel.strongPasswordCount.observeAsState(0)
+    val weakPasswordObserver by shieldViewModel.weakPasswordCount.observeAsState(0)
 
     LaunchedEffect(Unit) {
         shieldViewModel.getPasswords()
@@ -58,31 +62,20 @@ fun PasswordHealthScreen(
                 .padding(16.dp)
         ) {
             ShieldCard(
-                text = "Strong Password",
-                count = strongPassword
+                text = stringResource(R.string.strong_passwords),
+                subText = stringResource(R.string.boosts_security_with_robust_passwords_defending_against_hacks),
+                count = strongPasswordObserver,
+                textColor = strongPassword
             )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             ShieldCard(
-                text = "Weak Password",
-                count = weakPassword
+                text = stringResource(R.string.weak_passwords),
+                subText = stringResource(R.string.makes_your_accounts_easy_to_hack),
+                count = weakPasswordObserver,
+                textColor = weakPassword
             )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            ShieldCard(
-                text = "Reused Password",
-                count = 12
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            ShieldCard(
-                text = "Old Password",
-                count = 12
-            )
-
         }
     }
 }

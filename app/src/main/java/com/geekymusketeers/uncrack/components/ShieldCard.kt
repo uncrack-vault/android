@@ -15,16 +15,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.geekymusketeers.uncrack.ui.theme.medium14
+import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
+import com.geekymusketeers.uncrack.ui.theme.medium18
 import com.geekymusketeers.uncrack.ui.theme.medium26
+import com.geekymusketeers.uncrack.ui.theme.normal14
+import com.geekymusketeers.uncrack.ui.theme.strongPassword
 
 @Composable
 fun ShieldCard(
     count: Int,
     modifier: Modifier = Modifier,
-    text: String = ""
+    textColor: Color = strongPassword,
+    text: String = "",
+    subText: String = ""
 ) {
-
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -44,15 +48,18 @@ fun ShieldCard(
         ) {
             Text(
                 text = text,
-                color = Color.Black,
-                style = medium14
+                color = textColor,
+                style = medium18
+            )
+
+            Text(
+                text = subText,
+                style = normal14.copy(SurfaceTintLight)
             )
 
             Text(
                 text = count.toString(),
-                color = Color.Green,
                 style = medium26
-
             )
         }
     }

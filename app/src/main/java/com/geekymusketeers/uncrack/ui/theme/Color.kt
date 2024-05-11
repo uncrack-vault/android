@@ -23,3 +23,7 @@ val OnSurfaceLight: Color = Color(0xFF001E2F)
 val SurfaceVariantLight: Color = Color(0xFFEFF1F8)
 val OnSurfaceVariantLight: Color = Color(0xFF44474E)
 val SurfaceTintLight: Color = Color(0xFF74777F)
+
+val strongPassword: Color = Color(0xFF38BD23)
+val weakPassword: Color = Color(0xFFFF0000)
+val oldPassword: Color = Color(0xFFFF9900)

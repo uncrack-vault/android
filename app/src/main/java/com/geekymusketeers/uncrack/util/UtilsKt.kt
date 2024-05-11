@@ -3,11 +3,15 @@ package com.geekymusketeers.uncrack.util
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.domain.model.AccountType
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.regex.Pattern
 
 object UtilsKt {
@@ -207,5 +211,12 @@ object UtilsKt {
 
         // Calculate the password score out of 100
         return (score / 6) * 100
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun calculateThresholdDate(): String {
+        val thirtyDaysAgo = LocalDate.now().minusDays(30)
+        val formatter = DateTimeFormatter.ISO_LOCAL_DATE
+        return thirtyDaysAgo.format(formatter)
     }
 }

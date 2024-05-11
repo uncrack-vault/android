@@ -16,4 +16,8 @@ interface AccountRepository {
     fun getAccountById(accountId: Int) : Flow<Account>
 
     fun getAllPasswords(): Flow<List<String>>
+
+    fun getReusedPasswordCount(password: String): Boolean
+
+    fun getOldPasswordCount(password: String): Boolean
 }
