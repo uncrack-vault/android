@@ -9,6 +9,7 @@ import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.domain.repository.AccountRepository
 import com.geekymusketeers.uncrack.util.runIO
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class VaultViewModel @Inject constructor(
     var accountModel by mutableStateOf(emptyList<Account>())
 
     fun getAccounts() = runIO {
-        repository.getAllAccounts().collect { response ->
+        repository.getAllAccounts().collectLatest { response ->
             accountModel = response
         }
     }

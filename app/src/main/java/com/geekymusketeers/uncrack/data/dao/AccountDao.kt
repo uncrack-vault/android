@@ -27,4 +27,13 @@ interface AccountDao {
 
     @Query("SELECT * FROM account_table WHERE id = :accountId")
     fun getAccountById(accountId: Int) : Flow<Account>
+
+    @Query("SELECT password FROM account_table")
+    fun getAllPasswords(): Flow<List<String>>
+
+    @Query("SELECT * FROM account_table WHERE password = :password")
+    fun getReusedPasswordCount(password: String): Int
+
+    @Query("SELECT * FROM account_table WHERE password = :password AND dateTime < :thresholdDate")
+    fun getOldPasswordCount(password: String, thresholdDate: String): Int
 }

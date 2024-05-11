@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -32,12 +33,12 @@ import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.EmptyState
 import com.geekymusketeers.uncrack.components.VaultCard
-import com.geekymusketeers.uncrack.presentation.home.HomeViewModel
+import com.geekymusketeers.uncrack.sharedViewModel.UserViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
-import com.geekymusketeers.uncrack.ui.theme.medium30
+import com.geekymusketeers.uncrack.ui.theme.medium24
 import com.geekymusketeers.uncrack.ui.theme.normal16
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,14 +46,14 @@ import com.geekymusketeers.uncrack.ui.theme.normal16
 fun VaultScreen(
     onFabClicked: () -> Unit,
     vaultViewModel: VaultViewModel,
-    homeViewModel: HomeViewModel,
+    userViewModel: UserViewModel,
     modifier: Modifier = Modifier,
     navigateToViewPasswordScreen: (id: Int) -> Unit
 ) {
 
     val accounts = vaultViewModel.accountModel
     var searchQuery by rememberSaveable { mutableStateOf("") }
-    val userObserver by homeViewModel.state
+    val userObserver by userViewModel.state
 
     LaunchedEffect(Unit) {
         vaultViewModel.getAccounts()
@@ -65,7 +66,7 @@ fun VaultScreen(
                 onClick = { onFabClicked() }
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.Edit,
+                    imageVector = Icons.Outlined.Add,
                     contentDescription = "Add Credentials"
                 )
             }
@@ -80,11 +81,10 @@ fun VaultScreen(
         ) {
 
             Text(
-                text = "Vault",
-                style = medium30.copy(Color.Black)
+                text = "Hello, ${userObserver.name}",
+                style = medium24.copy(Color.Black)
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
 
             SearchBar(
                 modifier = Modifier.fillMaxWidth(),
@@ -107,7 +107,7 @@ fun VaultScreen(
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) }
             ) { }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(50.dp))
 
             LazyColumn(
                 modifier = Modifier

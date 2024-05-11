@@ -28,16 +28,18 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.presentation.account.AccountScreen
-import com.geekymusketeers.uncrack.presentation.account.PasswordGenerator
-import com.geekymusketeers.uncrack.presentation.account.PasswordGeneratorViewModel
-import com.geekymusketeers.uncrack.presentation.category.CategoryScreen
-import com.geekymusketeers.uncrack.presentation.home.HomeScreen
-import com.geekymusketeers.uncrack.presentation.home.HomeViewModel
+import com.geekymusketeers.uncrack.presentation.tools.PasswordGenerator
+import com.geekymusketeers.uncrack.presentation.tools.viewModel.PasswordGeneratorViewModel
+import com.geekymusketeers.uncrack.presentation.browse.category.CategoryScreen
+import com.geekymusketeers.uncrack.presentation.browse.BrowseScreen
+import com.geekymusketeers.uncrack.sharedViewModel.UserViewModel
 import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
-import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
-import com.geekymusketeers.uncrack.presentation.shield.ShieldScreen
+import com.geekymusketeers.uncrack.presentation.account.profile.ProfileScreen
+import com.geekymusketeers.uncrack.presentation.tools.PasswordHealthScreen
+import com.geekymusketeers.uncrack.presentation.tools.ToolsScreen
+import com.geekymusketeers.uncrack.presentation.tools.viewModel.ShieldViewModel
 import com.geekymusketeers.uncrack.presentation.vault.AccountSelectionScreen
 import com.geekymusketeers.uncrack.presentation.vault.AddPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.EditPasswordScreen
@@ -66,10 +68,11 @@ fun Navigation(
     modifier: Modifier = Modifier,
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
-    homeViewModel: HomeViewModel = hiltViewModel(),
+    userViewModel: UserViewModel = hiltViewModel(),
     themeViewModel: ThemeViewModel = hiltViewModel(),
     vaultViewModel: VaultViewModel = hiltViewModel(),
     addEditViewModel: AddEditViewModel = hiltViewModel(),
+    shieldViewModel: ShieldViewModel = hiltViewModel(),
     viewPasswordViewModel: ViewPasswordViewModel = hiltViewModel()
 ) {
 
@@ -86,7 +89,8 @@ fun Navigation(
         Screen.ConfirmMasterKeyScreen.name,
         Screen.PasswordGeneratorScreen.name,
         Screen.CategoryScreen.name,
-        "${Screen.ViewPasswordScreen.name}/{id}"
+        "${Screen.ViewPasswordScreen.name}/{id}",
+        Screen.PasswordHealthScreen.name
     )
 
     BackPressHandler()
@@ -103,17 +107,16 @@ fun Navigation(
     ) {
         NavHost(
             navController = navController,
-            startDestination = "home_screen",
+            startDestination = "vault_screen",
             enterTransition = { FadeIn },
             exitTransition = { FadeOut },
             popEnterTransition = { FadeIn },
             popExitTransition = { FadeOut }
         ) {
 
-            composable(route = Screen.HomeScreen.name) {
-                HomeScreen(
-                    navController,
-                    homeViewModel
+            composable(route = Screen.BrowseScreen.name) {
+                BrowseScreen(
+                    navController
                 )
             }
 
@@ -121,7 +124,7 @@ fun Navigation(
                 VaultScreen(
                     onFabClicked = { navController.navigate(Screen.AccountSelectionScreen.name) },
                     vaultViewModel = vaultViewModel,
-                    homeViewModel,
+                    userViewModel,
                     navigateToViewPasswordScreen = { id ->
                         navController.navigate("${Screen.ViewPasswordScreen.name}/$id")
                     }
@@ -185,8 +188,8 @@ fun Navigation(
                 )
             }
 
-            composable(route = Screen.ShieldScreen.name) {
-                ShieldScreen()
+            composable(route = Screen.ToolsScreen.name) {
+                ToolsScreen(navController)
             }
 
             composable(route = Screen.ProfileScreen.name) {
@@ -197,7 +200,7 @@ fun Navigation(
                 AccountScreen(
                     navController,
                     themeViewModel,
-                    homeViewModel
+                    userViewModel
                 )
             }
 
@@ -229,6 +232,10 @@ fun Navigation(
                 )
             }
 
+            composable(route = Screen.PasswordHealthScreen.name) {
+                PasswordHealthScreen(navController, shieldViewModel)
+            }
+
             composable(route = Screen.CategoryScreen.name) {
                 CategoryScreen(
                     navController
@@ -253,19 +260,19 @@ fun ShowBottomNavigation(
 
             val bottomNavItems = listOf(
                 BottomNavItem(
-                    name = "Home",
-                    route = "home_screen",
-                    icon = ImageVector.vectorResource(id = R.drawable.home_icon)
-                ),
-                BottomNavItem(
                     name = "Vault",
                     route = "vault_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.password)
                 ),
                 BottomNavItem(
-                    name = "Shield",
+                    name = "Browse",
+                    route = "home_screen",
+                    icon = ImageVector.vectorResource(id = R.drawable.browse)
+                ),
+                BottomNavItem(
+                    name = "Tools",
                     route = "shield_screen",
-                    icon = ImageVector.vectorResource(id = R.drawable.shield)
+                    icon = ImageVector.vectorResource(id = R.drawable.tools)
                 ),
                 BottomNavItem(
                     name = "Profile",

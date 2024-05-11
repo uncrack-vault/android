@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.profile
+package com.geekymusketeers.uncrack.presentation.account.profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

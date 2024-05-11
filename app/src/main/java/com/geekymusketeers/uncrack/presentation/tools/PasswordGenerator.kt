@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.account
+package com.geekymusketeers.uncrack.presentation.tools
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -16,13 +16,13 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -37,10 +37,11 @@ import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTopAppBar
-import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
+import com.geekymusketeers.uncrack.presentation.tools.viewModel.PasswordGeneratorViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.medium24
 import com.geekymusketeers.uncrack.ui.theme.medium30
 import com.geekymusketeers.uncrack.ui.theme.normal16
@@ -56,7 +57,6 @@ fun PasswordGenerator(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val clipboardManager = LocalClipboardManager.current
     val password by passwordGeneratorViewModel.password.observeAsState("")
     val passwordLength by passwordGeneratorViewModel.passwordLength.observeAsState(0.0f)
     val includeUppercase by passwordGeneratorViewModel.includeUppercase.observeAsState(true)
@@ -69,6 +69,7 @@ fun PasswordGenerator(
             UCTopAppBar(
                 modifier = modifier.fillMaxWidth(),
                 title = "Password Generator",
+                colors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
                 onBackPress = { navController.popBackStack() }
             )
         }
@@ -77,8 +78,8 @@ fun PasswordGenerator(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(16.dp)
-                .background(BackgroundLight),
+                .background(SurfaceVariantLight)
+                .padding(16.dp),
             verticalArrangement = Arrangement.Center
         ) {
 

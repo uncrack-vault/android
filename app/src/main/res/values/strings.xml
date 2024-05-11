@@ -177,7 +177,7 @@
     <string name="old_master_key">Old Master Key</string>
     <string name="new_master_key">New Master Key</string>
     <string name="password_generated_length">Password Length  %1$s</string>
-    <string name="manager_passwords">Manager Passwords</string>
+    <string name="browse">Browse</string>
     <string name="browser">Browser</string>
     <string name="card">Card</string>
     <string name="recently_used">Recently Used</string>
@@ -192,6 +192,14 @@
     <string name="sign_up">Sign Up</string>
     <string name="get_started">Get Started</string>
     <string name="create_an_account">Create an account</string>
+    <string name="tools">Tools</string>
+    <string name="quickly_generate_your_new_secure_passwords">Quickly generate your new secure passwords</string>
+    <string name="password_health">Password Health</string>
+    <string name="identify_passwords_health">Identify passwords health</string>
+    <string name="strong_passwords">Strong Passwords</string>
+    <string name="boosts_security_with_robust_passwords_defending_against_hacks">Boosts security with robust passwords.</string>
+    <string name="weak_passwords">Weak Passwords</string>
+    <string name="makes_your_accounts_easy_to_hack">Makes your accounts easy to hack</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
