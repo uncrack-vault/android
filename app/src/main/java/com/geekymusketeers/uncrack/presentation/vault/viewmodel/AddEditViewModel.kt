@@ -37,7 +37,6 @@ class AddEditViewModel @Inject constructor(
 
     fun setUserName(userName: String) {
         _username.value = userName
-        checkIfAdded()
     }
 
     fun setPassword(password: String) {
@@ -56,10 +55,7 @@ class AddEditViewModel @Inject constructor(
     private fun checkIfAdded() {
         val isEmailValid = validateEmail(email.value?.trim())
         val isAnyFieldNullOrEmpty =
-            email.value.isNullOrEmpty()
-                    || username.value.isNullOrEmpty()
-                    || password.value.isNullOrEmpty()
-                    || !isEmailValid
+            email.value.isNullOrEmpty() && password.value.isNullOrEmpty() && isEmailValid
 
         _isAdded.value = isAnyFieldNullOrEmpty.not()
     }

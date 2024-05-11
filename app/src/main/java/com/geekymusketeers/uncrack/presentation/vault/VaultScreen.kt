@@ -112,7 +112,7 @@ fun VaultScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(13.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 if (accounts.isNotEmpty()) {
                     items(accounts) {accountModel ->

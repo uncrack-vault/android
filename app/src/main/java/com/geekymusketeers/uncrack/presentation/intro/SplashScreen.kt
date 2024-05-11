@@ -75,7 +75,7 @@ fun SplashContent(activity: Activity, modifier: Modifier = Modifier) {
         ),
         label = ""
     )
-    val currentUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+    val currentUser = FirebaseAuth.getInstance().currentUser
 
     LaunchedEffect(Unit) {
         animation = true

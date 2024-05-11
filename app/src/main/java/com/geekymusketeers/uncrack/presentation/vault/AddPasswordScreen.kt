@@ -42,6 +42,7 @@ import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.navigation.Screen
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
+import com.geekymusketeers.uncrack.ui.theme.normal20
 import com.geekymusketeers.uncrack.ui.theme.normal24
 import com.geekymusketeers.uncrack.util.UtilsKt.generateRandomPassword
 import java.time.LocalDateTime
@@ -90,14 +91,16 @@ fun AddPasswordScreen(
         ) {
 
             Image(
-                modifier = Modifier.size(110.dp),
+                modifier = Modifier.size(80.dp),
                 painter = rememberAsyncImagePainter(model = accountIcon),
                 contentDescription = null
             )
 
+            Spacer(modifier = Modifier.height(10.dp))
+
             Text(
                 text = accountName,
-                style = normal24.copy(Color.Black)
+                style = normal20.copy(Color.Black)
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -200,7 +203,7 @@ fun AddPasswordScreen(
                     addEditViewModel.addAccount(account)
                     navController.navigate(Screen.VaultScreen.name)
                 },
-//                enabled = isAdded
+                enabled = isAdded
             )
         }
     }
