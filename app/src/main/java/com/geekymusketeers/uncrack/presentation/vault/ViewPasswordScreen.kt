@@ -44,15 +44,19 @@ import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
-import com.geekymusketeers.uncrack.navigation.Screen
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.normal12
+import com.geekymusketeers.uncrack.ui.theme.normal20
 import com.geekymusketeers.uncrack.ui.theme.normal30
+import com.geekymusketeers.uncrack.ui.theme.oldPassword
+import com.geekymusketeers.uncrack.ui.theme.strongPassword
+import com.geekymusketeers.uncrack.ui.theme.weakPassword
 import com.geekymusketeers.uncrack.util.UtilsKt.calculatePasswordStrength
+import com.geekymusketeers.uncrack.util.UtilsKt.getAccountImage
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,8 +73,11 @@ fun ViewPasswordScreen(
     var passwordVisibility by remember { mutableStateOf(false) }
     var progressValue by remember { mutableFloatStateOf(0f) }
     var progressMessage by rememberSaveable { mutableStateOf("") }
+    val accountCompany = viewPasswordViewModel.accountModel.company
+    val email = viewPasswordViewModel.accountModel.email
     val username = viewPasswordViewModel.accountModel.username
     val password = viewPasswordViewModel.accountModel.password
+    val category = viewPasswordViewModel.accountModel.category
 
     LaunchedEffect(Unit) {
         viewPasswordViewModel.getAccountById(accountId)
@@ -108,8 +115,8 @@ fun ViewPasswordScreen(
         ) {
 
             Image(
-                modifier = Modifier.size(110.dp),
-                painter = painterResource(id = R.drawable.new_medium),
+                modifier = Modifier.size(80.dp),
+                painter = getAccountImage(accountCompany),
                 contentDescription = null
             )
 
@@ -117,8 +124,8 @@ fun ViewPasswordScreen(
 
             Text(
                 modifier = Modifier.padding(bottom = 20.dp),
-                text = "Medium",
-                style = normal30.copy(Color.Black)
+                text = accountCompany,
+                style = normal20.copy(Color.Black)
             )
 
             Row(
@@ -139,6 +146,7 @@ fun ViewPasswordScreen(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    // TODO: Need to change the icon according to the category saved
                     Image(
                         modifier = Modifier.size(32.dp),
                         painter = painterResource(id = R.drawable.category_social),
@@ -148,7 +156,7 @@ fun ViewPasswordScreen(
                     Spacer(modifier = Modifier.height(5.dp))
 
                     Text(
-                        text = "Social",
+                        text = category,
                         style = normal12.copy(OnSurfaceVariantLight)
                     )
                 }
@@ -171,9 +179,9 @@ fun ViewPasswordScreen(
                             progress = { progressValue },
                             modifier = Modifier.size(42.dp),
                             color = when {
-                                passwordStrength <= 3 -> Color.Red
-                                passwordStrength <= 7 -> Color.Yellow
-                                else -> Color.Green
+                                passwordStrength <= 3 -> weakPassword
+                                passwordStrength <= 7 -> oldPassword
+                                else -> strongPassword
                             },
                             strokeWidth = 5.dp,
                             trackColor = SurfaceTintLight,
@@ -202,6 +210,7 @@ fun ViewPasswordScreen(
                     color = SurfaceTintLight.copy(alpha = .5f)
                 )
 
+                // TODO: Will change it to Share
                 Column(
                     modifier = Modifier
                         .padding(16.dp),
@@ -229,12 +238,25 @@ fun ViewPasswordScreen(
             UCTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
-                headerText = stringResource(id = R.string.username),
-                hintText = stringResource(R.string.username_hint),
-                value = username,
+                headerText = stringResource(id = R.string.email),
+                value = email,
                 onValueChange = {},
                 readOnly = true
             )
+
+            Spacer(modifier = Modifier.height(21.dp))
+
+            if (username.isNotEmpty()) {
+                UCTextField(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    headerText = stringResource(id = R.string.username),
+                    hintText = stringResource(R.string.username_hint),
+                    value = username,
+                    onValueChange = {},
+                    readOnly = true
+                )
+            }
 
             Spacer(modifier = Modifier.height(21.dp))
 
