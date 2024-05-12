@@ -1,7 +1,9 @@
 package com.geekymusketeers.uncrack.presentation.vault
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -51,12 +54,12 @@ import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.normal12
 import com.geekymusketeers.uncrack.ui.theme.normal20
-import com.geekymusketeers.uncrack.ui.theme.normal30
 import com.geekymusketeers.uncrack.ui.theme.oldPassword
 import com.geekymusketeers.uncrack.ui.theme.strongPassword
 import com.geekymusketeers.uncrack.ui.theme.weakPassword
 import com.geekymusketeers.uncrack.util.UtilsKt.calculatePasswordStrength
 import com.geekymusketeers.uncrack.util.UtilsKt.getAccountImage
+import com.geekymusketeers.uncrack.util.UtilsKt.getCategoryImage
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,6 +72,7 @@ fun ViewPasswordScreen(
     navigateToEditPasswordScreen: (accountID: Int) -> Unit
 ) {
 
+    val context = LocalContext.current
     var passwordStrength by remember { mutableIntStateOf(0) }
     var passwordVisibility by remember { mutableStateOf(false) }
     var progressValue by remember { mutableFloatStateOf(0f) }
@@ -78,6 +82,7 @@ fun ViewPasswordScreen(
     val username = viewPasswordViewModel.accountModel.username
     val password = viewPasswordViewModel.accountModel.password
     val category = viewPasswordViewModel.accountModel.category
+    val note = viewPasswordViewModel.accountModel.note
 
     LaunchedEffect(Unit) {
         viewPasswordViewModel.getAccountById(accountId)
@@ -146,10 +151,9 @@ fun ViewPasswordScreen(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // TODO: Need to change the icon according to the category saved
                     Image(
                         modifier = Modifier.size(32.dp),
-                        painter = painterResource(id = R.drawable.category_social),
+                        painter = getCategoryImage(category),
                         contentDescription = null
                     )
 
@@ -210,23 +214,56 @@ fun ViewPasswordScreen(
                     color = SurfaceTintLight.copy(alpha = .5f)
                 )
 
-                // TODO: Will change it to Share
                 Column(
                     modifier = Modifier
-                        .padding(16.dp),
+                        .padding(16.dp)
+                        .clickable {
+                            if (username.isEmpty() && note.isEmpty()) {
+                                val shareNoteWithoutUserName =
+                                    "${"Email: $email"}\n${"Password: $password"}"
+                                val myIntent = Intent(Intent.ACTION_SEND)
+                                myIntent.type = "text/plane"
+                                myIntent.putExtra(Intent.EXTRA_TEXT, shareNoteWithoutUserName)
+                                context.startActivity(myIntent)
+                            } else {
+                                val shareNote =
+                                    "${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Username: $username"}\n${"Note: $note"}"
+                                val myIntent = Intent(Intent.ACTION_SEND)
+                                myIntent.type = "text/plane"
+                                myIntent.putExtra(Intent.EXTRA_TEXT, shareNote)
+                                context.startActivity(myIntent)
+                            }
+                        },
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        modifier = Modifier.size(32.dp),
-                        painter = painterResource(id = R.drawable.outlined_fav_btn),
+                        modifier = Modifier.size(32.dp)
+                            .clickable {
+                                if (username.isEmpty() && note.isEmpty()) {
+                                    val shareNoteWithoutUserName =
+                                        "${"Email: $email"}\n${"Password: $password"}"
+                                    val myIntent = Intent(Intent.ACTION_SEND)
+                                    myIntent.type = "text/plane"
+                                    myIntent.putExtra(Intent.EXTRA_TEXT, shareNoteWithoutUserName)
+                                    context.startActivity(myIntent)
+                                } else {
+                                    val shareNote =
+                                        "${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Username: $username"}\n${"Note: $note"}"
+                                    val myIntent = Intent(Intent.ACTION_SEND)
+                                    myIntent.type = "text/plane"
+                                    myIntent.putExtra(Intent.EXTRA_TEXT, shareNote)
+                                    context.startActivity(myIntent)
+                                }
+                            },
+                        painter = painterResource(id = R.drawable.share_app),
                         contentDescription = null
                     )
 
                     Spacer(modifier = Modifier.height(5.dp))
 
                     Text(
-                        text = stringResource(R.string.not_favourite),
+                        text = stringResource(R.string.share),
                         style = normal12.copy(OnSurfaceVariantLight)
                     )
 

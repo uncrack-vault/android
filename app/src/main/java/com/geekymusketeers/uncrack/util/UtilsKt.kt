@@ -3,10 +3,12 @@ package com.geekymusketeers.uncrack.util
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.domain.model.AccountType
@@ -172,6 +174,16 @@ object UtilsKt {
             "Meetup" -> painterResource(id = R.drawable.meetup)
             "Pinterest" -> painterResource(id = R.drawable.pinterest)
             else -> painterResource(id = R.drawable.uncrack_logo)
+        }
+    }
+
+    @Composable
+    fun getCategoryImage(category: String): Painter {
+        return when(category) {
+            "Social" -> painterResource(id = R.drawable.category_social)
+            "Communication" -> painterResource(id = R.drawable.social_icon)
+            "Work" -> painterResource(id = R.drawable.work_icon)
+            else -> painterResource(id = R.drawable.others_icon)
         }
     }
 

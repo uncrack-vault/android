@@ -200,6 +200,7 @@
     <string name="boosts_security_with_robust_passwords_defending_against_hacks">Boosts security with robust passwords.</string>
     <string name="weak_passwords">Weak Passwords</string>
     <string name="makes_your_accounts_easy_to_hack">Makes your accounts easy to hack</string>
+    <string name="share">Share\n</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
