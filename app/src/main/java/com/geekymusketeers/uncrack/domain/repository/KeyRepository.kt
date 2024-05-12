@@ -7,5 +7,5 @@ interface KeyRepository {
 
     suspend fun setMasterKey(key: Key)
 
-    fun getMasterKey(): Flow<List<Key>>
+    fun getMasterKey(): Flow<Key>
 }

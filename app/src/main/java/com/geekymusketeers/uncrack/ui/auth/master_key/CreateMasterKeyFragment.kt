@@ -21,7 +21,7 @@ import com.geekymusketeers.uncrack.databinding.FragmentCreateMasterKeyBinding
 import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util.Companion.hideKeyboard
-import com.geekymusketeers.uncrack.viewModel.KeyViewModel
+import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

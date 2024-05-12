@@ -46,6 +46,7 @@ import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
 import com.geekymusketeers.uncrack.presentation.auth.login.LoginScreens
+import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
@@ -190,7 +191,7 @@ fun SignupContent(
                         }
                     )
                     context.findActivity()?.apply {
-                        startActivity(Intent(activity, MainActivity::class.java))
+                        startActivity(Intent(activity, CreateMasterKeyScreen::class.java))
                     }
                 },
                 enabled = isRegisterButtonEnableObserve

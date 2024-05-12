@@ -2,22 +2,14 @@ package com.geekymusketeers.uncrack.ui.splash_activity
 
 
 import android.content.Context
-import android.content.Intent
 import android.hardware.biometrics.BiometricPrompt
 import android.os.*
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.geekymusketeers.uncrack.databinding.ActivitySplashBinding
 import com.geekymusketeers.uncrack.util.Util
-import com.geekymusketeers.uncrack.ui.auth.MasterKeyActivity
-import com.geekymusketeers.uncrack.viewModel.KeyViewModel
 //import com.geekymusketeers.uncrack.viewModel.ViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.P)
 class SplashActivity : AppCompatActivity() {

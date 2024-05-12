@@ -8,20 +8,15 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.domain.model.Key
 import com.geekymusketeers.uncrack.databinding.FragmentUpdateMasterKeyBinding
 import com.geekymusketeers.uncrack.ui.fragments.settings.SecurityFragment
 import com.geekymusketeers.uncrack.util.Encryption
-import com.geekymusketeers.uncrack.viewModel.KeyViewModel
+import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 class UpdateMasterKeyFragment : Fragment() {

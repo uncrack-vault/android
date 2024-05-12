@@ -55,7 +55,7 @@ import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
-import com.geekymusketeers.uncrack.viewModel.KeyViewModel
+import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import kotlinx.collections.immutable.ImmutableList
@@ -85,8 +85,6 @@ fun Navigation(
         "${Screen.EditPasswordScreen.name}/{accountID}",
         Screen.ProfileScreen.name,
         Screen.UpdateMasterKeyScreen.name,
-        Screen.CreateMasterKeyScreen.name,
-        Screen.ConfirmMasterKeyScreen.name,
         Screen.PasswordGeneratorScreen.name,
         Screen.CategoryScreen.name,
         "${Screen.ViewPasswordScreen.name}/{id}",
@@ -206,20 +204,6 @@ fun Navigation(
 
             composable(route = Screen.UpdateMasterKeyScreen.name) {
                 UpdateMasterKey(
-                    navController,
-                    masterKeyViewModel
-                )
-            }
-
-            composable(route = Screen.CreateMasterKeyScreen.name) {
-                CreateMasterKeyScreen(
-                    navController,
-                    masterKeyViewModel
-                )
-            }
-
-            composable(route = Screen.ConfirmMasterKeyScreen.name) {
-                ConfirmMasterKeyScreen(
                     navController,
                     masterKeyViewModel
                 )

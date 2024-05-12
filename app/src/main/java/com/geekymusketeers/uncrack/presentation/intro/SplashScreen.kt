@@ -32,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.google.firebase.auth.FirebaseAuth
@@ -88,8 +89,8 @@ fun SplashContent(activity: Activity, modifier: Modifier = Modifier) {
             }
         } else {
             activity.run {
-                delay(2000)
-                startActivity(Intent(this,MainActivity::class.java))
+                delay(2000L)
+                startActivity(Intent(this,ConfirmMasterKeyScreen::class.java))
                 finish()
             }
         }
