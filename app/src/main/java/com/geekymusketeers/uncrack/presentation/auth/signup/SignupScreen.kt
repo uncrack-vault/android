@@ -24,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -99,11 +100,11 @@ fun SignupContent(
 ) {
 
     val context = LocalContext.current
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val name by authViewModel.username.observeAsState("")
+    val email by authViewModel.email.observeAsState("")
+    val password by authViewModel.password.observeAsState("")
     var passwordVisibility by remember { mutableStateOf(false) }
-    val isRegisterButtonEnableObserve = authViewModel.isRegistrationEnabled.value
+    val isRegisterButtonEnableObserve by authViewModel.isRegistrationEnabled.observeAsState(false)
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -131,7 +132,7 @@ fun SignupContent(
                 headerText = stringResource(R.string.name_header),
                 hintText = stringResource(R.string.name_hint),
                 value = name,
-                onValueChange = { name = it }
+                onValueChange = { authViewModel.setUserName(it) }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -143,7 +144,7 @@ fun SignupContent(
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
                 value = email,
-                onValueChange = { email = it }
+                onValueChange = { authViewModel.setEmail(it) }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -154,7 +155,7 @@ fun SignupContent(
                 headerText = stringResource(R.string.password_header),
                 hintText = stringResource(R.string.password_hint),
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = { authViewModel.setPassword(it) },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     val image = if (passwordVisibility)
@@ -175,27 +176,25 @@ fun SignupContent(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            if (isRegisterButtonEnableObserve != null) {
-                UCButton(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    text = stringResource(id = R.string.register),
-                    onClick = {
-                        authViewModel.signUp(
-                            name,
-                            email,
-                            password,
-                            onSignedUp = { signUpUser ->
-                                onSignUp(signUpUser)
-                            }
-                        )
-                        context.findActivity()?.apply {
-                            startActivity(Intent(activity, MainActivity::class.java))
+            UCButton(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                text = stringResource(id = R.string.register),
+                onClick = {
+                    authViewModel.signUp(
+                        name,
+                        email,
+                        password,
+                        onSignedUp = { signUpUser ->
+                            onSignUp(signUpUser)
                         }
-                    },
-                    enabled = isRegisterButtonEnableObserve
-                )
-            }
+                    )
+                    context.findActivity()?.apply {
+                        startActivity(Intent(activity, MainActivity::class.java))
+                    }
+                },
+                enabled = isRegisterButtonEnableObserve
+            )
 
             Spacer(modifier = Modifier.height(15.dp))
 

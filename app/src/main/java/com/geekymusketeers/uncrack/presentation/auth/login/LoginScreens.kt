@@ -24,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -56,7 +57,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.sign
 
 @AndroidEntryPoint
 class LoginScreens : ComponentActivity() {
@@ -103,9 +103,10 @@ fun LoginContent(
 ) {
 
     val context = LocalContext.current
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val email by viewModel.email.observeAsState("")
+    val password by viewModel.password.observeAsState("")
     var passwordVisibility by remember { mutableStateOf(false) }
+    val isSignInEnable by viewModel.isSignInButtonEnabled.observeAsState(false)
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -133,7 +134,7 @@ fun LoginContent(
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
                 value = email,
-                onValueChange = { email = it }
+                onValueChange = { viewModel.setEmail(it) }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -144,7 +145,7 @@ fun LoginContent(
                 headerText = stringResource(R.string.password_header),
                 hintText = stringResource(R.string.password_hint),
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = { viewModel.setPassword(it) },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
 
@@ -182,7 +183,7 @@ fun LoginContent(
                         startActivity(Intent(activity, MainActivity::class.java))
                     }
                 },
-//                enabled = false
+                enabled = isSignInEnable
             )
 
             Spacer(modifier = Modifier.height(15.dp))
