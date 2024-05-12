@@ -80,7 +80,7 @@ class AddEditViewModel : ViewModel() {
 
         return withContext(Dispatchers.IO) {
             try {
-                accountsViewModel.editAccount(account)
+//                accountsViewModel.editAccount(account)
 //                Util.log("Updated in RoomDB")
                 return@withContext 1
             } catch (e: java.lang.Exception) {

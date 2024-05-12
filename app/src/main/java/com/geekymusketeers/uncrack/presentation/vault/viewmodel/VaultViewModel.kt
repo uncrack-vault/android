@@ -33,11 +33,11 @@ class VaultViewModel @Inject constructor(
         }
     }
 
-    fun editAccount(account: Account) {
-        viewModelScope.launch{
-            repository.editAccount(account)
-        }
-    }
+//    fun editAccount(account: Account) {
+//        viewModelScope.launch{
+//            repository.editAccount(account)
+//        }
+//    }
 
     fun deleteAccount(account: Account) {
         viewModelScope.launch {

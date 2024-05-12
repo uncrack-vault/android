@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.domain.repository.AccountRepository
+import com.geekymusketeers.uncrack.domain.repository.AccountRepositoryImpl
 import com.geekymusketeers.uncrack.util.runIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -49,5 +50,9 @@ class ViewPasswordViewModel @Inject constructor(
 
     fun updatePassword(password: String) {
         accountModel = accountModel.copy(password = password)
+    }
+
+    fun updateNote(note: String) {
+        accountModel = accountModel.copy(note = note)
     }
 }

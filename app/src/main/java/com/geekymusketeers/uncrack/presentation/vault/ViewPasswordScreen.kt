@@ -128,10 +128,11 @@ fun ViewPasswordScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                modifier = Modifier.padding(bottom = 20.dp),
                 text = accountCompany,
                 style = normal20.copy(Color.Black)
             )
+
+            Spacer(modifier = Modifier.height(20.dp))
 
             Row(
                 modifier = Modifier
@@ -152,7 +153,7 @@ fun ViewPasswordScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(30.dp),
                         painter = getCategoryImage(category),
                         contentDescription = null
                     )
@@ -238,24 +239,8 @@ fun ViewPasswordScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        modifier = Modifier.size(32.dp)
-                            .clickable {
-                                if (username.isEmpty() && note.isEmpty()) {
-                                    val shareNoteWithoutUserName =
-                                        "${"Email: $email"}\n${"Password: $password"}"
-                                    val myIntent = Intent(Intent.ACTION_SEND)
-                                    myIntent.type = "text/plane"
-                                    myIntent.putExtra(Intent.EXTRA_TEXT, shareNoteWithoutUserName)
-                                    context.startActivity(myIntent)
-                                } else {
-                                    val shareNote =
-                                        "${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Username: $username"}\n${"Note: $note"}"
-                                    val myIntent = Intent(Intent.ACTION_SEND)
-                                    myIntent.type = "text/plane"
-                                    myIntent.putExtra(Intent.EXTRA_TEXT, shareNote)
-                                    context.startActivity(myIntent)
-                                }
-                            },
+                        modifier = Modifier
+                            .size(30.dp),
                         painter = painterResource(id = R.drawable.share_app),
                         contentDescription = null
                     )
@@ -288,7 +273,6 @@ fun ViewPasswordScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     headerText = stringResource(id = R.string.username),
-                    hintText = stringResource(R.string.username_hint),
                     value = username,
                     onValueChange = {},
                     readOnly = true
@@ -301,7 +285,6 @@ fun ViewPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.password),
-                hintText = stringResource(R.string.password_hint),
                 value = password,
                 onValueChange = {},
                 readOnly = true,
@@ -323,6 +306,19 @@ fun ViewPasswordScreen(
                     }
                 }
             )
+
+            Spacer(modifier = Modifier.height(21.dp))
+
+            if (note.isNotEmpty()) {
+                UCTextField(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    headerText = stringResource(id = R.string.note),
+                    value = note,
+                    onValueChange = {},
+                    readOnly = true
+                )
+            }
         }
     }
 }

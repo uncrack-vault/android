@@ -1,6 +1,9 @@
 package com.geekymusketeers.uncrack.presentation.vault
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +17,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,36 +27,48 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import coil.compose.rememberAsyncImagePainter
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.domain.model.Account
+import com.geekymusketeers.uncrack.navigation.Screen
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
-import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
+import com.geekymusketeers.uncrack.ui.theme.normal20
 import com.geekymusketeers.uncrack.util.UtilsKt
+import com.geekymusketeers.uncrack.util.UtilsKt.generateRandomPassword
+import com.geekymusketeers.uncrack.util.UtilsKt.getAccountImage
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditPasswordScreen(
     navController: NavHostController,
     accountID: Int,
     viewPasswordViewModel: ViewPasswordViewModel,
-    modifier : Modifier = Modifier
+    modifier: Modifier = Modifier
 ) {
 
+    val currentDateTime = LocalDateTime.now()
+    val formattedDateTime =
+        DateTimeFormatter.ofPattern("dd/M/yyyy hh:mm:ss").format(currentDateTime)
     var passwordVisibility by remember { mutableStateOf(false) }
     val accountName = viewPasswordViewModel.accountModel.company
     val accountEmail = viewPasswordViewModel.accountModel.email
     val accountPassword = viewPasswordViewModel.accountModel.password
     val accountUserName = viewPasswordViewModel.accountModel.username
+    val accountCategory = viewPasswordViewModel.accountModel.category
+    val accountNote = viewPasswordViewModel.accountModel.note
 
     LaunchedEffect(Unit) {
         viewPasswordViewModel.getAccountById(accountID)
@@ -64,7 +80,7 @@ fun EditPasswordScreen(
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 title = "Edit Password",
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
+                colors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
                 onBackPress = { navController.popBackStack() }
             )
         }
@@ -73,15 +89,23 @@ fun EditPasswordScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(SurfaceVariantLight)
                 .padding(paddingValues)
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             Image(
-                modifier = Modifier.size(110.dp),
-                painter = rememberAsyncImagePainter(model = R.drawable.new_medium),
+                modifier = Modifier.size(80.dp),
+                painter = getAccountImage(accountName),
                 contentDescription = null
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = accountName,
+                style = normal20.copy(Color.Black)
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -90,10 +114,9 @@ fun EditPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.email),
-                hintText = stringResource(id = R.string.email_hint),
                 value = accountEmail,
-                onValueChange = {
-                    viewPasswordViewModel.updateEmail(it)
+                onValueChange = { email ->
+                    viewPasswordViewModel.updateEmail(email)
                 },
             )
 
@@ -103,10 +126,9 @@ fun EditPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.username),
-                hintText = stringResource(R.string.username_hint),
                 value = accountUserName,
-                onValueChange = {
-                    viewPasswordViewModel.updateUserName(it)
+                onValueChange = { username ->
+                    viewPasswordViewModel.updateUserName(username)
                 }
             )
 
@@ -116,10 +138,9 @@ fun EditPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.password),
-                hintText = stringResource(R.string.password_hint),
                 value = accountPassword,
-                onValueChange = {
-                    viewPasswordViewModel.updatePassword(it)
+                onValueChange = { password ->
+                    viewPasswordViewModel.updatePassword(password)
                 },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
@@ -139,7 +160,10 @@ fun EditPasswordScreen(
                             )
                         }
 
-                        IconButton(onClick = { UtilsKt.generateRandomPassword(12) }) {
+                        IconButton(onClick = {
+                            val generatedUpdatedPassword = generateRandomPassword(12)
+                            viewPasswordViewModel.updatePassword(generatedUpdatedPassword)
+                        }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.dice),
                                 contentDescription = null
@@ -149,6 +173,19 @@ fun EditPasswordScreen(
                 }
             )
 
+            Spacer(modifier = Modifier.height(21.dp))
+
+            UCTextField(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                headerText = stringResource(id = R.string.note),
+                value = accountNote,
+                onValueChange = { note ->
+                    viewPasswordViewModel.updateNote(note)
+                }
+            )
+
+
             Spacer(modifier = Modifier.weight(1f))
 
             UCButton(
@@ -156,20 +193,19 @@ fun EditPasswordScreen(
                     .fillMaxWidth(),
                 text = stringResource(R.string.save),
                 onClick = {
-                    // TODO: Update the logic
                     val updateAccount = Account(
-                        id = 0,
-                        company = "Instagram",
+                        id = accountID,
+                        company = accountName,
                         email = accountEmail,
-                        category = "Social",
+                        category = accountCategory,
                         username = accountUserName,
                         password = accountPassword,
-                        note = "Hello",
-                        dateTime = ""
+                        note = accountNote,
+                        dateTime = formattedDateTime
                     )
                     viewPasswordViewModel.updateAccount(updateAccount)
-                },
-//                enabled = isAdded
+                    navController.navigate(Screen.VaultScreen.name)
+                }
             )
         }
     }
