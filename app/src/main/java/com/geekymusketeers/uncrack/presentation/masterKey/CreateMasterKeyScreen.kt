@@ -34,16 +34,15 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.domain.model.Key
-import com.geekymusketeers.uncrack.navigation.Screen
-import com.geekymusketeers.uncrack.presentation.auth.login.LoginScreens
+import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.bold30
+import com.geekymusketeers.uncrack.ui.theme.normal20
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -86,7 +85,7 @@ fun CreateMasterKeyContent(
     val confirmMasterKeyObserver by masterKeyViewModel.confirmMasterKeyLiveData.observeAsState("")
     val enableButtonObserver by masterKeyViewModel.enableButtonLiveData.observeAsState(false)
     var passwordVisibility by remember { mutableStateOf(false) }
-
+    var confirmPasswordVisibility by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier.fillMaxSize()
@@ -99,8 +98,15 @@ fun CreateMasterKeyContent(
                 .padding(16.dp)
         ) {
             Text(
-                text = "Create Master Key",
+                text = stringResource(R.string.create_master_password),
                 style = bold30.copy(color = Color.Black)
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = stringResource(R.string.you_will_be_using_master_password_as_a_key_to_unlock_your_passwords),
+                style = normal20.copy(color = SurfaceTintLight)
             )
 
             Spacer(modifier = Modifier.height(50.dp))
@@ -108,7 +114,8 @@ fun CreateMasterKeyContent(
             UCTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
-                headerText = stringResource(id = R.string.master_key),
+                headerText = stringResource(id = R.string.master_password),
+                hintText = stringResource(id = R.string.password_hint),
                 value = masterKeyObserver,
                 onValueChange = {
                     masterKeyViewModel.setMasterKey(it)
@@ -137,19 +144,20 @@ fun CreateMasterKeyContent(
             UCTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
-                headerText = stringResource(id = R.string.confirm_master_key),
+                headerText = stringResource(id = R.string.confirm_master_password),
+                hintText = stringResource(id = R.string.password_hint),
                 value = confirmMasterKeyObserver,
                 onValueChange = {
                     masterKeyViewModel.setConfirmMasterKey(it)
                 },
-                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                visualTransformation = if (confirmPasswordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    val image = if (passwordVisibility)
+                    val image = if (confirmPasswordVisibility)
                         painterResource(id = R.drawable.visibility_on)
                     else painterResource(id = R.drawable.visibility_off)
 
                     IconButton(onClick =
-                    { passwordVisibility = passwordVisibility.not() }
+                    { confirmPasswordVisibility = confirmPasswordVisibility.not() }
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),

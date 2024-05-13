@@ -29,17 +29,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
-import com.geekymusketeers.uncrack.ui.theme.bold30
 import com.geekymusketeers.uncrack.ui.theme.normal20
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -98,7 +97,7 @@ fun ConfirmMasterKeyContent(
         ) {
 
             Text(
-                text = "Kindly provide your Master Key",
+                text = stringResource(R.string.kindly_provide_your_master_password),
                 style = normal20.copy(color = Color.Black)
             )
 
@@ -107,7 +106,8 @@ fun ConfirmMasterKeyContent(
             UCTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
-                headerText = "Master Key",
+                headerText = stringResource(id = R.string.master_password),
+                hintText = stringResource(id = R.string.password_hint),
                 value = confirmMasterKey,
                 onValueChange = { confirmMasterKey = it },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
@@ -134,13 +134,13 @@ fun ConfirmMasterKeyContent(
             UCButton(
                 modifier = Modifier
                     .fillMaxWidth(),
-                text = "Continue",
+                text = stringResource(R.string.continue_txt),
                 onClick = {
                     context.findActivity()?.apply {
                         startActivity(Intent(activity, MainActivity::class.java))
                     }
                 },
-                enabled = if (savedMasterKey == confirmMasterKey) true else false
+                enabled = savedMasterKey == confirmMasterKey
             )
         }
     }
