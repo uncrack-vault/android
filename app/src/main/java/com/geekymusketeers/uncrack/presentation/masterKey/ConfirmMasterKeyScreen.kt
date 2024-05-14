@@ -39,6 +39,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
+import com.geekymusketeers.uncrack.ui.theme.bold30
 import com.geekymusketeers.uncrack.ui.theme.normal20
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -98,7 +99,7 @@ fun ConfirmMasterKeyContent(
 
             Text(
                 text = stringResource(R.string.kindly_provide_your_master_password),
-                style = normal20.copy(color = Color.Black)
+                style = bold30.copy(color = Color.Black)
             )
 
             Spacer(modifier = Modifier.height(50.dp))
