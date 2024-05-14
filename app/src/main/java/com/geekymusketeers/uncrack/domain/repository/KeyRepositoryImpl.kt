@@ -8,7 +8,7 @@ class KeyRepositoryImpl(
     private val keyDao: KeyDao
 ): KeyRepository {
 
-    override fun getMasterKey(): Flow<List<Key>> {
+    override fun getMasterKey(): Flow<Key> {
         return keyDao.getMasterKey()
     }
 

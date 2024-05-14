@@ -59,6 +59,17 @@
             android:theme="@style/Theme.UnCrack">
         </activity>
 
+        <activity android:name=".presentation.masterKey.CreateMasterKeyScreen"
+            android:exported="true"
+            android:theme="@style/Theme.UnCrack">
+        </activity>
+
+        <activity android:name=".presentation.masterKey.ConfirmMasterKeyScreen"
+            android:exported="true"
+            android:theme="@style/Theme.UnCrack">
+        </activity>
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

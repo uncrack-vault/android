@@ -14,5 +14,5 @@ interface KeyDao {
     suspend fun setMasterKey(key: Key)
 
     @Query("SELECT * FROM master_key")
-    fun getMasterKey(): Flow<List<Key>>
+    fun getMasterKey(): Flow<Key>
 }

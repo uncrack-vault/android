@@ -12,17 +12,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentLockMasterKeyBinding
 import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.ui.auth.MasterKeyActivity
-import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util
-import com.geekymusketeers.uncrack.viewModel.KeyViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
 
 class LockMasterKeyFragment : Fragment() {
 

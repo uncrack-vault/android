@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.viewModel
+package com.geekymusketeers.uncrack.presentation.masterKey
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +17,7 @@ class KeyViewModel @Inject constructor(
     private val repository: KeyRepository
 ) : ViewModel() {
 
-    var keyModel by mutableStateOf(emptyList<Key>())
+    var keyModel by mutableStateOf(Key(0,""))
 
     private val _masterKeyLiveData = MutableLiveData<String>()
     val masterKeyLiveData: LiveData<String> = _masterKeyLiveData
