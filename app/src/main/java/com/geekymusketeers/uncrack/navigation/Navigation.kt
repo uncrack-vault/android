@@ -87,6 +87,7 @@ fun Navigation(
         Screen.UpdateMasterKeyScreen.name,
         Screen.PasswordGeneratorScreen.name,
         Screen.CategoryScreen.name,
+        Screen.AccountScreen.name,
         "${Screen.ViewPasswordScreen.name}/{id}",
         Screen.PasswordHealthScreen.name
     )
@@ -192,6 +193,7 @@ fun Navigation(
 
             composable(route = Screen.ProfileScreen.name) {
                 ProfileScreen(
+                    navController,
                     userViewModel
                 )
             }

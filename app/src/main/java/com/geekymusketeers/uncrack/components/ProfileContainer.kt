@@ -31,7 +31,7 @@ fun ProfileContainer(
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = modifier
-                .size(120.dp)
+                .size(100.dp)
                 .clip(CircleShape)
         )
 

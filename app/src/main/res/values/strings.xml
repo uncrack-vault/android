@@ -207,6 +207,10 @@
     <string name="you_will_be_using_master_password_as_a_key_to_unlock_your_passwords">You will be using Master Password as a key to unlock your passwords</string>
     <string name="create_master_password">Create Master Password</string>
     <string name="kindly_provide_your_master_password">Kindly provide your Master Password</string>
+    <string name="icon">icon\n</string>
+    <string name="help">Help</string>
+    <string name="rate_uncrack">Rate UnCrack</string>
+    <string name="invite_friends">Invite Friends</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
