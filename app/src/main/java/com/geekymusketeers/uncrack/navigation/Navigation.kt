@@ -83,7 +83,7 @@ fun Navigation(
         Screen.AccountSelectionScreen.name,
         "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}&accountCategory={accountCategory}",
         "${Screen.EditPasswordScreen.name}/{accountID}",
-        Screen.ProfileScreen.name,
+        Screen.AccountScreen.name,
         Screen.UpdateMasterKeyScreen.name,
         Screen.PasswordGeneratorScreen.name,
         Screen.CategoryScreen.name,
@@ -191,7 +191,9 @@ fun Navigation(
             }
 
             composable(route = Screen.ProfileScreen.name) {
-                ProfileScreen()
+                ProfileScreen(
+                    userViewModel
+                )
             }
 
             composable(route = Screen.AccountScreen.name) {
@@ -255,12 +257,12 @@ fun ShowBottomNavigation(
 //                ),
                 BottomNavItem(
                     name = "Tools",
-                    route = "shield_screen",
+                    route = "tools_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.tools)
                 ),
                 BottomNavItem(
                     name = "Profile",
-                    route = "account_screen",
+                    route = "profile_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.person_icon)
                 )
             )
