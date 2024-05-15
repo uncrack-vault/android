@@ -5,7 +5,7 @@ sealed class Screen(val name: String) {
     data object BrowseScreen : Screen("home_screen")
     data object VaultScreen : Screen("vault_screen")
     data object ToolsScreen : Screen("tools_screen")
-    data object AccountScreen : Screen("account_screen")
+    data object SettingsScreen : Screen("settings_screen")
     data object AccountSelectionScreen : Screen("account_selection_screen")
     data object AddPasswordScreen : Screen("add_password_screen")
     data object EditPasswordScreen : Screen("edit_password_screen")

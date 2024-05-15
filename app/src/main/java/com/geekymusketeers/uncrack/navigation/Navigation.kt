@@ -27,14 +27,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.presentation.account.AccountScreen
+import com.geekymusketeers.uncrack.presentation.account.SettingsScreen
 import com.geekymusketeers.uncrack.presentation.tools.PasswordGenerator
 import com.geekymusketeers.uncrack.presentation.tools.viewModel.PasswordGeneratorViewModel
 import com.geekymusketeers.uncrack.presentation.browse.category.CategoryScreen
 import com.geekymusketeers.uncrack.presentation.browse.BrowseScreen
 import com.geekymusketeers.uncrack.sharedViewModel.UserViewModel
-import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
-import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.account.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.tools.PasswordHealthScreen
@@ -83,11 +81,10 @@ fun Navigation(
         Screen.AccountSelectionScreen.name,
         "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}&accountCategory={accountCategory}",
         "${Screen.EditPasswordScreen.name}/{accountID}",
-        Screen.AccountScreen.name,
+        Screen.SettingsScreen.name,
         Screen.UpdateMasterKeyScreen.name,
         Screen.PasswordGeneratorScreen.name,
         Screen.CategoryScreen.name,
-        Screen.AccountScreen.name,
         "${Screen.ViewPasswordScreen.name}/{id}",
         Screen.PasswordHealthScreen.name
     )
@@ -198,8 +195,8 @@ fun Navigation(
                 )
             }
 
-            composable(route = Screen.AccountScreen.name) {
-                AccountScreen(
+            composable(route = Screen.SettingsScreen.name) {
+                SettingsScreen(
                     navController,
                     themeViewModel,
                     userViewModel
