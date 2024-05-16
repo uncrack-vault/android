@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,6 +39,7 @@ import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
+import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.bold30
 import com.geekymusketeers.uncrack.ui.theme.normal20
@@ -65,11 +67,12 @@ class ConfirmMasterKeyScreen : ComponentActivity() {
         setContent {
             UnCrackTheme {
                 masterKeyViewModel = hiltViewModel()
-                ConfirmMasterKeyContent(this@ConfirmMasterKeyScreen,masterKeyViewModel)
+                ConfirmMasterKeyContent(this@ConfirmMasterKeyScreen, masterKeyViewModel)
             }
         }
     }
 }
+
 @Composable
 fun ConfirmMasterKeyContent(
     activity: Activity,
@@ -94,6 +97,7 @@ fun ConfirmMasterKeyContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .background(SurfaceVariantLight)
                 .padding(16.dp)
         ) {
 

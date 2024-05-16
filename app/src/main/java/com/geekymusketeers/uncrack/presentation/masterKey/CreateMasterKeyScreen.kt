@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,6 +41,7 @@ import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.domain.model.Key
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.bold30
 import com.geekymusketeers.uncrack.ui.theme.normal20
@@ -47,7 +49,7 @@ import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateMasterKeyScreen: ComponentActivity() {
+class CreateMasterKeyScreen : ComponentActivity() {
 
     private lateinit var masterKeyViewModel: KeyViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +75,6 @@ class CreateMasterKeyScreen: ComponentActivity() {
 }
 
 
-
 @Composable
 fun CreateMasterKeyContent(
     activity: Activity,
@@ -95,6 +96,7 @@ fun CreateMasterKeyContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .background(SurfaceVariantLight)
                 .padding(16.dp)
         ) {
             Text(
@@ -175,7 +177,7 @@ fun CreateMasterKeyContent(
                     .fillMaxWidth(),
                 text = stringResource(R.string.save),
                 onClick = {
-                    val key = Key(0,masterKeyObserver)
+                    val key = Key(0, masterKeyObserver)
                     masterKeyViewModel.saveMasterKey(key)
                     context.findActivity()?.apply {
                         startActivity(Intent(activity, MainActivity::class.java))

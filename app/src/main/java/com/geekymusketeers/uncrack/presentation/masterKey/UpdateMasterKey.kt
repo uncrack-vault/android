@@ -1,5 +1,6 @@
 package com.geekymusketeers.uncrack.presentation.masterKey
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,33 +31,26 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
+import com.geekymusketeers.uncrack.domain.model.Key
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
+import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.bold30
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UpdateMasterKey(
     navController: NavHostController,
-    masterKeyViewModel: KeyViewModel,
+    keyViewModel: KeyViewModel,
     modifier: Modifier = Modifier
 ) {
 
-
-    var oldMasterKey by remember {
-        mutableStateOf("")
-    }
-
-    var newMasterKey by remember {
-        mutableStateOf("")
-    }
-
-    var confirmMasterKey by remember {
-        mutableStateOf("")
-    }
-
-    var passwordVisibility by remember {
-        mutableStateOf(false)
-    }
+    var oldMasterKey by remember { mutableStateOf("") }
+    var newMasterKey by remember { mutableStateOf("") }
+    var newConfirmMasterKey by remember { mutableStateOf("") }
+    var oldPasswordVisibility by remember { mutableStateOf(false) }
+    var newPasswordVisibility by remember { mutableStateOf(false) }
+    var confirmPasswordVisibility by remember { mutableStateOf(false) }
+    val oldMasterPasswordObserver = keyViewModel.keyModel.password
 
 
     Scaffold(
@@ -64,7 +58,8 @@ fun UpdateMasterKey(
         topBar = {
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
+                title = "Update Master Password",
+                colors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
                 onBackPress = { navController.popBackStack() }
             )
         }
@@ -74,29 +69,24 @@ fun UpdateMasterKey(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .background(SurfaceVariantLight)
                 .padding(16.dp)
         ) {
-            Text(
-                text = stringResource(R.string.update_master_key),
-                style = bold30.copy(color = Color.Black)
-            )
-
-            Spacer(modifier = Modifier.height(50.dp))
 
             UCTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
-                headerText = stringResource(R.string.old_master_key),
+                headerText = stringResource(R.string.old_master_password),
                 hintText = stringResource(id = R.string.password_hint),
                 value = oldMasterKey,
                 onValueChange = { oldMasterKey = it },
-                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                visualTransformation = if (oldPasswordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    val image = if (passwordVisibility)
+                    val image = if (oldPasswordVisibility)
                         painterResource(id = R.drawable.visibility_on)
                     else painterResource(id = R.drawable.visibility_off)
 
-                    IconButton(onClick = { passwordVisibility = passwordVisibility.not() }
+                    IconButton(onClick = { oldPasswordVisibility = oldPasswordVisibility.not() }
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),
@@ -112,17 +102,17 @@ fun UpdateMasterKey(
             UCTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
-                headerText = stringResource(R.string.new_master_key),
+                headerText = stringResource(R.string.new_master_password),
                 hintText = stringResource(id = R.string.password_hint),
                 value = newMasterKey,
                 onValueChange = { newMasterKey = it },
-                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                visualTransformation = if (newPasswordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    val image = if (passwordVisibility)
+                    val image = if (newPasswordVisibility)
                         painterResource(id = R.drawable.visibility_on)
                     else painterResource(id = R.drawable.visibility_off)
 
-                    IconButton(onClick = { passwordVisibility = passwordVisibility.not() }
+                    IconButton(onClick = { newPasswordVisibility = newPasswordVisibility.not() }
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),
@@ -138,17 +128,17 @@ fun UpdateMasterKey(
             UCTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
-                headerText = stringResource(id = R.string.confirm_master_key),
+                headerText = stringResource(id = R.string.confirm_master_password),
                 hintText = stringResource(id = R.string.password_hint),
-                value = confirmMasterKey,
-                onValueChange = { confirmMasterKey = it },
-                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                value = newConfirmMasterKey,
+                onValueChange = { newConfirmMasterKey = it },
+                visualTransformation = if (confirmPasswordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    val image = if (passwordVisibility)
+                    val image = if (confirmPasswordVisibility)
                         painterResource(id = R.drawable.visibility_on)
                     else painterResource(id = R.drawable.visibility_off)
 
-                    IconButton(onClick = { passwordVisibility = passwordVisibility.not() }
+                    IconButton(onClick = { confirmPasswordVisibility = confirmPasswordVisibility.not() }
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),
@@ -166,9 +156,13 @@ fun UpdateMasterKey(
                     .fillMaxWidth(),
                 text = stringResource(id = R.string.update),
                 onClick = {
-                    // TODO: Perform req operation
+                    val updatedKey = Key(0, newMasterKey)
+                    keyViewModel.saveMasterKey(updatedKey)
+                    navController.popBackStack()
                 },
-                enabled = false
+                enabled = oldMasterPasswordObserver == oldMasterKey &&
+                        newMasterKey.length >= 8 &&
+                        newMasterKey == newConfirmMasterKey
             )
         }
     }

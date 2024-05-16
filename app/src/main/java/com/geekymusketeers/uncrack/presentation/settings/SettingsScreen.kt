@@ -248,7 +248,7 @@ fun SettingsScreen(
                     itemName = stringResource(R.string.log_out),
                     textColor = Color.Red,
                     onClick = {
-
+                        openLogoutDialog = true
                     }
                 )
             }
