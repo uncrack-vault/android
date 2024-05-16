@@ -45,9 +45,8 @@ private val LightColorPalette = lightColorScheme(
 
 @Composable
 fun UnCrackTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
     themeViewModel: ThemeViewModel = hiltViewModel(),
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val themeState by themeViewModel.themeState.collectAsState()

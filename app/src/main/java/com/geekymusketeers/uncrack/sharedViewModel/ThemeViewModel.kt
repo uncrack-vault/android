@@ -47,10 +47,4 @@ class ThemeViewModel @Inject constructor(
             }
         }
     }
-
-    fun blockScreenShort() = runIO {
-        dataStore.edit { preferences ->
-            preferences[IS_SS_BLOCK_KEY] = !(preferences[IS_SS_BLOCK_KEY] ?: false)
-        }
-    }
 }

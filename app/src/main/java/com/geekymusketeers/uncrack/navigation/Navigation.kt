@@ -1,6 +1,7 @@
 package com.geekymusketeers.uncrack.navigation
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.Icon
@@ -27,14 +28,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.presentation.account.SettingsScreen
+import com.geekymusketeers.uncrack.presentation.settings.SettingsScreen
 import com.geekymusketeers.uncrack.presentation.tools.PasswordGenerator
 import com.geekymusketeers.uncrack.presentation.tools.viewModel.PasswordGeneratorViewModel
 import com.geekymusketeers.uncrack.presentation.browse.category.CategoryScreen
 import com.geekymusketeers.uncrack.presentation.browse.BrowseScreen
 import com.geekymusketeers.uncrack.sharedViewModel.UserViewModel
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
-import com.geekymusketeers.uncrack.presentation.account.profile.ProfileScreen
+import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.tools.PasswordHealthScreen
 import com.geekymusketeers.uncrack.presentation.tools.ToolsScreen
 import com.geekymusketeers.uncrack.presentation.tools.viewModel.ShieldViewModel
@@ -54,6 +55,7 @@ import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
 import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
+import com.geekymusketeers.uncrack.presentation.settings.SettingsViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import kotlinx.collections.immutable.ImmutableList
@@ -63,6 +65,7 @@ import kotlinx.collections.immutable.persistentListOf
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Navigation(
+    activity: Activity,
     modifier: Modifier = Modifier,
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
@@ -71,7 +74,8 @@ fun Navigation(
     vaultViewModel: VaultViewModel = hiltViewModel(),
     addEditViewModel: AddEditViewModel = hiltViewModel(),
     shieldViewModel: ShieldViewModel = hiltViewModel(),
-    viewPasswordViewModel: ViewPasswordViewModel = hiltViewModel()
+    viewPasswordViewModel: ViewPasswordViewModel = hiltViewModel(),
+    settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
 
     val navController = rememberNavController()
@@ -197,9 +201,10 @@ fun Navigation(
 
             composable(route = Screen.SettingsScreen.name) {
                 SettingsScreen(
+                    activity,
                     navController,
                     themeViewModel,
-                    userViewModel
+                    settingsViewModel
                 )
             }
 

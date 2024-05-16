@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.account.profile
+package com.geekymusketeers.uncrack.presentation.profile
 
 import android.content.Intent
 import android.net.Uri

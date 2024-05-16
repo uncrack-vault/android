@@ -1,5 +1,7 @@
-package com.geekymusketeers.uncrack.presentation.account
+package com.geekymusketeers.uncrack.presentation.settings
 
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,13 +20,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -33,13 +36,16 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.SettingsItemGroup
 import com.geekymusketeers.uncrack.components.ThemeDialog
 import com.geekymusketeers.uncrack.components.UCSettingsCard
+import com.geekymusketeers.uncrack.components.UCSwitchCard
 import com.geekymusketeers.uncrack.components.UCTopAppBar
+import com.geekymusketeers.uncrack.data.db.AccountDatabase
+import com.geekymusketeers.uncrack.domain.model.Account
+import com.geekymusketeers.uncrack.navigation.Screen
+import com.geekymusketeers.uncrack.presentation.auth.login.LoginScreens
 import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
-import com.geekymusketeers.uncrack.sharedViewModel.UserViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
-import com.geekymusketeers.uncrack.ui.theme.bold18
 import com.geekymusketeers.uncrack.ui.theme.bold20
 import com.geekymusketeers.uncrack.ui.theme.medium14
 import com.geekymusketeers.uncrack.ui.theme.normal16
@@ -47,16 +53,23 @@ import com.geekymusketeers.uncrack.ui.theme.normal16
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
+    activity: Activity,
     navController: NavHostController,
     themeViewModel: ThemeViewModel,
-    userViewModel: UserViewModel,
+    settingsViewModel: SettingsViewModel,
     modifier: Modifier = Modifier
 ) {
 
-    val context = LocalContext.current
+    val themeStateObserver by themeViewModel.themeState.collectAsState()
+    val isScreenshotEnabled by settingsViewModel.isScreenshotEnabled.observeAsState(false)
+    val onLogOutComplete by settingsViewModel.onLogOutComplete.observeAsState(false)
     var openThemeDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
-    val userData = userViewModel.state.value
+
+    if (onLogOutComplete) {
+        activity.startActivity(Intent(activity, LoginScreens::class.java))
+        activity.finish()
+    }
 
     when {
         openThemeDialog -> {
@@ -88,7 +101,7 @@ fun SettingsScreen(
                 confirmButton = {
                     TextButton(
                         onClick = {
-                            // TODO: IMPL the logout logic
+                            settingsViewModel.logout()
                             openLogoutDialog = false
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -156,7 +169,7 @@ fun SettingsScreen(
                 UCSettingsCard(
                     itemName = "Change Master Password",
                     onClick = {
-
+                        navController.navigate(Screen.UpdateMasterKeyScreen.name)
                     }
                 )
 
@@ -165,11 +178,10 @@ fun SettingsScreen(
                     color = SurfaceVariantLight
                 )
 
-                UCSettingsCard(
+                UCSwitchCard(
                     itemName = stringResource(R.string.unlock_with_biometric),
-                    onClick = {
-
-                    }
+                    isChecked = false,
+                    onChecked = {}
                 )
 
                 HorizontalDivider(
@@ -177,10 +189,11 @@ fun SettingsScreen(
                     color = SurfaceVariantLight
                 )
 
-                UCSettingsCard(
+                UCSwitchCard(
                     itemName = stringResource(R.string.take_in_app_screenshots),
-                    onClick = {
-
+                    isChecked = isScreenshotEnabled,
+                    onChecked = {
+                        settingsViewModel.setScreenshotEnabled(it)
                     }
                 )
             }
@@ -219,10 +232,11 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(14.dp))
 
             SettingsItemGroup {
-                UCSettingsCard(
+                UCSwitchCard(
                     itemName = stringResource(R.string.theme),
-                    onClick = {
-
+                    isChecked = themeStateObserver.isDarkMode,
+                    onChecked = {
+                        themeViewModel.toggleTheme()
                     }
                 )
             }
