@@ -55,6 +55,7 @@ import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
 import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
+import com.geekymusketeers.uncrack.presentation.profile.HelpScreen
 import com.geekymusketeers.uncrack.presentation.settings.SettingsViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
@@ -90,7 +91,8 @@ fun Navigation(
         Screen.PasswordGeneratorScreen.name,
         Screen.CategoryScreen.name,
         "${Screen.ViewPasswordScreen.name}/{id}",
-        Screen.PasswordHealthScreen.name
+        Screen.PasswordHealthScreen.name,
+        Screen.HelpScreen.name
     )
 
     BackPressHandler()
@@ -197,6 +199,10 @@ fun Navigation(
                     navController,
                     userViewModel
                 )
+            }
+
+            composable(route = Screen.HelpScreen.name) {
+                HelpScreen(navController)
             }
 
             composable(route = Screen.SettingsScreen.name) {

@@ -112,7 +112,7 @@ fun ProfileScreen(
                 itemName = stringResource(R.string.help),
                 iconId = R.drawable.help,
                 onClick = {
-
+                    navHostController.navigate(Screen.HelpScreen.name)
                 }
             )
         }
