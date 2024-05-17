@@ -67,13 +67,14 @@ fun ProfileScreen(
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                ProfileContainer {
-                }
+                ProfileContainer(
+                    userViewModel
+                )
 
                 Spacer(modifier = Modifier.height(22.dp))
 
                 Text(
-                    text = userData.email,
+                    text = userData.name,
                     style = medium22.copy(color = OnSurfaceLight)
                 )
             }
