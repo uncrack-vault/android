@@ -1,6 +1,7 @@
 package com.geekymusketeers.uncrack.navigation
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.Icon
@@ -27,16 +28,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.presentation.account.AccountScreen
+import com.geekymusketeers.uncrack.presentation.settings.SettingsScreen
 import com.geekymusketeers.uncrack.presentation.tools.PasswordGenerator
 import com.geekymusketeers.uncrack.presentation.tools.viewModel.PasswordGeneratorViewModel
 import com.geekymusketeers.uncrack.presentation.browse.category.CategoryScreen
 import com.geekymusketeers.uncrack.presentation.browse.BrowseScreen
 import com.geekymusketeers.uncrack.sharedViewModel.UserViewModel
-import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
-import com.geekymusketeers.uncrack.presentation.masterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
-import com.geekymusketeers.uncrack.presentation.account.profile.ProfileScreen
+import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.tools.PasswordHealthScreen
 import com.geekymusketeers.uncrack.presentation.tools.ToolsScreen
 import com.geekymusketeers.uncrack.presentation.tools.viewModel.ShieldViewModel
@@ -56,6 +55,8 @@ import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
 import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
+import com.geekymusketeers.uncrack.presentation.profile.HelpScreen
+import com.geekymusketeers.uncrack.presentation.settings.SettingsViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import kotlinx.collections.immutable.ImmutableList
@@ -65,6 +66,7 @@ import kotlinx.collections.immutable.persistentListOf
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Navigation(
+    activity: Activity,
     modifier: Modifier = Modifier,
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
@@ -73,7 +75,8 @@ fun Navigation(
     vaultViewModel: VaultViewModel = hiltViewModel(),
     addEditViewModel: AddEditViewModel = hiltViewModel(),
     shieldViewModel: ShieldViewModel = hiltViewModel(),
-    viewPasswordViewModel: ViewPasswordViewModel = hiltViewModel()
+    viewPasswordViewModel: ViewPasswordViewModel = hiltViewModel(),
+    settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
 
     val navController = rememberNavController()
@@ -83,12 +86,13 @@ fun Navigation(
         Screen.AccountSelectionScreen.name,
         "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}&accountCategory={accountCategory}",
         "${Screen.EditPasswordScreen.name}/{accountID}",
-        Screen.ProfileScreen.name,
+        Screen.SettingsScreen.name,
         Screen.UpdateMasterKeyScreen.name,
         Screen.PasswordGeneratorScreen.name,
         Screen.CategoryScreen.name,
         "${Screen.ViewPasswordScreen.name}/{id}",
-        Screen.PasswordHealthScreen.name
+        Screen.PasswordHealthScreen.name,
+        Screen.HelpScreen.name
     )
 
     BackPressHandler()
@@ -191,14 +195,22 @@ fun Navigation(
             }
 
             composable(route = Screen.ProfileScreen.name) {
-                ProfileScreen()
+                ProfileScreen(
+                    navController,
+                    userViewModel
+                )
             }
 
-            composable(route = Screen.AccountScreen.name) {
-                AccountScreen(
+            composable(route = Screen.HelpScreen.name) {
+                HelpScreen(navController)
+            }
+
+            composable(route = Screen.SettingsScreen.name) {
+                SettingsScreen(
+                    activity,
                     navController,
                     themeViewModel,
-                    userViewModel
+                    settingsViewModel
                 )
             }
 
@@ -255,12 +267,12 @@ fun ShowBottomNavigation(
 //                ),
                 BottomNavItem(
                     name = "Tools",
-                    route = "shield_screen",
+                    route = "tools_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.tools)
                 ),
                 BottomNavItem(
                     name = "Profile",
-                    route = "account_screen",
+                    route = "profile_screen",
                     icon = ImageVector.vectorResource(id = R.drawable.person_icon)
                 )
             )

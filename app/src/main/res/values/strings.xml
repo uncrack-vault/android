@@ -21,7 +21,7 @@
     <string name="share_details">Share Details</string>
     <string name="credentials_backups">Credentials Backups</string>
     <string name="backup_credentials_to_google_drive">Backup credentials to Google Drive</string>
-    <string name="security">Security</string>
+    <string name="security">Account Security</string>
     <string name="biometric_authentication">Biometric Authentication</string>
     <string name="share_app">Share App</string>
     <string name="share_app_with_others">Share app with others</string>
@@ -174,9 +174,9 @@
     <string name="include_following">Include following:</string>
     <string name="copy">Copy</string>
     <string name="backup">Backup</string>
-    <string name="general">General</string>
+    <string name="appearance">Appearance</string>
     <string name="danger_zone">Danger Zone</string>
-    <string name="update_master_key">Update Master Key</string>
+    <string name="update_master_password">Update Master Password</string>
     <string name="old_master_key">Old Master Key</string>
     <string name="new_master_key">New Master Key</string>
     <string name="password_generated_length">Password Length  %1$s</string>
@@ -207,6 +207,17 @@
     <string name="you_will_be_using_master_password_as_a_key_to_unlock_your_passwords">You will be using Master Password as a key to unlock your passwords</string>
     <string name="create_master_password">Create Master Password</string>
     <string name="kindly_provide_your_master_password">Kindly provide your Master Password</string>
+    <string name="icon">icon\n</string>
+    <string name="help">Help</string>
+    <string name="rate_uncrack">Rate UnCrack</string>
+    <string name="invite_friends">Invite Friends</string>
+    <string name="take_in_app_screenshots">Take in-app screenshots</string>
+    <string name="unlock_with_biometric">Unlock with biometric</string>
+    <string name="delete_account">Delete account</string>
+    <string name="log_out">Log Out</string>
+    <string name="theme">Theme</string>
+    <string name="old_master_password">Old Master Password\n</string>
+    <string name="new_master_password">New Master Password</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
