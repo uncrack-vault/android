@@ -37,14 +37,17 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.components.PasswordStrengthIndicator
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.domain.model.Key
+import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.bold30
-import com.geekymusketeers.uncrack.ui.theme.normal20
+import com.geekymusketeers.uncrack.ui.theme.medium14
+import com.geekymusketeers.uncrack.ui.theme.normal16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -84,6 +87,8 @@ fun CreateMasterKeyContent(
     val context = LocalContext.current
     val masterKeyObserver by masterKeyViewModel.masterKeyLiveData.observeAsState("")
     val confirmMasterKeyObserver by masterKeyViewModel.confirmMasterKeyLiveData.observeAsState("")
+    val hasMinLengthObserver by masterKeyViewModel.hasMinLength.observeAsState(false)
+    val hasSymbolObserver by masterKeyViewModel.hasSymbol.observeAsState(false)
     val enableButtonObserver by masterKeyViewModel.enableButtonLiveData.observeAsState(false)
     var passwordVisibility by remember { mutableStateOf(false) }
     var confirmPasswordVisibility by remember { mutableStateOf(false) }
@@ -108,7 +113,7 @@ fun CreateMasterKeyContent(
 
             Text(
                 text = stringResource(R.string.you_will_be_using_master_password_as_a_key_to_unlock_your_passwords),
-                style = normal20.copy(color = SurfaceTintLight)
+                style = normal16.copy(color = SurfaceTintLight)
             )
 
             Spacer(modifier = Modifier.height(50.dp))
@@ -140,6 +145,27 @@ fun CreateMasterKeyContent(
                     }
                 }
             )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Column {
+                Text(
+                    text = stringResource(R.string.master_password_must_include),
+                    style = medium14.copy(OnPrimaryContainerLight)
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+
+                PasswordStrengthIndicator(
+                    modifier = Modifier.padding(start = 4.dp),
+                    text = stringResource(R.string._9_or_more_characters),
+                    isMet = hasMinLengthObserver
+                )
+                PasswordStrengthIndicator(
+                    modifier = Modifier.padding(start = 4.dp),
+                    text = stringResource(R.string.at_least_1_symbol),
+                    isMet = hasSymbolObserver
+                )
+            }
 
             Spacer(modifier = Modifier.height(30.dp))
 

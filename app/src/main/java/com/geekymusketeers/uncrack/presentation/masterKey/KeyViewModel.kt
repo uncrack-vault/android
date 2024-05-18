@@ -28,8 +28,15 @@ class KeyViewModel @Inject constructor(
     private val _enableButtonLiveData = MutableLiveData<Boolean>()
     val enableButtonLiveData: LiveData<Boolean> = _enableButtonLiveData
 
+    private val _hasMinLength = MutableLiveData(false)
+    val hasMinLength: LiveData<Boolean> = _hasMinLength
+
+    private val _hasSymbol = MutableLiveData(false)
+    val hasSymbol: LiveData<Boolean> = _hasSymbol
+
     fun setMasterKey(masterKey: String) {
         _masterKeyLiveData.value = masterKey
+        validatePassword(masterKey)
         checkMasterKey()
     }
 
@@ -43,6 +50,16 @@ class KeyViewModel @Inject constructor(
             _masterKeyLiveData.value.isNullOrBlank()
                 .not() && _confirmMasterKeyLiveData.value.isNullOrBlank().not() &&
                     _masterKeyLiveData.value == _confirmMasterKeyLiveData.value
+        isPasswordValid()
+    }
+
+    private fun validatePassword(password: String) {
+        _hasMinLength.value = password.length >= 9
+        _hasSymbol.value = password.any { !it.isLetterOrDigit() }
+    }
+
+    private fun isPasswordValid(): Boolean {
+        return _hasMinLength.value == true && _hasSymbol.value == true
     }
 
     fun saveMasterKey(key: Key) = runIO {

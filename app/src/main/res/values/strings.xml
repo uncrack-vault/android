@@ -219,6 +219,9 @@
     <string name="theme">Theme</string>
     <string name="old_master_password">Old Master Password\n</string>
     <string name="new_master_password">New Master Password</string>
+    <string name="at_least_1_symbol"><![CDATA[At least 1 symbol (*#/&%....)]]></string>
+    <string name="_9_or_more_characters">9 or more characters</string>
+    <string name="master_password_must_include">Master Password must include:</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
