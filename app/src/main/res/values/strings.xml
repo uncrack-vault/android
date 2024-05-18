@@ -155,6 +155,7 @@
     <string name="skip">Skip</string>
     <string name="cancel">Cancel</string>
     <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="are_you_sure_you_want_to_delete">Are you sure you want to delete your account?</string>
     <string name="logout">Logout?</string>
     <string name="email_header">Enter your email</string>
     <string name="email_hint">johndoe123@gmail.com</string>

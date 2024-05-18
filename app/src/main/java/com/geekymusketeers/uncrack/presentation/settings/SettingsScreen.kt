@@ -63,10 +63,12 @@ fun SettingsScreen(
     val themeStateObserver by themeViewModel.themeState.collectAsState()
     val isScreenshotEnabled by settingsViewModel.isScreenshotEnabled.observeAsState(false)
     val onLogOutComplete by settingsViewModel.onLogOutComplete.observeAsState(false)
+    val onDeleteAccountComplete by settingsViewModel.onDeleteAccountComplete.observeAsState(false)
     var openThemeDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
+    var openDeleteAccountDialog by remember { mutableStateOf(false) }
 
-    if (onLogOutComplete) {
+    if (onLogOutComplete || onDeleteAccountComplete) {
         activity.startActivity(Intent(activity, LoginScreens::class.java))
         activity.finish()
     }
@@ -119,6 +121,65 @@ fun SettingsScreen(
                     TextButton(
                         onClick = {
                             openLogoutDialog = false
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Transparent,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(R.string.cancel),
+                            style = medium14
+                        )
+                    }
+                },
+                containerColor = MaterialTheme.colorScheme.background
+            )
+        }
+
+        openDeleteAccountDialog -> {
+            AlertDialog(
+                onDismissRequest = { openDeleteAccountDialog = false },
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.delete_icon),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                },
+                title = {
+                    Text(
+                        text = stringResource(R.string.delete_account),
+                        style = normal16.copy(color = OnPrimaryContainerLight)
+                    )
+                },
+                text = {
+                    Text(
+                        text = stringResource(R.string.are_you_sure_you_want_to_delete),
+                        style = normal16.copy(color = OnSurfaceVariantLight)
+                    )
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            settingsViewModel.deleteAccount()
+                            openDeleteAccountDialog = false
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Transparent,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    ) {
+                        Text(
+                            "Delete",
+                            style = medium14
+                        )
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            openDeleteAccountDialog = false
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Transparent,
@@ -260,7 +321,7 @@ fun SettingsScreen(
                     itemName = stringResource(R.string.delete_account),
                     textColor = Color.Red,
                     onClick = {
-
+                        openDeleteAccountDialog = true
                     }
                 )
             }
