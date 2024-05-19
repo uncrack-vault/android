@@ -35,8 +35,8 @@ fun UCSettingsCard(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
-            .clickable { onClick() },
+            .clickable { onClick() }
+            .padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.Start),
         verticalAlignment = Alignment.CenterVertically
     ) {
