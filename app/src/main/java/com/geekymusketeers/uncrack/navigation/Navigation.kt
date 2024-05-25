@@ -159,7 +159,8 @@ fun Navigation(
                     accountIconId,
                     accountTextId,
                     accountCategoryId,
-                    addEditViewModel
+                    addEditViewModel,
+                    masterKeyViewModel
                 )
             }
 

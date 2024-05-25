@@ -169,7 +169,7 @@ fun UpdateMasterKey(
                     .fillMaxWidth(),
                 text = stringResource(id = R.string.update),
                 onClick = {
-                    val updatedKey = Key(0, newMasterKey)
+                    val updatedKey = Key(0, newMasterKey,"")
                     keyViewModel.saveMasterKey(updatedKey)
                     navController.popBackStack()
                 },

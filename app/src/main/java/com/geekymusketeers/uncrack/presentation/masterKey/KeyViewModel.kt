@@ -17,7 +17,7 @@ class KeyViewModel @Inject constructor(
     private val repository: KeyRepository
 ) : ViewModel() {
 
-    var keyModel by mutableStateOf(Key(0,""))
+    var keyModel by mutableStateOf(Key(0,"",""))
 
     private val _masterKeyLiveData = MutableLiveData<String>()
     val masterKeyLiveData: LiveData<String> = _masterKeyLiveData

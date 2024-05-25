@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class Key(
     @PrimaryKey(autoGenerate = false)
     val id : Int,
-    val password : String
+    val password : String,
+    val secretKey: String
 )

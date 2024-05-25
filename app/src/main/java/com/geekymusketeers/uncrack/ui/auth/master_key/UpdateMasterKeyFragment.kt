@@ -124,16 +124,16 @@ class UpdateMasterKeyFragment : Fragment() {
         trans?.replace(R.id.fragment,frag)?.commit()
     }
 
-    private fun updateKey() {
-
-        val updatedKey = binding.layoutMasterKey.text.toString()
-
-        val encrypt = Encryption.getDefault("Key", "Salt", ByteArray(16))
-        val encryptedUpdatedKey = encrypt.encryptOrNull(updatedKey)
-
-        val updatedMasterKey = Key(0,encryptedUpdatedKey)
-        updateKeyViewModel.saveMasterKey(updatedMasterKey)
-    }
+//    private fun updateKey() {
+//
+//        val updatedKey = binding.layoutMasterKey.text.toString()
+//
+//        val encrypt = Encryption.getDefault("Key", "Salt", ByteArray(16))
+//        val encryptedUpdatedKey = encrypt.encryptOrNull(updatedKey)
+//
+//        val updatedMasterKey = Key(0,encryptedUpdatedKey)
+//        updateKeyViewModel.saveMasterKey(updatedMasterKey)
+//    }
 
     private fun showProgress() {
         buttonText.visibility = View.GONE

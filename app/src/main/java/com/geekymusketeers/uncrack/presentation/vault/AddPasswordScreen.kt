@@ -19,6 +19,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -32,6 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.unpackInt1
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.geekymusketeers.uncrack.R
@@ -40,13 +42,17 @@ import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.navigation.Screen
+import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.normal20
 import com.geekymusketeers.uncrack.ui.theme.normal24
 import com.geekymusketeers.uncrack.util.UtilsKt.generateRandomPassword
+import com.geekymusketeers.uncrack.util.aesEncrypt
+import com.geekymusketeers.uncrack.util.toSecretKey
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Base64
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,6 +63,7 @@ fun AddPasswordScreen(
     accountName: String,
     accountCategory: String,
     addEditViewModel: AddEditViewModel,
+    keyViewModel: KeyViewModel,
     modifier: Modifier = Modifier
 ) {
 
@@ -69,7 +76,11 @@ fun AddPasswordScreen(
     val password by addEditViewModel.password.observeAsState("")
     val note by addEditViewModel.note.observeAsState("")
     val isAdded by addEditViewModel.isAdded.observeAsState(false)
+    val secretKey = keyViewModel.keyModel.secretKey
 
+    LaunchedEffect(Unit) {
+        keyViewModel.getMasterKey()
+    }
     Scaffold(
         modifier.fillMaxSize(),
         topBar = {
@@ -190,13 +201,14 @@ fun AddPasswordScreen(
                     .fillMaxWidth(),
                 text = stringResource(R.string.save),
                 onClick = {
+                    val encryptedPassword = Base64.getEncoder().encodeToString(aesEncrypt(password.toByteArray(),secretKey.toSecretKey()))
                     val account = Account(
                         id = 0,
                         company = accountName,
                         email = email,
                         category = accountCategory,
                         username = username,
-                        password = password,
+                        password = encryptedPassword,
                         note = note,
                         dateTime = formattedDateTime
                     )

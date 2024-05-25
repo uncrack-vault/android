@@ -2,11 +2,13 @@ package com.geekymusketeers.uncrack.presentation.masterKey.createMasterKey
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -50,12 +52,15 @@ import com.geekymusketeers.uncrack.ui.theme.bold30
 import com.geekymusketeers.uncrack.ui.theme.medium14
 import com.geekymusketeers.uncrack.ui.theme.normal16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.generateAESKey
+import com.geekymusketeers.uncrack.util.toBase64String
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CreateMasterKeyScreen : ComponentActivity() {
 
     private lateinit var masterKeyViewModel: KeyViewModel
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         enableEdgeToEdge(
@@ -79,6 +84,7 @@ class CreateMasterKeyScreen : ComponentActivity() {
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CreateMasterKeyContent(
     activity: Activity,
@@ -209,7 +215,8 @@ fun CreateMasterKeyContent(
                     .fillMaxWidth(),
                 text = stringResource(R.string.save),
                 onClick = {
-                    val key = Key(0, masterKeyObserver)
+                    val secretKey = generateAESKey().toBase64String()
+                    val key = Key(0, masterKeyObserver,secretKey)
                     masterKeyViewModel.saveMasterKey(key)
                     context.findActivity()?.apply {
                         startActivity(Intent(activity, MainActivity::class.java))
