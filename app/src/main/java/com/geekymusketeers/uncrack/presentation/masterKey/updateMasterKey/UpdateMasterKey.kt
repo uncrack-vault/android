@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.masterKey
+package com.geekymusketeers.uncrack.presentation.masterKey.updateMasterKey
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,7 +19,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -32,9 +30,8 @@ import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.domain.model.Key
-import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
+import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
-import com.geekymusketeers.uncrack.ui.theme.bold30
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -83,15 +80,21 @@ fun UpdateMasterKey(
                 visualTransformation = if (oldPasswordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     val image = if (oldPasswordVisibility)
-                        painterResource(id = R.drawable.visibility_on)
-                    else painterResource(id = R.drawable.visibility_off)
+                        painterResource(id = R.drawable.visibility_off)
+                    else painterResource(id = R.drawable.visibility_on)
+
+                    val imageDescription =
+                        if (oldPasswordVisibility) stringResource(R.string.show_password) else stringResource(
+                            R.string.hide_password
+                        )
+
 
                     IconButton(onClick = { oldPasswordVisibility = oldPasswordVisibility.not() }
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),
                             painter = image,
-                            contentDescription = null
+                            contentDescription = imageDescription
                         )
                     }
                 }
@@ -109,15 +112,20 @@ fun UpdateMasterKey(
                 visualTransformation = if (newPasswordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     val image = if (newPasswordVisibility)
-                        painterResource(id = R.drawable.visibility_on)
-                    else painterResource(id = R.drawable.visibility_off)
+                        painterResource(id = R.drawable.visibility_off)
+                    else painterResource(id = R.drawable.visibility_on)
+
+                    val imageDescription =
+                        if (newPasswordVisibility) stringResource(R.string.show_password) else stringResource(
+                            R.string.hide_password
+                        )
 
                     IconButton(onClick = { newPasswordVisibility = newPasswordVisibility.not() }
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),
                             painter = image,
-                            contentDescription = null
+                            contentDescription = imageDescription
                         )
                     }
                 }
@@ -135,15 +143,20 @@ fun UpdateMasterKey(
                 visualTransformation = if (confirmPasswordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     val image = if (confirmPasswordVisibility)
-                        painterResource(id = R.drawable.visibility_on)
-                    else painterResource(id = R.drawable.visibility_off)
+                        painterResource(id = R.drawable.visibility_off)
+                    else painterResource(id = R.drawable.visibility_on)
+
+                    val imageDescription =
+                        if (confirmPasswordVisibility) stringResource(R.string.show_password) else stringResource(
+                            R.string.hide_password
+                        )
 
                     IconButton(onClick = { confirmPasswordVisibility = confirmPasswordVisibility.not() }
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),
                             painter = image,
-                            contentDescription = null
+                            contentDescription = imageDescription
                         )
                     }
                 }

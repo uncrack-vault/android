@@ -30,13 +30,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.presentation.masterKey.ConfirmMasterKeyScreen
+import com.geekymusketeers.uncrack.presentation.masterKey.confirmMasterKey.ConfirmMasterKeyScreen
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
@@ -90,7 +88,7 @@ fun SplashContent(activity: Activity, modifier: Modifier = Modifier) {
         } else {
             activity.run {
                 delay(2000L)
-                startActivity(Intent(this,ConfirmMasterKeyScreen::class.java))
+                startActivity(Intent(this, ConfirmMasterKeyScreen::class.java))
                 finish()
             }
         }

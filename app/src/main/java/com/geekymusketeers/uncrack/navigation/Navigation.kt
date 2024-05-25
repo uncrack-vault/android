@@ -34,7 +34,7 @@ import com.geekymusketeers.uncrack.presentation.tools.viewModel.PasswordGenerato
 import com.geekymusketeers.uncrack.presentation.browse.category.CategoryScreen
 import com.geekymusketeers.uncrack.presentation.browse.BrowseScreen
 import com.geekymusketeers.uncrack.sharedViewModel.UserViewModel
-import com.geekymusketeers.uncrack.presentation.masterKey.UpdateMasterKey
+import com.geekymusketeers.uncrack.presentation.masterKey.updateMasterKey.UpdateMasterKey
 import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.tools.PasswordHealthScreen
 import com.geekymusketeers.uncrack.presentation.tools.ToolsScreen

@@ -144,8 +144,8 @@ fun AddPasswordScreen(
                 trailingIcon = {
 
                     val image = if (passwordVisibility)
-                        painterResource(id = R.drawable.visibility_on)
-                    else painterResource(id = R.drawable.visibility_off)
+                        painterResource(id = R.drawable.visibility_off)
+                    else painterResource(id = R.drawable.visibility_on)
 
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween

@@ -154,8 +154,13 @@ fun LoginContent(
                 trailingIcon = {
 
                     val image = if (passwordVisibility)
-                        painterResource(id = R.drawable.visibility_on)
-                    else painterResource(id = R.drawable.visibility_off)
+                        painterResource(id = R.drawable.visibility_off)
+                    else painterResource(id = R.drawable.visibility_on)
+
+                    val imageDescription =
+                        if (passwordVisibility) stringResource(R.string.show_password) else stringResource(
+                            R.string.hide_password
+                        )
 
                     IconButton(onClick =
                     { passwordVisibility = passwordVisibility.not() }
@@ -163,7 +168,7 @@ fun LoginContent(
                         Icon(
                             modifier = Modifier.size(24.dp),
                             painter = image,
-                            contentDescription = null
+                            contentDescription = imageDescription
                         )
                     }
                 }

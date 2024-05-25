@@ -225,6 +225,8 @@
     <string name="forgot_password">Forgot Password</string>
     <string name="enter_your_registered_mail">Enter your registered mail</string>
     <string name="send_reset_link">Send reset link</string>
+    <string name="show_password">Show Password</string>
+    <string name="hide_password">Hide Password</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
