@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.tools
+package com.geekymusketeers.uncrack.presentation.tools.passwordHealth
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,14 +15,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.ShieldCard
 import com.geekymusketeers.uncrack.components.UCTopAppBar
-import com.geekymusketeers.uncrack.presentation.tools.viewModel.ShieldViewModel
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.strongPassword
 import com.geekymusketeers.uncrack.ui.theme.weakPassword
@@ -31,7 +29,7 @@ import com.geekymusketeers.uncrack.ui.theme.weakPassword
 @Composable
 fun PasswordHealthScreen(
     navController: NavController,
-    shieldViewModel: ShieldViewModel,
+    shieldViewModel: PassHealthViewModel,
     modifier: Modifier = Modifier
 ) {
 

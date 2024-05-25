@@ -17,13 +17,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.navigation.Screen
-import com.geekymusketeers.uncrack.presentation.tools.viewModel.ShieldViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.medium18

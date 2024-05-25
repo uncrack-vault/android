@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.tools.viewModel
+package com.geekymusketeers.uncrack.presentation.tools.passwordHealth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class ShieldViewModel @Inject constructor(
+class PassHealthViewModel @Inject constructor(
     private val repository: AccountRepository
 ): ViewModel() {
 

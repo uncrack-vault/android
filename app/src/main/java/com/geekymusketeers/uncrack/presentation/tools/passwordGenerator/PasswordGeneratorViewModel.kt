@@ -1,4 +1,4 @@
-package com.geekymusketeers.uncrack.presentation.tools.viewModel
+package com.geekymusketeers.uncrack.presentation.tools.passwordGenerator
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
