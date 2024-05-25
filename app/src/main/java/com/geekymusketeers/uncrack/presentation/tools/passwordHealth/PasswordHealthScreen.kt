@@ -29,15 +29,15 @@ import com.geekymusketeers.uncrack.ui.theme.weakPassword
 @Composable
 fun PasswordHealthScreen(
     navController: NavController,
-    shieldViewModel: PassHealthViewModel,
+    passwordHealthViewModel: PassHealthViewModel,
     modifier: Modifier = Modifier
 ) {
 
-    val strongPasswordObserver by shieldViewModel.strongPasswordCount.observeAsState(0)
-    val weakPasswordObserver by shieldViewModel.weakPasswordCount.observeAsState(0)
+    val strongPasswordObserver by passwordHealthViewModel.strongPasswordCount.observeAsState(0)
+    val weakPasswordObserver by passwordHealthViewModel.weakPasswordCount.observeAsState(0)
 
     LaunchedEffect(Unit) {
-        shieldViewModel.getPasswords()
+        passwordHealthViewModel.getPasswords()
     }
 
     Scaffold(

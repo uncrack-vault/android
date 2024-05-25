@@ -28,24 +28,29 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.presentation.browse.BrowseScreen
+import com.geekymusketeers.uncrack.presentation.browse.category.CategoryScreen
+import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
+import com.geekymusketeers.uncrack.presentation.masterKey.updateMasterKey.UpdateMasterKey
+import com.geekymusketeers.uncrack.presentation.profile.HelpScreen
+import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
 import com.geekymusketeers.uncrack.presentation.settings.SettingsScreen
+import com.geekymusketeers.uncrack.presentation.settings.SettingsViewModel
+import com.geekymusketeers.uncrack.presentation.tools.ToolsScreen
 import com.geekymusketeers.uncrack.presentation.tools.passwordGenerator.PasswordGenerator
 import com.geekymusketeers.uncrack.presentation.tools.passwordGenerator.PasswordGeneratorViewModel
-import com.geekymusketeers.uncrack.presentation.browse.category.CategoryScreen
-import com.geekymusketeers.uncrack.presentation.browse.BrowseScreen
-import com.geekymusketeers.uncrack.sharedViewModel.UserViewModel
-import com.geekymusketeers.uncrack.presentation.masterKey.updateMasterKey.UpdateMasterKey
-import com.geekymusketeers.uncrack.presentation.profile.ProfileScreen
+import com.geekymusketeers.uncrack.presentation.tools.passwordHealth.PassHealthViewModel
 import com.geekymusketeers.uncrack.presentation.tools.passwordHealth.PasswordHealthScreen
-import com.geekymusketeers.uncrack.presentation.tools.ToolsScreen
-import com.geekymusketeers.uncrack.presentation.tools.passwordHealth.ShieldViewModel
 import com.geekymusketeers.uncrack.presentation.vault.AccountSelectionScreen
 import com.geekymusketeers.uncrack.presentation.vault.AddPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.EditPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.VaultScreen
 import com.geekymusketeers.uncrack.presentation.vault.ViewPasswordScreen
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
+import com.geekymusketeers.uncrack.sharedViewModel.UserViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.FadeIn
@@ -54,11 +59,6 @@ import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.util.BackPressHandler
-import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
-import com.geekymusketeers.uncrack.presentation.profile.HelpScreen
-import com.geekymusketeers.uncrack.presentation.settings.SettingsViewModel
-import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
-import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -74,7 +74,7 @@ fun Navigation(
     themeViewModel: ThemeViewModel = hiltViewModel(),
     vaultViewModel: VaultViewModel = hiltViewModel(),
     addEditViewModel: AddEditViewModel = hiltViewModel(),
-    shieldViewModel: ShieldViewModel = hiltViewModel(),
+    passwordHealthViewModel: PassHealthViewModel = hiltViewModel(),
     viewPasswordViewModel: ViewPasswordViewModel = hiltViewModel(),
     settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
@@ -229,7 +229,7 @@ fun Navigation(
             }
 
             composable(route = Screen.PasswordHealthScreen.name) {
-                PasswordHealthScreen(navController, shieldViewModel)
+                PasswordHealthScreen(navController, passwordHealthViewModel)
             }
 
             composable(route = Screen.CategoryScreen.name) {
