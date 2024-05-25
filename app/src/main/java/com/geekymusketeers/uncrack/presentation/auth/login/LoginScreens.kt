@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +29,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -45,6 +47,7 @@ import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
+import com.geekymusketeers.uncrack.presentation.auth.forgotPassword.ForgotPasswordScreen
 import com.geekymusketeers.uncrack.presentation.auth.signup.SignupScreen
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
@@ -52,6 +55,7 @@ import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.onClick
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -163,6 +167,21 @@ fun LoginContent(
                         )
                     }
                 }
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = stringResource(R.string.forgot_password), modifier = Modifier
+                    .align(Alignment.End)
+                    .onClick {
+                        context
+                            .findActivity()
+                            ?.let {
+                                it.startActivity(Intent(it, ForgotPasswordScreen::class.java))
+                            }
+                    },
+                color = MaterialTheme.colorScheme.primary
             )
 
             Spacer(modifier = Modifier.weight(1f))

@@ -9,6 +9,7 @@ import com.geekymusketeers.uncrack.util.UtilsKt.validateEmail
 import com.geekymusketeers.uncrack.util.UtilsKt.validateName
 import com.geekymusketeers.uncrack.util.UtilsKt.validatePassword
 import com.geekymusketeers.uncrack.util.runIO
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -33,6 +34,8 @@ class AuthViewModel : ViewModel() {
     private val _password = MutableLiveData<String>()
     val password: LiveData<String> = _password
 
+    val resetPassword = MutableLiveData<Boolean>()
+
     fun setUserName(username: String) {
         _username.value = username
         checkIfAdded()
@@ -46,6 +49,13 @@ class AuthViewModel : ViewModel() {
     fun setPassword(password: String) {
         _password.value = password
         checkIfAdded()
+    }
+
+    fun resetPassword(email: String) = runIO {
+        FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+            .addOnSuccessListener {
+                resetPassword.postValue(true)
+            }.addOnFailureListener { }
     }
 
     fun logIn(

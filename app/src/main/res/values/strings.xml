@@ -222,6 +222,9 @@
     <string name="at_least_1_symbol"><![CDATA[At least 1 symbol (*#/&%....)]]></string>
     <string name="_9_or_more_characters">9 or more characters</string>
     <string name="master_password_must_include">Master Password must include:</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="enter_your_registered_mail">Enter your registered mail</string>
+    <string name="send_reset_link">Send reset link</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
