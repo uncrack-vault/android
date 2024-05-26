@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -37,6 +38,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -49,6 +52,7 @@ import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
 import com.geekymusketeers.uncrack.presentation.auth.forgotPassword.ForgotPasswordScreen
 import com.geekymusketeers.uncrack.presentation.auth.signup.SignupScreen
+import com.geekymusketeers.uncrack.presentation.masterKey.createMasterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
@@ -137,6 +141,8 @@ fun LoginContent(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
                 value = email,
                 onValueChange = { viewModel.setEmail(it) }
             )
@@ -148,6 +154,8 @@ fun LoginContent(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.password_header),
                 hintText = stringResource(R.string.password_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                 value = password,
                 onValueChange = { viewModel.setPassword(it) },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
@@ -204,7 +212,7 @@ fun LoginContent(
                         }
                     )
                     context.findActivity()?.apply {
-                        startActivity(Intent(activity, MainActivity::class.java))
+                        startActivity(Intent(activity, CreateMasterKeyScreen::class.java))
                     }
                 },
                 enabled = isSignInEnable

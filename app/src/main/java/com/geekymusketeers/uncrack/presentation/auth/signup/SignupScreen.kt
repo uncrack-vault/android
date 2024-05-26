@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -35,6 +36,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -131,6 +134,8 @@ fun SignupContent(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.name_header),
                 hintText = stringResource(R.string.name_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
                 value = name,
                 onValueChange = { authViewModel.setUserName(it) }
             )
@@ -143,6 +148,8 @@ fun SignupContent(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
                 value = email,
                 onValueChange = { authViewModel.setEmail(it) }
             )
@@ -154,6 +161,8 @@ fun SignupContent(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.password_header),
                 hintText = stringResource(R.string.password_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                 value = password,
                 onValueChange = { authViewModel.setPassword(it) },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
