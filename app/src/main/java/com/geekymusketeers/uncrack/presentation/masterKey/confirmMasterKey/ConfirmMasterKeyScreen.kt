@@ -21,6 +21,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -83,7 +84,7 @@ fun ConfirmMasterKeyContent(
     val context = LocalContext.current
     var confirmMasterKey by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-    val savedMasterKey = masterKeyViewModel.keyModel.password
+    val savedMasterKey by masterKeyViewModel.keyModel.collectAsState()
 
     LaunchedEffect(Unit) {
         masterKeyViewModel.getMasterKey()
@@ -151,7 +152,7 @@ fun ConfirmMasterKeyContent(
                         startActivity(Intent(activity, MainActivity::class.java))
                     }
                 },
-                enabled = savedMasterKey == confirmMasterKey
+                enabled = savedMasterKey.password == confirmMasterKey
             )
         }
     }

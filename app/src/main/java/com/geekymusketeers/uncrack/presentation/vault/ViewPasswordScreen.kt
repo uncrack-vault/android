@@ -1,6 +1,9 @@
 package com.geekymusketeers.uncrack.presentation.vault
 
 import android.content.Intent
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,7 +27,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -47,6 +52,7 @@ import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.components.UCTopAppBar
+import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
@@ -60,14 +66,20 @@ import com.geekymusketeers.uncrack.ui.theme.weakPassword
 import com.geekymusketeers.uncrack.util.UtilsKt.calculatePasswordStrength
 import com.geekymusketeers.uncrack.util.UtilsKt.getAccountImage
 import com.geekymusketeers.uncrack.util.UtilsKt.getCategoryImage
+import com.geekymusketeers.uncrack.util.aesDecrypt
+import com.geekymusketeers.uncrack.util.toBase64String
+import com.geekymusketeers.uncrack.util.toSecretKey
 import timber.log.Timber
+import java.util.Base64
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ViewPasswordScreen(
     navController: NavHostController,
     accountId: Int,
     viewPasswordViewModel: ViewPasswordViewModel,
+    masterKeyViewModel: KeyViewModel,
     modifier: Modifier = Modifier,
     navigateToEditPasswordScreen: (accountID: Int) -> Unit
 ) {
@@ -83,9 +95,21 @@ fun ViewPasswordScreen(
     val password = viewPasswordViewModel.accountModel.password
     val category = viewPasswordViewModel.accountModel.category
     val note = viewPasswordViewModel.accountModel.note
+    val securityKey by masterKeyViewModel.keyModel.collectAsState()
+    Log.d("","Decrypted Password is $securityKey")
+    val decryptedPassword by masterKeyViewModel.decryptedPassword.observeAsState()
+    Log.d("","Decrypted Password is $decryptedPassword")
+
 
     LaunchedEffect(Unit) {
         viewPasswordViewModel.getAccountById(accountId)
+        masterKeyViewModel.getMasterKey()
+    }
+
+    LaunchedEffect(key1 = password, key2 = securityKey) {
+        if (password.isNotEmpty() && securityKey.secretKey.isNotEmpty()) {
+            masterKeyViewModel.decryptPassword(password.toByteArray(),securityKey.secretKey.toSecretKey())
+        }
     }
 
     LaunchedEffect(password) {
@@ -285,7 +309,7 @@ fun ViewPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.password),
-                value = password,
+                value = decryptedPassword.toString(),
                 onValueChange = {},
                 readOnly = true,
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
