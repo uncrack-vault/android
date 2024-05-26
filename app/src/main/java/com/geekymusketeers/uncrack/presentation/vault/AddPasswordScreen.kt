@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -76,11 +77,12 @@ fun AddPasswordScreen(
     val password by addEditViewModel.password.observeAsState("")
     val note by addEditViewModel.note.observeAsState("")
     val isAdded by addEditViewModel.isAdded.observeAsState(false)
-    val secretKey = keyViewModel.keyModel.secretKey
+    val secretKeyObserver by keyViewModel.keyModel.collectAsState()
 
     LaunchedEffect(Unit) {
         keyViewModel.getMasterKey()
     }
+
     Scaffold(
         modifier.fillMaxSize(),
         topBar = {
@@ -201,7 +203,7 @@ fun AddPasswordScreen(
                     .fillMaxWidth(),
                 text = stringResource(R.string.save),
                 onClick = {
-                    val encryptedPassword = Base64.getEncoder().encodeToString(aesEncrypt(password.toByteArray(),secretKey.toSecretKey()))
+                    val encryptedPassword = Base64.getEncoder().encodeToString(aesEncrypt(password.toByteArray(),secretKeyObserver.secretKey.toSecretKey()))
                     val account = Account(
                         id = 0,
                         company = accountName,
