@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,6 +30,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -110,6 +113,7 @@ fun AddPasswordScreen(
                     .fillMaxWidth(),
                 maxLines = 1,
                 headerText = stringResource(id = R.string.email),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
                 value = email,
                 onValueChange = {
                     addEditViewModel.setEmail(it)
@@ -123,6 +127,7 @@ fun AddPasswordScreen(
                     .fillMaxWidth(),
                 maxLines = 1,
                 headerText = stringResource(id = R.string.username),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
                 value = username,
                 onValueChange = {
                     addEditViewModel.setUserName(it)
@@ -136,6 +141,7 @@ fun AddPasswordScreen(
                     .fillMaxWidth(),
                 maxLines = 1,
                 headerText = stringResource(id = R.string.password),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                 value = password,
                 onValueChange = {
                     addEditViewModel.setPassword(it)
@@ -177,6 +183,7 @@ fun AddPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.note),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
                 value = note,
                 onValueChange = {
                     addEditViewModel.setNote(it)
