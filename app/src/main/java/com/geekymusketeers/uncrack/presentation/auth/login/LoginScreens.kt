@@ -25,8 +25,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -45,7 +45,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
@@ -59,6 +58,8 @@ import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.Validator.Companion.isValidEmail
+import com.geekymusketeers.uncrack.util.Validator.Companion.isValidPassword
 import com.geekymusketeers.uncrack.util.onClick
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -111,10 +112,14 @@ fun LoginContent(
 ) {
 
     val context = LocalContext.current
-    val email by viewModel.email.observeAsState("")
-    val password by viewModel.password.observeAsState("")
+    var email by  remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-    val isSignInEnable by viewModel.isSignInButtonEnabled.observeAsState(false)
+    val isSignInButtonEnable by remember {
+        derivedStateOf {
+            email.isValidEmail() && password.isValidPassword()
+        }
+    }
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -144,7 +149,7 @@ fun LoginContent(
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
                 value = email,
-                onValueChange = { viewModel.setEmail(it) }
+                onValueChange = { email = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -157,7 +162,7 @@ fun LoginContent(
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                 value = password,
-                onValueChange = { viewModel.setPassword(it) },
+                onValueChange = { password = it },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
 
@@ -215,7 +220,7 @@ fun LoginContent(
                         startActivity(Intent(activity, CreateMasterKeyScreen::class.java))
                     }
                 },
-                enabled = isSignInEnable
+                enabled = isSignInButtonEnable
             )
 
             Spacer(modifier = Modifier.height(15.dp))

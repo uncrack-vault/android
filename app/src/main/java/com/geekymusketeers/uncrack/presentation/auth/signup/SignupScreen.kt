@@ -24,8 +24,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -55,6 +55,9 @@ import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.Validator.Companion.isValidEmail
+import com.geekymusketeers.uncrack.util.Validator.Companion.isValidName
+import com.geekymusketeers.uncrack.util.Validator.Companion.isValidPassword
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -103,11 +106,15 @@ fun SignupContent(
 ) {
 
     val context = LocalContext.current
-    val name by authViewModel.username.observeAsState("")
-    val email by authViewModel.email.observeAsState("")
-    val password by authViewModel.password.observeAsState("")
+    var userName by remember { mutableStateOf("") }
+    var userEmail by remember { mutableStateOf("") }
+    var userPassword by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-    val isRegisterButtonEnableObserve by authViewModel.isRegistrationEnabled.observeAsState(false)
+    val isRegisterButtonEnable by remember {
+        derivedStateOf {
+            userName.isValidName() && userEmail.isValidEmail() && userPassword.isValidPassword()
+        }
+    }
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -136,8 +143,8 @@ fun SignupContent(
                 hintText = stringResource(R.string.name_hint),
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
-                value = name,
-                onValueChange = { authViewModel.setUserName(it) }
+                value = userName,
+                onValueChange = { userName = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -150,8 +157,8 @@ fun SignupContent(
                 hintText = stringResource(R.string.email_hint),
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
-                value = email,
-                onValueChange = { authViewModel.setEmail(it) }
+                value = userEmail,
+                onValueChange = { userEmail = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -163,8 +170,8 @@ fun SignupContent(
                 hintText = stringResource(R.string.password_hint),
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
-                value = password,
-                onValueChange = { authViewModel.setPassword(it) },
+                value = userPassword,
+                onValueChange = { userPassword = it },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     val image = if (passwordVisibility)
@@ -196,9 +203,9 @@ fun SignupContent(
                 text = stringResource(id = R.string.register),
                 onClick = {
                     authViewModel.signUp(
-                        name,
-                        email,
-                        password,
+                        userName,
+                        userEmail,
+                        userPassword,
                         onSignedUp = { signUpUser ->
                             onSignUp(signUpUser)
                         }
@@ -207,7 +214,7 @@ fun SignupContent(
                         startActivity(Intent(activity, CreateMasterKeyScreen::class.java))
                     }
                 },
-                enabled = isRegisterButtonEnableObserve
+                enabled = isRegisterButtonEnable
             )
 
             Spacer(modifier = Modifier.height(15.dp))
