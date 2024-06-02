@@ -205,7 +205,7 @@
     <string name="boosts_security_with_robust_passwords_defending_against_hacks">Boosts security with robust passwords.</string>
     <string name="weak_passwords">Weak Passwords</string>
     <string name="makes_your_accounts_easy_to_hack">Makes your accounts easy to hack</string>
-    <string name="share">Share\n</string>
+    <string name="share">Share</string>
     <string name="you_will_be_using_master_password_as_a_key_to_unlock_your_passwords">You will be using Master Password as a key to unlock your passwords</string>
     <string name="create_master_password">Create Master Password</string>
     <string name="kindly_provide_your_master_password">Kindly provide your Master Password</string>
