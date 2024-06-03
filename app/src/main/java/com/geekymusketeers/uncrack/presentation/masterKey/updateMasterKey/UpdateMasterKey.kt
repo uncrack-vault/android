@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,6 +22,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -75,6 +78,8 @@ fun UpdateMasterKey(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.old_master_password),
                 hintText = stringResource(id = R.string.password_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Next),
                 value = oldMasterKey,
                 onValueChange = { oldMasterKey = it },
                 visualTransformation = if (oldPasswordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
@@ -107,6 +112,8 @@ fun UpdateMasterKey(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.new_master_password),
                 hintText = stringResource(id = R.string.password_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Next),
                 value = newMasterKey,
                 onValueChange = { newMasterKey = it },
                 visualTransformation = if (newPasswordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
@@ -138,6 +145,8 @@ fun UpdateMasterKey(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.confirm_master_password),
                 hintText = stringResource(id = R.string.password_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                 value = newConfirmMasterKey,
                 onValueChange = { newConfirmMasterKey = it },
                 visualTransformation = if (confirmPasswordVisibility) VisualTransformation.None else PasswordVisualTransformation(),

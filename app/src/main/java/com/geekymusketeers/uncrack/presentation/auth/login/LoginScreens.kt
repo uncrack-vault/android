@@ -3,6 +3,7 @@ package com.geekymusketeers.uncrack.presentation.auth.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -18,12 +19,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -37,24 +41,30 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.components.ProgressDialog
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
 import com.geekymusketeers.uncrack.presentation.auth.forgotPassword.ForgotPasswordScreen
 import com.geekymusketeers.uncrack.presentation.auth.signup.SignupScreen
+import com.geekymusketeers.uncrack.presentation.masterKey.createMasterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.UtilsKt.isNetworkAvailable
+import com.geekymusketeers.uncrack.util.Validator.Companion.isValidEmail
+import com.geekymusketeers.uncrack.util.Validator.Companion.isValidPassword
 import com.geekymusketeers.uncrack.util.onClick
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -107,10 +117,28 @@ fun LoginContent(
 ) {
 
     val context = LocalContext.current
-    val email by viewModel.email.observeAsState("")
-    val password by viewModel.password.observeAsState("")
+    var email by  remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-    val isSignInEnable by viewModel.isSignInButtonEnabled.observeAsState(false)
+    val isSignInButtonEnable by remember {
+        derivedStateOf {
+            email.isValidEmail() && password.isValidPassword()
+        }
+    }
+
+    val errorLiveData by viewModel.errorLiveData.observeAsState()
+    var isLoading by remember { mutableStateOf(false) }
+
+    LaunchedEffect(errorLiveData) {
+        errorLiveData?.let { error ->
+            isLoading = false
+            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    if (isLoading) {
+        ProgressDialog {}
+    }
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -137,8 +165,10 @@ fun LoginContent(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
                 value = email,
-                onValueChange = { viewModel.setEmail(it) }
+                onValueChange = { email = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -148,8 +178,10 @@ fun LoginContent(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.password_header),
                 hintText = stringResource(R.string.password_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                 value = password,
-                onValueChange = { viewModel.setPassword(it) },
+                onValueChange = { password = it },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
 
@@ -196,18 +228,27 @@ fun LoginContent(
                     .fillMaxWidth(),
                 text = stringResource(R.string.login),
                 onClick = {
-                    viewModel.logIn(
-                        email,
-                        password,
-                        onSignedIn = { signedInUser ->
-                            onSignedIn(signedInUser)
-                        }
-                    )
+                    if (context.isNetworkAvailable()) {
+                        isLoading = true
+                        viewModel.logIn(
+                            email,
+                            password,
+                            onSignedIn = { signedInUser ->
+                                onSignedIn(signedInUser)
+                            }
+                        )
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "No Internet available",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                     context.findActivity()?.apply {
-                        startActivity(Intent(activity, MainActivity::class.java))
+                        startActivity(Intent(activity, CreateMasterKeyScreen::class.java))
                     }
                 },
-                enabled = isSignInEnable
+                enabled = isSignInButtonEnable
             )
 
             Spacer(modifier = Modifier.height(15.dp))

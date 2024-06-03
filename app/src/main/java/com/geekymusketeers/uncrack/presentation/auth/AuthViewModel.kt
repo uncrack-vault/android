@@ -1,13 +1,8 @@
 package com.geekymusketeers.uncrack.presentation.auth
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.geekymusketeers.uncrack.domain.model.User
-import com.geekymusketeers.uncrack.util.UtilsKt
-import com.geekymusketeers.uncrack.util.UtilsKt.validateEmail
-import com.geekymusketeers.uncrack.util.UtilsKt.validateName
-import com.geekymusketeers.uncrack.util.UtilsKt.validatePassword
 import com.geekymusketeers.uncrack.util.runIO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -18,44 +13,17 @@ import com.google.firebase.ktx.Firebase
 class AuthViewModel : ViewModel() {
 
     private val auth = Firebase.auth
-
-    private val _isRegistrationEnabled = MutableLiveData(false)
-    val isRegistrationEnabled: LiveData<Boolean> = _isRegistrationEnabled
-
-    private val _isSignInButtonEnabled = MutableLiveData(false)
-    val isSignInButtonEnabled: LiveData<Boolean> = _isSignInButtonEnabled
-
-    private val _email = MutableLiveData<String>()
-    val email: LiveData<String> = _email
-
-    private val _username = MutableLiveData<String>()
-    val username: LiveData<String> = _username
-
-    private val _password = MutableLiveData<String>()
-    val password: LiveData<String> = _password
-
     val resetPassword = MutableLiveData<Boolean>()
-
-    fun setUserName(username: String) {
-        _username.value = username
-        checkIfAdded()
-    }
-
-    fun setEmail(email: String) {
-        _email.value = email
-        checkIfAdded()
-    }
-
-    fun setPassword(password: String) {
-        _password.value = password
-        checkIfAdded()
-    }
+    val errorLiveData = MutableLiveData<String>()
+    val registerStatus = MutableLiveData<Boolean>()
 
     fun resetPassword(email: String) = runIO {
         FirebaseAuth.getInstance().sendPasswordResetEmail(email)
             .addOnSuccessListener {
                 resetPassword.postValue(true)
-            }.addOnFailureListener { }
+            }.addOnFailureListener {
+                errorLiveData.postValue(it.message.toString())
+            }
     }
 
     fun logIn(
@@ -69,7 +37,7 @@ class AuthViewModel : ViewModel() {
                     val user = auth.currentUser
                     onSignedIn(user!!)
                 } else {
-                    //
+                    errorLiveData.postValue("Please check your details")
                 }
             }
     }
@@ -95,20 +63,13 @@ class AuthViewModel : ViewModel() {
                             .addOnSuccessListener {
                                 onSignedUp(user)
                             }
-                            .addOnFailureListener {  }
+                            .addOnFailureListener {
+                                errorLiveData.postValue(it.message.toString())
+                            }
                     }
                 } else {
-//                    onSignUpError("Please check your details")
+                    errorLiveData.postValue("Please check your details")
                 }
             }
-    }
-
-    private fun checkIfAdded() {
-        val isUserNameValid = validateName(username.value?.trim())
-        val isEmailValid = validateEmail(email.value?.trim())
-        val isInputsNullOrEmpty = username.value.isNullOrEmpty() && email.value.isNullOrEmpty() && password.value.isNullOrEmpty() && isUserNameValid && isEmailValid
-
-        _isRegistrationEnabled.value = !isInputsNullOrEmpty
-        _isSignInButtonEnabled.value = !isInputsNullOrEmpty
     }
 }

@@ -293,18 +293,6 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(14.dp))
 
             SettingsItemGroup {
-                UCSwitchCard(
-                    itemName = stringResource(R.string.theme),
-                    isChecked = themeStateObserver.isDarkMode,
-                    onChecked = {
-                        themeViewModel.toggleTheme()
-                    }
-                )
-            }
-
-            Spacer(modifier = Modifier.height(14.dp))
-
-            SettingsItemGroup {
                 UCSettingsCard(
                     itemName = stringResource(R.string.log_out),
                     textColor = Color.Red,
