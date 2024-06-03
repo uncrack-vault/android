@@ -14,13 +14,16 @@ class AuthViewModel : ViewModel() {
 
     private val auth = Firebase.auth
     val resetPassword = MutableLiveData<Boolean>()
-
+    val errorLiveData = MutableLiveData<String>()
+    val registerStatus = MutableLiveData<Boolean>()
 
     fun resetPassword(email: String) = runIO {
         FirebaseAuth.getInstance().sendPasswordResetEmail(email)
             .addOnSuccessListener {
                 resetPassword.postValue(true)
-            }.addOnFailureListener { }
+            }.addOnFailureListener {
+                errorLiveData.postValue(it.message.toString())
+            }
     }
 
     fun logIn(
@@ -34,7 +37,7 @@ class AuthViewModel : ViewModel() {
                     val user = auth.currentUser
                     onSignedIn(user!!)
                 } else {
-                    //
+                    errorLiveData.postValue("Please check your details")
                 }
             }
     }
@@ -60,10 +63,12 @@ class AuthViewModel : ViewModel() {
                             .addOnSuccessListener {
                                 onSignedUp(user)
                             }
-                            .addOnFailureListener {  }
+                            .addOnFailureListener {
+                                errorLiveData.postValue(it.message.toString())
+                            }
                     }
                 } else {
-//                    onSignUpError("Please check your details")
+                    errorLiveData.postValue("Please check your details")
                 }
             }
     }

@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.components.ProgressDialog
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
@@ -43,6 +44,7 @@ import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.util.UtilsKt
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.UtilsKt.isNetworkAvailable
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -77,14 +79,28 @@ fun ForgotPasswordContent(
     var email by rememberSaveable { mutableStateOf("") }
     val enableSendBtn by remember { derivedStateOf { UtilsKt.validateEmail(email) } }
     val resetPasswordRequestLiveData by viewModel.resetPassword.observeAsState()
+    val errorLiveData by viewModel.errorLiveData.observeAsState()
+    var isLoading by remember { mutableStateOf(false) }
 
     LaunchedEffect(resetPasswordRequestLiveData) {
         if (resetPasswordRequestLiveData == true) {
+            isLoading = false
             context.findActivity()?.let {
-                Toast.makeText(it, "Email sent", Toast.LENGTH_SHORT).show()
+                Toast.makeText(it, "Email sent to your registered email", Toast.LENGTH_LONG).show()
                 it.finish()
             }
         }
+    }
+
+    LaunchedEffect(errorLiveData) {
+        errorLiveData?.let { error ->
+            isLoading = false
+            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    if (isLoading) {
+        ProgressDialog {}
     }
 
     Scaffold(
@@ -124,7 +140,15 @@ fun ForgotPasswordContent(
                     .fillMaxWidth(),
                 text = stringResource(R.string.send_reset_link),
                 onClick = {
-                    viewModel.resetPassword(email)
+                    if (context.isNetworkAvailable()) {
+                        viewModel.resetPassword(email)
+                    } else {
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.noInternet),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 },
                 enabled = enableSendBtn
             )

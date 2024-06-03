@@ -228,6 +228,9 @@
     <string name="send_reset_link">Send reset link</string>
     <string name="show_password">Show Password</string>
     <string name="hide_password">Hide Password</string>
+    <string name="account_created_successfully">Account created successfully</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="noInternet">No Internet available</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

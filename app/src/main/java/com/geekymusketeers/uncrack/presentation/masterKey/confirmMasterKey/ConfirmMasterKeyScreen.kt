@@ -153,7 +153,7 @@ fun ConfirmMasterKeyContent(
             UCButton(
                 modifier = Modifier
                     .fillMaxWidth(),
-                text = stringResource(R.string.continue_txt),
+                text = stringResource(R.string.unlock_uncrack),
                 onClick = {
                     context.findActivity()?.apply {
                         startActivity(Intent(activity, MainActivity::class.java))

@@ -3,6 +3,7 @@ package com.geekymusketeers.uncrack.presentation.auth.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -25,8 +26,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -46,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.components.ProgressDialog
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
@@ -58,6 +62,7 @@ import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.UtilsKt.isNetworkAvailable
 import com.geekymusketeers.uncrack.util.Validator.Companion.isValidEmail
 import com.geekymusketeers.uncrack.util.Validator.Companion.isValidPassword
 import com.geekymusketeers.uncrack.util.onClick
@@ -119,6 +124,20 @@ fun LoginContent(
         derivedStateOf {
             email.isValidEmail() && password.isValidPassword()
         }
+    }
+
+    val errorLiveData by viewModel.errorLiveData.observeAsState()
+    var isLoading by remember { mutableStateOf(false) }
+
+    LaunchedEffect(errorLiveData) {
+        errorLiveData?.let { error ->
+            isLoading = false
+            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    if (isLoading) {
+        ProgressDialog {}
     }
 
     Scaffold(
@@ -209,13 +228,22 @@ fun LoginContent(
                     .fillMaxWidth(),
                 text = stringResource(R.string.login),
                 onClick = {
-                    viewModel.logIn(
-                        email,
-                        password,
-                        onSignedIn = { signedInUser ->
-                            onSignedIn(signedInUser)
-                        }
-                    )
+                    if (context.isNetworkAvailable()) {
+                        isLoading = true
+                        viewModel.logIn(
+                            email,
+                            password,
+                            onSignedIn = { signedInUser ->
+                                onSignedIn(signedInUser)
+                            }
+                        )
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "No Internet available",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                     context.findActivity()?.apply {
                         startActivity(Intent(activity, CreateMasterKeyScreen::class.java))
                     }
