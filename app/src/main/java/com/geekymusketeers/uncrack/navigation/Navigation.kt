@@ -159,7 +159,8 @@ fun Navigation(
                     accountIconId,
                     accountTextId,
                     accountCategoryId,
-                    addEditViewModel
+                    addEditViewModel,
+                    masterKeyViewModel
                 )
             }
 
@@ -184,6 +185,7 @@ fun Navigation(
                     navController,
                     accountId = id,
                     viewPasswordViewModel,
+                    masterKeyViewModel,
                     navigateToEditPasswordScreen = { accountID ->
                         navController.navigate("${Screen.EditPasswordScreen.name}/$accountID")
                     }

@@ -133,7 +133,7 @@ class CreateMasterKeyFragment : Fragment() {
 
             lifecycleScope.launch(Dispatchers.Main) {
                 delay(1400L)
-                setMasterKey()
+//                setMasterKey()
                 goToMainActivity()
             }
 
@@ -174,16 +174,16 @@ class CreateMasterKeyFragment : Fragment() {
         requireActivity().finish()
     }
 
-    private fun setMasterKey() {
-        val masterKey = binding.masterKey.text.toString()
-
-        // Encrypting the master key
-        val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
-        val encryptedKey = encryption.encryptOrNull(masterKey)
-
-        val key = Key(0,encryptedKey)
-        keyViewModel.saveMasterKey(key)
-    }
+//    private fun setMasterKey() {
+//        val masterKey = binding.masterKey.text.toString()
+//
+//        // Encrypting the master key
+//        val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
+//        val encryptedKey = encryption.encryptOrNull(masterKey)
+//
+//        val key = Key(0,encryptedKey)
+//        keyViewModel.saveMasterKey(key)
+//    }
 
 
     private fun showProgress() {

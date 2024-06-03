@@ -15,6 +15,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,7 +51,7 @@ fun UpdateMasterKey(
     var oldPasswordVisibility by remember { mutableStateOf(false) }
     var newPasswordVisibility by remember { mutableStateOf(false) }
     var confirmPasswordVisibility by remember { mutableStateOf(false) }
-    val oldMasterPasswordObserver = keyViewModel.keyModel.password
+    val oldMasterPasswordObserver by keyViewModel.keyModel.collectAsState()
 
 
     Scaffold(
@@ -178,11 +179,11 @@ fun UpdateMasterKey(
                     .fillMaxWidth(),
                 text = stringResource(id = R.string.update),
                 onClick = {
-                    val updatedKey = Key(0, newMasterKey)
+                    val updatedKey = Key(0, newMasterKey,"")
                     keyViewModel.saveMasterKey(updatedKey)
                     navController.popBackStack()
                 },
-                enabled = oldMasterPasswordObserver == oldMasterKey &&
+                enabled = oldMasterPasswordObserver.password == oldMasterKey &&
                         newMasterKey.length >= 8 &&
                         newMasterKey == newConfirmMasterKey
             )

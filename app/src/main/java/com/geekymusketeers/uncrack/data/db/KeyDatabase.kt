@@ -9,7 +9,7 @@ import com.geekymusketeers.uncrack.domain.model.Key
 
 @Database(
     entities = [Key::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class KeyDatabase : RoomDatabase() {
