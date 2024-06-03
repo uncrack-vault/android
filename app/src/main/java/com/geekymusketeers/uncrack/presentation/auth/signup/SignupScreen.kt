@@ -3,6 +3,7 @@ package com.geekymusketeers.uncrack.presentation.auth.signup
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -18,11 +19,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -35,12 +39,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.components.ProgressDialog
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
@@ -52,6 +59,10 @@ import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
+import com.geekymusketeers.uncrack.util.UtilsKt.isNetworkAvailable
+import com.geekymusketeers.uncrack.util.Validator.Companion.isValidEmail
+import com.geekymusketeers.uncrack.util.Validator.Companion.isValidName
+import com.geekymusketeers.uncrack.util.Validator.Companion.isValidPassword
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -100,11 +111,39 @@ fun SignupContent(
 ) {
 
     val context = LocalContext.current
-    val name by authViewModel.username.observeAsState("")
-    val email by authViewModel.email.observeAsState("")
-    val password by authViewModel.password.observeAsState("")
+    var userName by remember { mutableStateOf("") }
+    var userEmail by remember { mutableStateOf("") }
+    var userPassword by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-    val isRegisterButtonEnableObserve by authViewModel.isRegistrationEnabled.observeAsState(false)
+    val isRegisterButtonEnable by remember {
+        derivedStateOf {
+            userName.isValidName() && userEmail.isValidEmail() && userPassword.isValidPassword()
+        }
+    }
+    val errorLiveData by authViewModel.errorLiveData.observeAsState()
+    val registerStatus by authViewModel.registerStatus.observeAsState(false)
+    var isLoading by remember { mutableStateOf(false) }
+
+    LaunchedEffect(registerStatus) {
+        if (registerStatus) {
+            isLoading = false
+            Toast.makeText(
+                context,
+                context.getString(R.string.account_created_successfully), Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    LaunchedEffect(errorLiveData) {
+        errorLiveData?.let { error ->
+            isLoading = false
+            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    if (isLoading) {
+        ProgressDialog {}
+    }
 
     Scaffold(
         modifier = modifier.fillMaxSize()
@@ -131,8 +170,10 @@ fun SignupContent(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.name_header),
                 hintText = stringResource(R.string.name_hint),
-                value = name,
-                onValueChange = { authViewModel.setUserName(it) }
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
+                value = userName,
+                onValueChange = { userName = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -143,8 +184,10 @@ fun SignupContent(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
-                value = email,
-                onValueChange = { authViewModel.setEmail(it) }
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
+                value = userEmail,
+                onValueChange = { userEmail = it }
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -154,8 +197,10 @@ fun SignupContent(
                     .fillMaxWidth(),
                 headerText = stringResource(R.string.password_header),
                 hintText = stringResource(R.string.password_hint),
-                value = password,
-                onValueChange = { authViewModel.setPassword(it) },
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
+                value = userPassword,
+                onValueChange = { userPassword = it },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     val image = if (passwordVisibility)
@@ -186,19 +231,28 @@ fun SignupContent(
                     .fillMaxWidth(),
                 text = stringResource(id = R.string.register),
                 onClick = {
-                    authViewModel.signUp(
-                        name,
-                        email,
-                        password,
-                        onSignedUp = { signUpUser ->
-                            onSignUp(signUpUser)
-                        }
-                    )
+                    if (context.isNetworkAvailable()) {
+                        isLoading = true
+                        authViewModel.signUp(
+                            userName,
+                            userEmail,
+                            userPassword,
+                            onSignedUp = { signUpUser ->
+                                onSignUp(signUpUser)
+                            }
+                        )
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "No Internet avaialble",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                     context.findActivity()?.apply {
                         startActivity(Intent(activity, CreateMasterKeyScreen::class.java))
                     }
                 },
-                enabled = isRegisterButtonEnableObserve
+                enabled = isRegisterButtonEnable
             )
 
             Spacer(modifier = Modifier.height(15.dp))

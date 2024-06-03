@@ -59,6 +59,11 @@
             android:theme="@style/Theme.UnCrack">
         </activity>
 
+        <activity android:name=".presentation.auth.forgotPassword.ForgotPasswordScreen"
+            android:exported="true"
+            android:theme="@style/Theme.UnCrack">
+        </activity>
+
         <activity android:name=".presentation.masterKey.createMasterKey.CreateMasterKeyScreen"
             android:exported="true"
             android:theme="@style/Theme.UnCrack">

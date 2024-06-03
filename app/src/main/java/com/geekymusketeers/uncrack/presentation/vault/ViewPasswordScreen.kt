@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -69,6 +68,7 @@ import com.geekymusketeers.uncrack.util.UtilsKt.getCategoryImage
 import com.geekymusketeers.uncrack.util.aesDecrypt
 import com.geekymusketeers.uncrack.util.toBase64String
 import com.geekymusketeers.uncrack.util.toSecretKey
+import com.geekymusketeers.uncrack.util.onClick
 import timber.log.Timber
 import java.util.Base64
 
@@ -156,7 +156,7 @@ fun ViewPasswordScreen(
                 style = normal20.copy(Color.Black)
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
             Row(
                 modifier = Modifier
@@ -173,16 +173,14 @@ fun ViewPasswordScreen(
                 Column(
                     modifier = Modifier
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        modifier = Modifier.size(30.dp),
+                        modifier = Modifier.size(40.dp),
                         painter = getCategoryImage(category),
                         contentDescription = null
                     )
-
-                    Spacer(modifier = Modifier.height(5.dp))
 
                     Text(
                         text = category,
@@ -191,7 +189,7 @@ fun ViewPasswordScreen(
                 }
 
                 VerticalDivider(
-                    modifier = Modifier.height(30.dp),
+                    modifier = Modifier.height(40.dp),
                     thickness = 1.dp,
                     color = SurfaceTintLight.copy(alpha = .5f)
                 )
@@ -199,14 +197,14 @@ fun ViewPasswordScreen(
                 Column(
                     modifier = Modifier
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Box(contentAlignment = Alignment.Center) {
 
                         CircularProgressIndicator(
                             progress = { progressValue },
-                            modifier = Modifier.size(42.dp),
+                            modifier = Modifier.size(40.dp),
                             color = when {
                                 passwordStrength <= 3 -> weakPassword
                                 passwordStrength <= 7 -> oldPassword
@@ -225,8 +223,6 @@ fun ViewPasswordScreen(
 
                     }
 
-                    Spacer(modifier = Modifier.height(5.dp))
-
                     Text(
                         text = stringResource(R.string.password_strength),
                         style = normal12.copy(OnSurfaceVariantLight)
@@ -234,42 +230,41 @@ fun ViewPasswordScreen(
                 }
 
                 VerticalDivider(
-                    modifier = Modifier.height(30.dp),
+                    modifier = Modifier.height(40.dp),
                     thickness = 1.dp,
                     color = SurfaceTintLight.copy(alpha = .5f)
                 )
 
                 Column(
                     modifier = Modifier
-                        .padding(16.dp)
-                        .clickable {
-                            if (username.isEmpty() && note.isEmpty()) {
-                                val shareNoteWithoutUserName =
-                                    "${"Email: $email"}\n${"Password: $password"}"
-                                val myIntent = Intent(Intent.ACTION_SEND)
-                                myIntent.type = "text/plane"
-                                myIntent.putExtra(Intent.EXTRA_TEXT, shareNoteWithoutUserName)
-                                context.startActivity(myIntent)
-                            } else {
-                                val shareNote =
-                                    "${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Username: $username"}\n${"Note: $note"}"
-                                val myIntent = Intent(Intent.ACTION_SEND)
-                                myIntent.type = "text/plane"
-                                myIntent.putExtra(Intent.EXTRA_TEXT, shareNote)
-                                context.startActivity(myIntent)
-                            }
-                        },
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
                         modifier = Modifier
-                            .size(30.dp),
-                        painter = painterResource(id = R.drawable.share_app),
+                            .size(40.dp)
+                            .onClick {
+                                if (username.isEmpty() && note.isEmpty()) {
+                                    val shareNoteWithoutUserName =
+                                        "${"Email: $email"}\n${"Password: $password"}"
+                                    val myIntent = Intent(Intent.ACTION_SEND)
+                                    myIntent.type = "text/plane"
+                                    myIntent.putExtra(Intent.EXTRA_TEXT, shareNoteWithoutUserName)
+                                    context.startActivity(myIntent)
+                                } else {
+                                    val shareNote =
+                                        "${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Username: $username"}\n${"Note: $note"}"
+                                    val myIntent = Intent(Intent.ACTION_SEND)
+                                    myIntent.type = "text/plane"
+                                    myIntent.putExtra(Intent.EXTRA_TEXT, shareNote)
+                                    context.startActivity(myIntent)
+                                }
+                            },
+                        painter = painterResource(id = R.drawable.share),
                         contentDescription = null
                     )
 
-                    Spacer(modifier = Modifier.height(5.dp))
 
                     Text(
                         text = stringResource(R.string.share),

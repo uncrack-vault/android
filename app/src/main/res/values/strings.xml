@@ -34,6 +34,7 @@
     <string name="discard_text">Are you sure you discard changes?</string>
     <string name="continue_editing">Continue editing</string>
     <string name="continue_txt">Continue</string>
+    <string name="unlock_uncrack">Unlock UnCrack</string>
     <string name="note">Note <font color='#808080'> (optional)</font></string>
     <string name="category">Category</string>
     <string name="hint_email">youremail123@gmail.com</string>
@@ -204,7 +205,7 @@
     <string name="boosts_security_with_robust_passwords_defending_against_hacks">Boosts security with robust passwords.</string>
     <string name="weak_passwords">Weak Passwords</string>
     <string name="makes_your_accounts_easy_to_hack">Makes your accounts easy to hack</string>
-    <string name="share">Share\n</string>
+    <string name="share">Share</string>
     <string name="you_will_be_using_master_password_as_a_key_to_unlock_your_passwords">You will be using Master Password as a key to unlock your passwords</string>
     <string name="create_master_password">Create Master Password</string>
     <string name="kindly_provide_your_master_password">Kindly provide your Master Password</string>
@@ -227,6 +228,9 @@
     <string name="send_reset_link">Send reset link</string>
     <string name="show_password">Show Password</string>
     <string name="hide_password">Hide Password</string>
+    <string name="account_created_successfully">Account created successfully</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="noInternet">No Internet available</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

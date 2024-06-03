@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -33,6 +34,8 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -130,6 +133,8 @@ fun CreateMasterKeyContent(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.master_password),
                 hintText = stringResource(id = R.string.password_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Next),
                 value = masterKeyObserver,
                 onValueChange = {
                     masterKeyViewModel.setMasterKey(it)
@@ -160,7 +165,9 @@ fun CreateMasterKeyContent(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Column {
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Text(
                     text = stringResource(R.string.master_password_must_include),
                     style = medium14.copy(OnPrimaryContainerLight)
@@ -186,6 +193,8 @@ fun CreateMasterKeyContent(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.confirm_master_password),
                 hintText = stringResource(id = R.string.password_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                 value = confirmMasterKeyObserver,
                 onValueChange = {
                     masterKeyViewModel.setConfirmMasterKey(it)

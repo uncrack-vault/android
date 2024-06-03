@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -32,6 +33,8 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -114,6 +117,11 @@ fun ConfirmMasterKeyContent(
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.master_password),
                 hintText = stringResource(id = R.string.password_hint),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                ),
                 value = confirmMasterKey,
                 onValueChange = { confirmMasterKey = it },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
@@ -146,7 +154,7 @@ fun ConfirmMasterKeyContent(
             UCButton(
                 modifier = Modifier
                     .fillMaxWidth(),
-                text = stringResource(R.string.continue_txt),
+                text = stringResource(R.string.unlock_uncrack),
                 onClick = {
                     context.findActivity()?.apply {
                         startActivity(Intent(activity, MainActivity::class.java))
