@@ -65,7 +65,6 @@ import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import com.geekymusketeers.uncrack.util.UtilsKt.isNetworkAvailable
 import com.geekymusketeers.uncrack.util.Validator.Companion.isValidEmail
 import com.geekymusketeers.uncrack.util.Validator.Companion.isValidPassword
-import com.geekymusketeers.uncrack.util.onClick
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -211,7 +210,7 @@ fun LoginContent(
             Text(
                 text = stringResource(R.string.forgot_password), modifier = Modifier
                     .align(Alignment.End)
-                    .onClick {
+                    .clickable {
                         context
                             .findActivity()
                             ?.let {
