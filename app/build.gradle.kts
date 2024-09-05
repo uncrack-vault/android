@@ -142,9 +142,6 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
 
-    // In-app update
-    implementation ("com.google.android.play:core:1.10.3")
-
     // Compose-lint
     lintChecks("com.slack.lint.compose:compose-lint-checks:1.3.1")
 
