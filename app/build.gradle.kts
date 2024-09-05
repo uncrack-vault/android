@@ -135,12 +135,12 @@ dependencies {
     implementation ("nu.aaro.gustav:passwordstrengthmeter:0.4")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
     implementation ("com.google.firebase:firebase-crashlytics")
     implementation ("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-messaging")
-    implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
 
     // Compose-lint
     lintChecks("com.slack.lint.compose:compose-lint-checks:1.3.1")
