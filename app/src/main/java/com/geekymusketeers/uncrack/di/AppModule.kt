@@ -6,11 +6,12 @@ import androidx.room.Room
 import com.geekymusketeers.uncrack.data.datastore.DataStoreUtil
 import com.geekymusketeers.uncrack.data.db.AccountDatabase
 import com.geekymusketeers.uncrack.data.db.KeyDatabase
-import com.geekymusketeers.uncrack.data.db.KeyDatabase_Impl
 import com.geekymusketeers.uncrack.domain.repository.AccountRepository
 import com.geekymusketeers.uncrack.domain.repository.AccountRepositoryImpl
 import com.geekymusketeers.uncrack.domain.repository.KeyRepository
 import com.geekymusketeers.uncrack.domain.repository.KeyRepositoryImpl
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -67,4 +68,12 @@ object AppModule {
     ): KeyRepository {
         return KeyRepositoryImpl(keyDao = keyDB.keyDao)
     }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
 }

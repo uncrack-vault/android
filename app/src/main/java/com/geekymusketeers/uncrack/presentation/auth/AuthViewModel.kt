@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import timber.log.Timber
 
 class AuthViewModel : ViewModel() {
 
@@ -48,7 +49,7 @@ class AuthViewModel : ViewModel() {
         password: String,
         onSignedUp: (FirebaseUser) -> Unit,
     ) = runIO {
-        auth.createUserWithEmailAndPassword(email,password)
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
@@ -61,14 +62,22 @@ class AuthViewModel : ViewModel() {
                             .document(it.uid)
                             .set(userProfile)
                             .addOnSuccessListener {
+                                Timber.tag("AuthViewModel")
+                                    .d("User profile is successfully created for user %s", user)
                                 onSignedUp(user)
+                                registerStatus.postValue(true)
                             }
-                            .addOnFailureListener {
-                                errorLiveData.postValue(it.message.toString())
+                            .addOnFailureListener { exception ->
+                                Timber.tag("AuthViewModel")
+                                    .e("Failed to create user profile: %s", exception.message)
+                                errorLiveData.postValue("Failed to create user profile: ${exception.message}")
                             }
+                    } ?: run {
+                        errorLiveData.postValue("User is null after creation")
                     }
                 } else {
-                    errorLiveData.postValue("Please check your details")
+                    Timber.tag("AuthViewModel").e("Sign up failed: %s", task.exception?.message)
+                    errorLiveData.postValue("Sign up failed: ${task.exception?.message}")
                 }
             }
     }

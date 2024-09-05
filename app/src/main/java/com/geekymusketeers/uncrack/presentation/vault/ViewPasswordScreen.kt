@@ -3,6 +3,7 @@ package com.geekymusketeers.uncrack.presentation.vault
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -59,7 +60,6 @@ import com.geekymusketeers.uncrack.ui.theme.weakPassword
 import com.geekymusketeers.uncrack.util.UtilsKt.calculatePasswordStrength
 import com.geekymusketeers.uncrack.util.UtilsKt.getAccountImage
 import com.geekymusketeers.uncrack.util.UtilsKt.getCategoryImage
-import com.geekymusketeers.uncrack.util.onClick
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -220,7 +220,7 @@ fun ViewPasswordScreen(
                     Image(
                         modifier = Modifier
                             .size(40.dp)
-                            .onClick {
+                            .clickable {
                                 if (username.isEmpty() && note.isEmpty()) {
                                     val shareNoteWithoutUserName =
                                         "${"Email: $email"}\n${"Password: $password"}"
