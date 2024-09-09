@@ -32,9 +32,9 @@ import com.geekymusketeers.uncrack.util.UtilsKt.getSocialAccounts
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AccountSelectionScreen(
-    modifier: Modifier = Modifier,
     navController: NavHostController,
     addEditViewModel: AddEditViewModel,
+    modifier: Modifier = Modifier,
     goToAddPasswordScreen: (Int, String, String) -> Unit
 ) {
     Scaffold(
