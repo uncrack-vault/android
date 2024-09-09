@@ -135,6 +135,7 @@ fun Navigation(
 
             composable(route = Screen.AccountSelectionScreen.name) {
                 AccountSelectionScreen(
+                    modifier,
                     navController,
                     addEditViewModel
                 ) { accountIcon, accountName, accountCategory ->
