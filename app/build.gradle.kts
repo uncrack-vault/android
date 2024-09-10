@@ -17,8 +17,8 @@ android {
         applicationId = "com.geekymusketeers.uncrack"
         minSdk = 24
         targetSdk = 34
-        versionCode = 10
-        versionName = "2.1.0"
+        versionCode = 11
+        versionName = "3.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     lint {
@@ -65,7 +65,7 @@ dependencies {
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.foundation:foundation-layout")
     implementation("androidx.compose.material:material")
-    implementation("androidx.compose.material3:material3:1.2.0")
+    implementation("androidx.compose.material3:material3:1.3.0")
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.compose.ui:ui-graphics")
@@ -73,7 +73,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("androidx.activity:activity-compose:1.9.0-alpha03")
-    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.navigation:navigation-compose:2.8.0")
 
 
     // Compose Test
@@ -155,5 +155,5 @@ dependencies {
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
 
     // Coil
-    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("io.coil-kt:coil-compose:2.7.0")
 }
