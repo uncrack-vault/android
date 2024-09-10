@@ -67,7 +67,8 @@ fun ProfileScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 ProfileContainer(
-                    userViewModel
+                    userViewModel = userViewModel,
+                    modifier = Modifier.padding(top = 20.dp)
                 )
 
                 Spacer(modifier = Modifier.height(22.dp))

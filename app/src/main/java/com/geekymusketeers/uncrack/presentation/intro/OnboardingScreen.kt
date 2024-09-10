@@ -78,7 +78,6 @@ class OnboardingScreen : ComponentActivity() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnboardingContent(activity: Activity, modifier: Modifier = Modifier) {
-    val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val pages = OnBoardingItem.onboardingScreenItems()
     val pagerState = rememberPagerState(pageCount = { pages.size })

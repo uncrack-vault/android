@@ -135,10 +135,6 @@ fun LoginContent(
         }
     }
 
-    if (isLoading) {
-        ProgressDialog {}
-    }
-
     Scaffold(
         modifier = modifier.fillMaxSize()
     ) { paddingValues ->

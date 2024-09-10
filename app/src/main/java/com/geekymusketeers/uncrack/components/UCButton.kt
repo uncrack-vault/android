@@ -42,7 +42,7 @@ fun UCButton(
         enabled = enabled
     ) {
         leadingIcon?.let {
-            Icon(painter = it, contentDescription = null)
+            Icon(modifier = Modifier.padding(end = 4.dp), painter = it, contentDescription = null)
         }
         Text(
             text = text,
