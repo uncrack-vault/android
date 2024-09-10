@@ -20,6 +20,7 @@ import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.AccountCard
 import com.geekymusketeers.uncrack.components.UCTopAppBar
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.medium20
 import com.geekymusketeers.uncrack.util.UtilsKt.getCommunicationAccounts
@@ -32,6 +33,7 @@ import com.geekymusketeers.uncrack.util.UtilsKt.getSocialAccounts
 @Composable
 fun AccountSelectionScreen(
     navController: NavHostController,
+    addEditViewModel: AddEditViewModel,
     modifier: Modifier = Modifier,
     goToAddPasswordScreen: (Int, String, String) -> Unit
 ) {
@@ -71,6 +73,7 @@ fun AccountSelectionScreen(
                     icon = iconId,
                     text = accountText.text,
                 ) {
+                    addEditViewModel.resetState()
                     goToAddPasswordScreen(iconId, accountText.text, category)
                 }
             }
@@ -97,6 +100,7 @@ fun AccountSelectionScreen(
                     icon = iconId,
                     text = accountText.text,
                 ) {
+                    addEditViewModel.resetState()
                     goToAddPasswordScreen(iconId, accountText.text, category)
                 }
             }
@@ -122,6 +126,7 @@ fun AccountSelectionScreen(
                     icon = iconId,
                     text = accountText.text,
                 ) {
+                    addEditViewModel.resetState()
                     goToAddPasswordScreen(iconId, accountText.text, category)
                 }
             }
@@ -148,6 +153,7 @@ fun AccountSelectionScreen(
                     icon = iconId,
                     text = accountText.text,
                 ) {
+                    addEditViewModel.resetState()
                     goToAddPasswordScreen(iconId, accountText.text, category)
                 }
             }
@@ -173,6 +179,7 @@ fun AccountSelectionScreen(
                     icon = iconId,
                     text = accountText.text,
                 ) {
+                    addEditViewModel.resetState()
                     goToAddPasswordScreen(iconId, accountText.text, category)
                 }
             }

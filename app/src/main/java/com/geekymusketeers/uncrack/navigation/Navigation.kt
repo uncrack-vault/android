@@ -135,7 +135,8 @@ fun Navigation(
 
             composable(route = Screen.AccountSelectionScreen.name) {
                 AccountSelectionScreen(
-                    navController
+                    navController,
+                    addEditViewModel
                 ) { accountIcon, accountName, accountCategory ->
                     navController.navigate("${Screen.AddPasswordScreen.name}?accountIcon=$accountIcon&accountName=$accountName&accountCategory=$accountCategory")
                 }

@@ -11,18 +11,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -50,8 +53,7 @@ fun VaultScreen(
     modifier: Modifier = Modifier,
     navigateToViewPasswordScreen: (id: Int) -> Unit
 ) {
-
-    val accounts = vaultViewModel.accountModel
+    val accounts by vaultViewModel.filteredAccounts.collectAsState()
     var searchQuery by rememberSaveable { mutableStateOf("") }
     val userObserver by userViewModel.state
 
@@ -79,20 +81,19 @@ fun VaultScreen(
                 .background(SurfaceVariantLight)
                 .padding(16.dp)
         ) {
-
             Text(
                 text = "Hello, ${userObserver.name}",
                 style = medium24.copy(Color.Black)
             )
-
 
             SearchBar(
                 modifier = Modifier.fillMaxWidth(),
                 query = searchQuery,
                 onQueryChange = {
                     searchQuery = it
+                    vaultViewModel.searchAccount(it)
                 },
-                onSearch = {},
+                onSearch = { vaultViewModel.searchAccount(it) },
                 active = false,
                 onActiveChange = {},
                 placeholder = {
@@ -104,7 +105,19 @@ fun VaultScreen(
                 colors = SearchBarDefaults.colors(
                     containerColor = PrimaryContainerLight
                 ),
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) }
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                trailingIcon = {
+                    if (searchQuery.isNotEmpty()) {
+                        IconButton(
+                            onClick = {
+                                searchQuery = ""
+                                vaultViewModel.searchAccount("")
+                            }
+                        ) {
+                            Icon(Icons.Default.Clear, contentDescription = null)
+                        }
+                    }
+                }
             ) { }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -115,7 +128,7 @@ fun VaultScreen(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 if (accounts.isNotEmpty()) {
-                    items(accounts) {accountModel ->
+                    items(accounts) { accountModel ->
                         VaultCard(
                             accountModel = accountModel,
                             onClick = {

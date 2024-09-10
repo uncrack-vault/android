@@ -30,6 +30,18 @@ class AddEditViewModel @Inject constructor(
     private val _isAdded = MutableLiveData(false)
     val isAdded: LiveData<Boolean> = _isAdded
 
+    init {
+        resetState()
+    }
+
+    fun resetState() {
+        _email.value = ""
+        _username.value = ""
+        _password.value = ""
+        _note.value = ""
+        _isAdded.value = false
+    }
+
     fun setEmail(email: String) {
         _email.value = email
         checkIfAdded()
