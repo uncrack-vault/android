@@ -10,21 +10,18 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.adapter.AccountAdapter
-import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentHomeBinding
-import com.geekymusketeers.uncrack.databinding.ParagraphModalBinding
 import com.geekymusketeers.uncrack.databinding.SharepasswordModalBinding
 import com.geekymusketeers.uncrack.databinding.ViewpasswordModalBinding
 import com.geekymusketeers.uncrack.util.Encryption
@@ -32,11 +29,10 @@ import com.geekymusketeers.uncrack.util.Util
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.getBaseStringForFiltering
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
-import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
-import kotlin.math.roundToInt
 
 
 class HomeFragment : Fragment() {
@@ -44,7 +40,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: AccountViewModel
+    private lateinit var viewModel: VaultViewModel
     private lateinit var deleteViewModel: AddEditViewModel
     private lateinit var accountAdapter: AccountAdapter
     private lateinit var recyclerView: RecyclerView
@@ -267,21 +263,21 @@ class HomeFragment : Fragment() {
 
 
 
-        viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
-        viewModel.readAllData.observe(viewLifecycleOwner) { account ->
-
-
-            accountList.clear()
-            accountList.addAll(account)
-
-            accountAdapter.setData(account)
-            if (account.isEmpty()) {
-                binding.emptyList.visibility = View.VISIBLE
-            } else {
-                binding.emptyList.visibility = View.GONE
-            }
-
-        }
+//        viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
+//        viewModel.getAccounts().observe(viewLifecycleOwner) { account ->
+//
+//
+//            accountList.clear()
+//            accountList.addAll(account)
+//
+//            accountAdapter.setData(account)
+//            if (account.isEmpty()) {
+//                binding.emptyList.visibility = View.VISIBLE
+//            } else {
+//                binding.emptyList.visibility = View.GONE
+//            }
+//
+//        }
 
         // Moving to AddFragment
         binding.fab.setOnClickListener {
@@ -387,16 +383,16 @@ class HomeFragment : Fragment() {
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.readAllData.observe(viewLifecycleOwner) { account ->
-            accountAdapter.setData(account)
-            if (account.isEmpty()) {
-                binding.emptyList.visibility = View.VISIBLE
-            } else {
-                binding.emptyList.visibility = View.GONE
-            }
-
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel.readAllData.observe(viewLifecycleOwner) { account ->
+//            accountAdapter.setData(account)
+//            if (account.isEmpty()) {
+//                binding.emptyList.visibility = View.VISIBLE
+//            } else {
+//                binding.emptyList.visibility = View.GONE
+//            }
+//
+//        }
+//    }
 }

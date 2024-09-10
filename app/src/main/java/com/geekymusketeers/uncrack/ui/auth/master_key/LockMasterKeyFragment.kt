@@ -12,17 +12,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.databinding.FragmentLockMasterKeyBinding
-import com.geekymusketeers.uncrack.ui.MainActivity
+import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.ui.auth.MasterKeyActivity
-import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util
-import com.geekymusketeers.uncrack.viewModel.KeyViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
 
 class LockMasterKeyFragment : Fragment() {
 
@@ -62,35 +57,35 @@ class LockMasterKeyFragment : Fragment() {
 
     private fun clickHandlers() {
         buttonLayout.setOnClickListener {
-            checkKeyViewModel.getMasterKey().observe(viewLifecycleOwner) { key ->
-                val inputMasterKey = binding.inputMasterKey.text.toString()
-                showProgress()
-                val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
-                val correctMasterKey = encryption.decryptOrNull(key[0].password)
-                if (inputMasterKey.isEmpty() || inputMasterKey.isBlank()){
-                    binding.apply {
-                        inputMasterKeyHelperTV.text = getString(R.string.master_key_cannot_be_blank)
-                        inputMasterKeyHelperTV.visibility = View.VISIBLE
-                    }
-                    stopProgress()
-                    return@observe
-                } else {
-                    if (inputMasterKey == correctMasterKey) {
-                        lifecycleScope.launch(Dispatchers.Main) {
-                            delay(1000L)
-                            goToMainActivity()
-                        }
-                    }
-                    else {
-                        binding.apply {
-                            inputMasterKeyHelperTV.text = getString(R.string.incorrect_password)
-                            inputMasterKeyHelperTV.visibility = View.VISIBLE
-                        }
-                        stopProgress()
-                        return@observe
-                    }
-                }
-            }
+//            checkKeyViewModel.getMasterKey().observe(viewLifecycleOwner) { key ->
+//                val inputMasterKey = binding.inputMasterKey.text.toString()
+//                showProgress()
+//                val encryption = Encryption.getDefault("Key", "Salt", ByteArray(16))
+//                val correctMasterKey = encryption.decryptOrNull(key[0].password)
+//                if (inputMasterKey.isEmpty() || inputMasterKey.isBlank()){
+//                    binding.apply {
+//                        inputMasterKeyHelperTV.text = getString(R.string.master_key_cannot_be_blank)
+//                        inputMasterKeyHelperTV.visibility = View.VISIBLE
+//                    }
+//                    stopProgress()
+//                    return@observe
+//                } else {
+//                    if (inputMasterKey == correctMasterKey) {
+//                        lifecycleScope.launch(Dispatchers.Main) {
+//                            delay(1000L)
+//                            goToMainActivity()
+//                        }
+//                    }
+//                    else {
+//                        binding.apply {
+//                            inputMasterKeyHelperTV.text = getString(R.string.incorrect_password)
+//                            inputMasterKeyHelperTV.visibility = View.VISIBLE
+//                        }
+//                        stopProgress()
+//                        return@observe
+//                    }
+//                }
+//            }
         }
 
         binding.passwordToggle.setOnClickListener {

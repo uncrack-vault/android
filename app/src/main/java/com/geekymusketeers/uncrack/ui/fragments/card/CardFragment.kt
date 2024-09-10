@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.adapter.CardAdapter
-import com.geekymusketeers.uncrack.data.model.Account
-import com.geekymusketeers.uncrack.data.model.Card
+import com.geekymusketeers.uncrack.domain.model.Account
+import com.geekymusketeers.uncrack.domain.model.Card
 import com.geekymusketeers.uncrack.databinding.FragmentCardBinding
 import com.geekymusketeers.uncrack.databinding.ViewcardmodalBinding
 import com.geekymusketeers.uncrack.util.Encryption

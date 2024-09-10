@@ -17,13 +17,13 @@ import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.geekymusketeers.uncrack.R
-import com.geekymusketeers.uncrack.data.model.Account
+import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.databinding.FragmentAddBinding
 import com.geekymusketeers.uncrack.databinding.OptionsModalBinding
 import com.geekymusketeers.uncrack.util.Encryption
 import com.geekymusketeers.uncrack.util.Util.Companion.createBottomSheet
 import com.geekymusketeers.uncrack.util.Util.Companion.setBottomSheet
-import com.geekymusketeers.uncrack.viewModel.AccountViewModel
+import com.geekymusketeers.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.geekymusketeers.uncrack.viewModel.AddEditViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
@@ -43,7 +43,7 @@ class AddFragment : Fragment() {
     private lateinit var buttonText: TextView
     private lateinit var buttonProgress: ProgressBar
 
-    private lateinit var viewModel: AccountViewModel
+    private lateinit var viewModel: VaultViewModel
     private lateinit var myViewModel: AddEditViewModel
 
     override fun onCreateView(
@@ -168,7 +168,7 @@ class AddFragment : Fragment() {
     }
 
     private fun initialization() {
-        viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
+        viewModel = ViewModelProvider(this)[VaultViewModel::class.java]
         myViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory

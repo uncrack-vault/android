@@ -19,7 +19,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.adapter.SettingsItemAdapter
-import com.geekymusketeers.uncrack.data.model.SettingsItem
+import com.geekymusketeers.uncrack.domain.model.SettingsItem
 import com.geekymusketeers.uncrack.databinding.AboutusModalBinding
 import com.geekymusketeers.uncrack.databinding.FragmentSettingsBinding
 import com.geekymusketeers.uncrack.ui.fragments.account.HomeFragment

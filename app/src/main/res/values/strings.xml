@@ -6,9 +6,9 @@
     <string name="password">Password</string>
     <string name="company">Company</string>
     <string name="let_s_go">Let\'s go</string>
-    <string name="mailTo">mailto:aritrarick2002@gmail.com?Subject=Your%20feedback%20is%20important%20to%20us%21</string>
+    <string name="mailTo">mailto:uncrack.manager@gmail.com?Subject=Your%20feedback%20is%20important%20to%20us%21</string>
     <string name="email">Email</string>
-    <string name="username">UserName <font color='#808080'> (optional)</font></string>
+    <string name="username">UserName</string>
     <string name="add_password">Password</string>
     <string name="select_the_account">Select</string>
     <string name="edit_email">Email <font color='#FF0000'>*</font></string>
@@ -21,7 +21,7 @@
     <string name="share_details">Share Details</string>
     <string name="credentials_backups">Credentials Backups</string>
     <string name="backup_credentials_to_google_drive">Backup credentials to Google Drive</string>
-    <string name="security">Security</string>
+    <string name="security">Account Security</string>
     <string name="biometric_authentication">Biometric Authentication</string>
     <string name="share_app">Share App</string>
     <string name="share_app_with_others">Share app with others</string>
@@ -33,6 +33,8 @@
     <string name="discard">Discard changes</string>
     <string name="discard_text">Are you sure you discard changes?</string>
     <string name="continue_editing">Continue editing</string>
+    <string name="continue_txt">Continue</string>
+    <string name="unlock_uncrack">Unlock UnCrack</string>
     <string name="note">Note <font color='#808080'> (optional)</font></string>
     <string name="category">Category</string>
     <string name="hint_email">youremail123@gmail.com</string>
@@ -91,8 +93,10 @@
     <string name="update_your_master_key">Update your Master Key</string>
     <string name="set_up_a_master_key_to_secure_all_your_credentials">Set up a master key to secure your credentials with end-to-end encryption</string>
     <string name="master_key">Master Key</string>
+    <string name="master_password">Master Password</string>
     <string name="end_to_end_encryption">End-to-End Encryption</string>
     <string name="confirm_master_key">Confirm Master Key</string>
+    <string name="confirm_master_password">Confirm Master Password</string>
     <string name="enter_your_master_key_to_continue">Kindly provide your master key to proceed 👋.</string>
     <string name="save_master_key">Save Master Key</string>
     <string name="master_key_cannot_be_blank">Please enter your Master Key</string>
@@ -147,6 +151,86 @@
     <string name="edit">Edit</string>
     <string name="expiry">Expiry Date</string>
     <string name="holder_name">Card Holder Name</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="skip">Skip</string>
+    <string name="cancel">Cancel</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="are_you_sure_you_want_to_delete">Are you sure you want to delete your account?</string>
+    <string name="logout">Logout?</string>
+    <string name="email_header">Enter your email</string>
+    <string name="email_hint">johndoe123@gmail.com</string>
+    <string name="password_header">Enter your password</string>
+    <string name="password_hint">****************</string>
+    <string name="name_header">Enter your name</string>
+    <string name="name_hint">John Doe</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="create">Create</string>
+    <string name="by_aritra_das">By Aritra Das 💙</string>
+    <string name="save">Save</string>
+    <string name="numbers">Numbers</string>
+    <string name="uppercase_letters">Uppercase letters</string>
+    <string name="lowercase_letters">Lowercase letters</string>
+    <string name="special_symbols">Special symbols</string>
+    <string name="include_following">Include following:</string>
+    <string name="copy">Copy</string>
+    <string name="backup">Backup</string>
+    <string name="appearance">Appearance</string>
+    <string name="danger_zone">Danger Zone</string>
+    <string name="update_master_password">Update Master Password</string>
+    <string name="old_master_key">Old Master Key</string>
+    <string name="new_master_key">New Master Key</string>
+    <string name="password_generated_length">Password Length  %1$s</string>
+    <string name="browse">Browse</string>
+    <string name="browser">Browser</string>
+    <string name="card">Card</string>
+    <string name="recently_used">Recently Used</string>
+    <string name="username_hint">johndoe</string>
+    <string name="not_favourite">Not favourite</string>
+    <string name="password_strength">Password Strength</string>
+    <string name="communities">Communities</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="communication">Communication</string>
+    <string name="crowdsourcing">Crowdsourcing</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="get_started">Get Started</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="tools">Tools</string>
+    <string name="quickly_generate_your_new_secure_passwords">Quickly generate your new secure passwords</string>
+    <string name="password_health">Password Health</string>
+    <string name="identify_passwords_health">Identify passwords health</string>
+    <string name="strong_passwords">Strong Passwords</string>
+    <string name="boosts_security_with_robust_passwords_defending_against_hacks">Boosts security with robust passwords.</string>
+    <string name="weak_passwords">Weak Passwords</string>
+    <string name="makes_your_accounts_easy_to_hack">Makes your accounts easy to hack</string>
+    <string name="share">Share</string>
+    <string name="you_will_be_using_master_password_as_a_key_to_unlock_your_passwords">You will be using Master Password as a key to unlock your passwords</string>
+    <string name="create_master_password">Create Master Password</string>
+    <string name="kindly_provide_your_master_password">Kindly provide your Master Password</string>
+    <string name="icon">icon\n</string>
+    <string name="help">Help</string>
+    <string name="rate_uncrack">Rate UnCrack</string>
+    <string name="invite_friends">Invite Friends</string>
+    <string name="take_in_app_screenshots">Take in-app screenshots</string>
+    <string name="unlock_with_biometric">Unlock with biometric</string>
+    <string name="delete_account">Delete account</string>
+    <string name="log_out">Log Out</string>
+    <string name="theme">Theme</string>
+    <string name="old_master_password">Old Master Password\n</string>
+    <string name="new_master_password">New Master Password</string>
+    <string name="at_least_1_symbol"><![CDATA[At least 1 symbol (*#/&%....)]]></string>
+    <string name="_9_or_more_characters">9 or more characters</string>
+    <string name="master_password_must_include">Master Password must include:</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="enter_your_registered_mail">Enter your registered mail</string>
+    <string name="send_reset_link">Send reset link</string>
+    <string name="show_password">Show Password</string>
+    <string name="hide_password">Hide Password</string>
+    <string name="account_created_successfully">Account created successfully</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="noInternet">No Internet available</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>
