@@ -8,4 +8,7 @@ object Constants {
     const val INVITE = """
             Hey there! I've been using this amazing app and thought you might like it too! 😊 Check it out: https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack
     """
+    const val SECRET_KEY = "biometric_secret_key"
+    const val PREF_BIOMETRIC = "biometric_preferences"
+    const val ENCRYPTED_FILE_NAME = "encrypted_data_store"
 }
