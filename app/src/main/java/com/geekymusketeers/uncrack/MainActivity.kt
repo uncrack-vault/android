@@ -2,6 +2,7 @@ package com.geekymusketeers.uncrack
 
 import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -25,10 +26,10 @@ class MainActivity : ComponentActivity() {
 
         settingsViewModel.isScreenshotEnabled.observe(this) { isEnabled ->
             if (isEnabled) {
-                window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE)
+                window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
             } else {
-                window.setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE,
-                    android.view.WindowManager.LayoutParams.FLAG_SECURE)
+                window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                    WindowManager.LayoutParams.FLAG_SECURE)
             }
         }
 
