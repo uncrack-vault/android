@@ -231,6 +231,7 @@
     <string name="account_created_successfully">Account created successfully</string>
     <string name="please_wait">Please wait...</string>
     <string name="noInternet">No Internet available</string>
+    <string name="change_master_password">Change Master Password</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

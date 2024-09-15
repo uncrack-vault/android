@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -98,7 +99,7 @@ fun Navigation(
     BackPressHandler()
 
     Scaffold(
-        modifier = modifier,
+        modifier = Modifier.fillMaxSize().then(modifier),
         bottomBar = {
             ShowBottomNavigation(
                 backStackEntry,
@@ -210,7 +211,6 @@ fun Navigation(
                 SettingsScreen(
                     activity,
                     navController,
-                    themeViewModel,
                     settingsViewModel
                 )
             }

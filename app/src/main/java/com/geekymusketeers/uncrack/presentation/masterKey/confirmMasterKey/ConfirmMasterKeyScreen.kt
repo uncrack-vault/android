@@ -52,8 +52,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ConfirmMasterKeyScreen : ComponentActivity() {
 
-    private lateinit var masterKeyViewModel: KeyViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         enableEdgeToEdge(
@@ -69,8 +67,7 @@ class ConfirmMasterKeyScreen : ComponentActivity() {
 
         setContent {
             UnCrackTheme {
-                masterKeyViewModel = hiltViewModel()
-                ConfirmMasterKeyContent(this@ConfirmMasterKeyScreen, masterKeyViewModel)
+                ConfirmMasterKeyContent(this@ConfirmMasterKeyScreen)
             }
         }
     }
@@ -79,8 +76,8 @@ class ConfirmMasterKeyScreen : ComponentActivity() {
 @Composable
 fun ConfirmMasterKeyContent(
     activity: Activity,
-    masterKeyViewModel: KeyViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    masterKeyViewModel: KeyViewModel = hiltViewModel()
 ) {
 
     val context = LocalContext.current

@@ -20,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -38,11 +37,8 @@ import com.geekymusketeers.uncrack.components.ThemeDialog
 import com.geekymusketeers.uncrack.components.UCSettingsCard
 import com.geekymusketeers.uncrack.components.UCSwitchCard
 import com.geekymusketeers.uncrack.components.UCTopAppBar
-import com.geekymusketeers.uncrack.data.db.AccountDatabase
-import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.navigation.Screen
 import com.geekymusketeers.uncrack.presentation.auth.login.LoginScreens
-import com.geekymusketeers.uncrack.sharedViewModel.ThemeViewModel
 import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
@@ -55,12 +51,10 @@ import com.geekymusketeers.uncrack.ui.theme.normal16
 fun SettingsScreen(
     activity: Activity,
     navController: NavHostController,
-    themeViewModel: ThemeViewModel,
     settingsViewModel: SettingsViewModel,
     modifier: Modifier = Modifier
 ) {
 
-    val themeStateObserver by themeViewModel.themeState.collectAsState()
     val isScreenshotEnabled by settingsViewModel.isScreenshotEnabled.observeAsState(false)
     val onLogOutComplete by settingsViewModel.onLogOutComplete.observeAsState(false)
     val onDeleteAccountComplete by settingsViewModel.onDeleteAccountComplete.observeAsState(false)
@@ -228,22 +222,22 @@ fun SettingsScreen(
 
             SettingsItemGroup {
                 UCSettingsCard(
-                    itemName = "Change Master Password",
+                    itemName = stringResource(R.string.change_master_password),
                     onClick = {
                         navController.navigate(Screen.UpdateMasterKeyScreen.name)
                     }
                 )
 
-                HorizontalDivider(
-                    thickness = 2.dp,
-                    color = SurfaceVariantLight
-                )
-
-                UCSwitchCard(
-                    itemName = stringResource(R.string.unlock_with_biometric),
-                    isChecked = false,
-                    onChecked = {}
-                )
+//                HorizontalDivider(
+//                    thickness = 2.dp,
+//                    color = SurfaceVariantLight
+//                )
+//
+//                UCSwitchCard(
+//                    itemName = stringResource(R.string.unlock_with_biometric),
+//                    isChecked = false,
+//                    onChecked = {}
+//                )
 
                 HorizontalDivider(
                     thickness = 2.dp,
@@ -261,24 +255,24 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 18.dp, top = 18.dp),
-                text = "Language",
-                style = bold20.copy(color = OnPrimaryContainerLight)
-            )
+//            Text(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(start = 16.dp, end = 18.dp, top = 18.dp),
+//                text = "Language",
+//                style = bold20.copy(color = OnPrimaryContainerLight)
+//            )
 
-            Spacer(modifier = Modifier.height(14.dp))
-
-            SettingsItemGroup {
-                UCSettingsCard(
-                    itemName = "App language",
-                    onClick = {
-
-                    }
-                )
-            }
+//            Spacer(modifier = Modifier.height(14.dp))
+//
+//            SettingsItemGroup {
+//                UCSettingsCard(
+//                    itemName = "App language",
+//                    onClick = {
+//
+//                    }
+//                )
+//            }
 
             Spacer(modifier = Modifier.height(10.dp))
 
