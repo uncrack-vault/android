@@ -8,13 +8,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.geekymusketeers.uncrack.domain.model.Key
 import com.geekymusketeers.uncrack.domain.repository.KeyRepository
+import com.geekymusketeers.uncrack.util.BiometricPreference
 import com.geekymusketeers.uncrack.util.runIO
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class KeyViewModel @Inject constructor(
-    private val repository: KeyRepository
+    private val repository: KeyRepository,
+    private val preference: BiometricPreference
 ) : ViewModel() {
 
     var keyModel by mutableStateOf(Key(0,""))
@@ -33,6 +36,8 @@ class KeyViewModel @Inject constructor(
 
     private val _hasSymbol = MutableLiveData(false)
     val hasSymbol: LiveData<Boolean> = _hasSymbol
+
+    val showBiometricPrompt = MutableStateFlow(false)
 
     fun setMasterKey(masterKey: String) {
         _masterKeyLiveData.value = masterKey
@@ -69,6 +74,13 @@ class KeyViewModel @Inject constructor(
     fun getMasterKey() = runIO {
         repository.getMasterKey().collect { response ->
             keyModel = response
+        }
+    }
+
+    fun checkIfBiometricEnabled() = runIO {
+        val isBiometricEnabled = preference.isBiometricEnabled()
+        if (isBiometricEnabled) {
+            showBiometricPrompt.tryEmit(true)
         }
     }
 }

@@ -22,6 +22,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,6 +38,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.MainActivity
 import com.geekymusketeers.uncrack.R
@@ -46,6 +48,7 @@ import com.geekymusketeers.uncrack.presentation.masterKey.KeyViewModel
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.bold30
+import com.geekymusketeers.uncrack.util.BiometricHelper
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -83,11 +86,18 @@ fun ConfirmMasterKeyContent(
     modifier: Modifier = Modifier
 ) {
 
-    val context = LocalContext.current
+    val context = LocalContext.current as FragmentActivity
+    val isBiometricAvailable = remember { BiometricHelper.isBiometricAvailable(context) }
+    val showBiometricPrompt by masterKeyViewModel.showBiometricPrompt.collectAsState()
     var confirmMasterKey by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
     val savedMasterKey = masterKeyViewModel.keyModel.password
 
+    LaunchedEffect(isBiometricAvailable) {
+        if (isBiometricAvailable) {
+            masterKeyViewModel.checkIfBiometricEnabled()
+        }
+    }
     LaunchedEffect(Unit) {
         masterKeyViewModel.getMasterKey()
     }
