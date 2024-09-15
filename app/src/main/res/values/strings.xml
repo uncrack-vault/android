@@ -231,6 +231,8 @@
     <string name="account_created_successfully">Account created successfully</string>
     <string name="please_wait">Please wait...</string>
     <string name="noInternet">No Internet available</string>
+    <string name="biometric_prompt_title_text">Biometric Authentication</string>
+    <string name="biometric_prompt_description_text">Please authenticate to unlock UnCrack</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

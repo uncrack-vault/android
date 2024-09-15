@@ -1,6 +1,7 @@
 package com.geekymusketeers.uncrack.presentation.settings
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -28,9 +30,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavHostController
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.components.SettingsItemGroup
@@ -49,6 +53,10 @@ import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.bold20
 import com.geekymusketeers.uncrack.ui.theme.medium14
 import com.geekymusketeers.uncrack.ui.theme.normal16
+import com.geekymusketeers.uncrack.util.BiometricHelper
+import com.geekymusketeers.uncrack.util.Constants.ENCRYPTED_FILE_NAME
+import com.geekymusketeers.uncrack.util.Constants.PREF_BIOMETRIC
+import com.geekymusketeers.uncrack.util.CryptoManager
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,13 +68,33 @@ fun SettingsScreen(
     modifier: Modifier = Modifier
 ) {
 
-    val themeStateObserver by themeViewModel.themeState.collectAsState()
+    val context = LocalContext.current as FragmentActivity
+    val isBiometricAvailable = remember {
+        BiometricHelper.isBiometricAvailable(context)
+    }
+    val isBiometricEnabled by settingsViewModel.isBiometricEnabled.collectAsState()
     val isScreenshotEnabled by settingsViewModel.isScreenshotEnabled.observeAsState(false)
     val onLogOutComplete by settingsViewModel.onLogOutComplete.observeAsState(false)
     val onDeleteAccountComplete by settingsViewModel.onDeleteAccountComplete.observeAsState(false)
     var openThemeDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
     var openDeleteAccountDialog by remember { mutableStateOf(false) }
+
+    LaunchedEffect(isBiometricAvailable) {
+        if(isBiometricEnabled) {
+            val cryptoManager = CryptoManager()
+            val encryption = cryptoManager.getFromPrefs(
+                context,
+                ENCRYPTED_FILE_NAME,
+                Context.MODE_PRIVATE,
+                PREF_BIOMETRIC
+            )
+            if (encryption == null) {
+                BiometricHelper.registerUserBiometrics(context)
+            }
+        }
+    }
+
 
     if (onLogOutComplete || onDeleteAccountComplete) {
         activity.startActivity(Intent(activity, LoginScreens::class.java))
@@ -241,8 +269,10 @@ fun SettingsScreen(
 
                 UCSwitchCard(
                     itemName = stringResource(R.string.unlock_with_biometric),
-                    isChecked = false,
-                    onChecked = {}
+                    isChecked = isBiometricEnabled,
+                    onChecked = {
+                        settingsViewModel.setBiometricEnabled(it)
+                    }
                 )
 
                 HorizontalDivider(

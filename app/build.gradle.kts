@@ -126,7 +126,7 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Datastore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     // Lottie Animation
     implementation ("com.airbnb.android:lottie:6.3.0")
@@ -156,4 +156,7 @@ dependencies {
 
     // Coil
     implementation("io.coil-kt:coil-compose:2.7.0")
+
+    implementation ("androidx.biometric:biometric:1.2.0-alpha05")
+    implementation ("com.google.code.gson:gson:2.10.1")
 }
