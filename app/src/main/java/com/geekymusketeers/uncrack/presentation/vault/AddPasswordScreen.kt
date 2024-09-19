@@ -47,7 +47,6 @@ import com.geekymusketeers.uncrack.navigation.Screen
 import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.normal20
-import com.geekymusketeers.uncrack.ui.theme.normal24
 import com.geekymusketeers.uncrack.util.UtilsKt.generateRandomPassword
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
