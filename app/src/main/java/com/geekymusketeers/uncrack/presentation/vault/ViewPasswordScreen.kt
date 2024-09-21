@@ -144,7 +144,7 @@ fun ViewPasswordScreen(
                     )
                     .background(Color.White),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(
                     modifier = Modifier
@@ -230,7 +230,7 @@ fun ViewPasswordScreen(
                                     context.startActivity(myIntent)
                                 } else {
                                     val shareNote =
-                                        "${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Username: $username"}\n${"Note: $note"}"
+                                        "${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Note: $note"}"
                                     val myIntent = Intent(Intent.ACTION_SEND)
                                     myIntent.type = "text/plane"
                                     myIntent.putExtra(Intent.EXTRA_TEXT, shareNote)
