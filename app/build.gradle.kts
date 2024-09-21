@@ -126,13 +126,13 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // Lottie Animation
-    implementation ("com.airbnb.android:lottie:6.3.0")
+    implementation("com.airbnb.android:lottie-compose:5.0.3")
 
     // Password Strength Meter
     implementation ("nu.aaro.gustav:passwordstrengthmeter:0.4")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
     implementation ("com.google.firebase:firebase-crashlytics")
     implementation ("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-messaging")

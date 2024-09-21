@@ -36,19 +36,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.components.NoInternetScreen
 import com.geekymusketeers.uncrack.components.ProgressDialog
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
 import com.geekymusketeers.uncrack.presentation.auth.AuthViewModel
 import com.geekymusketeers.uncrack.ui.theme.DMSansFontFamily
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
+import com.geekymusketeers.uncrack.util.ConnectivityObserver
+import com.geekymusketeers.uncrack.util.NetworkConnectivityObserver
 import com.geekymusketeers.uncrack.util.UtilsKt
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import com.geekymusketeers.uncrack.util.UtilsKt.isNetworkAvailable
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class ForgotPasswordScreen : ComponentActivity() {
+
+    private lateinit var connectivityObserver: ConnectivityObserver
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -61,10 +67,28 @@ class ForgotPasswordScreen : ComponentActivity() {
             )
         )
         super.onCreate(savedInstanceState)
+        connectivityObserver = NetworkConnectivityObserver(applicationContext)
 
         setContent {
             UnCrackTheme {
-                ForgotPasswordContent()
+                var networkStatus by remember {
+                    mutableStateOf(ConnectivityObserver.Status.Unavailable)
+                }
+
+                LaunchedEffect(key1 = true) {
+                    connectivityObserver.observe().collectLatest { status ->
+                        networkStatus = status
+                    }
+                }
+
+                when(networkStatus) {
+                    ConnectivityObserver.Status.Available -> {
+                        ForgotPasswordContent()
+                    }
+                    else -> {
+                        NoInternetScreen()
+                    }
+                }
             }
         }
     }
@@ -140,15 +164,7 @@ fun ForgotPasswordContent(
                     .fillMaxWidth(),
                 text = stringResource(R.string.send_reset_link),
                 onClick = {
-                    if (context.isNetworkAvailable()) {
-                        viewModel.resetPassword(email)
-                    } else {
-                        Toast.makeText(
-                            context,
-                            context.getString(R.string.noInternet),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    viewModel.resetPassword(email)
                 },
                 enabled = enableSendBtn
             )
