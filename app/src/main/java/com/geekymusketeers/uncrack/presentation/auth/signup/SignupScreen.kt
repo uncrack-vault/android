@@ -47,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.R
+import com.geekymusketeers.uncrack.components.NoInternetScreen
 import com.geekymusketeers.uncrack.components.ProgressDialog
 import com.geekymusketeers.uncrack.components.UCButton
 import com.geekymusketeers.uncrack.components.UCTextField
@@ -58,6 +59,8 @@ import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.geekymusketeers.uncrack.ui.theme.medium16
+import com.geekymusketeers.uncrack.util.ConnectivityObserver
+import com.geekymusketeers.uncrack.util.NetworkConnectivityObserver
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import com.geekymusketeers.uncrack.util.UtilsKt.isNetworkAvailable
 import com.geekymusketeers.uncrack.util.Validator.Companion.isValidEmail
@@ -68,12 +71,15 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class SignupScreen : ComponentActivity() {
 
     private val auth: FirebaseAuth by lazy { Firebase.auth }
     private lateinit var authViewModel: AuthViewModel
+    private lateinit var connectivityObserver: ConnectivityObserver
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         enableEdgeToEdge(
@@ -85,18 +91,36 @@ class SignupScreen : ComponentActivity() {
             )
         )
         super.onCreate(savedInstanceState)
+        connectivityObserver = NetworkConnectivityObserver(applicationContext)
 
         setContent {
             UnCrackTheme {
                 var newUser by remember { mutableStateOf(auth.currentUser) }
-                authViewModel = hiltViewModel()
-                SignupContent(
-                    this@SignupScreen,
-                    authViewModel,
-                    onSignUp = { signUpUser ->
-                        newUser = signUpUser
+                var networkState by remember {
+                    mutableStateOf(ConnectivityObserver.Status.Unavailable)
+                }
+
+                LaunchedEffect(key1 = true) {
+                    connectivityObserver.observe().collectLatest { status ->
+                        networkState = status
                     }
-                )
+                }
+                authViewModel = hiltViewModel()
+
+                when(networkState) {
+                    ConnectivityObserver.Status.Available -> {
+                        SignupContent(
+                            this@SignupScreen,
+                            authViewModel,
+                            onSignUp = { signUpUser ->
+                                newUser = signUpUser
+                            }
+                        )
+                    }
+                    else -> {
+                        NoInternetScreen()
+                    }
+                }
             }
         }
     }
@@ -231,23 +255,16 @@ fun SignupContent(
                     .fillMaxWidth(),
                 text = stringResource(id = R.string.register),
                 onClick = {
-                    if (context.isNetworkAvailable()) {
-                        isLoading = true
-                        authViewModel.signUp(
-                            userName,
-                            userEmail,
-                            userPassword,
-                            onSignedUp = { signUpUser ->
-                                onSignUp(signUpUser)
-                            }
-                        )
-                    } else {
-                        Toast.makeText(
-                            context,
-                            "No Internet avaialble",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    isLoading = true
+                    authViewModel.signUp(
+                        userName,
+                        userEmail,
+                        userPassword,
+                        onSignedUp = { signUpUser ->
+                            onSignUp(signUpUser)
+                        }
+                    )
+
                     context.findActivity()?.apply {
                         startActivity(Intent(activity, CreateMasterKeyScreen::class.java))
                     }
