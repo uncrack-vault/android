@@ -27,7 +27,6 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -47,7 +46,6 @@ import com.geekymusketeers.uncrack.ui.theme.OnSurfaceLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
-import com.geekymusketeers.uncrack.ui.theme.navigationTopBarHeight
 import com.geekymusketeers.uncrack.ui.theme.normal16
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -87,7 +85,6 @@ fun OnboardingContent(activity: Activity, modifier: Modifier = Modifier) {
         modifier = modifier.padding(
             start = 16.dp,
             end = 16.dp,
-            top = navigationTopBarHeight,
             bottom = bottomPadding
         ),
         verticalArrangement = Arrangement.SpaceBetween
