@@ -17,6 +17,7 @@ class AuthViewModel : ViewModel() {
     val resetPassword = MutableLiveData<Boolean>()
     val errorLiveData = MutableLiveData<String>()
     val registerStatus = MutableLiveData<Boolean>()
+    val loginSuccess = MutableLiveData<Boolean>()
 
     fun resetPassword(email: String) = runIO {
         FirebaseAuth.getInstance().sendPasswordResetEmail(email)
@@ -27,18 +28,14 @@ class AuthViewModel : ViewModel() {
             }
     }
 
-    fun logIn(
-        email: String,
-        password: String,
-        onSignedIn: (FirebaseUser) -> Unit,
-    ) = runIO {
+    fun logIn(email: String, password: String) = runIO {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    onSignedIn(user!!)
+                    loginSuccess.postValue(true)
                 } else {
-                    errorLiveData.postValue("Please check your details")
+                    errorLiveData.postValue("Invalid email or password")
+                    loginSuccess.postValue(false)
                 }
             }
     }

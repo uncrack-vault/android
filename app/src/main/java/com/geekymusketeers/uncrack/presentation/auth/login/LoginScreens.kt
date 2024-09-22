@@ -65,25 +65,18 @@ import com.geekymusketeers.uncrack.ui.theme.medium16
 import com.geekymusketeers.uncrack.util.ConnectivityObserver
 import com.geekymusketeers.uncrack.util.NetworkConnectivityObserver
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
-import com.geekymusketeers.uncrack.util.UtilsKt.isNetworkAvailable
 import com.geekymusketeers.uncrack.util.Validator.Companion.isValidEmail
 import com.geekymusketeers.uncrack.util.Validator.Companion.isValidPassword
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class LoginScreens : ComponentActivity() {
 
-    private val auth: FirebaseAuth by lazy { Firebase.auth }
     private lateinit var userAuthViewModel: AuthViewModel
     private lateinit var connectivityObserver: ConnectivityObserver
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.light(
                 Color.White.toArgb(), Color.White.toArgb()
@@ -97,7 +90,6 @@ class LoginScreens : ComponentActivity() {
         connectivityObserver = NetworkConnectivityObserver(applicationContext)
         setContent {
             UnCrackTheme {
-                var user by remember { mutableStateOf(auth.currentUser) }
                 var networkStatus by remember { mutableStateOf(ConnectivityObserver.Status.Unavailable) }
 
                 LaunchedEffect(key1 = true) {
@@ -109,15 +101,8 @@ class LoginScreens : ComponentActivity() {
 
                 when (networkStatus) {
                     ConnectivityObserver.Status.Available -> {
-                        LoginContent(
-                            this@LoginScreens,
-                            userAuthViewModel,
-                            onSignedIn = { signedInUser ->
-                                user = signedInUser
-                            }
-                        )
+                        LoginContent(this@LoginScreens, userAuthViewModel)
                     }
-
                     else -> {
                         NoInternetScreen()
                     }
@@ -131,12 +116,10 @@ class LoginScreens : ComponentActivity() {
 fun LoginContent(
     activity: Activity,
     viewModel: AuthViewModel,
-    modifier: Modifier = Modifier,
-    onSignedIn: (FirebaseUser) -> Unit
+    modifier: Modifier = Modifier
 ) {
-
     val context = LocalContext.current
-    var email by  remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
     val isSignInButtonEnable by remember {
@@ -146,12 +129,25 @@ fun LoginContent(
     }
 
     val errorLiveData by viewModel.errorLiveData.observeAsState()
+    val loginSuccess by viewModel.loginSuccess.observeAsState()
     var isLoading by remember { mutableStateOf(false) }
 
     LaunchedEffect(errorLiveData) {
         errorLiveData?.let { error ->
             isLoading = false
             Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    LaunchedEffect(loginSuccess) {
+        loginSuccess?.let { success ->
+            isLoading = false
+            if (success) {
+                context.findActivity()?.apply {
+                    startActivity(Intent(activity, CreateMasterKeyScreen::class.java))
+                    finish() // Optional: close the login activity
+                }
+            }
         }
     }
 
@@ -164,7 +160,6 @@ fun LoginContent(
                 .padding(paddingValues)
                 .padding(16.dp)
         ) {
-
             Text(
                 text = stringResource(R.string.log_in),
                 fontSize = 40.sp,
@@ -176,8 +171,7 @@ fun LoginContent(
             Spacer(modifier = Modifier.height(60.dp))
 
             UCTextField(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 headerText = stringResource(R.string.email_header),
                 hintText = stringResource(R.string.email_hint),
                 maxLines = 1,
@@ -189,8 +183,7 @@ fun LoginContent(
             Spacer(modifier = Modifier.height(30.dp))
 
             UCTextField(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 headerText = stringResource(R.string.password_header),
                 hintText = stringResource(R.string.password_hint),
                 maxLines = 1,
@@ -199,19 +192,14 @@ fun LoginContent(
                 onValueChange = { password = it },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-
                     val image = if (passwordVisibility)
                         painterResource(id = R.drawable.visibility_off)
                     else painterResource(id = R.drawable.visibility_on)
 
                     val imageDescription =
-                        if (passwordVisibility) stringResource(R.string.show_password) else stringResource(
-                            R.string.hide_password
-                        )
+                        if (passwordVisibility) stringResource(R.string.show_password) else stringResource(R.string.hide_password)
 
-                    IconButton(onClick =
-                    { passwordVisibility = passwordVisibility.not() }
-                    ) {
+                    IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
                         Icon(
                             modifier = Modifier.size(24.dp),
                             painter = image,
@@ -224,14 +212,13 @@ fun LoginContent(
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(
-                text = stringResource(R.string.forgot_password), modifier = Modifier
+                text = stringResource(R.string.forgot_password),
+                modifier = Modifier
                     .align(Alignment.End)
                     .clickable {
-                        context
-                            .findActivity()
-                            ?.let {
-                                it.startActivity(Intent(it, ForgotPasswordScreen::class.java))
-                            }
+                        context.findActivity()?.let {
+                            it.startActivity(Intent(it, ForgotPasswordScreen::class.java))
+                        }
                     },
                 color = MaterialTheme.colorScheme.primary
             )
@@ -239,22 +226,11 @@ fun LoginContent(
             Spacer(modifier = Modifier.weight(1f))
 
             UCButton(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.login),
                 onClick = {
                     isLoading = true
-                    viewModel.logIn(
-                        email,
-                        password,
-                        onSignedIn = { signedInUser ->
-                            onSignedIn(signedInUser)
-                        }
-                    )
-
-                    context.findActivity()?.apply {
-                        startActivity(Intent(activity, CreateMasterKeyScreen::class.java))
-                    }
+                    viewModel.logIn(email, password)
                 },
                 enabled = isSignInButtonEnable
             )
@@ -283,5 +259,9 @@ fun LoginContent(
                 )
             }
         }
+    }
+
+    if (isLoading) {
+        ProgressDialog {}
     }
 }
