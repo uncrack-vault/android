@@ -47,4 +47,8 @@ class AccountRepositoryImpl(
         val count = accountDao.getOldPasswordCount(password, thresholdDate)
         return count > 0
     }
+
+    override suspend fun deleteAccountDetails() {
+        accountDao.deleteAccountDetails()
+    }
 }

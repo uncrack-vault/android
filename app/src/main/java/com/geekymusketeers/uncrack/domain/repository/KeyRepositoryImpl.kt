@@ -12,6 +12,10 @@ class KeyRepositoryImpl(
         return keyDao.getMasterKey()
     }
 
+    override suspend fun deleteMasterKey() {
+        keyDao.deleteMasterKey()
+    }
+
     override suspend fun setMasterKey(key: Key) {
         keyDao.setMasterKey(key)
     }

@@ -8,4 +8,6 @@ interface KeyRepository {
     suspend fun setMasterKey(key: Key)
 
     fun getMasterKey(): Flow<Key>
+
+    suspend fun deleteMasterKey()
 }

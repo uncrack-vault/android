@@ -36,4 +36,7 @@ interface AccountDao {
 
     @Query("SELECT * FROM account_table WHERE password = :password AND dateTime < :thresholdDate")
     fun getOldPasswordCount(password: String, thresholdDate: String): Int
+
+    @Query("DELETE FROM account_table")
+    suspend fun deleteAccountDetails()
 }

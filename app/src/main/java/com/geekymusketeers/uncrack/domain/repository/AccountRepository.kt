@@ -20,4 +20,6 @@ interface AccountRepository {
     fun getReusedPasswordCount(password: String): Boolean
 
     fun getOldPasswordCount(password: String): Boolean
+
+    suspend fun deleteAccountDetails()
 }

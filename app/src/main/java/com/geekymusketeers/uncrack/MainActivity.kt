@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.navigation.Navigation
 import com.geekymusketeers.uncrack.presentation.settings.SettingsViewModel
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         settingsViewModel.isScreenshotEnabled.observe(this) { isEnabled ->
             if (isEnabled) {
@@ -41,7 +43,6 @@ class MainActivity : ComponentActivity() {
             )
         )
 
-        super.onCreate(savedInstanceState)
         setContent {
             UnCrackTheme {
                 Navigation(this)

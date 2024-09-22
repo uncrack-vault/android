@@ -3,14 +3,21 @@ package com.geekymusketeers.uncrack.presentation.settings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.geekymusketeers.uncrack.domain.repository.AccountRepository
+import com.geekymusketeers.uncrack.domain.repository.KeyRepository
 import com.geekymusketeers.uncrack.util.runIO
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-class SettingsViewModel @Inject constructor(): ViewModel() {
+@HiltViewModel
+class SettingsViewModel @Inject constructor(
+    private val keyRepository: KeyRepository,
+    private val accountRepository: AccountRepository
+): ViewModel() {
 
     private val auth = Firebase.auth
     val onLogOutComplete = MutableLiveData<Boolean>()
@@ -25,6 +32,8 @@ class SettingsViewModel @Inject constructor(): ViewModel() {
     }
 
     fun logout() = runIO {
+        keyRepository.deleteMasterKey()
+        accountRepository.deleteAccountDetails()
         FirebaseAuth.getInstance().signOut()
         onLogOutComplete.postValue(true)
     }

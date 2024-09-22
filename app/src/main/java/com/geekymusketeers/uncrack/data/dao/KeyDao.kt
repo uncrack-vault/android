@@ -15,4 +15,7 @@ interface KeyDao {
 
     @Query("SELECT * FROM master_key")
     fun getMasterKey(): Flow<Key>
+
+    @Query("DELETE FROM master_key")
+    suspend fun deleteMasterKey()
 }
