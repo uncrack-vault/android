@@ -41,7 +41,7 @@ class VaultViewModel @Inject constructor(
                 _accountModel.value
             } else {
                 _accountModel.value.filter { account ->
-                    account.company.contains(query, false)
+                    account.company.contains(query, true)
                 }
             }
         }
