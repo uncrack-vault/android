@@ -223,14 +223,14 @@ fun ViewPasswordScreen(
                             .clickable {
                                 if (username.isEmpty() && note.isEmpty()) {
                                     val shareNoteWithoutUserName =
-                                        "${"Email: $email"}\n${"Password: $password"}"
+                                        "${"Account Name: $accountCompany"}\n${"Email: $email"}\n${"Password: $password"}"
                                     val myIntent = Intent(Intent.ACTION_SEND)
                                     myIntent.type = "text/plane"
                                     myIntent.putExtra(Intent.EXTRA_TEXT, shareNoteWithoutUserName)
                                     context.startActivity(myIntent)
                                 } else {
                                     val shareNote =
-                                        "${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Note: $note"}"
+                                        "${"Account Name: $accountCompany"}\n${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Note: $note"}"
                                     val myIntent = Intent(Intent.ACTION_SEND)
                                     myIntent.type = "text/plane"
                                     myIntent.putExtra(Intent.EXTRA_TEXT, shareNote)
