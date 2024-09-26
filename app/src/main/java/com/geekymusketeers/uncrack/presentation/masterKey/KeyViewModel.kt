@@ -45,12 +45,9 @@ class KeyViewModel @Inject constructor(
         checkMasterKey()
     }
 
-    fun checkMasterKey() {
-        _enableButtonLiveData.value =
-            _masterKeyLiveData.value.isNullOrBlank()
-                .not() && _confirmMasterKeyLiveData.value.isNullOrBlank().not() &&
-                    _masterKeyLiveData.value == _confirmMasterKeyLiveData.value
-        isPasswordValid()
+    private fun checkMasterKey() {
+        _enableButtonLiveData.value = isPasswordValid() &&
+                _masterKeyLiveData.value == _confirmMasterKeyLiveData.value
     }
 
     private fun validatePassword(password: String) {
