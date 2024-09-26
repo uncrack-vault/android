@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
@@ -82,10 +84,10 @@ fun PasswordGenerator(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(SurfaceVariantLight)
+                .verticalScroll(rememberScrollState())
                 .padding(16.dp),
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = buildAnnotatedString {
@@ -131,14 +133,14 @@ fun PasswordGenerator(
                 )
             )
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             Text(
                 text = stringResource(R.string.include_following),
                 style = medium24.copy(OnPrimaryContainerLight)
             )
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             SwitchItem(
                 label = stringResource(R.string.numbers),
@@ -176,8 +178,6 @@ fun PasswordGenerator(
                 },
                 leadingIcon = painterResource(id = R.drawable.generate_password)
             )
-
-            Spacer(modifier = Modifier.height(10.dp))
 
             UCButton(
                 modifier = Modifier.fillMaxWidth(),
