@@ -65,10 +65,9 @@ class AddEditViewModel @Inject constructor(
     }
 
     private fun checkIfAdded() {
-        val isEmailValid = validateEmail(email.value?.trim())
-        val isAnyFieldNullOrEmpty =
-            email.value.isNullOrEmpty() && password.value.isNullOrEmpty() && isEmailValid
+        val isEmailValid = validateEmail(email.value)
+        val areFieldsFilled = !email.value.isNullOrEmpty() && !password.value.isNullOrEmpty()
 
-        _isAdded.value = isAnyFieldNullOrEmpty.not()
+        _isAdded.value = areFieldsFilled && isEmailValid
     }
 }

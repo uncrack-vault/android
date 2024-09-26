@@ -48,6 +48,7 @@ import com.geekymusketeers.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.normal20
 import com.geekymusketeers.uncrack.util.UtilsKt.generateRandomPassword
+import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -62,7 +63,6 @@ fun AddPasswordScreen(
     addEditViewModel: AddEditViewModel,
     modifier: Modifier = Modifier
 ) {
-
     LaunchedEffect(Unit) {
         addEditViewModel.resetState()
     }
@@ -88,7 +88,6 @@ fun AddPasswordScreen(
             )
         }
     ) { paddingValues ->
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -96,7 +95,6 @@ fun AddPasswordScreen(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Image(
                 modifier = Modifier.size(80.dp),
                 painter = rememberAsyncImagePainter(model = accountIcon),
@@ -152,7 +150,6 @@ fun AddPasswordScreen(
                 },
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-
                     val image = if (passwordVisibility)
                         painterResource(id = R.drawable.visibility_off)
                     else painterResource(id = R.drawable.visibility_on)
