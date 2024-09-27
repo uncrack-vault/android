@@ -52,10 +52,4 @@ class VaultViewModel @Inject constructor(
             repository.addAccount(account)
         }
     }
-
-    fun deleteAccount(account: Account) {
-        viewModelScope.launch {
-            repository.deleteAccount(account)
-        }
-    }
 }

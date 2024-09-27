@@ -4,11 +4,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.geekymusketeers.uncrack.domain.model.Account
 import com.geekymusketeers.uncrack.domain.repository.AccountRepository
-import com.geekymusketeers.uncrack.domain.repository.AccountRepositoryImpl
 import com.geekymusketeers.uncrack.util.runIO
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -54,5 +55,11 @@ class ViewPasswordViewModel @Inject constructor(
 
     fun updateNote(note: String) {
         accountModel = accountModel.copy(note = note)
+    }
+
+    fun deleteAccount(account: Account) {
+        viewModelScope.launch {
+            repository.deleteAccount(account)
+        }
     }
 }
