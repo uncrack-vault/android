@@ -30,11 +30,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat.startActivity
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.geekymusketeers.uncrack.R
 import com.geekymusketeers.uncrack.presentation.masterKey.confirmMasterKey.ConfirmMasterKeyScreen
-import com.geekymusketeers.uncrack.presentation.masterKey.createMasterKey.CreateMasterKeyScreen
 import com.geekymusketeers.uncrack.ui.theme.BackgroundLight
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
 import com.google.firebase.auth.FirebaseAuth
@@ -58,18 +55,16 @@ class SplashScreen : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val splashViewModel: SplashViewModel = hiltViewModel()
-
             UnCrackTheme {
-                SplashContent(this@SplashScreen, splashViewModel)
+                SplashContent(this@SplashScreen)
             }
         }
     }
 }
+
 @Composable
 fun SplashContent(
     activity: Activity,
-    splashViewModel: SplashViewModel,
     modifier: Modifier = Modifier
 ) {
 
@@ -97,16 +92,8 @@ fun SplashContent(
         } else {
             activity.run {
                 delay(2000L)
-                splashViewModel.checkMasterKeyPresent(
-                    onMasterKeyExists = {
-                            startActivity(Intent(this, ConfirmMasterKeyScreen::class.java))
-                            finish()
-                    },
-                    onMasterKeyNotExists = {
-                            startActivity(Intent(this, CreateMasterKeyScreen::class.java))
-                            finish()
-                    }
-                )
+                startActivity(Intent(this, ConfirmMasterKeyScreen::class.java))
+                finish()
             }
         }
 

@@ -7,7 +7,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +16,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
@@ -46,7 +46,7 @@ import com.geekymusketeers.uncrack.ui.theme.OnSurfaceLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.PrimaryDark
 import com.geekymusketeers.uncrack.ui.theme.UnCrackTheme
-import com.geekymusketeers.uncrack.ui.theme.normal16
+import com.geekymusketeers.uncrack.ui.theme.medium18
 import com.geekymusketeers.uncrack.util.UtilsKt.findActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -73,57 +73,60 @@ class OnboardingScreen : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnboardingContent(activity: Activity, modifier: Modifier = Modifier) {
+
     val context = LocalContext.current
     val pages = OnBoardingItem.onboardingScreenItems()
     val pagerState = rememberPagerState(pageCount = { pages.size })
     val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
 
     Column(
-        modifier = modifier.padding(
-            start = 16.dp,
-            end = 16.dp,
-            bottom = bottomPadding
-        ),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(
+                start = 16.dp,
+                end = 16.dp,
+                bottom = bottomPadding
+            ),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
+        Spacer(modifier = Modifier.height(40.dp))
 
         if (pagerState.currentPage != pages.lastIndex) {
             Text(
                 modifier = Modifier
-                    .padding(vertical = 20.dp)
+                    .align(Alignment.End)
                     .clickable {
-                        context
-                            .findActivity()
-                            ?.apply {
-                                val loginIntent = Intent(activity, LoginScreens::class.java)
-                                startActivity(loginIntent)
-                                finish()
-                            }
-                    }
-                    .align(Alignment.End),
+                        context.findActivity()?.apply {
+                            val loginIntent = Intent(activity, LoginScreens::class.java)
+                            startActivity(loginIntent)
+                            finish()
+                        }
+                    },
                 text = stringResource(R.string.skip),
-                style = normal16.copy(OnSurfaceLight)
+                style = medium18.copy(OnSurfaceLight)
             )
         }
 
         Spacer(modifier = Modifier.weight(1f))
 
-        HorizontalPager(state = pagerState) { index ->
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.weight(8f)
+        ) { index ->
             OnboardingComponent(item = pages[index])
         }
 
         PageIndicator(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 200.dp),
+                .padding(top = 16.dp),
             pagesSize = pages.size,
             selectedPage = pagerState.currentPage
         )
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(32.dp))
 
         UCButton(
             modifier = Modifier.fillMaxWidth(),

@@ -1,15 +1,15 @@
 package com.geekymusketeers.uncrack.sharedViewModel
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.geekymusketeers.uncrack.domain.model.User
-import com.geekymusketeers.uncrack.util.runIO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
@@ -21,24 +21,25 @@ class UserViewModel @Inject constructor(
     private val firestore: FirebaseFirestore
 ) : ViewModel() {
 
-    val state = mutableStateOf(User())
+    private val _state = MutableStateFlow(User())
+    val state: StateFlow<User> = _state
 
     init {
         getCurrentUser()
     }
 
-    private fun getCurrentUser() = runIO {
-            try {
-                val currentUser = auth.currentUser
-                if (currentUser != null) {
-                    val user = fetchUserFromFirestore(currentUser.uid)
-                    state.value = user
-                } else {
-                    Timber.e("No user is currently logged in")
-                }
-            } catch (e: Exception) {
-                Timber.e("Error fetching user data: $e")
+    private fun getCurrentUser() = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            val currentUser = auth.currentUser
+            if (currentUser != null) {
+                val user = fetchUserFromFirestore(currentUser.uid)
+                _state.value = user
+            } else {
+                Timber.e("No user is currently logged in")
             }
+        } catch (e: Exception) {
+            Timber.e("Error fetching user data: $e")
+        }
     }
 
     private suspend fun fetchUserFromFirestore(userId: String): User {

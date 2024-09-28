@@ -14,7 +14,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Add
-import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -55,7 +54,7 @@ fun VaultScreen(
 ) {
     val accounts by vaultViewModel.filteredAccounts.collectAsState()
     var searchQuery by rememberSaveable { mutableStateOf("") }
-    val userObserver by userViewModel.state
+    val user by userViewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {
         vaultViewModel.getAccounts()
@@ -82,7 +81,7 @@ fun VaultScreen(
                 .padding(16.dp)
         ) {
             Text(
-                text = "Hello, ${userObserver.name}",
+                text = "Hello, ${user.name}",
                 style = medium24.copy(Color.Black)
             )
 
@@ -139,7 +138,7 @@ fun VaultScreen(
                 } else {
                     item {
                         EmptyState(
-                            stateTitle = "Hey ${userObserver.name}, \n currently there are no passwords saved",
+                            stateTitle = "Hey ${user.name}, \n currently there are no passwords saved",
                             image = R.drawable.vault_empty_state
                         )
                     }

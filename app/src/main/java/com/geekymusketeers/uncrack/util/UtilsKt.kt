@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Patterns
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
@@ -72,10 +73,7 @@ object UtilsKt {
     }
 
     fun validateEmail(email: String?): Boolean {
-        return !email.isNullOrEmpty() && email.split("")
-            .all { word ->
-                word.isNotEmpty() && Pattern.matches("^([A-Za-z.]+)*", word)
-            }
+        return email != null && Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     fun calculatePasswordStrength(password: String): Int {

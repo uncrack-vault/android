@@ -41,7 +41,7 @@ class VaultViewModel @Inject constructor(
                 _accountModel.value
             } else {
                 _accountModel.value.filter { account ->
-                    account.company.contains(query, false)
+                    account.company.contains(query, true)
                 }
             }
         }
@@ -50,12 +50,6 @@ class VaultViewModel @Inject constructor(
     fun addAccount(account: Account) {
         viewModelScope.launch{
             repository.addAccount(account)
-        }
-    }
-
-    fun deleteAccount(account: Account) {
-        viewModelScope.launch {
-            repository.deleteAccount(account)
         }
     }
 }

@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -43,7 +45,7 @@ fun ProfileScreen(
 ) {
 
     val context = LocalContext.current
-    val userData = userViewModel.state.value
+    val userData by userViewModel.state.collectAsState()
 
     Column(
         modifier = modifier

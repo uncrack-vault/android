@@ -15,12 +15,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -52,7 +56,9 @@ import com.geekymusketeers.uncrack.ui.theme.OnPrimaryContainerLight
 import com.geekymusketeers.uncrack.ui.theme.OnSurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceTintLight
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
+import com.geekymusketeers.uncrack.ui.theme.medium14
 import com.geekymusketeers.uncrack.ui.theme.normal12
+import com.geekymusketeers.uncrack.ui.theme.normal16
 import com.geekymusketeers.uncrack.ui.theme.normal20
 import com.geekymusketeers.uncrack.ui.theme.oldPassword
 import com.geekymusketeers.uncrack.ui.theme.strongPassword
@@ -75,6 +81,7 @@ fun ViewPasswordScreen(
     val context = LocalContext.current
     var passwordStrength by remember { mutableIntStateOf(0) }
     var passwordVisibility by remember { mutableStateOf(false) }
+    var showDeleteDialog by remember { mutableStateOf(false) }
     var progressValue by remember { mutableFloatStateOf(0f) }
     var progressMessage by rememberSaveable { mutableStateOf("") }
     val accountCompany = viewPasswordViewModel.accountModel.company
@@ -97,6 +104,68 @@ fun ViewPasswordScreen(
         Timber.d("Progress message $progressMessage")
     }
 
+    when {
+        showDeleteDialog -> {
+            AlertDialog(
+                onDismissRequest = { showDeleteDialog = false },
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.delete_icon),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                },
+                title = {
+                    Text(
+                        text = stringResource(R.string.delete_account),
+                        style = normal16.copy(color = OnPrimaryContainerLight)
+                    )
+                },
+                text = {
+                    Text(
+                        text = stringResource(R.string.are_you_sure_you_want_to_delete),
+                        style = normal16.copy(color = OnSurfaceVariantLight)
+                    )
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            viewPasswordViewModel.deleteAccount(viewPasswordViewModel.accountModel)
+                            showDeleteDialog = false
+                            navController.popBackStack()
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Transparent,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    ) {
+                        Text(
+                            "Okay",
+                            style = medium14
+                        )
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            showDeleteDialog = false
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Transparent,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(R.string.cancel),
+                            style = medium14
+                        )
+                    }
+                },
+                containerColor = MaterialTheme.colorScheme.background
+            )
+        }
+    }
+
     Scaffold(
         modifier.fillMaxSize(),
         topBar = {
@@ -106,7 +175,7 @@ fun ViewPasswordScreen(
                 onBackPress = { navController.popBackStack() },
                 shouldShowFavAndEditButton = false,
                 onEditPress = { navigateToEditPasswordScreen(accountId) },
-                onDeletePress = { }
+                onDeletePress = { showDeleteDialog = true }
             )
         }
     ) { paddingValues ->
@@ -223,14 +292,14 @@ fun ViewPasswordScreen(
                             .clickable {
                                 if (username.isEmpty() && note.isEmpty()) {
                                     val shareNoteWithoutUserName =
-                                        "${"Email: $email"}\n${"Password: $password"}"
+                                        "${"Account Name: $accountCompany"}\n${"Email: $email"}\n${"Password: $password"}"
                                     val myIntent = Intent(Intent.ACTION_SEND)
                                     myIntent.type = "text/plane"
                                     myIntent.putExtra(Intent.EXTRA_TEXT, shareNoteWithoutUserName)
                                     context.startActivity(myIntent)
                                 } else {
                                     val shareNote =
-                                        "${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Note: $note"}"
+                                        "${"Account Name: $accountCompany"}\n${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "Note: $note"
                                     val myIntent = Intent(Intent.ACTION_SEND)
                                     myIntent.type = "text/plane"
                                     myIntent.putExtra(Intent.EXTRA_TEXT, shareNote)
