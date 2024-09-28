@@ -33,7 +33,7 @@ fun UCStrokeButton(
         modifier = Modifier
             .defaultMinSize(
                 minWidth = ButtonDefaults.MinWidth,
-                minHeight = 50.dp
+                minHeight = 60.dp
             )
             .clip(RoundedCornerShape(100.dp))
             .then(modifier),

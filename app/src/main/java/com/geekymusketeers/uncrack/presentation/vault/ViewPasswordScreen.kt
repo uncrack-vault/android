@@ -299,7 +299,7 @@ fun ViewPasswordScreen(
                                     context.startActivity(myIntent)
                                 } else {
                                     val shareNote =
-                                        "${"Account Name: $accountCompany"}\n${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "${"Note: $note"}"
+                                        "${"Account Name: $accountCompany"}\n${"Email: $email"}\n${"UserName: $username"}\n${"Password: $password"}\n" + "Note: $note"
                                     val myIntent = Intent(Intent.ACTION_SEND)
                                     myIntent.type = "text/plane"
                                     myIntent.putExtra(Intent.EXTRA_TEXT, shareNote)

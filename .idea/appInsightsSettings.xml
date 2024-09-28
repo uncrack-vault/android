@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AppInsightsSettings">
+    <option name="selectedTabId" value="Firebase Crashlytics" />
     <option name="tabSettings">
       <map>
         <entry key="Android Vitals">
@@ -8,7 +9,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.aritra.notify" />
+                  <option name="appId" value="com.geekymusketeers.uncrack" />
                 </ConnectionSetting>
               </option>
               <option name="failureTypes">
@@ -34,7 +35,16 @@
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
-              <option name="timeIntervalDays" value="THIRTY_DAYS" />
+              <option name="timeIntervalDays" value="ONE_DAY" />
+              <option name="versions">
+                <list>
+                  <VersionSetting>
+                    <option name="buildVersion" value="11" />
+                    <option name="displayName" value="3.1.0 (11)" />
+                    <option name="displayVersion" value="3.1.0" />
+                  </VersionSetting>
+                </list>
+              </option>
               <option name="visibilityType" value="ALL" />
             </InsightsFilterSettings>
           </value>
