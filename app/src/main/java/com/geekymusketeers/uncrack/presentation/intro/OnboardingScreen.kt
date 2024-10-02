@@ -55,14 +55,7 @@ class OnboardingScreen : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(
-                Color.White.toArgb(), Color.White.toArgb()
-            ),
-            navigationBarStyle = SystemBarStyle.light(
-                Color.White.toArgb(), Color.White.toArgb()
-            )
-        )
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         setContent {

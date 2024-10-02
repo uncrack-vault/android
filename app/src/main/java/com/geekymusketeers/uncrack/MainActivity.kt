@@ -54,14 +54,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(
-                Color.Transparent.toArgb(), Color.Transparent.toArgb()
-            ),
-            navigationBarStyle = SystemBarStyle.light(
-                Color.Transparent.toArgb(), Color.Transparent.toArgb()
-            )
-        )
+        enableEdgeToEdge()
 
         checkForAppUpdate()
 
