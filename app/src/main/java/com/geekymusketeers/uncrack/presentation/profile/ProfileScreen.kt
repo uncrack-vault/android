@@ -35,7 +35,6 @@ import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
 import com.geekymusketeers.uncrack.ui.theme.medium22
 import com.geekymusketeers.uncrack.ui.theme.normal14
 import com.geekymusketeers.uncrack.util.Constants
-import com.geekymusketeers.uncrack.util.Util
 
 @Composable
 fun ProfileScreen(
@@ -120,7 +119,7 @@ fun ProfileScreen(
                 iconId = R.drawable.rating,
                 onClick = {
                     val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(Util.PLAYSTORE_URL)
+                    intent.data = Uri.parse(Constants.PLAYSTORE_URL)
                     context.startActivity(intent)
                 }
             )

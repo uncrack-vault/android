@@ -21,6 +21,7 @@ import com.geekymusketeers.uncrack.components.SettingsItemGroup
 import com.geekymusketeers.uncrack.components.UCSettingsCard
 import com.geekymusketeers.uncrack.components.UCTopAppBar
 import com.geekymusketeers.uncrack.ui.theme.SurfaceVariantLight
+import com.geekymusketeers.uncrack.util.Constants
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,9 +63,11 @@ fun HelpScreen(
                 )
 
                 UCSettingsCard(
-                    itemName = "Terms of Services",
+                    itemName = "Terms & Conditions",
                     onClick = {
-
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.data = Uri.parse(Constants.TERMS_AND_CONDITIONS)
+                        context.startActivity(intent)
                     }
                 )
 
@@ -76,7 +79,9 @@ fun HelpScreen(
                 UCSettingsCard(
                     itemName = "Privacy Policy",
                     onClick = {
-
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.data = Uri.parse(Constants.PRIVACY_POLICY)
+                        context.startActivity(intent)
                     }
                 )
             }
