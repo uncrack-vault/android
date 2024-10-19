@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.geekymusketeers.uncrack"
+    namespace = "com.aritra.uncrack"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.geekymusketeers.uncrack"
+        applicationId = "com.aritra.uncrack"
         minSdk = 24
         targetSdk = 34
         versionCode = 11
