@@ -111,7 +111,7 @@ dependencies {
 
     // Kotlin components
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22")
-    api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // Hilt
