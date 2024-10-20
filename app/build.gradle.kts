@@ -54,7 +54,7 @@ android {
 dependencies {
 
     val roomVersion = "2.6.1"
-    val viewModelVersion = "2.5.1"
+    val viewModelVersion = "2.8.6"
     val navVersion = "2.7.2"
 
     // Compose
