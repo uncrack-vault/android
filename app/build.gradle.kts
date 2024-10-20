@@ -55,7 +55,7 @@ dependencies {
 
     val roomVersion = "2.6.1"
     val viewModelVersion = "2.5.1"
-    val navVersion = "2.7.2"
+    val navVersion = "2.8.3"
 
     // Compose
     val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
