@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.aritra.uncrack"
+    namespace = "com.aritradas.uncrack"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.aritra.uncrack"
+        applicationId = "com.aritradas.uncrack"
         minSdk = 24
         targetSdk = 34
         versionCode = 11

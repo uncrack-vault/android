@@ -36,9 +36,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:276783569819:android:b2ec1e4c3f842fe2ae5f3e",
+        "mobilesdk_app_id": "1:276783569819:android:bb8a8cbb0eb73de9ae5f3e",
         "android_client_info": {
-          "package_name": "com.geekymusketeers.uncrack"
+          "package_name": "com.aritradas.uncrack"
         }
       },
       "oauth_client": [
