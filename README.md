@@ -44,59 +44,55 @@ or click badges below.
 
 </div>
 
-# 🤨 Purpose of this app
-I see a lot of people are tried of memorizing all their passwords, me also sometimes forgot the login credentials. So, after thinking about this situations, this app is build, to help user's to store their passwords and other information in a secured and organized manner.
-
 # 🔏 Featues 
 
-- UnCrack securely stores all login credentials and important information in one place, accessible only to the user. The app uses advanced encryption techniques to ensure that the data is protected from unauthorized access.
+- **Secure Vault for Passwords:** UnCrack allows users to securely store and manage their passwords, with access protected by encryption and possibly biometric authentication (fingerprint/face recognition).
 
-- With just a fingerprint, users can easily access all of their login information and never have to worry about forgetting passwords or searching for lost information.
+- **Data Encryption:** All sensitive data, such as passwords and notes, are encrypted using industry-standard encryption methods (like AES-256) to prevent unauthorized access.
 
-- The app includes a secure password generator that can suggest stronger passwords and help users create unique and secure passwords for all their accounts.
+- **Password Generator:** The app includes a built-in password generator to help users create strong, unique passwords for improved security.
 
-- The app has a simple and user-friendly interface that makes it easy for users to manage their login information and passwords.
+- **Password Health Checker:** A built-in password health checker that can help you identify which passwords are weak and strong and you can change them according to it.
+
+- **Auto-Lock Mechanism:** The app automatically locks after a certain period of inactivity, requiring the user to re-authenticate.
 
 # ✨ Design 
 
-![1_Uncrack](https://github.com/aritra-tech/UnCrack/assets/80090908/3d455bbb-2da0-4cd0-8b56-816f8f603a96)   ![6_Uncrack](https://github.com/aritra-tech/UnCrack/assets/80090908/43ab4e9b-7b7b-4b45-990e-967775f76917)  ![3_Uncrack](https://github.com/aritra-tech/UnCrack/assets/80090908/2e115c42-e165-4a88-b2ea-6a4a29368b1f)   ![7_Uncrack](https://github.com/aritra-tech/UnCrack/assets/80090908/ab9259c1-87c6-4255-b27d-0d93d6285584)     ![5_Uncrack](https://github.com/aritra-tech/UnCrack/assets/80090908/d71ebd26-f263-4c96-8a1c-9526b3685365)    ![8_Uncrack 1](https://github.com/aritra-tech/UnCrack/assets/80090908/b83f1345-a473-425c-b425-2eab73393a8a)
+# Screenshots
+
+<div align="center">
+  <div>
+    <img src="https://github.com/user-attachments/assets/2852daf8-04bc-450d-ad1e-7cd5991c6935" alt="Splash Screen" width="220"/>
+    <img src="https://github.com/user-attachments/assets/5d100e52-9fca-4c8f-ab15-ff755ccc6e2d" alt="Vault Screen" width="220"/>
+    <img src="https://github.com/user-attachments/assets/2e9fc2c4-d156-40f2-b406-91c07761b2e7" alt="Add Password Screen" width="220"/>
+    <img src="https://github.com/user-attachments/assets/17c5a986-44e2-4e4e-89ff-f3d271893963" alt="Add Account Screen" width="220"/>
+  </div>
+  <div style="margin-top: 10px;">
+    <img src="https://github.com/user-attachments/assets/5f66fb8b-1aeb-44ed-9fb8-3deba2e0f259" alt="Tools Screen" width="220"/>
+    <img src="https://github.com/user-attachments/assets/0eaaf477-3c5a-4b30-b043-dd475a9b93b7" alt="Password Health Screen" width="220"/>
+    <img src="https://github.com/user-attachments/assets/e8fa9ccc-8a08-4221-8ffa-b5e76379ee80" alt="Password Generator Screen" width="220"/>
+    <img src="https://github.com/user-attachments/assets/a55d01cc-7c7f-4eb7-a510-406e74f34e24" alt="Profile Screen" width="220"/>
+  </div>
+</div>
 
 
 # 🛠 Made With 
 
-- [Kotlin](https://developer.android.com/kotlin/first) - First class and official programming language for Android development.
-- [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) - For asynchronous and more..
-- [Android Architecture Components](https://developer.android.com/topic/architecture) - Collection of libraries that help you design testable, and maintainable apps.
+- [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
+- [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For asynchronous calls and tasks to utilize threads.
+- [Jetpack Compose UI Toolkit](https://developer.android.com/jetpack/compose) - Modern UI development toolkit.
+- [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
+  - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Data objects that notify views when the underlying database changes.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes.
-  - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - Generates a binding class for each XML layout file present in that module and allows you to more easily write code that interacts with views.
-  - [Room](https://developer.android.com/training/data-storage/room) - Room is an android library which is an ORM which wraps android's native SQLite database
-  - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - LiveData was used to save and store values for viewModel calls and response of method calls.
+  - [Room](https://developer.android.com/topic/libraries/architecture/room) - Room is an Android library which is an ORM that wraps Android's native SQLite database.
+  - [StateFlow and SharedFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#:~:text=StateFlow%20is%20a%20state%2Dholder,property%20of%20the%20MutableStateFlow%20class.) - StateFlow and SharedFlow are Flow APIs that enable flows to optimally emit state updates and emit values to multiple consumers.
+- [Dependency Injection](https://developer.android.com/training/dependency-injection) -
+    - [Hilt-Dagger](https://dagger.dev/hilt/) - A standard way to incorporate Dagger dependency injection into an Android application.
+    - [Hilt-ViewModel](https://developer.android.com/training/dependency-injection/hilt-jetpack) - DI for injecting ```ViewModel```. 
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
-- [Password Strength Meter](https://github.com/gustavaa/AndroidPasswordStrengthMeter) - Password strength meter is an easy-to-implement and flexible password strength indicator for Android.
+- [Firebase FireStore](https://firebase.google.com/docs/firestore) - Use our flexible, scalable NoSQL cloud database, built on Google Cloud infrastructure, to store and sync data for client- and server-side development.
 - [Firebase Crashlytics](https://firebase.google.com/docs/crashlytics?hl=en&authuser=0) - Firebase Crashlytics is a lightweight, real-time crash reporter that helps you track crashes.
 - [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging?hl=en&authuser=0) - Firebase Cloud Messaging (FCM) is a cross-platform messaging solution that lets you reliably send messages.
-
-# 👀 Package Structure 
-
-    com.geekymusketeers.uncrack    # Root Package
-    
-    ├── data                # For data handling.
-    |   ├── model           # Model data classes, for local entities.
-    │   ├── repository      # Single source of data.
-    │   └── room            # For saving data.
-    |
-    ├── adapter             # All Adapters for recyclerViews              
-    │ 
-    |── service             # Notification Service
-    |
-    ├── ui                  # UI/View layer
-    |   ├── auth            # For Security
-    |   └── fragments       # All fragments     
-    │   └── splashScreen    # SplashScreen
-    |
-    ├── utils               # Utility Classes / Kotlin extensions
-    |
-    └── viewmodel           # Generates a binding class for each XML layout file
 
 # 👷‍♂️ Architecture 
 
