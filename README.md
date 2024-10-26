@@ -62,16 +62,16 @@ or click badges below.
 
 <div align="center">
   <div>
-    <img src="https://github.com/user-attachments/assets/2852daf8-04bc-450d-ad1e-7cd5991c6935" alt="Splash Screen" width="220"/>
-    <img src="https://github.com/user-attachments/assets/5d100e52-9fca-4c8f-ab15-ff755ccc6e2d" alt="Vault Screen" width="220"/>
-    <img src="https://github.com/user-attachments/assets/2e9fc2c4-d156-40f2-b406-91c07761b2e7" alt="Add Password Screen" width="220"/>
-    <img src="https://github.com/user-attachments/assets/17c5a986-44e2-4e4e-89ff-f3d271893963" alt="Add Account Screen" width="220"/>
+    <img src="https://github.com/user-attachments/assets/2852daf8-04bc-450d-ad1e-7cd5991c6935" alt="Splash Screen" width="180"/>
+    <img src="https://github.com/user-attachments/assets/5d100e52-9fca-4c8f-ab15-ff755ccc6e2d" alt="Vault Screen" width="180"/>
+    <img src="https://github.com/user-attachments/assets/2e9fc2c4-d156-40f2-b406-91c07761b2e7" alt="Add Password Screen" width="180"/>
+    <img src="https://github.com/user-attachments/assets/17c5a986-44e2-4e4e-89ff-f3d271893963" alt="Add Account Screen" width="180"/>
   </div>
   <div style="margin-top: 10px;">
-    <img src="https://github.com/user-attachments/assets/5f66fb8b-1aeb-44ed-9fb8-3deba2e0f259" alt="Tools Screen" width="220"/>
-    <img src="https://github.com/user-attachments/assets/0eaaf477-3c5a-4b30-b043-dd475a9b93b7" alt="Password Health Screen" width="220"/>
-    <img src="https://github.com/user-attachments/assets/e8fa9ccc-8a08-4221-8ffa-b5e76379ee80" alt="Password Generator Screen" width="220"/>
-    <img src="https://github.com/user-attachments/assets/a55d01cc-7c7f-4eb7-a510-406e74f34e24" alt="Profile Screen" width="220"/>
+    <img src="https://github.com/user-attachments/assets/5f66fb8b-1aeb-44ed-9fb8-3deba2e0f259" alt="Tools Screen" width="180"/>
+    <img src="https://github.com/user-attachments/assets/0eaaf477-3c5a-4b30-b043-dd475a9b93b7" alt="Password Health Screen" width="180"/>
+    <img src="https://github.com/user-attachments/assets/e8fa9ccc-8a08-4221-8ffa-b5e76379ee80" alt="Password Generator Screen" width="180"/>
+    <img src="https://github.com/user-attachments/assets/a55d01cc-7c7f-4eb7-a510-406e74f34e24" alt="Profile Screen" width="180"/>
   </div>
 </div>
 
