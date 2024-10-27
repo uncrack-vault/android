@@ -140,7 +140,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")
 
     // Compose-lint
-    lintChecks("com.slack.lint.compose:compose-lint-checks:1.3.1")
+    lintChecks("com.slack.lint.compose:compose-lint-checks:1.4.2")
 
     // Timber
     implementation ("com.jakewharton.timber:timber:5.0.1")
