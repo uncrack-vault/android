@@ -2,6 +2,10 @@ package com.aritradas.uncrack.di
 
 import android.app.Application
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import com.aritradas.uncrack.data.datastore.DataStoreUtil
 import com.aritradas.uncrack.data.db.AccountDatabase
@@ -76,4 +80,12 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFirebaseFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideDataStore(@ApplicationContext appContext: Context): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create(
+            produceFile = { appContext.preferencesDataStoreFile("user_preferences") }
+        )
+    }
 }

@@ -3,6 +3,7 @@ package com.aritradas.uncrack.presentation.vault
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.EmptyState
+import com.aritradas.uncrack.components.TypewriterText
 import com.aritradas.uncrack.components.VaultCard
 import com.aritradas.uncrack.sharedViewModel.UserViewModel
 import com.aritradas.uncrack.presentation.vault.viewmodel.VaultViewModel
@@ -58,6 +60,7 @@ fun VaultScreen(
 
     LaunchedEffect(Unit) {
         vaultViewModel.getAccounts()
+        userViewModel.getCurrentUser()
     }
 
     Scaffold(
@@ -96,10 +99,19 @@ fun VaultScreen(
                 active = false,
                 onActiveChange = {},
                 placeholder = {
-                    Text(
-                        text = "Search here",
-                        style = normal16.copy(OnSurfaceVariantLight),
-                    )
+                    Row {
+                        Text(
+                            text = "Search here ",
+                            style = normal16.copy(OnSurfaceVariantLight),
+                        )
+                        TypewriterText(texts = listOf(
+                            "Instagram",
+                            "Snapchat",
+                            "Reddit",
+                            "Linkedin"
+                        ))
+                    }
+
                 },
                 colors = SearchBarDefaults.colors(
                     containerColor = PrimaryContainerLight
