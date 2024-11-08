@@ -40,7 +40,7 @@ class AuthViewModel : ViewModel() {
                             .document(it.uid)
                             .get()
                             .addOnSuccessListener { document ->
-                                val storedHashedPassword = document.getString("hashedPassword")
+                                val storedHashedPassword = document.getString("password")
 
                                 if (storedHashedPassword != null) {
                                     if (HashUtils.checkHashPassword(password, storedHashedPassword)) {
