@@ -36,11 +36,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "18"
     }
     buildFeatures {
         buildConfig = true
@@ -118,23 +118,17 @@ dependencies {
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.49")
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    ksp ("com.google.dagger:hilt-android-compiler:2.48")
     implementation("androidx.hilt:hilt-work:1.2.0")
-    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    ksp ("androidx.hilt:hilt-compiler:1.2.0")
     implementation("androidx.work:work-runtime-ktx:2.9.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    // Lottie Animation
-    implementation("com.airbnb.android:lottie-compose:5.0.3")
-
-    // Password Strength Meter
-    implementation ("nu.aaro.gustav:passwordstrengthmeter:0.4")
-
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation ("com.google.firebase:firebase-crashlytics")
     implementation ("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-messaging")
