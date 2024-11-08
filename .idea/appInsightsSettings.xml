@@ -23,8 +23,8 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.aritra.uncrack" />
-                  <option name="mobileSdkAppId" value="1:276783569819:android:d11660046850de1fae5f3e" />
+                  <option name="appId" value="com.aritradas.uncrack" />
+                  <option name="mobileSdkAppId" value="1:276783569819:android:bb8a8cbb0eb73de9ae5f3e" />
                   <option name="projectId" value="uncrack-f89dc" />
                   <option name="projectNumber" value="276783569819" />
                 </ConnectionSetting>
