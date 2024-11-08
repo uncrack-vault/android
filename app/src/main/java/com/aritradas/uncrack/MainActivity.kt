@@ -40,6 +40,7 @@ class MainActivity : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         settingsViewModel.isScreenshotEnabled.observe(this) { isEnabled ->
@@ -50,8 +51,6 @@ class MainActivity : ComponentActivity() {
                     android.view.WindowManager.LayoutParams.FLAG_SECURE)
             }
         }
-
-        enableEdgeToEdge()
 
         checkForAppUpdate()
 
