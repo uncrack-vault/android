@@ -158,4 +158,6 @@ dependencies {
     implementation("com.google.android.play:app-update:2.1.0")
     implementation("com.google.android.play:app-update-ktx:2.1.0")
 
+    // BCrypt
+    implementation("org.mindrot:jbcrypt:0.4")
 }

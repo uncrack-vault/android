@@ -3,6 +3,7 @@ package com.aritradas.uncrack.presentation.auth
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aritradas.uncrack.domain.model.User
+import com.aritradas.uncrack.util.HashUtils
 import com.aritradas.uncrack.util.runIO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -32,7 +33,33 @@ class AuthViewModel : ViewModel() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    loginSuccess.postValue(true)
+                    val user = auth.currentUser
+                    user?.let {
+                        val userDB = FirebaseFirestore.getInstance()
+                        userDB.collection("Users")
+                            .document(it.uid)
+                            .get()
+                            .addOnSuccessListener { document ->
+                                val storedHashedPassword = document.getString("hashedPassword")
+
+                                if (storedHashedPassword != null) {
+                                    if (HashUtils.checkHashPassword(password, storedHashedPassword)) {
+                                        loginSuccess.postValue(true)
+                                    } else {
+                                        errorLiveData.postValue("Invalid email or password")
+                                        loginSuccess.postValue(false)
+                                    }
+                                } else {
+                                    errorLiveData.postValue("Failed to retrieve hashed password")
+                                }
+                            }
+                            .addOnFailureListener {
+                                errorLiveData.postValue("Failed to retrieve user data")
+                            }
+                    } ?: run {
+                        errorLiveData.postValue("User not found")
+                        loginSuccess.postValue(false)
+                    }
                 } else {
                     errorLiveData.postValue("Invalid email or password")
                     loginSuccess.postValue(false)
@@ -51,7 +78,8 @@ class AuthViewModel : ViewModel() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
 
-                    val userProfile = User(name, email, password)
+                    val hashedPassword = HashUtils.hasPassword(password)
+                    val userProfile = User(name, email, hashedPassword)
 
                     val userDB = FirebaseFirestore.getInstance()
                     user?.let {
