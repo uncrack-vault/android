@@ -58,6 +58,7 @@ fun VaultScreen(
 
     LaunchedEffect(Unit) {
         vaultViewModel.getAccounts()
+        userViewModel.getCurrentUser()
     }
 
     Scaffold(
