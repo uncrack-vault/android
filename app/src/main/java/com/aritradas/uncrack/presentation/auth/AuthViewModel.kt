@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.delay
 import timber.log.Timber
 
 class AuthViewModel : ViewModel() {
@@ -30,6 +31,7 @@ class AuthViewModel : ViewModel() {
     }
 
     fun logIn(email: String, password: String) = runIO {
+        delay(2000L)
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -73,6 +75,7 @@ class AuthViewModel : ViewModel() {
         password: String,
         onSignedUp: (FirebaseUser) -> Unit,
     ) = runIO {
+        delay(2000L)
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

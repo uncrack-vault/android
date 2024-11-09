@@ -2,9 +2,11 @@ package com.aritradas.uncrack.components
 
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +27,8 @@ fun UCButton(
     enabled: Boolean = true,
     trailingIcon: Painter? = null,
     leadingIcon: Painter? = null,
+    isLoading: Boolean = false,
+    loadingText: String? = null,
     onClick: () -> Unit
 ) {
     Button(
@@ -39,19 +43,44 @@ fun UCButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = PrimaryLight
         ),
-        enabled = enabled
+        enabled = enabled && !isLoading
     ) {
-        leadingIcon?.let {
-            Icon(modifier = Modifier.padding(end = 4.dp), painter = it, contentDescription = null)
-        }
-        Text(
-            text = text,
-            color = if (enabled) Color.White else SurfaceTintLight,
-            fontFamily = DMSansFontFamily,
-            fontSize = 14.sp
-        )
-        trailingIcon?.let {
-            Icon(modifier = Modifier.padding(start = 4.dp), painter = it, contentDescription = null)
+        if (isLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(24.dp),
+                color = Color.White,
+                strokeWidth = 2.dp
+            )
+            loadingText?.let {
+                Text(
+                    modifier = Modifier.padding(start = 8.dp),
+                    text = it,
+                    color = Color.White,
+                    fontFamily = DMSansFontFamily,
+                    fontSize = 14.sp
+                )
+            }
+        } else {
+            leadingIcon?.let {
+                Icon(
+                    modifier = Modifier.padding(end = 4.dp),
+                    painter = it,
+                    contentDescription = null
+                )
+            }
+            Text(
+                text = text,
+                color = if (enabled) Color.White else SurfaceTintLight,
+                fontFamily = DMSansFontFamily,
+                fontSize = 14.sp
+            )
+            trailingIcon?.let {
+                Icon(
+                    modifier = Modifier.padding(start = 4.dp),
+                    painter = it,
+                    contentDescription = null
+                )
+            }
         }
     }
 }

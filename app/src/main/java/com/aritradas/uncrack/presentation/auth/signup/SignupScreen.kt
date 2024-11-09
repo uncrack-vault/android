@@ -244,6 +244,8 @@ fun SignupContent(
                 modifier = Modifier
                     .fillMaxWidth(),
                 text = stringResource(id = R.string.register),
+                isLoading = isLoading,
+                loadingText = "Creating your account",
                 onClick = {
                     isLoading = true
                     authViewModel.signUp(
