@@ -66,6 +66,7 @@ fun CreateMasterKeyContent(
     val enableButtonObserver by masterKeyViewModel.enableButtonLiveData.observeAsState(false)
     var passwordVisibility by remember { mutableStateOf(false) }
     var confirmPasswordVisibility by remember { mutableStateOf(false) }
+    val isLoading by masterKeyViewModel.isLoading.observeAsState(false)
 
     Scaffold(
         modifier.fillMaxSize()
@@ -169,6 +170,8 @@ fun CreateMasterKeyContent(
             UCButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.save),
+                isLoading = isLoading,
+                loadingText = "Creating you Master Key",
                 onClick = {
                     val key = Key(0, masterKeyObserver)
                     masterKeyViewModel.saveMasterKey(key)

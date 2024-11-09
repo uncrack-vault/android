@@ -220,6 +220,8 @@ fun LoginContent(
             UCButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.login),
+                isLoading = isLoading,
+                loadingText = "Logging you in..",
                 onClick = {
                     isLoading = true
                     viewModel.logIn(email, password)
