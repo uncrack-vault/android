@@ -122,6 +122,16 @@ object UtilsKt {
         )
     }
 
+    fun getWorkAccounts(): Map<AccountType, Int> {
+        return mapOf(
+            AccountType.MICROSOFTONEDRIVE to R.drawable.microsoft_onedrive,
+            AccountType.DROPBOX to R.drawable.dropbox_new,
+            AccountType.GOOGLEDRIVE to R.drawable.google_drive,
+            AccountType.MEDIUM to R.drawable.medium,
+            AccountType.GITHUB to R.drawable.github,
+            AccountType.GITLAB to R.drawable.gitlab,
+        )
+    }
     fun getCrowdSourcingAccounts(): Map<AccountType, Int> {
         return mapOf(
             AccountType.BUYMEACOFFEE to R.drawable.new_buy_me_a_coffee,
@@ -134,6 +144,11 @@ object UtilsKt {
             AccountType.SLACK to R.drawable.slack,
             AccountType.TELEGRAM to R.drawable.telegram,
             AccountType.DISCORD to R.drawable.new_discord,
+            AccountType.SIGNAL to R.drawable.signal,
+            AccountType.LINE to R.drawable.line,
+            AccountType.ZOOM to R.drawable.zoom,
+            AccountType.SKYPE to R.drawable.skype,
+            AccountType.WECHAT to R.drawable.wechat
         )
     }
 
@@ -148,7 +163,8 @@ object UtilsKt {
         return mapOf(
             AccountType.REDDIT to R.drawable.reddit,
             AccountType.MEETUP to R.drawable.meetup,
-            AccountType.PINTEREST to R.drawable.pinterest
+            AccountType.PINTEREST to R.drawable.pinterest,
+            AccountType.STACKOVERFLOW to R.drawable.stackoverflow
         )
     }
 
@@ -161,6 +177,17 @@ object UtilsKt {
             "Snapchat" -> painterResource(id = R.drawable.snapchat)
             "Twitter" -> painterResource(id = R.drawable.twitter)
             "Messenger" -> painterResource(id = R.drawable.messenger)
+            "Microsoft OneDrive" -> painterResource(id = R.drawable.microsoft_onedrive)
+            "DropBox" -> painterResource(id = R.drawable.dropbox_new)
+            "Google Drive" -> painterResource(id = R.drawable.google_drive)
+            "Medium" -> painterResource(id = R.drawable.medium)
+            "GitHub" -> painterResource(id = R.drawable.github)
+            "GitLab" -> painterResource(id = R.drawable.gitlab)
+            "Signal" -> painterResource(id = R.drawable.signal)
+            "Line" -> painterResource(id = R.drawable.line)
+            "Zoom" -> painterResource(id = R.drawable.zoom)
+            "Skype" -> painterResource(id = R.drawable.skype)
+            "WeChat" -> painterResource(id = R.drawable.wechat)
             "Buy Me a Coffee" -> painterResource(id = R.drawable.new_buy_me_a_coffee)
             "Patreon" -> painterResource(id = R.drawable.patreon)
             "Slack" -> painterResource(id = R.drawable.slack)

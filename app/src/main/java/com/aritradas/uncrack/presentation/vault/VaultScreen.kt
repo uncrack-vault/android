@@ -101,7 +101,7 @@ fun VaultScreen(
                 placeholder = {
                     Row {
                         Text(
-                            text = "Search here ",
+                            text = "Search for ",
                             style = normal16.copy(OnSurfaceVariantLight),
                         )
                         TypewriterText(texts = listOf(
