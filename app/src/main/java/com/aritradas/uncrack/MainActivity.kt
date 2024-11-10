@@ -4,12 +4,16 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.core.view.WindowCompat
 import com.aritradas.uncrack.navigation.Navigation
 import com.aritradas.uncrack.presentation.settings.SettingsViewModel
 import com.aritradas.uncrack.ui.theme.UnCrackTheme
@@ -40,7 +44,18 @@ class MainActivity : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(
+                Color.Transparent.toArgb(), Color.Transparent.toArgb()
+            ),
+            navigationBarStyle = SystemBarStyle.light(
+                Color.Transparent.toArgb(), Color.Transparent.toArgb()
+            )
+        )
+
         super.onCreate(savedInstanceState)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         settingsViewModel.isScreenshotEnabled.observe(this) { isEnabled ->
             if (isEnabled) {
@@ -50,8 +65,6 @@ class MainActivity : ComponentActivity() {
                     android.view.WindowManager.LayoutParams.FLAG_SECURE)
             }
         }
-
-        enableEdgeToEdge()
 
         checkForAppUpdate()
 
