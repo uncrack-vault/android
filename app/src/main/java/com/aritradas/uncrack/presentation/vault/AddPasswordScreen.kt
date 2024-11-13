@@ -49,7 +49,7 @@ import com.aritradas.uncrack.domain.model.Account
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
-import com.aritradas.uncrack.ui.theme.normal20
+import com.aritradas.uncrack.ui.theme.medium22
 import com.aritradas.uncrack.util.UtilsKt.generateRandomPassword
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -98,7 +98,7 @@ fun AddPasswordScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                modifier = Modifier.size(80.dp),
+                modifier = Modifier.size(100.dp),
                 painter = rememberAsyncImagePainter(model = accountIcon),
                 contentDescription = null
             )
@@ -107,7 +107,7 @@ fun AddPasswordScreen(
 
             Text(
                 text = accountName,
-                style = normal20.copy(Color.Black)
+                style = medium22.copy(Color.Black)
             )
 
             Spacer(modifier = Modifier.height(20.dp))

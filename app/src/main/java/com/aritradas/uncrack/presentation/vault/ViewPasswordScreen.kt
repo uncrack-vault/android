@@ -57,9 +57,9 @@ import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.medium14
+import com.aritradas.uncrack.ui.theme.medium22
 import com.aritradas.uncrack.ui.theme.normal12
 import com.aritradas.uncrack.ui.theme.normal16
-import com.aritradas.uncrack.ui.theme.normal20
 import com.aritradas.uncrack.ui.theme.oldPassword
 import com.aritradas.uncrack.ui.theme.strongPassword
 import com.aritradas.uncrack.ui.theme.weakPassword
@@ -189,7 +189,7 @@ fun ViewPasswordScreen(
         ) {
 
             Image(
-                modifier = Modifier.size(80.dp),
+                modifier = Modifier.size(100.dp),
                 painter = getAccountImage(accountCompany),
                 contentDescription = null
             )
@@ -198,7 +198,7 @@ fun ViewPasswordScreen(
 
             Text(
                 text = accountCompany,
-                style = normal20.copy(Color.Black)
+                style = medium22.copy(Color.Black)
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -206,6 +206,7 @@ fun ViewPasswordScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
                     .clip(RoundedCornerShape(10.dp))
                     .shadow(
                         elevation = 10.dp,
