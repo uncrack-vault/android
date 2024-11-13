@@ -45,7 +45,7 @@ import com.aritradas.uncrack.domain.model.Account
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.normal20
+import com.aritradas.uncrack.ui.theme.medium22
 import com.aritradas.uncrack.util.UtilsKt.generateRandomPassword
 import com.aritradas.uncrack.util.UtilsKt.getAccountImage
 import java.time.LocalDateTime
@@ -98,7 +98,7 @@ fun EditPasswordScreen(
         ) {
 
             Image(
-                modifier = Modifier.size(80.dp),
+                modifier = Modifier.size(100.dp),
                 painter = getAccountImage(accountName),
                 contentDescription = null
             )
@@ -107,7 +107,7 @@ fun EditPasswordScreen(
 
             Text(
                 text = accountName,
-                style = normal20.copy(Color.Black)
+                style =  medium22.copy(Color.Black)
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -116,6 +116,7 @@ fun EditPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.email),
+                hintText = "user@example.com",
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
                 value = accountEmail,
@@ -130,6 +131,7 @@ fun EditPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.username),
+                hintText = "user.example",
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
                 value = accountUserName,
@@ -144,6 +146,7 @@ fun EditPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.password),
+                hintText = "Hit dice to generate password",
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                 value = accountPassword,

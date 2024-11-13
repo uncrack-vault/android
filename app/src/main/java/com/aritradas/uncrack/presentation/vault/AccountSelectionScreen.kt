@@ -28,6 +28,7 @@ import com.aritradas.uncrack.util.UtilsKt.getCommunitiesAccounts
 import com.aritradas.uncrack.util.UtilsKt.getCrowdSourcingAccounts
 import com.aritradas.uncrack.util.UtilsKt.getPortfolioAccounts
 import com.aritradas.uncrack.util.UtilsKt.getSocialAccounts
+import com.aritradas.uncrack.util.UtilsKt.getWorkAccounts
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,6 +69,31 @@ fun AccountSelectionScreen(
                 val accountText = entry.key
                 val iconId = entry.value
                 val category = stringResource(id = R.string.social)
+
+                AccountCard(
+                    icon = iconId,
+                    text = accountText.text,
+                ) {
+                    addEditViewModel.resetState()
+                    goToAddPasswordScreen(iconId, accountText.text, category)
+                }
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(
+                    text = stringResource(id = R.string.work),
+                    style = medium20.copy(Color.Black)
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+            }
+
+            items(getWorkAccounts().size) { index ->
+                val entry = getWorkAccounts().entries.elementAt(index)
+                val accountText = entry.key
+                val iconId = entry.value
+                val category = stringResource(id = R.string.work)
 
                 AccountCard(
                     icon = iconId,

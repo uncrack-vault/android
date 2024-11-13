@@ -101,7 +101,7 @@ fun VaultScreen(
                 placeholder = {
                     Row {
                         Text(
-                            text = "Search here ",
+                            text = "Search for ",
                             style = normal16.copy(OnSurfaceVariantLight),
                         )
                         TypewriterText(texts = listOf(
@@ -150,6 +150,7 @@ fun VaultScreen(
                 } else {
                     item {
                         EmptyState(
+                            modifier = Modifier.padding(top = 100.dp),
                             stateTitle = "Hey ${user.name}, \n currently there are no passwords saved",
                             image = R.drawable.vault_empty_state
                         )

@@ -2,6 +2,7 @@ package com.aritradas.uncrack.presentation.vault
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,13 +49,13 @@ import com.aritradas.uncrack.domain.model.Account
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
-import com.aritradas.uncrack.ui.theme.normal20
+import com.aritradas.uncrack.ui.theme.medium22
 import com.aritradas.uncrack.util.UtilsKt.generateRandomPassword
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationGraphicsApi::class)
 @Composable
 fun AddPasswordScreen(
     navController: NavHostController,
@@ -95,7 +98,7 @@ fun AddPasswordScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                modifier = Modifier.size(80.dp),
+                modifier = Modifier.size(100.dp),
                 painter = rememberAsyncImagePainter(model = accountIcon),
                 contentDescription = null
             )
@@ -104,7 +107,7 @@ fun AddPasswordScreen(
 
             Text(
                 text = accountName,
-                style = normal20.copy(Color.Black)
+                style = medium22.copy(Color.Black)
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -114,11 +117,26 @@ fun AddPasswordScreen(
                     .fillMaxWidth(),
                 maxLines = 1,
                 headerText = stringResource(id = R.string.email),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
+                hintText = "user@example.com",
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
                 value = email,
                 onValueChange = {
                     addEditViewModel.setEmail(it)
                 },
+                trailingIcon = {
+                    if (email.isNotEmpty()) {
+                        IconButton(
+                            onClick = {
+                                addEditViewModel.setEmail("")
+                            }
+                        ) {
+                            Icon(Icons.Default.Clear, contentDescription = null)
+                        }
+                    }
+                }
             )
 
             Spacer(modifier = Modifier.height(21.dp))
@@ -128,10 +146,25 @@ fun AddPasswordScreen(
                     .fillMaxWidth(),
                 maxLines = 1,
                 headerText = stringResource(id = R.string.username),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
+                hintText = "user.example",
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                ),
                 value = username,
                 onValueChange = {
                     addEditViewModel.setUserName(it)
+                },
+                trailingIcon = {
+                    if (username.isNotEmpty()) {
+                        IconButton(
+                            onClick = {
+                                addEditViewModel.setUserName("")
+                            }
+                        ) {
+                            Icon(Icons.Default.Clear, contentDescription = null)
+                        }
+                    }
                 }
             )
 
@@ -142,7 +175,11 @@ fun AddPasswordScreen(
                     .fillMaxWidth(),
                 maxLines = 1,
                 headerText = stringResource(id = R.string.password),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
+                hintText = "Hit dice to generate password",
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                ),
                 value = password,
                 onValueChange = {
                     addEditViewModel.setPassword(it)
@@ -156,6 +193,19 @@ fun AddPasswordScreen(
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
+                        if (password.isNotEmpty()) {
+                            IconButton(
+                                onClick = {
+                                    addEditViewModel.setPassword("")
+                                }
+                            ) {
+                                Icon(
+                                    Icons.Default.Clear,
+                                    contentDescription = null,
+                                )
+                            }
+                        }
+
                         IconButton(onClick = { passwordVisibility = passwordVisibility.not() }) {
                             Icon(
                                 modifier = Modifier.size(24.dp),
@@ -167,6 +217,7 @@ fun AddPasswordScreen(
                         IconButton(onClick = {
                             val generatedPassword = generateRandomPassword(12)
                             addEditViewModel.setPassword(generatedPassword)
+                            passwordVisibility = true
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.dice),
@@ -183,10 +234,24 @@ fun AddPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 headerText = stringResource(id = R.string.note),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Done
+                ),
                 value = note,
                 onValueChange = {
                     addEditViewModel.setNote(it)
+                },
+                trailingIcon = {
+                    if (note.isNotEmpty()) {
+                        IconButton(
+                            onClick = {
+                                addEditViewModel.setNote("")
+                            }
+                        ) {
+                            Icon(Icons.Default.Clear, contentDescription = null)
+                        }
+                    }
                 }
             )
 

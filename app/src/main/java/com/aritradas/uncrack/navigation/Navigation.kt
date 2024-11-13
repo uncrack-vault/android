@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -13,7 +14,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -279,13 +282,20 @@ fun ShowBottomNavigation(
             )
 
             bottomNavItems.forEach { item ->
+                val isSelected = backStackEntry.value?.destination?.route == item.route
+                val animateIconSize by animateFloatAsState(
+                    if (isSelected) 1f else 0.9f,
+                    label = "iconScale"
+                )
+
                 NavigationBarItem(
                     alwaysShowLabel = true,
                     icon = {
                         Icon(
+                            modifier = Modifier.scale(animateIconSize),
                             imageVector = item.icon,
                             contentDescription = item.name,
-                            tint = if (backStackEntry.value?.destination?.route == item.route)
+                            tint = if (isSelected)
                                 OnPrimaryContainerLight
                             else
                                 OnSurfaceVariantLight
@@ -295,17 +305,17 @@ fun ShowBottomNavigation(
                         Text(
                             text = item.name,
                             fontFamily = DMSansFontFamily,
-                            color = if (backStackEntry.value?.destination?.route == item.route)
+                            color = if (isSelected)
                                 OnPrimaryContainerLight
                             else
                                 OnSurfaceVariantLight,
-                            fontWeight = if (backStackEntry.value?.destination?.route == item.route)
+                            fontWeight = if (isSelected)
                                 FontWeight.SemiBold
                             else
                                 FontWeight.Normal,
                         )
                     },
-                    selected = backStackEntry.value?.destination?.route == item.route,
+                    selected = isSelected,
                     onClick = {
                         val currentDestination =
                             navController.currentBackStackEntry?.destination?.route

@@ -10,6 +10,7 @@ import com.aritradas.uncrack.domain.model.Key
 import com.aritradas.uncrack.domain.repository.KeyRepository
 import com.aritradas.uncrack.util.runIO
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,6 +34,10 @@ class KeyViewModel @Inject constructor(
 
     private val _hasSymbol = MutableLiveData(false)
     val hasSymbol: LiveData<Boolean> = _hasSymbol
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
 
     fun setMasterKey(masterKey: String) {
         _masterKeyLiveData.value = masterKey
@@ -60,7 +65,10 @@ class KeyViewModel @Inject constructor(
     }
 
     fun saveMasterKey(key: Key) = runIO {
+        delay(2000L)
+        _isLoading.postValue(true)
         repository.setMasterKey(key)
+        _isLoading.postValue(false)
     }
 
     fun getMasterKey() = runIO {
