@@ -18,6 +18,7 @@ import com.aritradas.uncrack.domain.model.Account
 import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 import com.aritradas.uncrack.ui.theme.medium18
 import com.aritradas.uncrack.ui.theme.normal14
+import com.aritradas.uncrack.util.EncryptionUtils
 import com.aritradas.uncrack.util.UtilsKt.getAccountImage
 
 @Composable
@@ -26,6 +27,12 @@ fun VaultCard(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
+
+    val email = try {
+        EncryptionUtils.decrypt(accountModel.email)
+    } catch (e: Exception) {
+        "Something went wrong!"
+    }
 
     Row(
         modifier = modifier
@@ -48,7 +55,7 @@ fun VaultCard(
             )
 
             Text(
-                text = accountModel.email,
+                text = email,
                 style = normal14.copy(SurfaceTintLight)
             )
         }

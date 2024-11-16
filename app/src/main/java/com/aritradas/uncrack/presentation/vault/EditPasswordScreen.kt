@@ -65,10 +65,11 @@ fun EditPasswordScreen(
     val formattedDateTime =
         DateTimeFormatter.ofPattern("dd/M/yyyy hh:mm:ss").format(currentDateTime)
     var passwordVisibility by remember { mutableStateOf(false) }
+
     val accountName = viewPasswordViewModel.accountModel.company
-    val accountEmail = viewPasswordViewModel.accountModel.email
-    val accountPassword = viewPasswordViewModel.accountModel.password
-    val accountUserName = viewPasswordViewModel.accountModel.username
+    val accountEmail = viewPasswordViewModel.decryptedEmail
+    val accountPassword = viewPasswordViewModel.decryptedPassword
+    val accountUserName = viewPasswordViewModel.decryptedUsername
     val accountCategory = viewPasswordViewModel.accountModel.category
     val accountNote = viewPasswordViewModel.accountModel.note
 

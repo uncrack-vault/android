@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aritradas.uncrack.domain.model.Account
 import com.aritradas.uncrack.domain.repository.AccountRepository
+import com.aritradas.uncrack.util.EncryptionUtils
 import com.aritradas.uncrack.util.runIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -31,26 +32,46 @@ class ViewPasswordViewModel @Inject constructor(
         )
     )
 
+    var decryptedEmail by mutableStateOf("")
+    var decryptedUsername by mutableStateOf("")
+    var decryptedPassword by mutableStateOf("")
+
     fun getAccountById(accountId: Int) = runIO {
         repository.getAccountById(accountId).collect { response ->
             accountModel = response
+            decryptData(response)
+        }
+    }
+
+    private fun decryptData(account: Account) {
+        try {
+            decryptedEmail = EncryptionUtils.decrypt(account.email)
+            decryptedUsername = EncryptionUtils.decrypt(account.username)
+            decryptedPassword = EncryptionUtils.decrypt(account.password)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
     fun updateAccount(account: Account) = runIO {
-        repository.editAccount(account)
+        val encryptedUpdatedAccount = account.copy(
+            email = EncryptionUtils.encrypt(account.email),
+            username = if (account.username.isNotEmpty()) EncryptionUtils.encrypt(account.username) else "",
+            password = EncryptionUtils.encrypt(account.password),
+        )
+        repository.editAccount(encryptedUpdatedAccount)
     }
 
     fun updateEmail(email: String) {
-        accountModel = accountModel.copy(email = email)
+        decryptedEmail = email
     }
 
     fun updateUserName(userName: String) {
-        accountModel = accountModel.copy(username = userName)
+        decryptedUsername = userName
     }
 
     fun updatePassword(password: String) {
-        accountModel = accountModel.copy(password = password)
+        decryptedPassword = password
     }
 
     fun updateNote(note: String) {

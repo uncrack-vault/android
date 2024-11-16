@@ -85,9 +85,9 @@ fun ViewPasswordScreen(
     var progressValue by remember { mutableFloatStateOf(0f) }
     var progressMessage by rememberSaveable { mutableStateOf("") }
     val accountCompany = viewPasswordViewModel.accountModel.company
-    val email = viewPasswordViewModel.accountModel.email
-    val username = viewPasswordViewModel.accountModel.username
-    val password = viewPasswordViewModel.accountModel.password
+    val email = viewPasswordViewModel.decryptedEmail
+    val username = viewPasswordViewModel.decryptedUsername
+    val password = viewPasswordViewModel.decryptedPassword
     val category = viewPasswordViewModel.accountModel.category
     val note = viewPasswordViewModel.accountModel.note
 
