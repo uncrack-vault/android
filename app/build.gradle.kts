@@ -85,7 +85,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // Default
-    implementation ("androidx.core:core-ktx:1.12.0")
+    implementation ("androidx.core:core-ktx:1.15.0")
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
 
