@@ -280,7 +280,7 @@ fun SettingsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
-                text = stringResource(R.string.appearance),
+                text = stringResource(R.string.danger_zone),
                 style = bold20.copy(color = OnPrimaryContainerLight)
             )
 
