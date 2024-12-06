@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "UnCrack"
 include (":app")
+include(":benchmark")

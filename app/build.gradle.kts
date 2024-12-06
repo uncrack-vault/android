@@ -33,6 +33,12 @@ android {
         getByName("debug") {
             isDebuggable = true
         }
+        create("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -163,4 +169,7 @@ dependencies {
 
     // BCrypt
     implementation("org.mindrot:jbcrypt:0.4")
+
+    //ProfilerInstaller
+    implementation("androidx.profileinstaller:profileinstaller:1.4.1")
 }
