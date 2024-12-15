@@ -67,7 +67,6 @@ import com.aritradas.uncrack.util.ConnectivityObserver
 import com.aritradas.uncrack.util.NetworkConnectivityObserver
 import com.aritradas.uncrack.util.UtilsKt.findActivity
 import com.aritradas.uncrack.util.Validator.Companion.isValidEmail
-import com.aritradas.uncrack.util.Validator.Companion.isValidPassword
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -125,11 +124,7 @@ fun LoginContent(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-    val isSignInButtonEnable by remember {
-        derivedStateOf {
-            email.isValidEmail() && password.isValidPassword()
-        }
-    }
+    val isSignInButtonEnable by remember { derivedStateOf { email.isValidEmail() } }
 
     val errorLiveData by viewModel.errorLiveData.observeAsState()
     val loginSuccess by viewModel.loginSuccess.observeAsState()

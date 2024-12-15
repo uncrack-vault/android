@@ -65,7 +65,6 @@ import com.aritradas.uncrack.util.NetworkConnectivityObserver
 import com.aritradas.uncrack.util.UtilsKt.findActivity
 import com.aritradas.uncrack.util.Validator.Companion.isValidEmail
 import com.aritradas.uncrack.util.Validator.Companion.isValidName
-import com.aritradas.uncrack.util.Validator.Companion.isValidPassword
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -143,7 +142,7 @@ fun SignupContent(
     var passwordVisibility by remember { mutableStateOf(false) }
     val isRegisterButtonEnable by remember {
         derivedStateOf {
-            userName.isValidName() && userEmail.isValidEmail() && userPassword.isValidPassword()
+            userName.isValidName() && userEmail.isValidEmail()
         }
     }
     val errorLiveData by authViewModel.errorLiveData.observeAsState()
