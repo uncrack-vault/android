@@ -53,7 +53,6 @@ import com.aritradas.uncrack.components.ProgressDialog
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.presentation.auth.AuthViewModel
-import com.aritradas.uncrack.presentation.auth.login.LoginScreens
 import com.aritradas.uncrack.presentation.masterKey.createMasterKey.CreateMasterKeyScreen
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
@@ -290,9 +289,7 @@ fun SignupContent(
 
                 Text(
                     modifier = Modifier.clickable {
-                        context.findActivity()?.apply {
-                            startActivity(Intent(activity, LoginScreens::class.java))
-                        }
+
                     },
                     text = stringResource(id = R.string.login),
                     style = medium16.copy(color = PrimaryLight)

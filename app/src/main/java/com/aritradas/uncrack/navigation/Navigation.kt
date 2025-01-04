@@ -32,8 +32,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aritradas.uncrack.R
+import com.aritradas.uncrack.presentation.auth.AuthViewModel
+import com.aritradas.uncrack.presentation.auth.login.LoginScreen
 import com.aritradas.uncrack.presentation.browse.BrowseScreen
 import com.aritradas.uncrack.presentation.browse.category.CategoryScreen
+import com.aritradas.uncrack.presentation.intro.OnboardingScreen
+import com.aritradas.uncrack.presentation.intro.SplashScreen
 import com.aritradas.uncrack.presentation.masterKey.KeyViewModel
 import com.aritradas.uncrack.presentation.masterKey.updateMasterKey.UpdateMasterKey
 import com.aritradas.uncrack.presentation.profile.HelpScreen
@@ -63,6 +67,7 @@ import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.PrimaryDark
 import com.aritradas.uncrack.util.BackPressHandler
+import com.aritradas.uncrack.util.ConnectivityObserver
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -71,7 +76,9 @@ import kotlinx.collections.immutable.persistentListOf
 @Composable
 fun Navigation(
     activity: Activity,
+    connectivityObserver: ConnectivityObserver,
     modifier: Modifier = Modifier,
+    authViewModel: AuthViewModel = hiltViewModel(),
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
     userViewModel: UserViewModel = hiltViewModel(),
@@ -87,6 +94,9 @@ fun Navigation(
     val backStackEntry = navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = persistentListOf(
+        Screen.OnboardingScreen.name,
+        Screen.LoginScreen.name,
+        Screen.SignUpScreen.name,
         Screen.AccountSelectionScreen.name,
         "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}&accountCategory={accountCategory}",
         "${Screen.EditPasswordScreen.name}/{accountID}",
@@ -102,7 +112,9 @@ fun Navigation(
     BackPressHandler()
 
     Scaffold(
-        modifier = Modifier.fillMaxSize().then(modifier),
+        modifier = Modifier
+            .fillMaxSize()
+            .then(modifier),
         bottomBar = {
             ShowBottomNavigation(
                 backStackEntry,
@@ -113,12 +125,28 @@ fun Navigation(
     ) {
         NavHost(
             navController = navController,
-            startDestination = "vault_screen",
+            startDestination = "splash_screen",
             enterTransition = { FadeIn },
             exitTransition = { FadeOut },
             popEnterTransition = { FadeIn },
             popExitTransition = { FadeOut }
         ) {
+
+            composable(route = Screen.SplashScreen.name) {
+                SplashScreen(navController)
+            }
+            composable(route = Screen.OnboardingScreen.name) { 
+                OnboardingScreen(navController)
+            }
+
+            composable(route = Screen.LoginScreen.name) {
+                LoginScreen(
+                    navController,
+                    viewModel = authViewModel,
+                    connectivityObserver
+                )
+            }
+
 
             composable(route = Screen.BrowseScreen.name) {
                 BrowseScreen(

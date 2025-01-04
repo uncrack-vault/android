@@ -1,7 +1,6 @@
 package com.aritradas.uncrack.presentation.settings
 
 import android.app.Activity
-import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -38,7 +37,6 @@ import com.aritradas.uncrack.components.UCSettingsCard
 import com.aritradas.uncrack.components.UCSwitchCard
 import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.navigation.Screen
-import com.aritradas.uncrack.presentation.auth.login.LoginScreens
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
@@ -63,8 +61,7 @@ fun SettingsScreen(
     var openDeleteAccountDialog by remember { mutableStateOf(false) }
 
     if (onLogOutComplete || onDeleteAccountComplete) {
-        activity.startActivity(Intent(activity, LoginScreens::class.java))
-        activity.finish()
+        navController.navigate(Screen.LoginScreen.name)
     }
 
     when {

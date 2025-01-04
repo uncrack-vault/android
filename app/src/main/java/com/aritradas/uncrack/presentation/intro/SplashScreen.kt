@@ -30,7 +30,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.aritradas.uncrack.R
+import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.masterKey.confirmMasterKey.ConfirmMasterKeyScreen
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.UnCrackTheme
@@ -38,33 +40,10 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
-@AndroidEntryPoint
-@SuppressLint("CustomSplashScreen")
-class SplashScreen : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(
-                Color.White.toArgb(), Color.White.toArgb()
-            ),
-            navigationBarStyle = SystemBarStyle.light(
-                Color.White.toArgb(), Color.White.toArgb()
-            )
-        )
-        super.onCreate(savedInstanceState)
-
-        setContent {
-            UnCrackTheme {
-                SplashContent(this@SplashScreen)
-            }
-        }
-    }
-}
 
 @Composable
-fun SplashContent(
-    activity: Activity,
+fun SplashScreen(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
 
@@ -84,17 +63,9 @@ fun SplashContent(
         animation = true
 
         if (currentUser == null) {
-            activity.run {
-                delay(2000L)
-                startActivity(Intent(this, OnboardingScreen::class.java))
-                finish()
-            }
+            navController.navigate(Screen.OnboardingScreen.name)
         } else {
-            activity.run {
-                delay(2000L)
-                startActivity(Intent(this, ConfirmMasterKeyScreen::class.java))
-                finish()
-            }
+            navController.navigate(Screen.ConfirmMasterKeyScreen.name)
         }
 
     }
