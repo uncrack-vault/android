@@ -34,6 +34,7 @@ import androidx.navigation.navArgument
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.presentation.auth.AuthViewModel
 import com.aritradas.uncrack.presentation.auth.login.LoginScreen
+import com.aritradas.uncrack.presentation.auth.signup.SignupScreen
 import com.aritradas.uncrack.presentation.browse.BrowseScreen
 import com.aritradas.uncrack.presentation.browse.category.CategoryScreen
 import com.aritradas.uncrack.presentation.intro.OnboardingScreen
@@ -147,7 +148,15 @@ fun Navigation(
                 )
             }
 
-
+            composable(Screen.SignUpScreen.name) {
+                SignupScreen(
+                    authViewModel,
+                    connectivityObserver,
+                    onSignUp = {
+                        navController.navigate(Screen.CreateMasterKeyScreen.name)
+                    }
+                )
+            }
             composable(route = Screen.BrowseScreen.name) {
                 BrowseScreen(
                     navController

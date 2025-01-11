@@ -1,7 +1,5 @@
 package com.aritradas.uncrack.presentation.auth.login
 
-import android.app.Activity
-import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -49,15 +47,11 @@ import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.auth.AuthViewModel
-import com.aritradas.uncrack.presentation.auth.forgotPassword.ForgotPasswordScreen
-import com.aritradas.uncrack.presentation.auth.signup.SignupScreen
-import com.aritradas.uncrack.presentation.masterKey.createMasterKey.CreateMasterKeyScreen
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.PrimaryLight
 import com.aritradas.uncrack.ui.theme.medium16
 import com.aritradas.uncrack.util.ConnectivityObserver
-import com.aritradas.uncrack.util.UtilsKt.findActivity
 import com.aritradas.uncrack.util.Validator.Companion.isValidEmail
 import kotlinx.coroutines.flow.collectLatest
 

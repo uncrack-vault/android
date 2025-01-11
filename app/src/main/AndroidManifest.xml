@@ -37,11 +37,6 @@
         </activity>
 
         <activity
-            android:name=".presentation.auth.signup.SignupScreen"
-            android:exported="true"
-            android:theme="@style/Theme.UnCrack"></activity>
-
-        <activity
             android:name=".presentation.auth.forgotPassword.ForgotPasswordScreen"
             android:exported="true"
             android:theme="@style/Theme.UnCrack"></activity>
