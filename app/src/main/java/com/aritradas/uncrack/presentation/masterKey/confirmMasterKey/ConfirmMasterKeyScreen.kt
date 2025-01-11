@@ -1,12 +1,5 @@
 package com.aritradas.uncrack.presentation.masterKey.confirmMasterKey
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.SystemBarStyle
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,7 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -37,47 +29,19 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.aritradas.uncrack.MainActivity
+import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
+import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.masterKey.KeyViewModel
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.UnCrackTheme
 import com.aritradas.uncrack.ui.theme.bold30
-import com.aritradas.uncrack.util.UtilsKt.findActivity
-import dagger.hilt.android.AndroidEntryPoint
-
-@AndroidEntryPoint
-class ConfirmMasterKeyScreen : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(
-                Color.Transparent.toArgb(), Color.Transparent.toArgb()
-            ),
-            navigationBarStyle = SystemBarStyle.light(
-                Color.Transparent.toArgb(), Color.Transparent.toArgb()
-            )
-        )
-
-        super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        setContent {
-            UnCrackTheme {
-                ConfirmMasterKeyContent(this@ConfirmMasterKeyScreen)
-            }
-        }
-    }
-}
 
 @Composable
-fun ConfirmMasterKeyContent(
-    activity: Activity,
+fun ConfirmMasterKeyScreen(
+    navController: NavController,
     modifier: Modifier = Modifier,
     masterKeyViewModel: KeyViewModel = hiltViewModel()
 ) {
@@ -154,9 +118,7 @@ fun ConfirmMasterKeyContent(
                     .fillMaxWidth(),
                 text = stringResource(R.string.unlock_uncrack),
                 onClick = {
-                    context.findActivity()?.apply {
-                        startActivity(Intent(activity, MainActivity::class.java))
-                    }
+                    navController.navigate(Screen.VaultScreen.name)
                 },
                 enabled = savedMasterKey == confirmMasterKey
             )

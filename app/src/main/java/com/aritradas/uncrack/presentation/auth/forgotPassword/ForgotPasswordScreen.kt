@@ -1,11 +1,6 @@
 package com.aritradas.uncrack.presentation.auth.forgotPassword
 
-import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.SystemBarStyle
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,7 +21,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,59 +36,14 @@ import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.presentation.auth.AuthViewModel
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
-import com.aritradas.uncrack.ui.theme.UnCrackTheme
 import com.aritradas.uncrack.util.ConnectivityObserver
-import com.aritradas.uncrack.util.NetworkConnectivityObserver
 import com.aritradas.uncrack.util.UtilsKt
 import com.aritradas.uncrack.util.UtilsKt.findActivity
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
-@AndroidEntryPoint
-class ForgotPasswordScreen : ComponentActivity() {
-
-    private lateinit var connectivityObserver: ConnectivityObserver
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(
-                Color.White.toArgb(), Color.White.toArgb()
-            ),
-            navigationBarStyle = SystemBarStyle.light(
-                Color.White.toArgb(), Color.White.toArgb()
-            )
-        )
-        super.onCreate(savedInstanceState)
-        connectivityObserver = NetworkConnectivityObserver(applicationContext)
-
-        setContent {
-            UnCrackTheme {
-                var networkStatus by remember {
-                    mutableStateOf(ConnectivityObserver.Status.Unavailable)
-                }
-
-                LaunchedEffect(key1 = true) {
-                    connectivityObserver.observe().collectLatest { status ->
-                        networkStatus = status
-                    }
-                }
-
-                when(networkStatus) {
-                    ConnectivityObserver.Status.Available -> {
-                        ForgotPasswordContent()
-                    }
-                    else -> {
-                        NoInternetScreen()
-                    }
-                }
-            }
-        }
-    }
-}
-
 @Composable
-fun ForgotPasswordContent(
+fun ForgotPasswordScreen(
+    connectivityObserver: ConnectivityObserver,
     modifier: Modifier = Modifier,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
@@ -104,6 +53,13 @@ fun ForgotPasswordContent(
     val resetPasswordRequestLiveData by viewModel.resetPassword.observeAsState()
     val errorLiveData by viewModel.errorLiveData.observeAsState()
     var isLoading by remember { mutableStateOf(false) }
+    var networkStatus by remember { mutableStateOf(ConnectivityObserver.Status.Unavailable) }
+
+    LaunchedEffect(key1 = true) {
+        connectivityObserver.observe().collectLatest { status ->
+            networkStatus = status
+        }
+    }
 
     LaunchedEffect(resetPasswordRequestLiveData) {
         if (resetPasswordRequestLiveData == true) {
@@ -126,47 +82,55 @@ fun ForgotPasswordContent(
         ProgressDialog {}
     }
 
-    Scaffold(
-        modifier = modifier.fillMaxSize()
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp)
-        ) {
+    when(networkStatus) {
+        ConnectivityObserver.Status.Available -> {
+            Scaffold(
+                modifier = modifier.fillMaxSize()
+            ) { paddingValues ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                        .padding(16.dp)
+                ) {
 
-            Text(
-                text = stringResource(R.string.forgot_password),
-                fontSize = 40.sp,
-                fontWeight = FontWeight.Bold,
-                fontFamily = DMSansFontFamily,
-                color = Color.Black
-            )
+                    Text(
+                        text = stringResource(R.string.forgot_password),
+                        fontSize = 40.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = DMSansFontFamily,
+                        color = Color.Black
+                    )
 
-            Spacer(modifier = Modifier.height(60.dp))
+                    Spacer(modifier = Modifier.height(60.dp))
 
-            UCTextField(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                headerText = stringResource(R.string.enter_your_registered_mail),
-                maxLines = 1,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
-                value = email,
-                onValueChange = { email = it }
-            )
+                    UCTextField(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        headerText = stringResource(R.string.enter_your_registered_mail),
+                        maxLines = 1,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
+                        value = email,
+                        onValueChange = { email = it }
+                    )
 
-            Spacer(modifier = Modifier.weight(1f))
+                    Spacer(modifier = Modifier.weight(1f))
 
-            UCButton(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                text = stringResource(R.string.send_reset_link),
-                onClick = {
-                    viewModel.resetPassword(email)
-                },
-                enabled = enableSendBtn
-            )
+                    UCButton(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = stringResource(R.string.send_reset_link),
+                        onClick = {
+                            viewModel.resetPassword(email)
+                        },
+                        enabled = enableSendBtn
+                    )
+                }
+            }
+        }
+        else -> {
+            NoInternetScreen()
         }
     }
+
 }

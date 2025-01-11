@@ -163,7 +163,7 @@ fun LoginScreen(
                         text = stringResource(R.string.forgot_password),
                         modifier = Modifier
                             .align(Alignment.End)
-                            .clickable { navController.navigate(Screen.ForgetPasswordScreen.name) },
+                            .clickable { navController.navigate(Screen.ForgotPasswordScreen.name) },
                         color = MaterialTheme.colorScheme.primary
                     )
 

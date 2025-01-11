@@ -33,6 +33,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.presentation.auth.AuthViewModel
+import com.aritradas.uncrack.presentation.auth.forgotPassword.ForgotPasswordScreen
 import com.aritradas.uncrack.presentation.auth.login.LoginScreen
 import com.aritradas.uncrack.presentation.auth.signup.SignupScreen
 import com.aritradas.uncrack.presentation.browse.BrowseScreen
@@ -40,6 +41,8 @@ import com.aritradas.uncrack.presentation.browse.category.CategoryScreen
 import com.aritradas.uncrack.presentation.intro.OnboardingScreen
 import com.aritradas.uncrack.presentation.intro.SplashScreen
 import com.aritradas.uncrack.presentation.masterKey.KeyViewModel
+import com.aritradas.uncrack.presentation.masterKey.confirmMasterKey.ConfirmMasterKeyScreen
+import com.aritradas.uncrack.presentation.masterKey.createMasterKey.CreateMasterKeyScreen
 import com.aritradas.uncrack.presentation.masterKey.updateMasterKey.UpdateMasterKey
 import com.aritradas.uncrack.presentation.profile.HelpScreen
 import com.aritradas.uncrack.presentation.profile.ProfileScreen
@@ -98,6 +101,9 @@ fun Navigation(
         Screen.OnboardingScreen.name,
         Screen.LoginScreen.name,
         Screen.SignUpScreen.name,
+        Screen.ForgotPasswordScreen.name,
+        Screen.CreateMasterKeyScreen.name,
+        Screen.ConfirmMasterKeyScreen.name,
         Screen.AccountSelectionScreen.name,
         "${Screen.AddPasswordScreen.name}?accountIcon={accountIcon}&accountName={accountName}&accountCategory={accountCategory}",
         "${Screen.EditPasswordScreen.name}/{accountID}",
@@ -157,6 +163,22 @@ fun Navigation(
                     }
                 )
             }
+
+            composable(Screen.ForgotPasswordScreen.name) {
+                ForgotPasswordScreen(connectivityObserver)
+            }
+
+            composable(Screen.CreateMasterKeyScreen.name) {
+                CreateMasterKeyScreen(
+                    navController,
+                    masterKeyViewModel
+                )
+            }
+
+            composable(Screen.ConfirmMasterKeyScreen.name) {
+                ConfirmMasterKeyScreen(navController)
+            }
+
             composable(route = Screen.BrowseScreen.name) {
                 BrowseScreen(
                     navController

@@ -36,22 +36,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".presentation.auth.forgotPassword.ForgotPasswordScreen"
-            android:exported="true"
-            android:theme="@style/Theme.UnCrack"></activity>
-
-        <activity
-            android:name=".presentation.masterKey.createMasterKey.CreateMasterKeyScreen"
-            android:exported="true"
-            android:theme="@style/Theme.UnCrack"></activity>
-
-        <activity
-            android:name=".presentation.masterKey.confirmMasterKey.ConfirmMasterKeyScreen"
-            android:exported="true"
-            android:theme="@style/Theme.UnCrack"></activity>
-
-
         <service
             android:name=".services.UnCrackMessagingService"
             android:enabled="true"

@@ -6,7 +6,7 @@ sealed class Screen(val name: String) {
     data object OnboardingScreen: Screen("onboarding_screen")
     data object LoginScreen: Screen("login_screen")
     data object SignUpScreen: Screen("signup_screen")
-    data object ForgetPasswordScreen: Screen("forgot_password_screen")
+    data object ForgotPasswordScreen: Screen("forgot_password_screen")
     data object CreateMasterKeyScreen: Screen("create_master_key_scree")
     data object ConfirmMasterKeyScreen: Screen("confirm_master_key_scree")
     data object BrowseScreen : Screen("home_screen")
