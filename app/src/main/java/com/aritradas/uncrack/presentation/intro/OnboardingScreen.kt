@@ -1,11 +1,6 @@
 package com.aritradas.uncrack.presentation.intro
 
 import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,41 +28,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.OnboardingComponent
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCStrokeButton
-import com.aritradas.uncrack.presentation.auth.login.LoginScreens
-import com.aritradas.uncrack.presentation.auth.signup.SignupScreen
+import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.intro.model.OnBoardingItem
 import com.aritradas.uncrack.ui.theme.OnSurfaceLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.PrimaryDark
-import com.aritradas.uncrack.ui.theme.UnCrackTheme
 import com.aritradas.uncrack.ui.theme.medium18
-import com.aritradas.uncrack.util.UtilsKt.findActivity
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class OnboardingScreen : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        enableEdgeToEdge()
-        super.onCreate(savedInstanceState)
-
-        setContent {
-            UnCrackTheme {
-                OnboardingContent(this@OnboardingScreen)
-            }
-        }
-    }
-}
 
 @Composable
-fun OnboardingContent(activity: Activity, modifier: Modifier = Modifier) {
+fun OnboardingScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
 
-    val context = LocalContext.current
     val pages = OnBoardingItem.onboardingScreenItems()
     val pagerState = rememberPagerState(pageCount = { pages.size })
     val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
@@ -89,11 +68,7 @@ fun OnboardingContent(activity: Activity, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .align(Alignment.End)
                     .clickable {
-                        context.findActivity()?.apply {
-                            val loginIntent = Intent(activity, LoginScreens::class.java)
-                            startActivity(loginIntent)
-                            finish()
-                        }
+                        navController.navigate(Screen.LoginScreen.name)
                     },
                 text = stringResource(R.string.skip),
                 style = medium18.copy(OnSurfaceLight)
@@ -123,9 +98,7 @@ fun OnboardingContent(activity: Activity, modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.get_started),
             onClick = {
-                context.findActivity()?.apply {
-                    startActivity(Intent(activity, LoginScreens::class.java))
-                }
+                navController.navigate(Screen.LoginScreen.name)
             }
         )
 
@@ -135,9 +108,7 @@ fun OnboardingContent(activity: Activity, modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.create_an_account),
             onClick = {
-                context.findActivity()?.apply {
-                    startActivity(Intent(activity, SignupScreen::class.java))
-                }
+                navController.navigate(Screen.SignUpScreen.name)
             }
         )
     }

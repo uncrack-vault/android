@@ -17,6 +17,7 @@ import androidx.core.view.WindowCompat
 import com.aritradas.uncrack.navigation.Navigation
 import com.aritradas.uncrack.presentation.settings.SettingsViewModel
 import com.aritradas.uncrack.ui.theme.UnCrackTheme
+import com.aritradas.uncrack.util.NetworkConnectivityObserver
 import com.google.android.gms.tasks.Task
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateInfo
@@ -70,7 +71,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             UnCrackTheme {
-                Navigation(this)
+                val connectivityObserver = NetworkConnectivityObserver(applicationContext)
+                Navigation(this, connectivityObserver)
             }
         }
     }

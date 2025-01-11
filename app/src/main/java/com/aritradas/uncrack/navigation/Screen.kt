@@ -2,6 +2,13 @@ package com.aritradas.uncrack.navigation
 
 sealed class Screen(val name: String) {
 
+    data object SplashScreen: Screen("splash_screen")
+    data object OnboardingScreen: Screen("onboarding_screen")
+    data object LoginScreen: Screen("login_screen")
+    data object SignUpScreen: Screen("signup_screen")
+    data object ForgotPasswordScreen: Screen("forgot_password_screen")
+    data object CreateMasterKeyScreen: Screen("create_master_key_scree")
+    data object ConfirmMasterKeyScreen: Screen("confirm_master_key_scree")
     data object BrowseScreen : Screen("home_screen")
     data object VaultScreen : Screen("vault_screen")
     data object ToolsScreen : Screen("tools_screen")
