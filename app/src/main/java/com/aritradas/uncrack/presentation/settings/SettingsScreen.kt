@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -25,10 +26,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.aritradas.uncrack.MainActivity
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.SettingsItemGroup
 import com.aritradas.uncrack.components.ThemeDialog
@@ -51,9 +54,11 @@ fun SettingsScreen(
     modifier: Modifier = Modifier
 ) {
 
+    val context = LocalContext.current
     val isScreenshotEnabled by settingsViewModel.isScreenshotEnabled.observeAsState(false)
     val onLogOutComplete by settingsViewModel.onLogOutComplete.observeAsState(false)
     val onDeleteAccountComplete by settingsViewModel.onDeleteAccountComplete.observeAsState(false)
+    val biometricAuthState by settingsViewModel.biometricAuthState.collectAsState()
     var openThemeDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
     var openDeleteAccountDialog by remember { mutableStateOf(false) }
@@ -228,8 +233,10 @@ fun SettingsScreen(
 
                 UCSwitchCard(
                     itemName = stringResource(R.string.unlock_with_biometric),
-                    isChecked = false,
-                    onChecked = {}
+                    isChecked = biometricAuthState,
+                    onChecked = {
+                        settingsViewModel.showBiometricPrompt(context as MainActivity)
+                    }
                 )
 
                 HorizontalDivider(
