@@ -21,8 +21,8 @@ fun SettingsItemGroup(
     Column(
         modifier = modifier
             .widthIn(max = 500.dp)
-            .padding(start = 12.dp, end = 12.dp)
-            .clip(RoundedCornerShape(8.dp))
+            .padding(horizontal = 12.dp)
+            .clip(RoundedCornerShape(10.dp))
             .background(BackgroundLight),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

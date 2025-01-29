@@ -1,6 +1,5 @@
 package com.aritradas.uncrack.presentation.settings
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -47,7 +46,6 @@ import com.aritradas.uncrack.ui.theme.normal16
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    activity: Activity,
     navController: NavHostController,
     settingsViewModel: SettingsViewModel,
     modifier: Modifier = Modifier
@@ -76,7 +74,6 @@ fun SettingsScreen(
                     Icon(
                         painter = painterResource(id = R.drawable.logout),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 },
                 title = {
@@ -135,7 +132,6 @@ fun SettingsScreen(
                     Icon(
                         painter = painterResource(id = R.drawable.delete_icon),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 },
                 title = {
@@ -225,16 +221,16 @@ fun SettingsScreen(
                     }
                 )
 
-//                HorizontalDivider(
-//                    thickness = 2.dp,
-//                    color = SurfaceVariantLight
-//                )
-//
-//                UCSwitchCard(
-//                    itemName = stringResource(R.string.unlock_with_biometric),
-//                    isChecked = false,
-//                    onChecked = {}
-//                )
+                HorizontalDivider(
+                    thickness = 2.dp,
+                    color = SurfaceVariantLight
+                )
+
+                UCSwitchCard(
+                    itemName = stringResource(R.string.unlock_with_biometric),
+                    isChecked = false,
+                    onChecked = {}
+                )
 
                 HorizontalDivider(
                     thickness = 2.dp,

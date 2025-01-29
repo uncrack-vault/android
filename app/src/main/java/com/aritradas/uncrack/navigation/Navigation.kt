@@ -271,7 +271,6 @@ fun Navigation(
 
             composable(route = Screen.SettingsScreen.name) {
                 SettingsScreen(
-                    activity,
                     navController,
                     settingsViewModel
                 )
