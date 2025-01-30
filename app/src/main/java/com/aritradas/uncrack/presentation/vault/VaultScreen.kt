@@ -77,19 +77,25 @@ fun VaultScreen(
         }
     ) { paddingValues ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(SurfaceVariantLight)
-                .padding(16.dp)
+                .then(modifier),
+            verticalArrangement = Arrangement.Top
         ) {
             Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
                 text = "Hello, ${user.name}",
                 style = medium24.copy(Color.Black)
             )
 
             SearchBar(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
                 query = searchQuery,
                 onQueryChange = {
                     searchQuery = it
@@ -111,7 +117,6 @@ fun VaultScreen(
                             "Linkedin"
                         ))
                     }
-
                 },
                 colors = SearchBarDefaults.colors(
                     containerColor = PrimaryContainerLight
@@ -135,7 +140,8 @@ fun VaultScreen(
 
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 if (accounts.isNotEmpty()) {
@@ -150,7 +156,6 @@ fun VaultScreen(
                 } else {
                     item {
                         EmptyState(
-                            modifier = Modifier.padding(top = 100.dp),
                             stateTitle = "Hey ${user.name}, \n currently there are no passwords saved",
                             image = R.drawable.vault_empty_state
                         )

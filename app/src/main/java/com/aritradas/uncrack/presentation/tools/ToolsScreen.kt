@@ -52,13 +52,6 @@ fun ToolsScreen(
                 .padding(16.dp),
         ) {
 
-            Text(
-                text = stringResource(R.string.tools),
-                style = medium28.copy(OnPrimaryContainerLight)
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
             Row(
                 modifier = modifier
                     .fillMaxWidth()

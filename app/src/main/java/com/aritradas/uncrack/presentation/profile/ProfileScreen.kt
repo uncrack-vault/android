@@ -6,10 +6,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,10 +48,12 @@ fun ProfileScreen(
 
     val context = LocalContext.current
     val userData by userViewModel.state.collectAsState()
+    val paddingValues = WindowInsets.systemBars.asPaddingValues()
 
     Column(
         modifier = modifier
             .fillMaxSize()
+            .padding(top = paddingValues.calculateTopPadding() + 10.dp)
             .background(SurfaceVariantLight),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -56,8 +61,7 @@ fun ProfileScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(BackgroundLight)
-                .padding(16.dp),
+                .background(BackgroundLight),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -69,10 +73,9 @@ fun ProfileScreen(
             ) {
                 ProfileContainer(
                     userViewModel = userViewModel,
-                    modifier = Modifier.padding(top = 20.dp)
                 )
 
-                Spacer(modifier = Modifier.height(22.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
                     text = userData.name,
@@ -90,11 +93,6 @@ fun ProfileScreen(
                 onClick = {
                     navHostController.navigate(Screen.SettingsScreen.name)
                 }
-            )
-
-            HorizontalDivider(
-                thickness = 2.dp,
-                color = SurfaceVariantLight
             )
 
             HorizontalDivider(

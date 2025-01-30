@@ -45,6 +45,7 @@ import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.bold20
 import com.aritradas.uncrack.ui.theme.medium14
 import com.aritradas.uncrack.ui.theme.normal16
+import com.aritradas.uncrack.ui.theme.semiBold18
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -213,7 +214,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
                 text = stringResource(id = R.string.security),
-                style = bold20.copy(color = OnPrimaryContainerLight)
+                style = semiBold18.copy(color = OnPrimaryContainerLight)
             )
 
             Spacer(modifier = Modifier.height(14.dp))
@@ -281,7 +282,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
                 text = stringResource(R.string.danger_zone),
-                style = bold20.copy(color = OnPrimaryContainerLight)
+                style = semiBold18.copy(color = OnPrimaryContainerLight)
             )
 
             Spacer(modifier = Modifier.height(14.dp))
