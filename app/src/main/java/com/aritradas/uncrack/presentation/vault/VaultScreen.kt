@@ -39,6 +39,7 @@ import com.aritradas.uncrack.components.TypewriterText
 import com.aritradas.uncrack.components.VaultCard
 import com.aritradas.uncrack.sharedViewModel.UserViewModel
 import com.aritradas.uncrack.presentation.vault.viewmodel.VaultViewModel
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.PrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
@@ -80,7 +81,7 @@ fun VaultScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(SurfaceVariantLight)
+                .background(BackgroundLight)
                 .then(modifier),
             verticalArrangement = Arrangement.Top
         ) {

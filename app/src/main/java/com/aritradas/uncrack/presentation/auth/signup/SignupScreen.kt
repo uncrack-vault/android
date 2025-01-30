@@ -1,6 +1,7 @@
 package com.aritradas.uncrack.presentation.auth.signup
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,14 +38,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.NoInternetScreen
 import com.aritradas.uncrack.components.ProgressDialog
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
-import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.auth.AuthViewModel
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.PrimaryLight
@@ -106,9 +106,6 @@ fun SignupScreen(
         }
     }
 
-    if (isLoading) {
-        ProgressDialog {}
-    }
 
     when(networkStatus) {
         ConnectivityObserver.Status.Available -> {
@@ -118,6 +115,7 @@ fun SignupScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
+                        .background(BackgroundLight)
                         .padding(paddingValues)
                         .padding(16.dp)
                 ) {

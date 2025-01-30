@@ -39,6 +39,7 @@ import com.aritradas.uncrack.components.UCSettingsCard
 import com.aritradas.uncrack.components.UCSwitchCard
 import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.navigation.Screen
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
@@ -206,7 +207,7 @@ fun SettingsScreen(
             modifier = modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(SurfaceVariantLight),
+                .background(BackgroundLight)
         ) {
 
             Text(
@@ -229,7 +230,7 @@ fun SettingsScreen(
 
                 HorizontalDivider(
                     thickness = 2.dp,
-                    color = SurfaceVariantLight
+                    color = OnSurfaceVariantLight
                 )
 
                 UCSwitchCard(
@@ -242,7 +243,7 @@ fun SettingsScreen(
 
                 HorizontalDivider(
                     thickness = 2.dp,
-                    color = SurfaceVariantLight
+                    color = OnSurfaceVariantLight
                 )
 
                 UCSwitchCard(

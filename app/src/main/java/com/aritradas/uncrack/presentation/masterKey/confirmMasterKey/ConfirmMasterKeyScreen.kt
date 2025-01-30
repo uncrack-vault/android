@@ -36,6 +36,7 @@ import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.masterKey.KeyViewModel
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.bold30
 
@@ -46,7 +47,6 @@ fun ConfirmMasterKeyScreen(
     masterKeyViewModel: KeyViewModel = hiltViewModel()
 ) {
 
-    val context = LocalContext.current
     var confirmMasterKey by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
     val savedMasterKey = masterKeyViewModel.keyModel.password
@@ -63,7 +63,7 @@ fun ConfirmMasterKeyScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(SurfaceVariantLight)
+                .background(BackgroundLight)
                 .padding(16.dp)
         ) {
 
