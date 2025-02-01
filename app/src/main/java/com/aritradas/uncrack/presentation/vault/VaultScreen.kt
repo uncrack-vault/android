@@ -45,6 +45,7 @@ import com.aritradas.uncrack.ui.theme.PrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.normal16
+import com.aritradas.uncrack.util.BackPressHandler
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,6 +59,8 @@ fun VaultScreen(
     val accounts by vaultViewModel.filteredAccounts.collectAsState()
     var searchQuery by rememberSaveable { mutableStateOf("") }
     val user by userViewModel.state.collectAsState()
+
+    BackPressHandler()
 
     LaunchedEffect(Unit) {
         vaultViewModel.getAccounts()
