@@ -42,8 +42,7 @@ import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.bold20
+import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.medium14
 import com.aritradas.uncrack.ui.theme.normal16
 import com.aritradas.uncrack.ui.theme.semiBold18
@@ -197,7 +196,7 @@ fun SettingsScreen(
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 title = "Settings",
-                colors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
+                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
                 onBackPress = { navController.popBackStack() }
             )
         }
@@ -230,7 +229,7 @@ fun SettingsScreen(
 
                 HorizontalDivider(
                     thickness = 2.dp,
-                    color = OnSurfaceVariantLight
+                    color = SurfaceLight
                 )
 
                 UCSwitchCard(
@@ -243,7 +242,7 @@ fun SettingsScreen(
 
                 HorizontalDivider(
                     thickness = 2.dp,
-                    color = OnSurfaceVariantLight
+                    color = SurfaceLight
                 )
 
                 UCSwitchCard(

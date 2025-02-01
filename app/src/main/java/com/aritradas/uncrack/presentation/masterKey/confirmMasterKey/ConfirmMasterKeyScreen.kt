@@ -39,6 +39,7 @@ import com.aritradas.uncrack.presentation.masterKey.KeyViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.bold30
+import kotlinx.coroutines.delay
 
 @Composable
 fun ConfirmMasterKeyScreen(
@@ -46,13 +47,21 @@ fun ConfirmMasterKeyScreen(
     modifier: Modifier = Modifier,
     masterKeyViewModel: KeyViewModel = hiltViewModel()
 ) {
-
     var confirmMasterKey by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
     val savedMasterKey = masterKeyViewModel.keyModel.password
 
     LaunchedEffect(Unit) {
         masterKeyViewModel.getMasterKey()
+    }
+
+    LaunchedEffect(isLoading) {
+        if (isLoading) {
+            delay(2000)
+            isLoading = false
+            navController.navigate(Screen.VaultScreen.name)
+        }
     }
 
     Scaffold(
@@ -98,10 +107,7 @@ fun ConfirmMasterKeyScreen(
                             R.string.hide_password
                         )
 
-
-                    IconButton(onClick =
-                    { passwordVisibility = passwordVisibility.not() }
-                    ) {
+                    IconButton(onClick = { passwordVisibility = passwordVisibility.not() }) {
                         Icon(
                             modifier = Modifier.size(24.dp),
                             painter = image,
@@ -117,8 +123,12 @@ fun ConfirmMasterKeyScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 text = stringResource(R.string.unlock_uncrack),
+                isLoading = isLoading,
+                loadingText = "Unlocking...",
                 onClick = {
-                    navController.navigate(Screen.VaultScreen.name)
+                    if (savedMasterKey == confirmMasterKey) {
+                        isLoading = true
+                    }
                 },
                 enabled = savedMasterKey == confirmMasterKey
             )

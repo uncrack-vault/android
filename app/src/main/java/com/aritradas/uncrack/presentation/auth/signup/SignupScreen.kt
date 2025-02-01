@@ -38,11 +38,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.NoInternetScreen
 import com.aritradas.uncrack.components.ProgressDialog
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
+import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.auth.AuthViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
@@ -60,6 +62,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun SignupScreen(
+    navController: NavController,
     authViewModel: AuthViewModel,
     connectivityObserver: ConnectivityObserver,
     modifier: Modifier = Modifier,
@@ -227,7 +230,7 @@ fun SignupScreen(
 
                         Text(
                             modifier = Modifier.clickable {
-
+                                navController.navigate(Screen.LoginScreen.name)
                             },
                             text = stringResource(id = R.string.login),
                             style = medium16.copy(color = PrimaryLight)

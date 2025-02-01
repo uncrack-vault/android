@@ -33,9 +33,8 @@ import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.sharedViewModel.UserViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceLight
-import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
+import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.SurfaceTintLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.medium22
 import com.aritradas.uncrack.ui.theme.normal14
 import com.aritradas.uncrack.util.Constants
@@ -62,7 +61,7 @@ fun ProfileScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(SurfaceVariantLight),
+                .background(BackgroundLight),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -98,7 +97,7 @@ fun ProfileScreen(
 
             HorizontalDivider(
                 thickness = 2.dp,
-                color = OnSurfaceVariantLight
+                color = SurfaceLight
             )
 
             UCSettingsCard(
@@ -125,7 +124,7 @@ fun ProfileScreen(
 
             HorizontalDivider(
                 thickness = 2.dp,
-                color = OnSurfaceVariantLight
+                color = SurfaceLight
             )
 
             UCSettingsCard(

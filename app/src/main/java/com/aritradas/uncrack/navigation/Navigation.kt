@@ -70,6 +70,7 @@ import com.aritradas.uncrack.ui.theme.FadeOut
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.PrimaryDark
+import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.util.BackPressHandler
 import com.aritradas.uncrack.util.ConnectivityObserver
 import kotlinx.collections.immutable.ImmutableList
@@ -156,6 +157,7 @@ fun Navigation(
 
             composable(Screen.SignUpScreen.name) {
                 SignupScreen(
+                    navController,
                     authViewModel,
                     connectivityObserver,
                     onSignUp = {
