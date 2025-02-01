@@ -36,6 +36,7 @@ import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.domain.model.Key
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.masterKey.KeyViewModel
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
@@ -66,7 +67,7 @@ fun CreateMasterKeyScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(SurfaceVariantLight)
+                .background(BackgroundLight)
                 .padding(16.dp)
         ) {
             Text(

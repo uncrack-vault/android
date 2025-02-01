@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.navigation.Screen
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.medium18
@@ -48,16 +49,9 @@ fun ToolsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(SurfaceVariantLight)
+                .background(BackgroundLight)
                 .padding(16.dp),
         ) {
-
-            Text(
-                text = stringResource(R.string.tools),
-                style = medium28.copy(OnPrimaryContainerLight)
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
 
             Row(
                 modifier = modifier
@@ -66,7 +60,7 @@ fun ToolsScreen(
                     .clickable {
                         navController.navigate(Screen.PasswordGeneratorScreen.name)
                     }
-                    .background(Color.White)
+                    .background(SurfaceVariantLight)
                     .shadow(
                         elevation = 5.dp,
                         spotColor = Color(0x0D666666),
@@ -111,7 +105,7 @@ fun ToolsScreen(
                     .clickable {
                         navController.navigate(Screen.PasswordHealthScreen.name)
                     }
-                    .background(Color.White)
+                    .background(SurfaceVariantLight)
                     .shadow(
                         elevation = 5.dp,
                         spotColor = Color(0x0D666666),

@@ -126,7 +126,7 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Datastore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.2")
 
     // Lottie Animation
     implementation("com.airbnb.android:lottie-compose:5.0.3")
@@ -163,4 +163,6 @@ dependencies {
 
     // BCrypt
     implementation("org.mindrot:jbcrypt:0.4")
+
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
 }

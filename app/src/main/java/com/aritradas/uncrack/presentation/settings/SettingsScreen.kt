@@ -1,6 +1,5 @@
 package com.aritradas.uncrack.presentation.settings
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -26,10 +26,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.aritradas.uncrack.MainActivity
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.SettingsItemGroup
 import com.aritradas.uncrack.components.ThemeDialog
@@ -37,25 +39,27 @@ import com.aritradas.uncrack.components.UCSettingsCard
 import com.aritradas.uncrack.components.UCSwitchCard
 import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.navigation.Screen
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.bold20
+import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.medium14
 import com.aritradas.uncrack.ui.theme.normal16
+import com.aritradas.uncrack.ui.theme.semiBold18
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    activity: Activity,
     navController: NavHostController,
     settingsViewModel: SettingsViewModel,
     modifier: Modifier = Modifier
 ) {
 
+    val context = LocalContext.current
     val isScreenshotEnabled by settingsViewModel.isScreenshotEnabled.observeAsState(false)
     val onLogOutComplete by settingsViewModel.onLogOutComplete.observeAsState(false)
     val onDeleteAccountComplete by settingsViewModel.onDeleteAccountComplete.observeAsState(false)
+    val biometricAuthState by settingsViewModel.biometricAuthState.collectAsState()
     var openThemeDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
     var openDeleteAccountDialog by remember { mutableStateOf(false) }
@@ -76,7 +80,6 @@ fun SettingsScreen(
                     Icon(
                         painter = painterResource(id = R.drawable.logout),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 },
                 title = {
@@ -135,7 +138,6 @@ fun SettingsScreen(
                     Icon(
                         painter = painterResource(id = R.drawable.delete_icon),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 },
                 title = {
@@ -194,7 +196,7 @@ fun SettingsScreen(
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 title = "Settings",
-                colors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
+                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
                 onBackPress = { navController.popBackStack() }
             )
         }
@@ -204,7 +206,7 @@ fun SettingsScreen(
             modifier = modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(SurfaceVariantLight),
+                .background(BackgroundLight)
         ) {
 
             Text(
@@ -212,7 +214,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
                 text = stringResource(id = R.string.security),
-                style = bold20.copy(color = OnPrimaryContainerLight)
+                style = semiBold18.copy(color = OnPrimaryContainerLight)
             )
 
             Spacer(modifier = Modifier.height(14.dp))
@@ -225,20 +227,22 @@ fun SettingsScreen(
                     }
                 )
 
-//                HorizontalDivider(
-//                    thickness = 2.dp,
-//                    color = SurfaceVariantLight
-//                )
-//
-//                UCSwitchCard(
-//                    itemName = stringResource(R.string.unlock_with_biometric),
-//                    isChecked = false,
-//                    onChecked = {}
-//                )
+                HorizontalDivider(
+                    thickness = 2.dp,
+                    color = SurfaceLight
+                )
+
+                UCSwitchCard(
+                    itemName = stringResource(R.string.unlock_with_biometric),
+                    isChecked = biometricAuthState,
+                    onChecked = {
+                        settingsViewModel.showBiometricPrompt(context as MainActivity)
+                    }
+                )
 
                 HorizontalDivider(
                     thickness = 2.dp,
-                    color = SurfaceVariantLight
+                    color = SurfaceLight
                 )
 
                 UCSwitchCard(
@@ -278,7 +282,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
                 text = stringResource(R.string.danger_zone),
-                style = bold20.copy(color = OnPrimaryContainerLight)
+                style = semiBold18.copy(color = OnPrimaryContainerLight)
             )
 
             Spacer(modifier = Modifier.height(14.dp))

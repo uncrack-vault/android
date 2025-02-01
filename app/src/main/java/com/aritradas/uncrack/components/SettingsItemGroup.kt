@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.ui.theme.BackgroundLight
+import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 
 @Composable
 fun SettingsItemGroup(
@@ -21,9 +22,9 @@ fun SettingsItemGroup(
     Column(
         modifier = modifier
             .widthIn(max = 500.dp)
-            .padding(start = 12.dp, end = 12.dp)
-            .clip(RoundedCornerShape(8.dp))
-            .background(BackgroundLight),
+            .padding(horizontal = 12.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .background(SurfaceVariantLight),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         columnScope()

@@ -1,6 +1,7 @@
 package com.aritradas.uncrack.presentation.auth.signup
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -45,6 +46,7 @@ import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.auth.AuthViewModel
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.PrimaryLight
@@ -60,6 +62,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun SignupScreen(
+    navController: NavController,
     authViewModel: AuthViewModel,
     connectivityObserver: ConnectivityObserver,
     modifier: Modifier = Modifier,
@@ -106,9 +109,6 @@ fun SignupScreen(
         }
     }
 
-    if (isLoading) {
-        ProgressDialog {}
-    }
 
     when(networkStatus) {
         ConnectivityObserver.Status.Available -> {
@@ -118,6 +118,7 @@ fun SignupScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
+                        .background(BackgroundLight)
                         .padding(paddingValues)
                         .padding(16.dp)
                 ) {
@@ -229,7 +230,7 @@ fun SignupScreen(
 
                         Text(
                             modifier = Modifier.clickable {
-
+                                navController.navigate(Screen.LoginScreen.name)
                             },
                             text = stringResource(id = R.string.login),
                             style = medium16.copy(color = PrimaryLight)

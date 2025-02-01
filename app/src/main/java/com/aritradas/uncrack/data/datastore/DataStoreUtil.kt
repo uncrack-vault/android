@@ -15,5 +15,6 @@ class DataStoreUtil @Inject constructor(context: Context) {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("settings")
         val IS_DARK_MODE_KEY = booleanPreferencesKey("dark_mode")
         val IS_SS_BLOCK_KEY = booleanPreferencesKey("ss_block")
+        val IS_BIOMETRIC_AUTH_SET_KEY = booleanPreferencesKey("biometric_auth")
     }
 }

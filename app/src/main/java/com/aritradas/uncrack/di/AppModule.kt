@@ -28,6 +28,11 @@ import javax.inject.Singleton
 object AppModule {
 
     @Provides
+    fun provideContext(@ApplicationContext context: Context): Context {
+        return context
+    }
+
+    @Provides
     fun provideDataStoreUtil(@ApplicationContext context: Context): DataStoreUtil =
         DataStoreUtil(context)
 
