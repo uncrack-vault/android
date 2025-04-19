@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
@@ -7,6 +10,11 @@ plugins {
     id ("com.google.firebase.crashlytics")
     id ("com.google.devtools.ksp")
     id ("com.google.dagger.hilt.android")
+}
+
+val localProperties = Properties()
+if (rootProject.file("local.properties").exists()) {
+    localProperties.load(FileInputStream(rootProject.file("local.properties")))
 }
 
 android {
@@ -27,10 +35,10 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file("../uncrack_release.jks")
-            storePassword = "uncrack"
-            keyAlias = "key0"
-            keyPassword = "uncrack"
+            storeFile = file(localProperties.getProperty("uncrack.store.file", "../uncrack_release.jks"))
+            storePassword = localProperties.getProperty("uncrack.store.password", "")
+            keyAlias = localProperties.getProperty("uncrack.key.alias", "")
+            keyPassword = localProperties.getProperty("uncrack.key.password", "")
         }
     }
 
