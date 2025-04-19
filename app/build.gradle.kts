@@ -24,14 +24,29 @@ android {
     lint {
         baseline = file("lint-baseline.xml")
     }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("../uncrack_release.jks")
+            storePassword = "uncrack"
+            keyAlias = "key0"
+            keyPassword = "uncrack"
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles (getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            resValue("string", "app_name", "UnCrack")
+            signingConfig = signingConfigs.getByName("release")
         }
         getByName("debug") {
             isDebuggable = true
+            applicationIdSuffix = ".debug"
+            resValue("string", "app_name", "UnCrack Debug")
+            versionNameSuffix = "-debug"
         }
     }
     compileOptions {
