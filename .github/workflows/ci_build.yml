@@ -30,12 +30,41 @@ jobs:
       - name: Create dummy google-services.json (Debug)
         run: |
           mkdir -p app/src/debug
-          echo '{}' > app/src/debug/google-services.json
+          cat <<EOF > app/src/debug/google-services.json
+          {
+            "project_info": {
+              "project_number": "1234567890",
+              "project_id": "dummy-project"
+            },
+            "client": [
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:1234567890:android:dummyappid",
+                  "android_client_info": {
+                    "package_name": "com.example.dummy"
+                  }
+                },
+                "oauth_client": [],
+                "api_key": [
+                  {
+                    "current_key": "DUMMY_API_KEY"
+                  }
+                ],
+                "services": {
+                  "appinvite_service": {
+                    "other_platform_oauth_client": []
+                  }
+                }
+              }
+            ],
+            "configuration_version": "1"
+          }
+          EOF
 
       - name: Create dummy google-services.json (Release)
         run: |
           mkdir -p app/src/release
-          echo '{}' > app/src/release/google-services.json
+          cp app/src/debug/google-services.json app/src/release/google-services.json
 
       - name: Build with Gradle
         run: ./gradlew build
