@@ -79,7 +79,7 @@ dependencies {
     implementation("androidx.compose.animation:animation-graphics-android:1.7.5")
     val roomVersion = "2.6.1"
     val viewModelVersion = "2.5.1"
-    val navVersion = "2.8.6"
+    val navVersion = "2.8.9"
 
     // Compose
     val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
