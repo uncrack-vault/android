@@ -1,4 +1,5 @@
 name: Build
+
 on:
   push:
     branches:
@@ -6,20 +7,28 @@ on:
   pull_request:
     branches:
       - '**'
+
+env:
+  RELEASE_KEYSTORE_PATH: uncrack_release.jks
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
+
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
           java-version: '17'
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Create dummy google-services.json (Debug)
         run: |
           mkdir -p app/src/debug
@@ -53,41 +62,23 @@ jobs:
             "configuration_version": "1"
           }
           EOF
+
       - name: Create dummy google-services.json (Release)
         run: |
           mkdir -p app/src/release
-          cat <<EOF > app/src/release/google-services.json
-          {
-            "project_info": {
-              "project_number": "1234567890",
-              "project_id": "dummy-project"
-            },
-            "client": [
-              {
-                "client_info": {
-                  "mobilesdk_app_id": "1:1234567890:android:dummyappid",
-                  "android_client_info": {
-                    "package_name": "com.aritradas.uncrack"
-                  }
-                },
-                "oauth_client": [],
-                "api_key": [
-                  {
-                    "current_key": "DUMMY_API_KEY"
-                  }
-                ],
-                "services": {
-                  "appinvite_service": {
-                    "other_platform_oauth_client": []
-                  }
-                }
-              }
-            ],
-            "configuration_version": "1"
-          }
-          EOF
+          cp app/src/debug/google-services.json app/src/release/google-services.json
+
+      - name: Decode keystore from secret
+        run: |
+          echo "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" | base64 -d > $RELEASE_KEYSTORE_PATH
+
       - name: Build with Gradle
+        env:
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
         run: ./gradlew build
+
       - name: Cache Gradle dependencies
         uses: actions/cache@v3
         with:
