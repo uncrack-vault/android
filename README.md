@@ -56,9 +56,19 @@ or click badges below.
 
 - **Auto-Lock Mechanism:** The app automatically locks after a certain period of inactivity, requiring the user to re-authenticate.
 
-# ✨ Design 
+## 🔐 Firebase Setup
 
-# Screenshots
+This project requires a `google-services.json` file in:
+- `app/src/debug/`
+- `app/src/release/`
+
+To get your own config:
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a project and register your app (`com.example.yourapp`)
+3. Download the `google-services.json` file and place it in the appropriate folders
+
+
+# ✨ Design 
 
 <div align="center">
   <div>
