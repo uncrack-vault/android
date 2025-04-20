@@ -12,17 +12,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the code
-      uses: actions/checkout@v2
+      - name: Checkout the code
+        uses: actions/checkout@v2
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-    - name: Build with Gradle
-      run: ./gradlew build
+      - name: Create dummy google-services.json (Debug)
+        run: |
+          mkdir -p app/src/debug
+          echo '{}' > app/src/debug/google-services.json
+
+      - name: Create dummy google-services.json (Release)
+        run: |
+          mkdir -p app/src/release
+          echo '{}' > app/src/release/google-services.json
+
+      - name: Build with Gradle
+        run: ./gradlew build
