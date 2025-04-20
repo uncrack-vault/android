@@ -16,6 +16,12 @@ val localProperties = Properties()
 if (rootProject.file("local.properties").exists()) {
     localProperties.load(FileInputStream(rootProject.file("local.properties")))
 }
+val versionProperties = Properties().apply {
+    load(FileInputStream(File(rootProject.rootDir, "version.properties")))
+}
+
+val versioncode = versionProperties["VERSION_CODE"].toString().toInt()
+val versionname = versionProperties["VERSION_NAME"].toString()
 
 android {
     namespace = "com.aritradas.uncrack"
@@ -25,8 +31,8 @@ android {
         applicationId = "com.aritradas.uncrack"
         minSdk = 24
         targetSdk = 34
-        versionCode = 12
-        versionName = "3.2.0"
+        versionCode = versioncode
+        versionName = versionname
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     lint {

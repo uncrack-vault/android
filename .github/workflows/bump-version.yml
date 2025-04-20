@@ -1,0 +1,48 @@
+name: Bump Version on Push to Master
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Read current version and bump it
+        id: bump
+        run: |
+          file=version.properties
+          versionCode=$(grep VERSION_CODE $file | cut -d'=' -f2)
+          versionName=$(grep VERSION_NAME $file | cut -d'=' -f2)
+
+          newVersionCode=$((versionCode + 1))
+
+          # Increment patch version (e.g., 3.2.0 -> 3.2.1)
+          IFS='.' read -r major minor patch <<< "$versionName"
+          patch=$((patch + 1))
+          newVersionName="$major.$minor.$patch"
+
+          echo "New versionCode: $newVersionCode"
+          echo "New versionName: $newVersionName"
+
+          sed -i "s/VERSION_CODE=.*/VERSION_CODE=$newVersionCode/" $file
+          sed -i "s/VERSION_NAME=.*/VERSION_NAME=$newVersionName/" $file
+
+          echo "version_code=$newVersionCode" >> $GITHUB_OUTPUT
+          echo "version_name=$newVersionName" >> $GITHUB_OUTPUT
+
+      - name: Commit and push version bump
+        run: |
+          git add version.properties
+          git commit -m "Bump version to ${{ steps.bump.outputs.version_name }} (code: ${{ steps.bump.outputs.version_code }})"
+          git push
