@@ -115,4 +115,10 @@ jobs:
           RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
           RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
-        run: ./gradlew build -x uploadCrashlyticsMappingFileRelease
+        run: |
+          ./gradlew build \
+            -Pandroid.injected.signing.store.file=$RELEASE_KEYSTORE_PATH \
+            -Pandroid.injected.signing.store.password=$RELEASE_KEYSTORE_PASSWORD \
+            -Pandroid.injected.signing.key.alias=$RELEASE_KEY_ALIAS \
+            -Pandroid.injected.signing.key.password=$RELEASE_KEY_PASSWORD \
+            -x uploadCrashlyticsMappingFileRelease
