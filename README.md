@@ -24,7 +24,7 @@
   <a href="">
       <img src="https://img.shields.io/github/v/release/aritra-tech/uncrack?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
   </a>
-  <a href="https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack">
+  <a href="https://play.google.com/store/apps/details?id=com.aritradas.uncrack">
       <img src="https://img.shields.io/endpoint?color=purple&logo=google-play&style=for-the-badge&label=Play%20store&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.geekymusketeers.uncrack%26l%3DAndroid%26m%3D%24version"/>
   </a>
   </br>
@@ -39,7 +39,7 @@
 Go to the [Releases](https://github.com/aritra-tech/UnCrack/releases/latest) and download latest apk
 or click badges below.
 
-<a href="https://play.google.com/store/apps/details?id=com.geekymusketeers.uncrack"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=90px />
+<a href="https://play.google.com/store/apps/details?id=com.aritradas.uncrack"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=90px />
 <a href="https://github.com/aritra-tech/UnCrack/releases/latest"><img alt="Get it on GitHub" src="https://user-images.githubusercontent.com/69304392/148696068-0cfea65d-b18f-4685-82b5-329a330b1c0d.png" height=90px />
 
 </div>
