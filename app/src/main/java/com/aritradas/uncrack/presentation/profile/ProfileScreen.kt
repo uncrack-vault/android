@@ -1,7 +1,6 @@
 package com.aritradas.uncrack.presentation.profile
 
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.navigation.NavHostController
 import com.aritradas.uncrack.BuildConfig
 import com.aritradas.uncrack.R
@@ -117,7 +117,7 @@ fun ProfileScreen(
                 iconId = R.drawable.rating,
                 onClick = {
                     val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(Constants.PLAYSTORE_URL)
+                    intent.data = Constants.PLAY_STORE_URL.toUri()
                     context.startActivity(intent)
                 }
             )

@@ -3,7 +3,6 @@ package com.aritradas.uncrack
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -25,13 +24,12 @@ import com.aritradas.uncrack.ui.theme.UnCrackTheme
 import com.aritradas.uncrack.util.AppBioMetricManager
 import com.aritradas.uncrack.util.NetworkConnectivityObserver
 import com.google.android.gms.tasks.Task
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -80,7 +78,7 @@ class MainActivity : FragmentActivity() {
             }
         }
 
-        checkForAppUpdate()
+//        checkForAppUpdate()
 
         setContent {
             UnCrackTheme {
