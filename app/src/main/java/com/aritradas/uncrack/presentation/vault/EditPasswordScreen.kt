@@ -47,7 +47,7 @@ import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.domain.model.Account
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.medium22
 import com.aritradas.uncrack.util.UtilsKt.generateRandomPassword
 import com.aritradas.uncrack.util.UtilsKt.getAccountImage
@@ -81,12 +81,14 @@ fun EditPasswordScreen(
     }
 
     Scaffold(
-        modifier.fillMaxSize().imePadding(),
+        modifier
+            .fillMaxSize()
+            .imePadding(),
         topBar = {
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 title = "Edit Password",
-                colors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
+                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
                 onBackPress = { navController.popBackStack() }
             )
         }
@@ -95,7 +97,7 @@ fun EditPasswordScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(SurfaceVariantLight)
+                .background(BackgroundLight)
                 .padding(paddingValues)
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState()),

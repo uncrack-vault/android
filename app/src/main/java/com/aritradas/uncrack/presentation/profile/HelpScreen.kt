@@ -20,6 +20,7 @@ import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.SettingsItemGroup
 import com.aritradas.uncrack.components.UCSettingsCard
 import com.aritradas.uncrack.components.UCTopAppBar
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.util.Constants
 
@@ -36,7 +37,7 @@ fun HelpScreen(
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 title = "Settings",
-                colors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
+                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
                 onBackPress = { navController.popBackStack() }
             )
         }
@@ -45,7 +46,7 @@ fun HelpScreen(
             modifier = modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(SurfaceVariantLight),
+                .background(BackgroundLight),
         ) {
             SettingsItemGroup {
                 UCSettingsCard(
