@@ -20,13 +20,19 @@ object EncryptionUtils {
     private const val KEY_DATA = "encryption_key_data"
 
     private lateinit var secretKey: SecretKey
+
+    @Volatile
     private var isInitialized = false
 
     fun initialize(context: Context) {
-        if (isInitialized) return
-
-        secretKey = getOrCreateKey(context)
-        isInitialized = true
+        if (!isInitialized) {
+            synchronized(this) {
+                if (!isInitialized) {
+                    secretKey = getOrCreateKey(context)
+                    isInitialized = true
+                }
+            }
+        }
     }
 
     private fun getOrCreateKey(context: Context): SecretKey {
