@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import android.view.WindowManager
+import com.aritradas.uncrack.util.EncryptionUtils
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -12,6 +13,7 @@ class UnCrackApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        EncryptionUtils.initialize(applicationContext)
         registerActivityLifecycle()
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
