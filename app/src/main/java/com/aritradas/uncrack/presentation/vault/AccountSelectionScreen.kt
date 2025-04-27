@@ -21,7 +21,7 @@ import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.AccountCard
 import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.presentation.vault.viewmodel.AddEditViewModel
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.medium20
 import com.aritradas.uncrack.util.UtilsKt.getCommunicationAccounts
 import com.aritradas.uncrack.util.UtilsKt.getCommunitiesAccounts
@@ -52,7 +52,7 @@ fun AccountSelectionScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(SurfaceVariantLight)
+                .background(BackgroundLight)
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {

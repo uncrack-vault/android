@@ -42,10 +42,10 @@ import androidx.navigation.NavHostController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTopAppBar
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.PrimaryLight
 import com.aritradas.uncrack.ui.theme.SurfaceLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.medium30
 import com.aritradas.uncrack.ui.theme.normal16
@@ -74,7 +74,7 @@ fun PasswordGenerator(
             UCTopAppBar(
                 modifier = modifier.fillMaxWidth(),
                 title = "Password Generator",
-                colors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
+                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
                 onBackPress = { navController.popBackStack() }
             )
         }
@@ -83,7 +83,7 @@ fun PasswordGenerator(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(SurfaceVariantLight)
+                .background(BackgroundLight)
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)

@@ -25,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -52,10 +53,11 @@ import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
+import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
+import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.SurfaceTintLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.medium14
 import com.aritradas.uncrack.ui.theme.medium22
 import com.aritradas.uncrack.ui.theme.normal12
@@ -175,6 +177,7 @@ fun ViewPasswordScreen(
                 onBackPress = { navController.popBackStack() },
                 shouldShowFavAndEditButton = false,
                 onEditPress = { navigateToEditPasswordScreen(accountId) },
+                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
                 onDeletePress = { showDeleteDialog = true }
             )
         }
@@ -182,7 +185,7 @@ fun ViewPasswordScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(SurfaceVariantLight)
+                .background(BackgroundLight)
                 .padding(paddingValues)
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -206,13 +209,12 @@ fun ViewPasswordScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
                     .clip(RoundedCornerShape(10.dp))
                     .shadow(
                         elevation = 10.dp,
                         shape = RoundedCornerShape(10.dp)
                     )
-                    .background(Color.White),
+                    .background(SurfaceLight),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
