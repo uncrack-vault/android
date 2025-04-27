@@ -37,12 +37,11 @@ import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.EmptyState
 import com.aritradas.uncrack.components.TypewriterText
 import com.aritradas.uncrack.components.VaultCard
-import com.aritradas.uncrack.sharedViewModel.UserViewModel
 import com.aritradas.uncrack.presentation.vault.viewmodel.VaultViewModel
+import com.aritradas.uncrack.sharedViewModel.UserViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.PrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.normal16
 import com.aritradas.uncrack.util.BackPressHandler
@@ -85,21 +84,20 @@ fun VaultScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(BackgroundLight)
+                .padding(horizontal = 16.dp)
                 .then(modifier),
-            verticalArrangement = Arrangement.Top
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                    .fillMaxWidth(),
                 text = "Hello, ${user.name}",
                 style = medium24.copy(Color.Black)
             )
 
             SearchBar(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                    .fillMaxWidth(),
                 query = searchQuery,
                 onQueryChange = {
                     searchQuery = it
@@ -144,8 +142,7 @@ fun VaultScreen(
 
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp),
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 if (accounts.isNotEmpty()) {
