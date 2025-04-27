@@ -63,14 +63,13 @@ import com.aritradas.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.aritradas.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
 import com.aritradas.uncrack.sharedViewModel.ThemeViewModel
 import com.aritradas.uncrack.sharedViewModel.UserViewModel
-import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
 import com.aritradas.uncrack.ui.theme.FadeIn
 import com.aritradas.uncrack.ui.theme.FadeOut
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
+import com.aritradas.uncrack.ui.theme.PrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.PrimaryDark
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.util.BackPressHandler
 import com.aritradas.uncrack.util.ConnectivityObserver
 import kotlinx.collections.immutable.ImmutableList
@@ -315,7 +314,7 @@ fun ShowBottomNavigation(
     if (backStackEntry.value?.destination?.route !in screensWithoutNavigationBar) {
         NavigationBar(
             modifier = modifier,
-            containerColor = BackgroundLight
+            containerColor = PrimaryContainerLight
         ) {
 
             val bottomNavItems = listOf(
