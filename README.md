@@ -31,8 +31,13 @@
 </p>
 
 <h4 align="center">🔑UnCrack is a simple Android application made using Kotlin, for managing your password. UnCrack securely stores all your login credentials and other important information, 
-  so you never have to worry about forgetting passwords or searching for lost information. Keep your digital life organized and protected with UnCrack.</h4>
-  
+  so you never have to worry about forgetting passwords or searching for lost information. Keep your digital life organized and protected with UnCrack.
+
+  <br>
+  <br>
+  Please go through the <a href="https://github.com/uncrack-manager/android/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> file before you start contributing.
+</h4>
+
 <div align="center">
   
 # ⬇️ Download
@@ -56,16 +61,22 @@ or click badges below.
 
 - **Auto-Lock Mechanism:** The app automatically locks after a certain period of inactivity, requiring the user to re-authenticate.
 
-## 🔐 Firebase Setup
+## Installation steps
 
-This project requires a `google-services.json` file in:
+1. Clone the repository
+   
+   ```bash
+    git clone https://github.com/uncrack-manager/android.git
+    ```
+    
+2. This project requires a `google-services.json` file in:
 - `app/src/debug/`
 - `app/src/release/`
 
-To get your own config:
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a project and register your app (`com.example.yourapp`)
-3. Download the `google-services.json` file and place it in the appropriate folders
+  To get your own config:
+  1. Go to [Firebase Console](https://console.firebase.google.com/)
+  2. Create a project and register your app (`com.example.yourapp`)
+  3. Download the `google-services.json` file and place it in the appropriate folders
 
 
 # ✨ Design 
