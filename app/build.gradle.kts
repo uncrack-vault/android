@@ -194,5 +194,10 @@ dependencies {
     implementation("org.mindrot:jbcrypt:0.4")
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
+    // Biometric
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+    //Credential Manager
+    implementation("androidx.credentials:credentials:1.5.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.5.0")
 }
