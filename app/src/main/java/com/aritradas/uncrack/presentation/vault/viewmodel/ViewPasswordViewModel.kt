@@ -18,7 +18,7 @@ class ViewPasswordViewModel @Inject constructor(
     private val repository: AccountRepository
 ) : ViewModel() {
 
-    var accountModel by mutableStateOf(
+    var accountModel: Account? by mutableStateOf(
         Account(
             id = 0,
             company = "",
@@ -43,11 +43,13 @@ class ViewPasswordViewModel @Inject constructor(
         }
     }
 
-    private fun decryptData(account: Account) {
+    private fun decryptData(account: Account?) {
         try {
-            decryptedEmail = EncryptionUtils.decrypt(account.email)
-            decryptedUsername = EncryptionUtils.decrypt(account.username)
-            decryptedPassword = EncryptionUtils.decrypt(account.password)
+            account?.let {
+                decryptedEmail = EncryptionUtils.decrypt(it.email)
+                decryptedUsername = EncryptionUtils.decrypt(it.username)
+                decryptedPassword = EncryptionUtils.decrypt(it.password)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -75,12 +77,27 @@ class ViewPasswordViewModel @Inject constructor(
     }
 
     fun updateNote(note: String) {
-        accountModel = accountModel.copy(note = note)
+        accountModel?.let {
+            accountModel = it.copy(note = note)
+        }
     }
 
-    fun deleteAccount(account: Account) {
+    fun deleteAccount(account: Account?) {
         viewModelScope.launch {
-            repository.deleteAccount(account)
+            account?.let {
+                repository.deleteAccount(it)
+                accountModel = Account(
+                    id = 0,
+                    company = "",
+                    email = "",
+                    category = "",
+                    username = "",
+                    password = "",
+                    note = "",
+                    dateTime = "",
+                    isFavourite = false
+                )
+            }
         }
     }
 }
