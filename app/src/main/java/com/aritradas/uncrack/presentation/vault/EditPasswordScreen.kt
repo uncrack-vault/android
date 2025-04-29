@@ -69,12 +69,12 @@ fun EditPasswordScreen(
         DateTimeFormatter.ofPattern("dd/M/yyyy hh:mm:ss").format(currentDateTime)
     var passwordVisibility by remember { mutableStateOf(false) }
 
-    val accountName = viewPasswordViewModel.accountModel.company
+    val accountName = viewPasswordViewModel.accountModel?.company
     val accountEmail = viewPasswordViewModel.decryptedEmail
     val accountPassword = viewPasswordViewModel.decryptedPassword
     val accountUserName = viewPasswordViewModel.decryptedUsername
-    val accountCategory = viewPasswordViewModel.accountModel.category
-    val accountNote = viewPasswordViewModel.accountModel.note
+    val accountCategory = viewPasswordViewModel.accountModel?.category
+    val accountNote = viewPasswordViewModel.accountModel?.note
 
     LaunchedEffect(Unit) {
         viewPasswordViewModel.getAccountById(accountID)
@@ -106,14 +106,14 @@ fun EditPasswordScreen(
 
             Image(
                 modifier = Modifier.size(100.dp),
-                painter = getAccountImage(accountName),
+                painter = getAccountImage(accountName.toString()),
                 contentDescription = null
             )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = accountName,
+                text = accountName.toString(),
                 style =  medium22.copy(Color.Black)
             )
 
@@ -199,7 +199,7 @@ fun EditPasswordScreen(
                 headerText = stringResource(id = R.string.note),
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
-                value = accountNote,
+                value = accountNote.toString(),
                 onValueChange = { note ->
                     viewPasswordViewModel.updateNote(note)
                 }
@@ -215,12 +215,12 @@ fun EditPasswordScreen(
                 onClick = {
                     val updateAccount = Account(
                         id = accountID,
-                        company = accountName,
+                        company = accountName.toString(),
                         email = accountEmail,
-                        category = accountCategory,
+                        category = accountCategory.toString(),
                         username = accountUserName,
                         password = accountPassword,
-                        note = accountNote,
+                        note = accountNote.toString(),
                         dateTime = formattedDateTime
                     )
                     viewPasswordViewModel.updateAccount(updateAccount)
