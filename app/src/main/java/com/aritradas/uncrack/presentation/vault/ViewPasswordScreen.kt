@@ -132,7 +132,8 @@ fun ViewPasswordScreen(
                 confirmButton = {
                     TextButton(
                         onClick = {
-                            viewPasswordViewModel.deleteAccount(viewPasswordViewModel.accountModel)
+                            val accountToDelete = viewPasswordViewModel.accountModel
+                            viewPasswordViewModel.deleteAccount(accountToDelete)
                             showDeleteDialog = false
                             navController.popBackStack()
                         },

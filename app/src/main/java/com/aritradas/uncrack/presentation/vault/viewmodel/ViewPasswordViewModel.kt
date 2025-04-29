@@ -78,9 +78,11 @@ class ViewPasswordViewModel @Inject constructor(
         accountModel = accountModel.copy(note = note)
     }
 
-    fun deleteAccount(account: Account) {
+    fun deleteAccount(account: Account?) {
         viewModelScope.launch {
-            repository.deleteAccount(account)
+            account?.let {
+                repository.deleteAccount(it)
+            }
         }
     }
 }
