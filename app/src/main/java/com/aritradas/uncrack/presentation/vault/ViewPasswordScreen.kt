@@ -86,12 +86,12 @@ fun ViewPasswordScreen(
     var showDeleteDialog by remember { mutableStateOf(false) }
     var progressValue by remember { mutableFloatStateOf(0f) }
     var progressMessage by rememberSaveable { mutableStateOf("") }
-    val accountCompany = viewPasswordViewModel.accountModel.company
+    val accountCompany = viewPasswordViewModel.accountModel?.company
     val email = viewPasswordViewModel.decryptedEmail
     val username = viewPasswordViewModel.decryptedUsername
     val password = viewPasswordViewModel.decryptedPassword
-    val category = viewPasswordViewModel.accountModel.category
-    val note = viewPasswordViewModel.accountModel.note
+    val category = viewPasswordViewModel.accountModel?.category
+    val note = viewPasswordViewModel.accountModel?.note
 
     LaunchedEffect(Unit) {
         viewPasswordViewModel.getAccountById(accountId)
@@ -132,7 +132,7 @@ fun ViewPasswordScreen(
                 confirmButton = {
                     TextButton(
                         onClick = {
-                            val accountToDelete = viewPasswordViewModel.accountModel
+                            val accountToDelete = viewPasswordViewModel.accountModel?.copy()
                             viewPasswordViewModel.deleteAccount(accountToDelete)
                             showDeleteDialog = false
                             navController.popBackStack()
@@ -194,14 +194,14 @@ fun ViewPasswordScreen(
 
             Image(
                 modifier = Modifier.size(100.dp),
-                painter = getAccountImage(accountCompany),
+                painter = getAccountImage(accountCompany.toString()),
                 contentDescription = null
             )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = accountCompany,
+                text = accountCompany.toString(),
                 style = medium22.copy(Color.Black)
             )
 
@@ -227,12 +227,12 @@ fun ViewPasswordScreen(
                 ) {
                     Image(
                         modifier = Modifier.size(40.dp),
-                        painter = getCategoryImage(category),
+                        painter = getCategoryImage(category.toString()),
                         contentDescription = null
                     )
 
                     Text(
-                        text = category,
+                        text = category.toString(),
                         style = normal12.copy(OnSurfaceVariantLight)
                     )
                 }
@@ -294,7 +294,7 @@ fun ViewPasswordScreen(
                         modifier = Modifier
                             .size(40.dp)
                             .clickable {
-                                if (username.isEmpty() && note.isEmpty()) {
+                                if (username.isEmpty() && note?.isEmpty() == true) {
                                     val shareNoteWithoutUserName =
                                         "${"Account Name: $accountCompany"}\n${"Email: $email"}\n${"Password: $password"}"
                                     val myIntent = Intent(Intent.ACTION_SEND)
@@ -377,12 +377,12 @@ fun ViewPasswordScreen(
 
             Spacer(modifier = Modifier.height(21.dp))
 
-            if (note.isNotEmpty()) {
+            if (note?.isNotEmpty() == true) {
                 UCTextField(
                     modifier = Modifier
                         .fillMaxWidth(),
                     headerText = stringResource(id = R.string.note),
-                    value = note,
+                    value = note.toString(),
                     onValueChange = {},
                     readOnly = true
                 )
