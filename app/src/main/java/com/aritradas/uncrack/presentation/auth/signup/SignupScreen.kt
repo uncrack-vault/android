@@ -38,10 +38,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.credentials.CredentialManager
 import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.NoInternetScreen
-import com.aritradas.uncrack.components.ProgressDialog
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
@@ -65,6 +65,7 @@ fun SignupScreen(
     navController: NavController,
     authViewModel: AuthViewModel,
     connectivityObserver: ConnectivityObserver,
+    credentialManager: CredentialManager,
     modifier: Modifier = Modifier,
     onSignUp: (FirebaseUser) -> Unit
 ) {
@@ -99,6 +100,7 @@ fun SignupScreen(
                 context,
                 context.getString(R.string.account_created_successfully), Toast.LENGTH_SHORT
             ).show()
+            navController.navigate(Screen.CreateMasterKeyScreen.name)
         }
     }
 
@@ -193,6 +195,35 @@ fun SignupScreen(
                     )
 
                     Spacer(modifier = Modifier.weight(1f))
+
+                    UCButton(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = "Sign Up with Passkey",
+                        isLoading = isLoading,
+                        loadingText = "Creating passkey...",
+                        onClick = {
+                            isLoading = true
+                            authViewModel.signUp(
+                                name = userName,
+                                email = userEmail,
+                                password = userPassword,
+                                onSignedUp = { user ->
+                                    authViewModel.createPasskey(
+                                        credentialManager = credentialManager,
+                                        userName = userName,
+                                        userEmail = userEmail,
+                                        context = context,
+                                        onSuccess = {
+                                            navController.navigate(Screen.CreateMasterKeyScreen.name)
+                                        }
+                                    )
+                                }
+                            )
+                        },
+                        enabled = isRegisterButtonEnable
+                    )
+
+                    Spacer(modifier = Modifier.height(20.dp))
 
                     UCButton(
                         modifier = Modifier

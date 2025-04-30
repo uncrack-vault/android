@@ -14,6 +14,8 @@ import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.view.WindowCompat
+import androidx.credentials.CredentialManager
+import androidx.credentials.CredentialManager.Companion.create
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -49,6 +51,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
     lateinit var appBioMetricManager: AppBioMetricManager
 
     private lateinit var appUpdateManager: AppUpdateManager
+    private lateinit var credentialManager: CredentialManager
 
     private val UPDATE_REQUEST_CODE = 500
 
@@ -88,6 +91,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
         // Initialize the AppUpdateManager
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         appUpdateManager.registerListener(this)
+        credentialManager = create(this)
 
         settingsViewModel.isScreenshotEnabled.observe(this) { isEnabled ->
             if (isEnabled) {
@@ -104,7 +108,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
         setContent {
             UnCrackTheme {
                 val connectivityObserver = NetworkConnectivityObserver(applicationContext)
-                Navigation(this, connectivityObserver)
+                Navigation(connectivityObserver, credentialManager)
             }
         }
 

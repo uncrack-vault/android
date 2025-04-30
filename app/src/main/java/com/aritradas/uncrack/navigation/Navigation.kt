@@ -1,7 +1,6 @@
 package com.aritradas.uncrack.navigation
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.core.animateFloatAsState
@@ -20,6 +19,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.credentials.CredentialManager
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -79,8 +79,8 @@ import kotlinx.collections.immutable.persistentListOf
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Navigation(
-    activity: Activity,
     connectivityObserver: ConnectivityObserver,
+    credentialManager: CredentialManager,
     modifier: Modifier = Modifier,
     authViewModel: AuthViewModel = hiltViewModel(),
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
@@ -148,17 +148,19 @@ fun Navigation(
 
             composable(route = Screen.LoginScreen.name) {
                 LoginScreen(
-                    navController,
+                    navController = navController,
                     viewModel = authViewModel,
-                    connectivityObserver
+                    connectivityObserver = connectivityObserver,
+                    credentialManager = credentialManager
                 )
             }
 
             composable(Screen.SignUpScreen.name) {
                 SignupScreen(
-                    navController,
-                    authViewModel,
-                    connectivityObserver,
+                    navController = navController,
+                    authViewModel = authViewModel,
+                    connectivityObserver = connectivityObserver,
+                    credentialManager = credentialManager,
                     onSignUp = {
                         navController.navigate(Screen.CreateMasterKeyScreen.name)
                     }
