@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -323,69 +325,75 @@ fun ViewPasswordScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(40.dp))
-
-            UCTextField(
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                headerText = stringResource(id = R.string.email),
-                value = email,
-                onValueChange = {},
-                readOnly = true
-            )
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+            ) {
+                Spacer(modifier = Modifier.height(40.dp))
 
-            Spacer(modifier = Modifier.height(21.dp))
-
-            if (username.isNotEmpty()) {
                 UCTextField(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    headerText = stringResource(id = R.string.username),
-                    value = username,
+                    headerText = stringResource(id = R.string.email),
+                    value = email,
                     onValueChange = {},
                     readOnly = true
                 )
-            }
 
-            Spacer(modifier = Modifier.height(21.dp))
+                Spacer(modifier = Modifier.height(21.dp))
 
-            UCTextField(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                headerText = stringResource(id = R.string.password),
-                value = password,
-                onValueChange = {},
-                readOnly = true,
-                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-                trailingIcon = {
-
-                    val image = if (passwordVisibility)
-                        painterResource(id = R.drawable.visibility_off)
-                    else painterResource(id = R.drawable.visibility_on)
-
-                    IconButton(onClick =
-                    { passwordVisibility = passwordVisibility.not() }
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(24.dp),
-                            painter = image,
-                            contentDescription = null
-                        )
-                    }
+                if (username.isNotEmpty()) {
+                    UCTextField(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        headerText = stringResource(id = R.string.username),
+                        value = username,
+                        onValueChange = {},
+                        readOnly = true
+                    )
                 }
-            )
 
-            Spacer(modifier = Modifier.height(21.dp))
+                Spacer(modifier = Modifier.height(21.dp))
 
-            if (note?.isNotEmpty() == true) {
                 UCTextField(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    headerText = stringResource(id = R.string.note),
-                    value = note.toString(),
+                    headerText = stringResource(id = R.string.password),
+                    value = password,
                     onValueChange = {},
-                    readOnly = true
+                    readOnly = true,
+                    visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                    trailingIcon = {
+
+                        val image = if (passwordVisibility)
+                            painterResource(id = R.drawable.visibility_off)
+                        else painterResource(id = R.drawable.visibility_on)
+
+                        IconButton(onClick =
+                        { passwordVisibility = passwordVisibility.not() }
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(24.dp),
+                                painter = image,
+                                contentDescription = null
+                            )
+                        }
+                    }
                 )
+
+                Spacer(modifier = Modifier.height(21.dp))
+
+                if (note?.isNotEmpty() == true) {
+                    UCTextField(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        headerText = stringResource(id = R.string.note),
+                        value = note.toString(),
+                        onValueChange = {},
+                        readOnly = true
+                    )
+                }
             }
         }
     }
