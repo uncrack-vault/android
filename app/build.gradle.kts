@@ -158,7 +158,7 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.1.2")
 
     // Lottie Animation
-    implementation("com.airbnb.android:lottie-compose:6.6.2")
+    implementation("com.airbnb.android:lottie-compose:6.6.6")
 
     // Password Strength Meter
     implementation ("nu.aaro.gustav:passwordstrengthmeter:0.4")
