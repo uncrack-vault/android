@@ -2,7 +2,6 @@ package com.aritradas.uncrack
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -37,6 +36,7 @@ import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -50,14 +50,11 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
 
     private lateinit var appUpdateManager: AppUpdateManager
 
-    private val UPDATE_REQUEST_CODE = 500
-
     private val activityResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
     ) { result: ActivityResult ->
         if (result.resultCode != RESULT_OK) {
-            Log.d("AppUpdate", "Update flow failed! Result code: ${result.resultCode}")
-            // User rejected or update failed
+            Timber.d("Update flow failed! Result code: ${result.resultCode}")
             if (BuildConfig.DEBUG) {
                 Toast.makeText(
                     applicationContext,
@@ -66,7 +63,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
                 ).show()
             }
         } else {
-            Log.d("AppUpdate", "Update flow succeeded")
+            Timber.d("Update flow succeeded")
         }
     }
 
@@ -132,45 +129,42 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
     }
 
     private fun checkForAppUpdate() {
-        Log.d("AppUpdate", "Checking for app updates...")
+        Timber.d("Checking for app updates...")
         val appUpdateInfoTask: Task<AppUpdateInfo> = appUpdateManager.appUpdateInfo
 
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-            Log.d("AppUpdate", "Update availability: ${appUpdateInfo.updateAvailability()}")
+            Timber.d("Update availability: ${appUpdateInfo.updateAvailability()}")
 
             when (appUpdateInfo.updateAvailability()) {
                 UpdateAvailability.UPDATE_AVAILABLE -> {
-                    Log.d(
-                        "AppUpdate",
-                        "Update available! Version code: ${appUpdateInfo.availableVersionCode()}"
-                    )
+                    Timber.d("Update available! Version code: ${appUpdateInfo.availableVersionCode()}")
 
                     // Check update priority if available
                     val updatePriority = try {
                         appUpdateInfo.updatePriority()
-                    } catch (e: Exception) {
+                    } catch (_: Exception) {
                         0
                     }
 
                     // For high priority updates (4-5), use immediate update if possible
                     if (updatePriority >= 4 && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                        Log.d("AppUpdate", "Starting IMMEDIATE update flow (high priority)")
+                        Timber.d("Starting IMMEDIATE update flow (high priority)")
                         startImmediateUpdate(appUpdateInfo)
                     }
                     // For normal updates, prefer flexible but fall back to immediate if needed
                     else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
-                        Log.d("AppUpdate", "Starting FLEXIBLE update flow")
+                        Timber.d("Starting FLEXIBLE update flow")
                         startFlexibleUpdate(appUpdateInfo)
                     } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                        Log.d("AppUpdate", "Starting IMMEDIATE update flow")
+                        Timber.d("Starting IMMEDIATE update flow")
                         startImmediateUpdate(appUpdateInfo)
                     } else {
-                        Log.d("AppUpdate", "No supported update types allowed")
+                        Timber.d("No supported update types allowed")
                     }
                 }
 
                 UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS -> {
-                    Log.d("AppUpdate", "Update already in progress")
+                    Timber.d("Update already in progress")
                     // Resume the update if it was already started
                     if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
                         startImmediateUpdate(appUpdateInfo)
@@ -178,15 +172,12 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
                 }
 
                 else -> {
-                    Log.d(
-                        "AppUpdate",
-                        "No update available or unknown state: ${appUpdateInfo.updateAvailability()}"
-                    )
+                    Timber.d("No update available or unknown state: ${appUpdateInfo.updateAvailability()}")
                     // Removed the Toast message that showed "No Update Available"
                 }
             }
         }.addOnFailureListener { exception ->
-            Log.e("AppUpdate", "Failed to check for updates", exception)
+            Timber.e(exception, "Failed to check for updates")
         }
     }
 
@@ -198,7 +189,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
                 AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build()
             )
         } catch (e: Exception) {
-            Log.e("AppUpdate", "Error starting immediate update flow", e)
+            Timber.e(e, "Error starting immediate update flow")
         }
     }
 
@@ -210,7 +201,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
                 AppUpdateOptions.newBuilder(AppUpdateType.FLEXIBLE).build()
             )
         } catch (e: Exception) {
-            Log.e("AppUpdate", "Error starting flexible update flow", e)
+            Timber.e(e, "Error starting flexible update flow")
         }
     }
 
@@ -221,7 +212,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
             popupSnackbarForCompleteUpdate()
         }
 
-        Log.d("AppUpdate", "Install state updated: ${state.installStatus()}")
+        Timber.d("Install state updated: ${state.installStatus()}")
     }
 
     private fun popupSnackbarForCompleteUpdate() {
@@ -243,13 +234,13 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
             // If an update is downloaded but not installed,
             // notify the user to complete the update
             if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                Log.d("AppUpdate", "Update downloaded but not installed")
+                Timber.d("Update downloaded but not installed")
                 popupSnackbarForCompleteUpdate()
             }
 
             // Check if an immediate update is in progress and was interrupted
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                Log.d("AppUpdate", "Update in progress - resuming")
+                Timber.d("Update in progress - resuming")
                 // If an in-app update is already running, resume the update
                 try {
                     appUpdateManager.startUpdateFlowForResult(
@@ -258,7 +249,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
                         AppUpdateOptions.newBuilder(appUpdateInfo.updatePriority()).build()
                     )
                 } catch (e: Exception) {
-                    Log.e("AppUpdate", "Error resuming update", e)
+                    Timber.e(e, "Error resuming update")
                 }
             }
         }

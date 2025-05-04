@@ -1,5 +1,10 @@
 package com.aritradas.uncrack.presentation.vault
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,11 +33,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.EmptyState
 import com.aritradas.uncrack.components.TypewriterText
@@ -58,12 +66,37 @@ fun VaultScreen(
     val accounts by vaultViewModel.filteredAccounts.collectAsState()
     var searchQuery by rememberSaveable { mutableStateOf("") }
     val user by userViewModel.state.collectAsState()
+    val context = LocalContext.current
+    var hasNotificationPermission by remember {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            mutableStateOf(
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED
+            )
+        } else {
+            mutableStateOf(true)
+        }
+    }
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGranted ->
+            hasNotificationPermission = isGranted
+        }
+    )
 
     BackPressHandler()
 
     LaunchedEffect(Unit) {
         vaultViewModel.getAccounts()
         userViewModel.getCurrentUser()
+    }
+
+    LaunchedEffect(Unit) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
     }
 
     Scaffold(
@@ -123,7 +156,7 @@ fun VaultScreen(
                 colors = SearchBarDefaults.colors(
                     containerColor = PrimaryContainerLight
                 ),
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
                 trailingIcon = {
                     if (searchQuery.isNotEmpty()) {
                         IconButton(
@@ -132,7 +165,7 @@ fun VaultScreen(
                                 vaultViewModel.searchAccount("")
                             }
                         ) {
-                            Icon(Icons.Default.Clear, contentDescription = null)
+                            Icon(Icons.Filled.Clear, contentDescription = null)
                         }
                     }
                 }
