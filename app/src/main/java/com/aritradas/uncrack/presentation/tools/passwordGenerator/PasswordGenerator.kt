@@ -1,6 +1,7 @@
 package com.aritradas.uncrack.presentation.tools.passwordGenerator
 
 import android.widget.Toast
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -51,6 +53,7 @@ import com.aritradas.uncrack.ui.theme.medium30
 import com.aritradas.uncrack.ui.theme.normal16
 import com.aritradas.uncrack.util.Constants.sliderStepRange
 import com.aritradas.uncrack.util.Constants.sliderSteps
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,6 +72,9 @@ fun PasswordGenerator(
     val includeNumbers by passwordGeneratorViewModel.includeNumbers.observeAsState(true)
     val includeSpecialChars by passwordGeneratorViewModel.includeSpecialChars.observeAsState(true)
 
+    val scrollState = rememberScrollState()
+    val scope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             UCTopAppBar(
@@ -84,7 +90,7 @@ fun PasswordGenerator(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(BackgroundLight)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -174,6 +180,9 @@ fun PasswordGenerator(
                 text = stringResource(R.string.generate),
                 onClick = {
                     passwordGeneratorViewModel.generatePassword()
+                    scope.launch {
+                        scrollState.animateScrollTo(value = 0, animationSpec = tween(200))
+                    }
                     Timber.d("Password ${passwordGeneratorViewModel.generatePassword()}")
                 },
                 leadingIcon = painterResource(id = R.drawable.generate_password)

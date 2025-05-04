@@ -145,12 +145,14 @@ fun VaultScreen(
                             text = "Search for ",
                             style = normal16.copy(OnSurfaceVariantLight),
                         )
-                        TypewriterText(texts = listOf(
-                            "Instagram",
-                            "Snapchat",
-                            "Reddit",
-                            "Linkedin"
-                        ))
+                        TypewriterText(
+                            texts = listOf(
+                                "Instagram",
+                                "Snapchat",
+                                "Reddit",
+                                "Linkedin"
+                            )
+                        )
                     }
                 },
                 colors = SearchBarDefaults.colors(
@@ -179,7 +181,7 @@ fun VaultScreen(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 if (accounts.isNotEmpty()) {
-                    items(accounts) { accountModel ->
+                    items(accounts, key = { it.id }) { accountModel ->
                         VaultCard(
                             accountModel = accountModel,
                             onClick = {
