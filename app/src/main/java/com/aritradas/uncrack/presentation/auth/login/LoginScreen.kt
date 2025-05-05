@@ -29,10 +29,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalAutofillManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentType
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -43,7 +47,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.NoInternetScreen
-import com.aritradas.uncrack.components.ProgressDialog
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
@@ -66,6 +69,7 @@ fun LoginScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val autofillManager = LocalAutofillManager.current
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
@@ -122,7 +126,9 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.height(60.dp))
 
                     UCTextField(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .semantics { contentType = ContentType.EmailAddress },
                         headerText = stringResource(R.string.email_header),
                         hintText = stringResource(R.string.email_hint),
                         maxLines = 1,
@@ -134,7 +140,9 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.height(30.dp))
 
                     UCTextField(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .semantics { contentType = ContentType.Password },
                         headerText = stringResource(R.string.password_header),
                         hintText = stringResource(R.string.password_hint),
                         maxLines = 1,
@@ -179,6 +187,7 @@ fun LoginScreen(
                         loadingText = "Logging you in..",
                         onClick = {
                             isLoading = true
+                            autofillManager?.commit()
                             viewModel.logIn(email, password)
                         },
                         enabled = isSignInButtonEnable

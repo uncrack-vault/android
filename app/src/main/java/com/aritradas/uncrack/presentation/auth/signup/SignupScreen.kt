@@ -27,10 +27,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalAutofillManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentType
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -41,7 +45,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.NoInternetScreen
-import com.aritradas.uncrack.components.ProgressDialog
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
@@ -70,6 +73,7 @@ fun SignupScreen(
 ) {
 
     val context = LocalContext.current
+    val autofillManager = LocalAutofillManager.current
     var userName by remember { mutableStateOf("") }
     var userEmail by remember { mutableStateOf("") }
     var userPassword by remember { mutableStateOf("") }
@@ -135,7 +139,8 @@ fun SignupScreen(
 
                     UCTextField(
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .semantics { contentType = ContentType.NewUsername },
                         headerText = stringResource(R.string.name_header),
                         hintText = stringResource(R.string.name_hint),
                         maxLines = 1,
@@ -149,7 +154,8 @@ fun SignupScreen(
 
                     UCTextField(
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .semantics { contentType = ContentType.EmailAddress },
                         headerText = stringResource(R.string.email_header),
                         hintText = stringResource(R.string.email_hint),
                         maxLines = 1,
@@ -162,7 +168,8 @@ fun SignupScreen(
 
                     UCTextField(
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .semantics { contentType = ContentType.NewPassword },
                         headerText = stringResource(R.string.password_header),
                         hintText = stringResource(R.string.password_hint),
                         maxLines = 1,
@@ -202,6 +209,7 @@ fun SignupScreen(
                         loadingText = "Creating your account",
                         onClick = {
                             isLoading = true
+                            autofillManager?.commit()
                             authViewModel.signUp(
                                 userName,
                                 userEmail,
