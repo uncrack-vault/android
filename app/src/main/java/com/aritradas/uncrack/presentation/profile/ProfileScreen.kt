@@ -102,6 +102,7 @@ fun ProfileScreen(
 
             UCSettingsCard(
                 itemName = stringResource(R.string.help),
+                itemSubText = "Get help using UnCrack",
                 iconId = R.drawable.help,
                 onClick = {
                     navHostController.navigate(Screen.HelpScreen.name)
@@ -114,7 +115,8 @@ fun ProfileScreen(
         SettingsItemGroup {
             UCSettingsCard(
                 itemName = stringResource(R.string.rate_uncrack),
-                iconId = R.drawable.rating,
+                itemSubText = stringResource(R.string.rate_uncrack_on_the_play_store),
+                iconId = R.drawable.rating_icon,
                 onClick = {
                     val intent = Intent(Intent.ACTION_VIEW)
                     intent.data = Constants.PLAY_STORE_URL.toUri()
@@ -129,6 +131,7 @@ fun ProfileScreen(
 
             UCSettingsCard(
                 itemName = stringResource(R.string.invite_friends),
+                itemSubText = stringResource(R.string.like_uncrack_share_with_friends),
                 iconId = R.drawable.share_app,
                 onClick = {
                     val sendIntent = Intent(Intent.ACTION_SEND).apply {
@@ -145,7 +148,7 @@ fun ProfileScreen(
 
         Text(
             modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
-            text = "Version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+            text = "Version: ${BuildConfig.VERSION_NAME}",
             style = normal14.copy(color = SurfaceTintLight)
         )
         Text(

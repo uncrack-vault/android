@@ -7,16 +7,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.aritradas.uncrack.MainActivity
@@ -37,15 +43,14 @@ import com.aritradas.uncrack.components.SettingsItemGroup
 import com.aritradas.uncrack.components.ThemeDialog
 import com.aritradas.uncrack.components.UCSettingsCard
 import com.aritradas.uncrack.components.UCSwitchCard
-import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.medium14
+import com.aritradas.uncrack.ui.theme.medium18
 import com.aritradas.uncrack.ui.theme.normal16
-import com.aritradas.uncrack.ui.theme.semiBold18
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,6 +68,7 @@ fun SettingsScreen(
     var openThemeDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
     var openDeleteAccountDialog by remember { mutableStateOf(false) }
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     if (onLogOutComplete || onDeleteAccountComplete) {
         navController.navigate(Screen.LoginScreen.name)
@@ -193,11 +199,29 @@ fun SettingsScreen(
     Scaffold(
         Modifier.fillMaxWidth(),
         topBar = {
-            UCTopAppBar(
+            MediumTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
-                title = "Settings",
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
-                onBackPress = { navController.popBackStack() }
+                title = {
+                    Text(
+                        text = "Settings",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                },
+                scrollBehavior = scrollBehavior,
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = BackgroundLight,
+                    scrolledContainerColor = BackgroundLight,
+                    titleContentColor = Color.Black
+                )
             )
         }
     ) { paddingValues ->
@@ -214,7 +238,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
                 text = stringResource(id = R.string.security),
-                style = semiBold18.copy(color = OnPrimaryContainerLight)
+                style = medium18.copy(color = OnPrimaryContainerLight)
             )
 
             Spacer(modifier = Modifier.height(14.dp))
@@ -222,6 +246,7 @@ fun SettingsScreen(
             SettingsItemGroup {
                 UCSettingsCard(
                     itemName = stringResource(R.string.change_master_password),
+                    itemSubText = stringResource(R.string.change_the_master_password_you_use_to_access_uncrack),
                     onClick = {
                         navController.navigate(Screen.UpdateMasterKeyScreen.name)
                     }
@@ -233,7 +258,8 @@ fun SettingsScreen(
                 )
 
                 UCSwitchCard(
-                    itemName = stringResource(R.string.unlock_with_biometric),
+                    itemName = stringResource(R.string.biometric_unlock),
+                    itemSubText = stringResource(R.string.use_biometric_to_unlock_the_app),
                     isChecked = biometricAuthState,
                     onChecked = {
                         settingsViewModel.showBiometricPrompt(context as MainActivity)
@@ -246,7 +272,8 @@ fun SettingsScreen(
                 )
 
                 UCSwitchCard(
-                    itemName = stringResource(R.string.take_in_app_screenshots),
+                    itemName = stringResource(R.string.allow_screenshots),
+                    itemSubText = stringResource(R.string.allow_screenshots_not_recommended),
                     isChecked = isScreenshotEnabled,
                     onChecked = {
                         settingsViewModel.setScreenshotEnabled(it)
@@ -256,33 +283,12 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-//            Text(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(start = 16.dp, end = 18.dp, top = 18.dp),
-//                text = "Language",
-//                style = bold20.copy(color = OnPrimaryContainerLight)
-//            )
-
-//            Spacer(modifier = Modifier.height(14.dp))
-//
-//            SettingsItemGroup {
-//                UCSettingsCard(
-//                    itemName = "App language",
-//                    onClick = {
-//
-//                    }
-//                )
-//            }
-
-            Spacer(modifier = Modifier.height(10.dp))
-
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
                 text = stringResource(R.string.danger_zone),
-                style = semiBold18.copy(color = OnPrimaryContainerLight)
+                style = medium18.copy(color = OnPrimaryContainerLight)
             )
 
             Spacer(modifier = Modifier.height(14.dp))
