@@ -8,19 +8,26 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.AccountCard
-import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.medium20
@@ -39,14 +46,36 @@ fun AccountSelectionScreen(
     modifier: Modifier = Modifier,
     goToAddPasswordScreen: (Int, String, String) -> Unit
 ) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+
     Scaffold(
-        modifier.fillMaxSize(),
+        modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            UCTopAppBar(
+            MediumTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
-                title = "Add Account",
-                onBackPress = { navController.popBackStack() },
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight)
+                title = {
+                    Text(
+                        text = "Add Account",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                },
+                scrollBehavior = scrollBehavior,
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = BackgroundLight,
+                    scrolledContainerColor = BackgroundLight,
+                    titleContentColor = Color.Black
+                )
             )
         }
     ) { paddingValues ->
