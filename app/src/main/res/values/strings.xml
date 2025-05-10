@@ -211,8 +211,8 @@
     <string name="kindly_provide_your_master_password">Kindly provide your Master Password</string>
     <string name="icon">icon\n</string>
     <string name="help">Help</string>
-    <string name="rate_uncrack">Rate UnCrack</string>
-    <string name="invite_friends">Invite Friends</string>
+    <string name="rate_uncrack">Send love</string>
+    <string name="invite_friends">Invite your friends</string>
     <string name="allow_screenshots">Allow screenshots</string>
     <string name="biometric_unlock">Biometric unlock</string>
     <string name="delete_account">Delete account</string>
@@ -232,6 +232,11 @@
     <string name="please_wait">Please wait...</string>
     <string name="noInternet">No Internet available</string>
     <string name="change_master_password">Change Master Password</string>
+    <string name="change_the_master_password_you_use_to_access_uncrack">Change the Master Password you use to access UnCrack</string>
+    <string name="use_biometric_to_unlock_the_app">Use biometric to unlock the app</string>
+    <string name="allow_screenshots_not_recommended">Allow screenshots (not recommended)</string>
+    <string name="like_uncrack_share_with_friends">Like UnCrack? Share with friends!</string>
+    <string name="rate_uncrack_on_the_play_store">Rate UnCrack on the Play Store</string>
     <string-array name="accounts">
         <item>Others</item>
         <item>PayPal</item>

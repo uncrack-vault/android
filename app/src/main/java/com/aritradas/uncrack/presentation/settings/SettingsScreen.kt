@@ -49,8 +49,8 @@ import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.medium14
+import com.aritradas.uncrack.ui.theme.medium18
 import com.aritradas.uncrack.ui.theme.normal16
-import com.aritradas.uncrack.ui.theme.semiBold18
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -238,7 +238,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
                 text = stringResource(id = R.string.security),
-                style = semiBold18.copy(color = OnPrimaryContainerLight)
+                style = medium18.copy(color = OnPrimaryContainerLight)
             )
 
             Spacer(modifier = Modifier.height(14.dp))
@@ -246,7 +246,7 @@ fun SettingsScreen(
             SettingsItemGroup {
                 UCSettingsCard(
                     itemName = stringResource(R.string.change_master_password),
-                    itemSubText = "Change the Master Password you use to access UnCrack",
+                    itemSubText = stringResource(R.string.change_the_master_password_you_use_to_access_uncrack),
                     onClick = {
                         navController.navigate(Screen.UpdateMasterKeyScreen.name)
                     }
@@ -259,7 +259,7 @@ fun SettingsScreen(
 
                 UCSwitchCard(
                     itemName = stringResource(R.string.biometric_unlock),
-                    itemSubText = "Use biometric to unlock the app",
+                    itemSubText = stringResource(R.string.use_biometric_to_unlock_the_app),
                     isChecked = biometricAuthState,
                     onChecked = {
                         settingsViewModel.showBiometricPrompt(context as MainActivity)
@@ -273,7 +273,7 @@ fun SettingsScreen(
 
                 UCSwitchCard(
                     itemName = stringResource(R.string.allow_screenshots),
-                    itemSubText = "Allow screenshots (not recommended)",
+                    itemSubText = stringResource(R.string.allow_screenshots_not_recommended),
                     isChecked = isScreenshotEnabled,
                     onChecked = {
                         settingsViewModel.setScreenshotEnabled(it)
@@ -288,7 +288,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
                 text = stringResource(R.string.danger_zone),
-                style = semiBold18.copy(color = OnPrimaryContainerLight)
+                style = medium18.copy(color = OnPrimaryContainerLight)
             )
 
             Spacer(modifier = Modifier.height(14.dp))

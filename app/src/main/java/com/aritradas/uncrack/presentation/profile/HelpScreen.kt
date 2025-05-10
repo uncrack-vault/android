@@ -7,19 +7,27 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.SettingsItemGroup
 import com.aritradas.uncrack.components.UCSettingsCard
-import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.util.Constants
@@ -31,14 +39,33 @@ fun HelpScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
         topBar = {
-            UCTopAppBar(
+            MediumTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
-                title = "Settings",
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
-                onBackPress = { navController.popBackStack() }
+                title = {
+                    Text(
+                        text = "Help",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                },
+                scrollBehavior = scrollBehavior,
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = BackgroundLight,
+                    scrolledContainerColor = BackgroundLight,
+                    titleContentColor = Color.Black
+                )
             )
         }
     ) { paddingValues ->
