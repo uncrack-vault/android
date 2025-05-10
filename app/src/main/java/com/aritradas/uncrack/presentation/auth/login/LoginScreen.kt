@@ -40,10 +40,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.credentials.CredentialManager
 import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.NoInternetScreen
-import com.aritradas.uncrack.components.ProgressDialog
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
@@ -63,6 +63,7 @@ fun LoginScreen(
     navController: NavController,
     viewModel: AuthViewModel,
     connectivityObserver: ConnectivityObserver,
+    credentialManager: CredentialManager,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -73,6 +74,7 @@ fun LoginScreen(
 
     val errorLiveData by viewModel.errorLiveData.observeAsState()
     val loginSuccess by viewModel.loginSuccess.observeAsState()
+    val passkeyLoginSuccess by viewModel.passkeyLoginSuccess.observeAsState()
     var isLoading by remember { mutableStateOf(false) }
     var networkStatus by remember { mutableStateOf(ConnectivityObserver.Status.Unavailable) }
 
@@ -93,6 +95,15 @@ fun LoginScreen(
         loginSuccess?.let { success ->
             isLoading = false
             if (success) {
+                navController.navigate(Screen.CreateMasterKeyScreen.name)
+            }
+        }
+    }
+
+    LaunchedEffect(passkeyLoginSuccess) {
+        passkeyLoginSuccess?.let { user ->
+            isLoading = false
+            if (true) {
                 navController.navigate(Screen.CreateMasterKeyScreen.name)
             }
         }
@@ -171,6 +182,20 @@ fun LoginScreen(
                     )
 
                     Spacer(modifier = Modifier.weight(1f))
+
+                    UCButton(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = "Sign in with Passkey",
+                        isLoading = isLoading,
+                        loadingText = "Authenticating...",
+                        onClick = {
+                            isLoading = true
+                            viewModel.authenticateWithPasskey(credentialManager, context)
+                        },
+                        enabled = true
+                    )
+
+                    Spacer(Modifier.height(20.dp))
 
                     UCButton(
                         modifier = Modifier.fillMaxWidth(),
