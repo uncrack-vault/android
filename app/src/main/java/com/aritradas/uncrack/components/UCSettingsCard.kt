@@ -1,11 +1,14 @@
 package com.aritradas.uncrack.components
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,11 +20,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.ui.theme.OnSurfaceLight
+import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 import com.aritradas.uncrack.ui.theme.medium18
+import com.aritradas.uncrack.ui.theme.normal14
 
 @Composable
 fun UCSettingsCard(
     itemName: String,
+    itemSubText: String? = null,
     modifier: Modifier = Modifier,
     iconId: Int? = null,
     textColor: Color = OnSurfaceLight,
@@ -32,7 +38,6 @@ fun UCSettingsCard(
             .fillMaxWidth()
             .clickable { onClick() }
             .padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.Start),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (iconId != null) {
@@ -41,10 +46,27 @@ fun UCSettingsCard(
                 painter = painterResource(iconId),
                 contentDescription = stringResource(R.string.icon),
             )
+            Spacer(modifier = Modifier.width(12.dp))
+
         }
-        Text(
-            text = itemName,
-            style = medium18.copy(textColor)
-        )
+
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(
+                text = itemName,
+                style = medium18.copy(textColor)
+            )
+
+            if (!itemSubText.isNullOrBlank()) {
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = itemSubText,
+                    style = normal14.copy(SurfaceTintLight)
+                )
+            }
+        }
     }
 }
+

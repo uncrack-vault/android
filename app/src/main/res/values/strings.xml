@@ -21,7 +21,7 @@
     <string name="share_details">Share Details</string>
     <string name="credentials_backups">Credentials Backups</string>
     <string name="backup_credentials_to_google_drive">Backup credentials to Google Drive</string>
-    <string name="security">Account Security</string>
+    <string name="security">Security</string>
     <string name="biometric_authentication">Biometric Authentication</string>
     <string name="share_app">Share App</string>
     <string name="share_app_with_others">Share app with others</string>
@@ -213,8 +213,8 @@
     <string name="help">Help</string>
     <string name="rate_uncrack">Rate UnCrack</string>
     <string name="invite_friends">Invite Friends</string>
-    <string name="take_in_app_screenshots">Take in-app screenshots</string>
-    <string name="unlock_with_biometric">Unlock with biometric</string>
+    <string name="allow_screenshots">Allow screenshots</string>
+    <string name="biometric_unlock">Biometric unlock</string>
     <string name="delete_account">Delete account</string>
     <string name="log_out">Log Out</string>
     <string name="theme">Theme</string>
