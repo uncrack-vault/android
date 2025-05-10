@@ -20,7 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.R
-import com.aritradas.uncrack.ui.theme.normal18
+import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
+import com.aritradas.uncrack.ui.theme.medium18
 
 @Composable
 fun AccountCard(
@@ -34,7 +35,7 @@ fun AccountCard(
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
             .clickable { onClick() }
-            .background(Color.White)
+            .background(SurfaceVariantLight)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -48,7 +49,7 @@ fun AccountCard(
 
         Text(
             text = text,
-            style = normal18.copy(Color.Black)
+            style = medium18.copy(Color.Black)
         )
     }
 }
