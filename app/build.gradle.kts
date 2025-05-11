@@ -192,7 +192,7 @@ dependencies {
 
     // BCrypt
     implementation("org.mindrot:jbcrypt:0.4")
-    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+    implementation("androidx.security:security-crypto:1.1.0-alpha07")
 
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
 }
