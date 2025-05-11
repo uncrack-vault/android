@@ -18,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -25,7 +26,6 @@ import com.aritradas.uncrack.R
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.google.firebase.auth.FirebaseAuth
-
 
 @Composable
 fun SplashScreen(
@@ -44,16 +44,20 @@ fun SplashScreen(
         label = ""
     )
     val currentUser = FirebaseAuth.getInstance().currentUser
+    val context = LocalContext.current
+    val activity = context as? android.app.Activity
+    val navigateTo = activity?.intent?.getStringExtra("navigate_to")
 
     LaunchedEffect(Unit) {
         animation = true
 
         if (currentUser == null) {
             navController.navigate(Screen.OnboardingScreen.name)
+        } else if (navigateTo != null) {
+            navController.navigate(navigateTo)
         } else {
             navController.navigate(Screen.ConfirmMasterKeyScreen.name)
         }
-
     }
 
     Surface {
