@@ -1,5 +1,6 @@
 package com.aritradas.uncrack
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -18,6 +19,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.aritradas.uncrack.navigation.Navigation
+import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.settings.SettingsViewModel
 import com.aritradas.uncrack.sharedViewModel.SharedViewModel
 import com.aritradas.uncrack.ui.theme.UnCrackTheme
@@ -49,6 +51,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
     lateinit var appBioMetricManager: AppBioMetricManager
 
     private lateinit var appUpdateManager: AppUpdateManager
+    private var appInBackground = false
 
     private val activityResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
@@ -85,6 +88,12 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
         // Initialize the AppUpdateManager
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         appUpdateManager.registerListener(this)
+
+        // Check for auto-lock in intent extras
+        val navigateTo = intent.getStringExtra("navigate_to")
+        if (navigateTo == Screen.ConfirmMasterKeyScreen.name) {
+            // Do nothing - the SplashScreen will handle navigation
+        }
 
         settingsViewModel.isScreenshotEnabled.observe(this) { isEnabled ->
             if (isEnabled) {
@@ -229,6 +238,12 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
     override fun onResume() {
         super.onResume()
 
+        // Check if auto-lock needs to be triggered
+        if (appInBackground) {
+            appInBackground = false
+            handleAutoLock()
+        }
+
         // For FLEXIBLE updates, check if an update has been downloaded
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
             // If an update is downloaded but not installed,
@@ -255,9 +270,34 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        appInBackground = true
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         // Unregister the listener to prevent memory leaks
         appUpdateManager.unregisterListener(this)
+    }
+
+    private fun handleAutoLock() {
+        // Using the ViewModel methods to avoid StateFlow access issues
+        val shouldLock = settingsViewModel.shouldLockApp()
+        val useBiometric = settingsViewModel.shouldUseBiometric()
+
+        if (shouldLock) {
+            if (useBiometric) {
+                // Show biometric prompt
+                viewModel.showBiometricPrompt(this)
+            } else {
+                // Navigate to master key confirmation screen
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                intent.putExtra("navigate_to", Screen.ConfirmMasterKeyScreen.name)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 }

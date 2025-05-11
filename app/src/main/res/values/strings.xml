@@ -235,6 +235,8 @@
     <string name="change_the_master_password_you_use_to_access_uncrack">Change the Master Password you use to access UnCrack</string>
     <string name="use_biometric_to_unlock_the_app">Use biometric to unlock the app</string>
     <string name="allow_screenshots_not_recommended">Allow screenshots (not recommended)</string>
+    <string name="auto_lock">Auto-lock</string>
+    <string name="automatically_lock_app_when_in_background">Automatically lock app when in background</string>
     <string name="like_uncrack_share_with_friends">Like UnCrack? Share with friends!</string>
     <string name="rate_uncrack_on_the_play_store">Rate UnCrack on the Play Store</string>
     <string-array name="accounts">
