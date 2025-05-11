@@ -52,6 +52,13 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
 
     private lateinit var appUpdateManager: AppUpdateManager
     private var appInBackground = false
+    private var lastBackgroundTime = 0L
+
+    companion object {
+        const val EXTRA_NAVIGATE_TO = "navigate_to"
+        const val EXTRA_PREVIOUS_ROUTE = "previous_route"
+        const val EXTRA_CURRENT_ROUTE = "current_route"
+    }
 
     private val activityResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
@@ -241,7 +248,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
         // Check if auto-lock needs to be triggered
         if (appInBackground) {
             appInBackground = false
-            handleAutoLock()
+            checkAndHandleAutoLock()
         }
 
         // For FLEXIBLE updates, check if an update has been downloaded
@@ -273,6 +280,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
     override fun onPause() {
         super.onPause()
         appInBackground = true
+        lastBackgroundTime = System.currentTimeMillis()
     }
 
     override fun onDestroy() {
@@ -281,12 +289,64 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
         appUpdateManager.unregisterListener(this)
     }
 
+    /**
+     * Check if enough time has elapsed for auto-lock and trigger if needed
+     */
+    private fun checkAndHandleAutoLock() {
+        // Using the ViewModel methods to avoid StateFlow access issues
+        val shouldLock = settingsViewModel.shouldLockApp()
+
+        if (shouldLock) {
+            val currentTime = System.currentTimeMillis()
+            val timeInBackground = currentTime - lastBackgroundTime
+            val configuredTimeout = settingsViewModel.getAutoLockTimeoutMs()
+
+            // Log for debugging
+            Timber.d("Time in background: $timeInBackground ms, Configured timeout: $configuredTimeout ms")
+
+            if (timeInBackground >= configuredTimeout) {
+                // Get the current route - this is what we want to return to after authentication
+                val currentRoute =
+                    intent.getStringExtra(EXTRA_CURRENT_ROUTE) ?: Screen.VaultScreen.name
+                val useBiometric = settingsViewModel.shouldUseBiometric()
+
+                Timber.d("Auto-locking after timeout. Current route: $currentRoute")
+
+                if (useBiometric) {
+                    // Show biometric prompt
+                    viewModel.showBiometricPrompt(this)
+                } else {
+                    // Navigate to master key confirmation screen
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    intent.putExtra(EXTRA_NAVIGATE_TO, Screen.ConfirmMasterKeyScreen.name)
+                    intent.putExtra(EXTRA_PREVIOUS_ROUTE, currentRoute)
+
+                    // Log for verification
+                    Timber.d("Starting ConfirmMasterKey with previous_route: $currentRoute")
+
+                    startActivity(intent)
+                    finish()
+                }
+            } else {
+                Timber.d("Not enough time elapsed for auto-lock")
+            }
+        }
+    }
+
+    @Deprecated("Use checkAndHandleAutoLock instead")
     private fun handleAutoLock() {
         // Using the ViewModel methods to avoid StateFlow access issues
         val shouldLock = settingsViewModel.shouldLockApp()
         val useBiometric = settingsViewModel.shouldUseBiometric()
 
         if (shouldLock) {
+            // Get the current route - this is what we want to return to after authentication
+            val currentRoute = intent.getStringExtra(EXTRA_CURRENT_ROUTE) ?: Screen.VaultScreen.name
+
+            // Log for debugging
+            Timber.d("Auto-locking. Current route: $currentRoute")
+            
             if (useBiometric) {
                 // Show biometric prompt
                 viewModel.showBiometricPrompt(this)
@@ -294,7 +354,12 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
                 // Navigate to master key confirmation screen
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                intent.putExtra("navigate_to", Screen.ConfirmMasterKeyScreen.name)
+                intent.putExtra(EXTRA_NAVIGATE_TO, Screen.ConfirmMasterKeyScreen.name)
+                intent.putExtra(EXTRA_PREVIOUS_ROUTE, currentRoute)
+
+                // Log for verification
+                Timber.d("Starting ConfirmMasterKey with previous_route: $currentRoute")
+                
                 startActivity(intent)
                 finish()
             }

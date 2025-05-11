@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.aritradas.uncrack.MainActivity
 import com.aritradas.uncrack.R
+import com.aritradas.uncrack.components.AutoLockTimeoutDialog
 import com.aritradas.uncrack.components.SettingsItemGroup
 import com.aritradas.uncrack.components.ThemeDialog
 import com.aritradas.uncrack.components.UCSettingsCard
@@ -66,9 +67,11 @@ fun SettingsScreen(
     val onDeleteAccountComplete by settingsViewModel.onDeleteAccountComplete.observeAsState(false)
     val biometricAuthState by settingsViewModel.biometricAuthState.collectAsState()
     val autoLockEnabled by settingsViewModel.autoLockEnabled.collectAsState()
+    val autoLockTimeout by settingsViewModel.autoLockTimeout.collectAsState()
     var openThemeDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
     var openDeleteAccountDialog by remember { mutableStateOf(false) }
+    var openAutoLockTimeoutDialog by remember { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     if (onLogOutComplete || onDeleteAccountComplete) {
@@ -78,6 +81,17 @@ fun SettingsScreen(
     when {
         openThemeDialog -> {
             ThemeDialog(onDismissRequest = { openThemeDialog = false })
+        }
+
+        openAutoLockTimeoutDialog -> {
+            AutoLockTimeoutDialog(
+                timeoutOptions = settingsViewModel.autoLockTimeoutLabels,
+                selectedIndex = settingsViewModel.getSelectedTimeoutIndex(),
+                onTimeoutSelected = { index ->
+                    settingsViewModel.setAutoLockTimeout(settingsViewModel.autoLockTimeoutOptions[index])
+                },
+                onDismissRequest = { openAutoLockTimeoutDialog = false }
+            )
         }
 
         openLogoutDialog -> {
@@ -285,6 +299,22 @@ fun SettingsScreen(
                     thickness = 2.dp,
                     color = SurfaceLight
                 )
+
+                UCSettingsCard(
+                    itemName = stringResource(R.string.auto_lock_timeout),
+                    itemSubText = stringResource(R.string.auto_lock_timeout_description_new).format(
+                        settingsViewModel.getTimeoutLabelForValue(autoLockTimeout)
+                    ),
+                    onClick = {
+                        openAutoLockTimeoutDialog = true
+                    }
+                )
+
+                HorizontalDivider(
+                    thickness = 2.dp,
+                    color = SurfaceLight
+                )
+
 
                 UCSwitchCard(
                     itemName = stringResource(R.string.allow_screenshots),

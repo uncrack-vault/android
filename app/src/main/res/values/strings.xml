@@ -237,6 +237,8 @@
     <string name="allow_screenshots_not_recommended">Allow screenshots (not recommended)</string>
     <string name="auto_lock">Auto-lock</string>
     <string name="automatically_lock_app_when_in_background">Automatically lock app when in background</string>
+    <string name="auto_lock_timeout">Auto-lock time</string>
+    <string name="auto_lock_timeout_description_new">Lock the app after %s of inactivity</string>
     <string name="like_uncrack_share_with_friends">Like UnCrack? Share with friends!</string>
     <string name="rate_uncrack_on_the_play_store">Rate UnCrack on the Play Store</string>
     <string-array name="accounts">
