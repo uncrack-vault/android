@@ -65,6 +65,7 @@ fun SettingsScreen(
     val onLogOutComplete by settingsViewModel.onLogOutComplete.observeAsState(false)
     val onDeleteAccountComplete by settingsViewModel.onDeleteAccountComplete.observeAsState(false)
     val biometricAuthState by settingsViewModel.biometricAuthState.collectAsState()
+    val autoLockEnabled by settingsViewModel.autoLockEnabled.collectAsState()
     var openThemeDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
     var openDeleteAccountDialog by remember { mutableStateOf(false) }
@@ -263,6 +264,20 @@ fun SettingsScreen(
                     isChecked = biometricAuthState,
                     onChecked = {
                         settingsViewModel.showBiometricPrompt(context as MainActivity)
+                    }
+                )
+
+                HorizontalDivider(
+                    thickness = 2.dp,
+                    color = SurfaceLight
+                )
+
+                UCSwitchCard(
+                    itemName = stringResource(R.string.auto_lock),
+                    itemSubText = stringResource(R.string.automatically_lock_app_when_in_background),
+                    isChecked = autoLockEnabled,
+                    onChecked = {
+                        settingsViewModel.setAutoLockEnabled(it)
                     }
                 )
 

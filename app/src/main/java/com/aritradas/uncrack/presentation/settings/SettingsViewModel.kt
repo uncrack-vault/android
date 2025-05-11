@@ -41,6 +41,8 @@ class SettingsViewModel @Inject constructor(
     private val dataStore = dataStoreUtil.dataStore
     private val _biometricAuthState = MutableStateFlow(false)
     val biometricAuthState: StateFlow<Boolean> = _biometricAuthState
+    private val _autoLockEnabled = MutableStateFlow(false)
+    val autoLockEnabled: StateFlow<Boolean> = _autoLockEnabled
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -48,6 +50,14 @@ class SettingsViewModel @Inject constructor(
                 preferences[DataStoreUtil.IS_BIOMETRIC_AUTH_SET_KEY] ?: false
             }.collect {
                 _biometricAuthState.value = it
+            }
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStore.data.map { preferences ->
+                preferences[DataStoreUtil.IS_AUTO_LOCK_ENABLED_KEY] ?: false
+            }.collect {
+                _autoLockEnabled.value = it
             }
         }
     }
@@ -76,6 +86,22 @@ class SettingsViewModel @Inject constructor(
 
     fun setScreenshotEnabled(enabled: Boolean) {
         _isScreenshotEnabled.value = enabled
+    }
+
+    fun setAutoLockEnabled(enabled: Boolean) {
+        viewModelScope.launch {
+            dataStore.edit { preferences ->
+                preferences[DataStoreUtil.IS_AUTO_LOCK_ENABLED_KEY] = enabled
+            }
+        }
+    }
+
+    fun shouldLockApp(): Boolean {
+        return _autoLockEnabled.value
+    }
+
+    fun shouldUseBiometric(): Boolean {
+        return _biometricAuthState.value
     }
 
     fun logout() = runIO {
