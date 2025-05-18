@@ -41,6 +41,31 @@ class SettingsViewModel @Inject constructor(
     private val dataStore = dataStoreUtil.dataStore
     private val _biometricAuthState = MutableStateFlow(false)
     val biometricAuthState: StateFlow<Boolean> = _biometricAuthState
+    private val _autoLockEnabled = MutableStateFlow(false)
+    val autoLockEnabled: StateFlow<Boolean> = _autoLockEnabled
+
+    // Available timeout options in milliseconds
+    val autoLockTimeoutOptions = listOf(
+        5000L,       // 5 seconds
+        30000L,      // 30 seconds
+        60000L,      // 1 minute
+        180000L,     // 3 minutes
+        300000L,     // 5 minutes
+        900000L      // 15 minutes
+    )
+
+    // Human-readable timeout labels
+    val autoLockTimeoutLabels = listOf(
+        "5 seconds",
+        "30 seconds",
+        "1 minute",
+        "3 minutes",
+        "5 minutes",
+        "15 minutes"
+    )
+
+    private val _autoLockTimeout = MutableStateFlow(60000L) // Default: 1 minute
+    val autoLockTimeout: StateFlow<Long> = _autoLockTimeout
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -48,6 +73,22 @@ class SettingsViewModel @Inject constructor(
                 preferences[DataStoreUtil.IS_BIOMETRIC_AUTH_SET_KEY] ?: false
             }.collect {
                 _biometricAuthState.value = it
+            }
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStore.data.map { preferences ->
+                preferences[DataStoreUtil.IS_AUTO_LOCK_ENABLED_KEY] ?: false
+            }.collect {
+                _autoLockEnabled.value = it
+            }
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStore.data.map { preferences ->
+                preferences[DataStoreUtil.AUTO_LOCK_TIMEOUT_KEY] ?: 60000L // Default: 1 minute
+            }.collect {
+                _autoLockTimeout.value = it
             }
         }
     }
@@ -76,6 +117,45 @@ class SettingsViewModel @Inject constructor(
 
     fun setScreenshotEnabled(enabled: Boolean) {
         _isScreenshotEnabled.value = enabled
+    }
+
+    fun setAutoLockEnabled(enabled: Boolean) {
+        viewModelScope.launch {
+            dataStore.edit { preferences ->
+                preferences[DataStoreUtil.IS_AUTO_LOCK_ENABLED_KEY] = enabled
+            }
+        }
+    }
+
+    fun setAutoLockTimeout(timeoutMs: Long) {
+        viewModelScope.launch {
+            dataStore.edit { preferences ->
+                preferences[DataStoreUtil.AUTO_LOCK_TIMEOUT_KEY] = timeoutMs
+            }
+        }
+    }
+
+    fun getTimeoutLabelForValue(timeoutMs: Long): String {
+        val index = autoLockTimeoutOptions.indexOf(timeoutMs)
+        return if (index >= 0) autoLockTimeoutLabels[index] else "1 minute"
+    }
+
+    fun getSelectedTimeoutIndex(): Int {
+        val timeout = _autoLockTimeout.value
+        return autoLockTimeoutOptions.indexOf(timeout).takeIf { it >= 0 }
+            ?: 2 // Default to 1 minute (index 2)
+    }
+    
+    fun shouldLockApp(): Boolean {
+        return _autoLockEnabled.value
+    }
+
+    fun shouldUseBiometric(): Boolean {
+        return _biometricAuthState.value
+    }
+
+    fun getAutoLockTimeoutMs(): Long {
+        return _autoLockTimeout.value
     }
 
     fun logout() = runIO {
