@@ -13,7 +13,6 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -95,7 +94,7 @@ fun Navigation(
 ) {
 
     val navController = rememberNavController()
-    val backStackEntry = navController.currentBackStackEntryAsState()
+    val backStackEntry by navController.currentBackStackEntryAsState()
 
     val screensWithoutNavigationBar = persistentListOf(
         Screen.OnboardingScreen.name,
@@ -215,9 +214,10 @@ fun Navigation(
                 )
             ) {
 
-                val accountIconId = backStackEntry.value?.arguments?.getInt("accountIcon") ?: 0
-                val accountTextId = backStackEntry.value?.arguments?.getString("accountName") ?: ""
-                val accountCategoryId = backStackEntry.value?.arguments?.getString("accountCategory") ?: ""
+                val accountIconId = backStackEntry?.arguments?.getInt("accountIcon") ?: 0
+                val accountTextId = backStackEntry?.arguments?.getString("accountName") ?: ""
+                val accountCategoryId =
+                    backStackEntry?.arguments?.getString("accountCategory") ?: ""
 
                 AddPasswordScreen(
                     navController,
@@ -306,12 +306,12 @@ fun Navigation(
 
 @Composable
 fun ShowBottomNavigation(
-    backStackEntry: State<NavBackStackEntry?>,
+    backStackEntry: NavBackStackEntry?,
     screensWithoutNavigationBar: ImmutableList<String>,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    if (backStackEntry.value?.destination?.route !in screensWithoutNavigationBar) {
+    if (backStackEntry?.destination?.route !in screensWithoutNavigationBar) {
         NavigationBar(
             modifier = modifier,
             containerColor = PrimaryContainerLight
@@ -341,7 +341,7 @@ fun ShowBottomNavigation(
             )
 
             bottomNavItems.forEach { item ->
-                val isSelected = backStackEntry.value?.destination?.route == item.route
+                val isSelected = backStackEntry?.destination?.route == item.route
                 val animateIconSize by animateFloatAsState(
                     if (isSelected) 1f else 0.9f,
                     label = "iconScale"

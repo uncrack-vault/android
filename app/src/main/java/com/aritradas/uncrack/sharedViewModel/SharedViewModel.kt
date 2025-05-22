@@ -33,6 +33,9 @@ class SharedViewModel @Inject constructor(
     private val _finishActivity = MutableStateFlow(false)
     val finishActivity: StateFlow<Boolean> = _finishActivity.asStateFlow()
 
+    private val _updateDownloaded = MutableStateFlow(false)
+    val updateDownloaded: StateFlow<Boolean> = _updateDownloaded.asStateFlow()
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             dataStore.data.map { preferences ->
@@ -72,6 +75,12 @@ class SharedViewModel @Inject constructor(
     private fun finishActivity() {
         viewModelScope.launch {
             _finishActivity.emit(true)
+        }
+    }
+
+    fun notifyUpdateDownloaded() {
+        viewModelScope.launch {
+            _updateDownloaded.emit(true)
         }
     }
 }

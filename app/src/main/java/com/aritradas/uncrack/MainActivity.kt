@@ -11,8 +11,18 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
@@ -26,7 +36,6 @@ import com.aritradas.uncrack.ui.theme.UnCrackTheme
 import com.aritradas.uncrack.util.AppBioMetricManager
 import com.aritradas.uncrack.util.NetworkConnectivityObserver
 import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -117,7 +126,33 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
         setContent {
             UnCrackTheme {
                 val connectivityObserver = NetworkConnectivityObserver(applicationContext)
-                Navigation(this, connectivityObserver)
+                val snackbarHostState = remember { SnackbarHostState() }
+
+                // Handle update downloaded event
+                LaunchedEffect(Unit) {
+                    viewModel.updateDownloaded.collect { isDownloaded ->
+                        if (isDownloaded) {
+                            val result = snackbarHostState.showSnackbar(
+                                message = "An update has been downloaded.",
+                                actionLabel = "INSTALL",
+                                duration = androidx.compose.material3.SnackbarDuration.Indefinite
+                            )
+                            if (result == SnackbarResult.ActionPerformed) {
+                                appUpdateManager.completeUpdate()
+                            }
+                        }
+                    }
+                }
+
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Navigation(this@MainActivity, connectivityObserver)
+
+                    // Put the SnackbarHost in the box after the main content
+                    SnackbarHost(
+                        hostState = snackbarHostState,
+                        modifier = Modifier.padding(bottom = 80.dp)  // Add padding to show above nav bar
+                    )
+                }
             }
         }
 
@@ -225,21 +260,10 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
         if (state.installStatus() == InstallStatus.DOWNLOADED) {
             // After the update is downloaded, show a notification
             // and request user confirmation to restart the app
-            popupSnackbarForCompleteUpdate()
+            viewModel.notifyUpdateDownloaded()
         }
 
         Timber.d("Install state updated: ${state.installStatus()}")
-    }
-
-    private fun popupSnackbarForCompleteUpdate() {
-        Snackbar.make(
-            findViewById(android.R.id.content),
-            "An update has been downloaded.",
-            Snackbar.LENGTH_INDEFINITE
-        ).apply {
-            setAction("INSTALL") { appUpdateManager.completeUpdate() }
-            show()
-        }
     }
 
     override fun onResume() {
@@ -257,7 +281,7 @@ class MainActivity : FragmentActivity(), InstallStateUpdatedListener {
             // notify the user to complete the update
             if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
                 Timber.d("Update downloaded but not installed")
-                popupSnackbarForCompleteUpdate()
+                viewModel.notifyUpdateDownloaded()
             }
 
             // Check if an immediate update is in progress and was interrupted
