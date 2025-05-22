@@ -1,10 +1,12 @@
 package com.aritradas.uncrack.util
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Base64
 import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import timber.log.Timber
 import java.nio.charset.StandardCharsets
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
@@ -17,6 +19,7 @@ object EncryptionUtils {
     private const val GCM_TAG_LENGTH = 128
     private const val KEY_ALIAS = "uncrack_encryption_key"
     private const val PREFERENCES_FILE = "encryption_prefs"
+    private const val FALLBACK_PREFS_FILE = "fallback_encryption_prefs"
     private const val KEY_DATA = "encryption_key_data"
 
     private lateinit var secretKey: SecretKey
@@ -28,48 +31,74 @@ object EncryptionUtils {
         if (!isInitialized) {
             synchronized(this) {
                 if (!isInitialized) {
-                    secretKey = getOrCreateKey(context)
+                    try {
+                        secretKey = getOrCreateSecureKey(context)
+                    } catch (e: Exception) {
+                        Timber.e(
+                            e,
+                            "Error initializing secure encryption, falling back to regular encryption"
+                        )
+                        secretKey = getOrCreateFallbackKey(context)
+                    }
                     isInitialized = true
                 }
             }
         }
     }
 
-    private fun getOrCreateKey(context: Context): SecretKey {
-        // Create or get the master key for EncryptedSharedPreferences
-        val masterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
+    private fun getOrCreateSecureKey(context: Context): SecretKey {
+        try {
+            // Create or get the master key for EncryptedSharedPreferences
+            val masterKey = MasterKey.Builder(context)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
 
-        // Get encrypted shared preferences
-        val sharedPreferences = EncryptedSharedPreferences.create(
-            context,
-            PREFERENCES_FILE,
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
+            // Get encrypted shared preferences
+            val sharedPreferences = EncryptedSharedPreferences.create(
+                context,
+                PREFERENCES_FILE,
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
 
-        // Check if we have a stored key
+            val keyString = sharedPreferences.getString(KEY_DATA, null)
+            return if (keyString != null) {
+                val keyBytes = Base64.decode(keyString, Base64.DEFAULT)
+                SecretKeySpec(keyBytes, "AES")
+            } else {
+                generateAndStoreNewKey(sharedPreferences)
+            }
+        } catch (e: Exception) {
+            throw e  // Rethrow to be handled by the fallback in initialize()
+        }
+    }
+
+    private fun getOrCreateFallbackKey(context: Context): SecretKey {
+        val sharedPreferences =
+            context.getSharedPreferences(FALLBACK_PREFS_FILE, Context.MODE_PRIVATE)
         val keyString = sharedPreferences.getString(KEY_DATA, null)
 
         return if (keyString != null) {
-            // If key exists, restore it
             val keyBytes = Base64.decode(keyString, Base64.DEFAULT)
             SecretKeySpec(keyBytes, "AES")
         } else {
-            // Generate a new key if none exists
-            val keyGenerator = KeyGenerator.getInstance("AES")
-            keyGenerator.init(256)
-            val newKey = keyGenerator.generateKey()
-
-            // Store the new key
-            val keyBytes = newKey.encoded
-            val keyString = Base64.encodeToString(keyBytes, Base64.DEFAULT)
-            sharedPreferences.edit { putString(KEY_DATA, keyString) }
-
-            newKey
+            generateAndStoreNewKey(sharedPreferences)
         }
+    }
+
+    private fun generateAndStoreNewKey(sharedPreferences: SharedPreferences): SecretKey {
+        // Generate a new key
+        val keyGenerator = KeyGenerator.getInstance("AES")
+        keyGenerator.init(256)
+        val newKey = keyGenerator.generateKey()
+
+        // Store the new key
+        val keyBytes = newKey.encoded
+        val keyString = Base64.encodeToString(keyBytes, Base64.DEFAULT)
+        sharedPreferences.edit { putString(KEY_DATA, keyString) }
+
+        return newKey
     }
 
     fun encrypt(data: String): String {
@@ -91,7 +120,7 @@ object EncryptionUtils {
 
             return Base64.encodeToString(combined, Base64.DEFAULT)
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Encryption error")
             return data // Return original data in case of encryption failure
         }
     }
@@ -115,7 +144,7 @@ object EncryptionUtils {
             val decryptedBytes = cipher.doFinal(encrypted)
             return String(decryptedBytes, StandardCharsets.UTF_8)
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Decryption error")
             return encryptedData // Return encrypted data in case of decryption failure
         }
     }
