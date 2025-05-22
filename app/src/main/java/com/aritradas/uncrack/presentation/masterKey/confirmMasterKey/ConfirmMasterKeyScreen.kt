@@ -1,5 +1,6 @@
 package com.aritradas.uncrack.presentation.masterKey.confirmMasterKey
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -37,7 +38,6 @@ import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.masterKey.KeyViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.bold30
 import kotlinx.coroutines.delay
 
@@ -45,12 +45,17 @@ import kotlinx.coroutines.delay
 fun ConfirmMasterKeyScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    masterKeyViewModel: KeyViewModel = hiltViewModel()
+    masterKeyViewModel: KeyViewModel = hiltViewModel(),
 ) {
     var confirmMasterKey by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
     var isLoading by remember { mutableStateOf(false) }
     val savedMasterKey = masterKeyViewModel.keyModel.password
+    val context = LocalContext.current
+
+    BackHandler(onBack = {
+        (context as? android.app.Activity)?.finish()
+    })
 
     LaunchedEffect(Unit) {
         masterKeyViewModel.getMasterKey()
