@@ -19,6 +19,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -51,6 +54,7 @@ fun ProfileScreen(
 
     val context = LocalContext.current
     val userData by userViewModel.state.collectAsState()
+    var showDialog by remember { mutableStateOf(false) }
     val paddingValues = WindowInsets.systemBars.asPaddingValues()
 
     Column(
@@ -87,12 +91,25 @@ fun ProfileScreen(
                         text = userData.name,
                         style = medium22.copy(color = OnSurfaceLight)
                     )
-                    IconButton(onClick = {}) {
+                    // Button to open the dialog
+                    IconButton(onClick = { showDialog = true }) {
                         Icon(
                             painter = painterResource(id = R.drawable.edit),
                             contentDescription = "Edit Username"
                         )
                     }
+                }
+
+                // Initiates the dialog to edit the username
+                if (showDialog) {
+                    EditUsernameDialog(
+                        currentName = userData.name,
+                        onDismiss = { showDialog = false },
+                        onSave = { newName ->
+                            userViewModel.updateUserName(newName)
+                            showDialog = false
+                        }
+                    )
                 }
             }
         }
