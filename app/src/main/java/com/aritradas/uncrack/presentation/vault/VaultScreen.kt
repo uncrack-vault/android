@@ -3,6 +3,7 @@ package com.aritradas.uncrack.presentation.vault
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -52,7 +53,6 @@ import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.PrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.normal16
-import com.aritradas.uncrack.util.BackPressHandler
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -86,7 +86,9 @@ fun VaultScreen(
         }
     )
 
-    BackPressHandler()
+    BackHandler(onBack = {
+        (context as? android.app.Activity)?.finish()
+    })
 
     LaunchedEffect(Unit) {
         vaultViewModel.getAccounts()
