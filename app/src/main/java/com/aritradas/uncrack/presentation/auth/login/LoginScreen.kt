@@ -1,6 +1,7 @@
 package com.aritradas.uncrack.presentation.auth.login
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -43,7 +44,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.NoInternetScreen
-import com.aritradas.uncrack.components.ProgressDialog
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
@@ -97,6 +97,10 @@ fun LoginScreen(
             }
         }
     }
+
+    BackHandler(onBack = {
+        (context as? android.app.Activity)?.finish()
+    })
 
     when (networkStatus) {
         ConnectivityObserver.Status.Available -> {

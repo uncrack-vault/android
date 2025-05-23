@@ -1,6 +1,7 @@
 package com.aritradas.uncrack.presentation.auth.forgotPassword
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -77,6 +78,10 @@ fun ForgotPasswordScreen(
             Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
         }
     }
+
+    BackHandler(onBack = {
+        (context as? android.app.Activity)?.finish()
+    })
 
     if (isLoading) {
         ProgressDialog {}

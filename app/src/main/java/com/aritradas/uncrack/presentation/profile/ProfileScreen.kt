@@ -1,6 +1,7 @@
 package com.aritradas.uncrack.presentation.profile
 
 import android.content.Intent
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -49,6 +50,10 @@ fun ProfileScreen(
     val context = LocalContext.current
     val userData by userViewModel.state.collectAsState()
     val paddingValues = WindowInsets.systemBars.asPaddingValues()
+
+    BackHandler(onBack = {
+        (context as? android.app.Activity)?.finish()
+    })
 
     Column(
         modifier = modifier
