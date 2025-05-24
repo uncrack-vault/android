@@ -39,7 +39,6 @@ import com.aritradas.uncrack.presentation.masterKey.KeyViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.SurfaceTintLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.bold30
 import com.aritradas.uncrack.ui.theme.medium14
 import com.aritradas.uncrack.ui.theme.normal16
@@ -121,7 +120,7 @@ fun CreateMasterKeyScreen(
 
                 PasswordStrengthIndicator(
                     modifier = Modifier.padding(start = 4.dp),
-                    text = stringResource(R.string._9_or_more_characters),
+                    text = stringResource(R.string._8_or_more_characters),
                     isMet = hasMinLengthObserver
                 )
                 PasswordStrengthIndicator(

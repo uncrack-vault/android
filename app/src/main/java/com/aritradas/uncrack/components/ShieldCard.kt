@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.ui.theme.SurfaceTintLight
+import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.medium18
 import com.aritradas.uncrack.ui.theme.medium26
 import com.aritradas.uncrack.ui.theme.normal14
@@ -33,7 +34,7 @@ fun ShieldCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .background(Color.White)
+            .background(SurfaceVariantLight)
             .shadow(
                 elevation = 5.dp,
                 spotColor = Color(0x0D666666),

@@ -48,14 +48,14 @@ fun UCButton(
         if (isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier.size(24.dp),
-                color = Color.White,
+                color = Color.Black,
                 strokeWidth = 2.dp
             )
             loadingText?.let {
                 Text(
                     modifier = Modifier.padding(start = 8.dp),
                     text = it,
-                    color = Color.White,
+                    color = Color.Black,
                     fontFamily = DMSansFontFamily,
                     fontSize = 14.sp
                 )

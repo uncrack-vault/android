@@ -19,13 +19,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -42,19 +45,18 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
-import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.domain.model.Account
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.vault.viewmodel.AddEditViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.medium22
-import com.aritradas.uncrack.util.UtilsKt.generateRandomPassword
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -73,6 +75,7 @@ fun AddPasswordScreen(
         addEditViewModel.resetState()
     }
 
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val currentDateTime = LocalDateTime.now()
     val formattedDateTime =
         DateTimeFormatter.ofPattern("dd/M/yyyy hh:mm:ss").format(currentDateTime)
@@ -88,11 +91,24 @@ fun AddPasswordScreen(
             .fillMaxSize()
             .imePadding(),
         topBar = {
-            UCTopAppBar(
-                modifier = Modifier.fillMaxWidth(),
-                title = "Add Password",
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
-                onBackPress = { navController.popBackStack() }
+            MediumTopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = BackgroundLight),
+                title = {
+                    Text(
+                        "Add Password",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back btn"
+                        )
+                    }
+                },
+                scrollBehavior = scrollBehavior
             )
         }
     ) { paddingValues ->
@@ -183,7 +199,7 @@ fun AddPasswordScreen(
                     .fillMaxWidth(),
                 maxLines = 1,
                 headerText = stringResource(id = R.string.password),
-                hintText = "Hit dice to generate password",
+                hintText = stringResource(R.string.password_hint),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
@@ -218,17 +234,6 @@ fun AddPasswordScreen(
                             Icon(
                                 modifier = Modifier.size(24.dp),
                                 painter = image,
-                                contentDescription = null
-                            )
-                        }
-
-                        IconButton(onClick = {
-                            val generatedPassword = generateRandomPassword(12)
-                            addEditViewModel.setPassword(generatedPassword)
-                            passwordVisibility = true
-                        }) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.dice),
                                 contentDescription = null
                             )
                         }
