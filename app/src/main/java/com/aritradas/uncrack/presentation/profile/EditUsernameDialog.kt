@@ -30,7 +30,10 @@ fun EditUsernameDialog(
             )
         },
         confirmButton = {
-            Button(onClick = { onSave(newName) }) {
+            Button(
+                onClick = { onSave(newName) },
+                enabled = newName.isNotBlank()
+            ) {
                 Text("Save")
             }
         },
