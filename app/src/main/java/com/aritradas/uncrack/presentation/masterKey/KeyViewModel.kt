@@ -56,7 +56,7 @@ class KeyViewModel @Inject constructor(
     }
 
     private fun validatePassword(password: String) {
-        _hasMinLength.value = password.length >= 9
+        _hasMinLength.value = password.length >= 8
         _hasSymbol.value = password.any { !it.isLetterOrDigit() }
     }
 
