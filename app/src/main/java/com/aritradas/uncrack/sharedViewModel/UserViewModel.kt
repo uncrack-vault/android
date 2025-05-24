@@ -62,6 +62,25 @@ class UserViewModel @Inject constructor(
         }
     }
 
+    // Function to update the username in Firestore
+    fun updateUserName(newName: String) {
+        val currentUser = auth.currentUser ?: return
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                firestore.collection("Users")
+                    .document(currentUser.uid)
+                    .update("name", newName)
+                    .await()
+
+                // Update local state and DataStore
+                _state.value = _state.value.copy(name = newName)
+                saveUserNameToDataStore(newName)
+            } catch (e: Exception) {
+                Timber.e("Error updating user name in Firestore: $e")
+            }
+        }
+    }
+
     private suspend fun fetchUserFromFirestore(userId: String): User {
         return try {
             val documentSnapshot = firestore.collection("Users").document(userId).get().await()
