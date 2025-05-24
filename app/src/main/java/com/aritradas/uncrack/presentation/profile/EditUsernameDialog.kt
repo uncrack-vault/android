@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.aritradas.uncrack.util.UtilsKt
 
 // Dialog to edit the username of the user
 @Composable
@@ -32,7 +33,7 @@ fun EditUsernameDialog(
         confirmButton = {
             Button(
                 onClick = { onSave(newName) },
-                enabled = newName.isNotBlank()
+                enabled = UtilsKt.validateName(newName)
             ) {
                 Text("Save")
             }
