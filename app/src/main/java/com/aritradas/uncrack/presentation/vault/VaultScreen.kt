@@ -29,6 +29,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -102,6 +104,21 @@ fun VaultScreen(
     }
 
     Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = BackgroundLight,
+                ),
+                title = {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "Hello, ${user.name}",
+                        style = medium24.copy(Color.Black)
+                    )
+                }
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.padding(vertical = 90.dp),
@@ -121,14 +138,7 @@ fun VaultScreen(
                 .background(BackgroundLight)
                 .padding(horizontal = 16.dp)
                 .then(modifier),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                text = "Hello, ${user.name}",
-                style = medium24.copy(Color.Black)
-            )
 
             SearchBar(
                 modifier = Modifier
