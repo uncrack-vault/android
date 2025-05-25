@@ -14,13 +14,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
@@ -49,6 +55,7 @@ fun ProfileScreen(
 
     val context = LocalContext.current
     val userData by userViewModel.state.collectAsState()
+    var showDialog by remember { mutableStateOf(false) }
     val paddingValues = WindowInsets.systemBars.asPaddingValues()
 
     BackHandler(onBack = {
@@ -82,10 +89,33 @@ fun ProfileScreen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Text(
-                    text = userData.name,
-                    style = medium22.copy(color = OnSurfaceLight)
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = userData.name,
+                        style = medium22.copy(color = OnSurfaceLight)
+                    )
+                    // Button to open the dialog
+                    IconButton(onClick = { showDialog = true }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.edit),
+                            contentDescription = "Edit Username"
+                        )
+                    }
+                }
+
+                // Initiates the dialog to edit the username
+                if (showDialog) {
+                    EditUsernameDialog(
+                        currentName = userData.name,
+                        onDismiss = { showDialog = false },
+                        onSave = { newName ->
+                            userViewModel.updateUserName(newName)
+                            showDialog = false
+                        }
+                    )
+                }
             }
         }
 
