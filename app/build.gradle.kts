@@ -151,7 +151,7 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Datastore
-    implementation("androidx.datastore:datastore-preferences:1.1.2")
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
 
     // Lottie Animation
     implementation("com.airbnb.android:lottie-compose:6.6.2")
