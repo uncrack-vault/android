@@ -6,6 +6,7 @@ on:
 
 permissions:
   pull-requests: write
+  issues: read
 
 jobs:
   greet:
@@ -13,12 +14,35 @@ jobs:
 
     steps:
       - name: Greet first-time contributor
-        uses: actions/first-interaction@v1
+        uses: actions/github-script@v7
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          pr-message: |
-            👋 Hello @${{ github.actor }}! Thanks for your first Pull Request 🎉
+          script: |
+            // Check if this is the user's first contribution
+            const { data: pullRequests } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              creator: context.payload.pull_request.user.login,
+              state: 'all'
+            });
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              creator: context.payload.pull_request.user.login,
+              state: 'all'
+            });
+
+            const isFirstContribution = pullRequests.length === 1 && issues.length === 0;
+
+            if (isFirstContribution) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body: `👋 Hello @${context.payload.pull_request.user.login}! Thanks for your first Pull Request 🎉
 
             We really appreciate your contribution to this project.
 
-            A maintainer will review your PR soon 🚀
+            A maintainer will review your PR soon 🚀`
+              });
+            }
