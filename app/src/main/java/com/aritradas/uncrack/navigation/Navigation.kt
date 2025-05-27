@@ -285,10 +285,17 @@ fun Navigation(
                 )
             }
 
-            composable(route = Screen.GeneratorScreen.name) {
+            composable(
+                route = "${Screen.GeneratorScreen.name}?tab={tab}",
+                arguments = listOf(
+                    navArgument("tab") { defaultValue = "password" }
+                )
+            ) { backStackEntry ->
+                val initialTab = backStackEntry.arguments?.getString("tab") ?: "password"
                 GeneratorScreen(
-                    navController,
-                    passwordGeneratorViewModel
+                    navController = navController,
+                    passwordGeneratorViewModel = passwordGeneratorViewModel,
+                    initialTab = initialTab
                 )
             }
 

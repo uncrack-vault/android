@@ -60,7 +60,7 @@ fun ToolsScreen(
         ) {
 
             Row(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(10.dp))
                     .clickable {
@@ -98,6 +98,49 @@ fun ToolsScreen(
                         color = Color.Gray,
                         style = normal14
 
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(10.dp))
+                    .clickable {
+                        navController.navigate("${Screen.GeneratorScreen.name}?tab=username")
+                    }
+                    .background(SurfaceVariantLight)
+                    .shadow(
+                        elevation = 5.dp,
+                        spotColor = Color(0x0D666666),
+                        ambientColor = Color(0x0D666666)
+                    )
+                    .padding(horizontal = 16.dp, vertical = 17.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    modifier = Modifier.size(30.dp),
+                    painter = painterResource(id = R.drawable.person_icon), // Add a username icon to your resources
+                    contentDescription = null
+                )
+
+                Spacer(modifier = Modifier.width(15.dp))
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+                    horizontalAlignment = Alignment.Start,
+                ) {
+                    Text(
+                        text = "Username Generator",
+                        color = Color.Black,
+                        style = medium18
+                    )
+
+                    Text(
+                        text = "Quickly generate unique usernames",
+                        color = Color.Gray,
+                        style = normal14
                     )
                 }
             }

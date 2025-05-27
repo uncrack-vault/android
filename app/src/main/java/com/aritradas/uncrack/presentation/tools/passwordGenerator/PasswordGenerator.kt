@@ -16,13 +16,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -54,7 +51,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCButton
-import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.PrimaryLight
@@ -72,7 +68,6 @@ import com.aritradas.uncrack.util.Constants.sliderSteps
 import com.aritradas.uncrack.util.UtilsKt.calculatePasswordStrength
 import timber.log.Timber
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PasswordGenerator(
     navController: NavHostController,
@@ -111,24 +106,33 @@ fun PasswordGenerator(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = buildAnnotatedString {
-                password.forEach {
-                    val textColor = when {
-                        it.isDigit() -> Color.Blue
-                        it.isLetterOrDigit().not() -> Color.Magenta
-                        else -> OnPrimaryContainerLight
+        if (password.isEmpty()) {
+            Text(
+                text = "Please select a password length below",
+                style = normal16.copy(OnPrimaryContainerLight),
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
+        } else {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = buildAnnotatedString {
+                    password.forEach {
+                        val textColor = when {
+                            it.isDigit() -> Color.Blue
+                            it.isLetterOrDigit().not() -> Color.Magenta
+                            else -> OnPrimaryContainerLight
+                        }
+                        withStyle(style = SpanStyle(color = textColor)) {
+                            append(it.toString())
+                        }
                     }
-                    withStyle(style = SpanStyle(color = textColor)) {
-                        append(it.toString())
-                    }
-                }
-            },
-            style = medium30,
-            textAlign = TextAlign.Center,
-            letterSpacing = TextUnit(1F, TextUnitType.Sp)
-        )
+                },
+                style = medium30,
+                textAlign = TextAlign.Center,
+                letterSpacing = TextUnit(1F, TextUnitType.Sp)
+            )
+        }
 
         UCButton(
             modifier = Modifier.fillMaxWidth(),
@@ -176,7 +180,6 @@ fun PasswordGenerator(
                 )
             }
         }
-
 
         Spacer(modifier = Modifier.height(10.dp))
 
