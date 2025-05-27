@@ -1,7 +1,6 @@
 package com.aritradas.uncrack.presentation.tools.passwordGenerator
 
 import android.widget.Toast
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -53,8 +52,6 @@ import com.aritradas.uncrack.ui.theme.medium30
 import com.aritradas.uncrack.ui.theme.normal16
 import com.aritradas.uncrack.util.Constants.sliderStepRange
 import com.aritradas.uncrack.util.Constants.sliderSteps
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -113,7 +110,19 @@ fun PasswordGenerator(
                 letterSpacing = TextUnit(1F, TextUnitType.Sp)
             )
 
-            Spacer(modifier = Modifier.height(90.dp))
+            UCButton(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(R.string.copy),
+                onClick = {
+                    password.let { passwordToCopy ->
+                        clipboardManager.setText(AnnotatedString((passwordToCopy)))
+                    }
+                    Toast.makeText(context, "Copied", Toast.LENGTH_SHORT).show()
+                },
+                leadingIcon = painterResource(id = R.drawable.copy_password)
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
 
             Text(
                 text = stringResource(R.string.password_generated_length, passwordLength.toInt()),
@@ -127,6 +136,9 @@ fun PasswordGenerator(
                 value = passwordLength,
                 onValueChange = { newPasswordLength ->
                     passwordGeneratorViewModel.updatePasswordLength(newPasswordLength)
+                },
+                onValueChangeFinished = {
+                    passwordGeneratorViewModel.generatePassword()
                 },
                 steps = sliderSteps,
                 valueRange = sliderStepRange,
@@ -172,33 +184,6 @@ fun PasswordGenerator(
             ) {
                 passwordGeneratorViewModel.updateIncludeSpecialChars(it)
             }
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            UCButton(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(R.string.generate),
-                onClick = {
-                    passwordGeneratorViewModel.generatePassword()
-                    scope.launch {
-                        scrollState.animateScrollTo(value = 0, animationSpec = tween(200))
-                    }
-                    Timber.d("Password ${passwordGeneratorViewModel.generatePassword()}")
-                },
-                leadingIcon = painterResource(id = R.drawable.generate_password)
-            )
-
-            UCButton(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(R.string.copy),
-                onClick = {
-                    password.let { passwordToCopy ->
-                        clipboardManager.setText(AnnotatedString((passwordToCopy)))
-                    }
-                    Toast.makeText(context, "Copied", Toast.LENGTH_SHORT).show()
-                },
-                leadingIcon = painterResource(id = R.drawable.copy_password)
-            )
         }
     }
 }
