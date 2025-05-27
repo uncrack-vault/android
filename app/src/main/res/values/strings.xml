@@ -189,6 +189,7 @@
     <string name="username_hint">johndoe</string>
     <string name="not_favourite">Not favourite</string>
     <string name="password_strength">Password Strength</string>
+    <string name="password_score">Password Score</string>
     <string name="communities">Communities</string>
     <string name="portfolio">Portfolio</string>
     <string name="communication">Communication</string>

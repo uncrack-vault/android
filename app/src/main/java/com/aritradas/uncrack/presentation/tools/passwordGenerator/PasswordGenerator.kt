@@ -3,6 +3,7 @@ package com.aritradas.uncrack.presentation.tools.passwordGenerator
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,8 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
@@ -20,12 +24,20 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -47,11 +59,18 @@ import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.PrimaryLight
 import com.aritradas.uncrack.ui.theme.SurfaceLight
+import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.medium30
+import com.aritradas.uncrack.ui.theme.normal12
 import com.aritradas.uncrack.ui.theme.normal16
+import com.aritradas.uncrack.ui.theme.oldPassword
+import com.aritradas.uncrack.ui.theme.strongPassword
+import com.aritradas.uncrack.ui.theme.weakPassword
 import com.aritradas.uncrack.util.Constants.sliderStepRange
 import com.aritradas.uncrack.util.Constants.sliderSteps
+import com.aritradas.uncrack.util.UtilsKt.calculatePasswordStrength
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,6 +83,9 @@ fun PasswordGenerator(
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
     val password by passwordGeneratorViewModel.password.observeAsState("")
     val passwordLength by passwordGeneratorViewModel.passwordLength.observeAsState(0.0f)
+    var passwordStrength by remember { mutableIntStateOf(0) }
+    var progressValue by remember { mutableFloatStateOf(0f) }
+    var progressMessage by rememberSaveable { mutableStateOf("") }
     val includeUppercase by passwordGeneratorViewModel.includeUppercase.observeAsState(true)
     val includeLowercase by passwordGeneratorViewModel.includeLowercase.observeAsState(true)
     val includeNumbers by passwordGeneratorViewModel.includeNumbers.observeAsState(true)
@@ -71,6 +93,15 @@ fun PasswordGenerator(
 
     val scrollState = rememberScrollState()
     val scope = rememberCoroutineScope()
+
+    LaunchedEffect(password) {
+        passwordStrength = calculatePasswordStrength(password)
+        val mappedScore = (passwordStrength * 100) / 9
+        progressValue = mappedScore.toFloat()
+        Timber.d("Progress value $progressValue")
+        progressMessage = passwordStrength.toString()
+        Timber.d("Progress message $progressMessage")
+    }
 
     Scaffold(
         topBar = {
@@ -121,6 +152,42 @@ fun PasswordGenerator(
                 },
                 leadingIcon = painterResource(id = R.drawable.copy_password)
             )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row (
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Text(
+                    text = stringResource(R.string.password_score),
+                    style = medium24.copy(OnPrimaryContainerLight)
+                )
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Box(contentAlignment = Alignment.Center) {
+
+                    CircularProgressIndicator(
+                        progress = { progressValue },
+                        modifier = Modifier.size(40.dp),
+                        color = when {
+                            passwordStrength <= 3 -> weakPassword
+                            passwordStrength <= 7 -> oldPassword
+                            else -> strongPassword
+                        },
+                        strokeWidth = 5.dp,
+                        trackColor = SurfaceTintLight,
+                        strokeCap = StrokeCap.Round,
+                    )
+
+                    Text(
+                        text = progressMessage,
+                        style = normal12,
+                        color = OnPrimaryContainerLight,
+                    )
+                }
+            }
+
 
             Spacer(modifier = Modifier.height(10.dp))
 
