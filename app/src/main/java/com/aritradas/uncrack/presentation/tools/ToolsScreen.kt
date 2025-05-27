@@ -64,7 +64,7 @@ fun ToolsScreen(
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(10.dp))
                     .clickable {
-                        navController.navigate(Screen.PasswordGeneratorScreen.name)
+                        navController.navigate(Screen.GeneratorScreen.name)
                     }
                     .background(SurfaceVariantLight)
                     .shadow(

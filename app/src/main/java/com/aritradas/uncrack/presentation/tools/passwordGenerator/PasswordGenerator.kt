@@ -103,154 +103,142 @@ fun PasswordGenerator(
         Timber.d("Progress message $progressMessage")
     }
 
-    Scaffold(
-        topBar = {
-            UCTopAppBar(
-                modifier = modifier.fillMaxWidth(),
-                title = "Password Generator",
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
-                onBackPress = { navController.popBackStack() }
-            )
-        }
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .background(BackgroundLight)
-                .verticalScroll(scrollState)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = buildAnnotatedString {
-                    password.forEach {
-                        val textColor = when {
-                            it.isDigit() -> Color.Blue
-                            it.isLetterOrDigit().not() -> Color.Magenta
-                            else -> OnPrimaryContainerLight
-                        }
-                        withStyle(style = SpanStyle(color = textColor)) {
-                            append(it.toString())
-                        }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(BackgroundLight)
+            .verticalScroll(scrollState)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = buildAnnotatedString {
+                password.forEach {
+                    val textColor = when {
+                        it.isDigit() -> Color.Blue
+                        it.isLetterOrDigit().not() -> Color.Magenta
+                        else -> OnPrimaryContainerLight
                     }
-                },
-                style = medium30,
-                textAlign = TextAlign.Center,
-                letterSpacing = TextUnit(1F, TextUnitType.Sp)
-            )
-
-            UCButton(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(R.string.copy),
-                onClick = {
-                    password.let { passwordToCopy ->
-                        clipboardManager.setText(AnnotatedString((passwordToCopy)))
+                    withStyle(style = SpanStyle(color = textColor)) {
+                        append(it.toString())
                     }
-                    Toast.makeText(context, "Copied", Toast.LENGTH_SHORT).show()
-                },
-                leadingIcon = painterResource(id = R.drawable.copy_password)
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Row (
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Text(
-                    text = stringResource(R.string.password_score),
-                    style = medium24.copy(OnPrimaryContainerLight)
-                )
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                Box(contentAlignment = Alignment.Center) {
-
-                    CircularProgressIndicator(
-                        progress = { progressValue },
-                        modifier = Modifier.size(40.dp),
-                        color = when {
-                            passwordStrength <= 3 -> weakPassword
-                            passwordStrength <= 7 -> oldPassword
-                            else -> strongPassword
-                        },
-                        strokeWidth = 5.dp,
-                        trackColor = SurfaceTintLight,
-                        strokeCap = StrokeCap.Round,
-                    )
-
-                    Text(
-                        text = progressMessage,
-                        style = normal12,
-                        color = OnPrimaryContainerLight,
-                    )
                 }
-            }
+            },
+            style = medium30,
+            textAlign = TextAlign.Center,
+            letterSpacing = TextUnit(1F, TextUnitType.Sp)
+        )
 
+        UCButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(R.string.copy),
+            onClick = {
+                password.let { passwordToCopy ->
+                    clipboardManager.setText(AnnotatedString((passwordToCopy)))
+                }
+                Toast.makeText(context, "Copied", Toast.LENGTH_SHORT).show()
+            },
+            leadingIcon = painterResource(id = R.drawable.copy_password)
+        )
 
-            Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+        ){
             Text(
-                text = stringResource(R.string.password_generated_length, passwordLength.toInt()),
+                text = stringResource(R.string.password_score),
                 style = medium24.copy(OnPrimaryContainerLight)
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.width(8.dp))
 
-            Slider(
-                modifier = Modifier.fillMaxWidth(),
-                value = passwordLength,
-                onValueChange = { newPasswordLength ->
-                    passwordGeneratorViewModel.updatePasswordLength(newPasswordLength)
-                },
-                onValueChangeFinished = {
-                    passwordGeneratorViewModel.generatePassword()
-                },
-                steps = sliderSteps,
-                valueRange = sliderStepRange,
-                colors = SliderDefaults.colors(
-                    thumbColor = OnPrimaryContainerLight,
-                    activeTrackColor = PrimaryLight,
-                    inactiveTrackColor = SurfaceLight,
-                    activeTickColor = Color.Transparent,
-                    inactiveTickColor = Color.Transparent
+            Box(contentAlignment = Alignment.Center) {
+
+                CircularProgressIndicator(
+                    progress = { progressValue },
+                    modifier = Modifier.size(40.dp),
+                    color = when {
+                        passwordStrength <= 3 -> weakPassword
+                        passwordStrength <= 7 -> oldPassword
+                        else -> strongPassword
+                    },
+                    strokeWidth = 5.dp,
+                    trackColor = SurfaceTintLight,
+                    strokeCap = StrokeCap.Round,
                 )
+
+                Text(
+                    text = progressMessage,
+                    style = normal12,
+                    color = OnPrimaryContainerLight,
+                )
+            }
+        }
+
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = stringResource(R.string.password_generated_length, passwordLength.toInt()),
+            style = medium24.copy(OnPrimaryContainerLight)
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Slider(
+            modifier = Modifier.fillMaxWidth(),
+            value = passwordLength,
+            onValueChange = { newPasswordLength ->
+                passwordGeneratorViewModel.updatePasswordLength(newPasswordLength)
+            },
+            onValueChangeFinished = {
+                passwordGeneratorViewModel.generatePassword()
+            },
+            steps = sliderSteps,
+            valueRange = sliderStepRange,
+            colors = SliderDefaults.colors(
+                thumbColor = OnPrimaryContainerLight,
+                activeTrackColor = PrimaryLight,
+                inactiveTrackColor = SurfaceLight,
+                activeTickColor = Color.Transparent,
+                inactiveTickColor = Color.Transparent
             )
+        )
 
-            Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
-            Text(
-                text = stringResource(R.string.include_following),
-                style = medium24.copy(OnPrimaryContainerLight)
-            )
+        Text(
+            text = stringResource(R.string.include_following),
+            style = medium24.copy(OnPrimaryContainerLight)
+        )
 
-            Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
-            SwitchItem(
-                label = stringResource(R.string.numbers),
-                checked = includeNumbers
-            ) {
-                passwordGeneratorViewModel.updateIncludeNumbers(it)
-            }
-            SwitchItem(
-                label = stringResource(R.string.uppercase_letters),
-                checked = includeUppercase
-            ) {
-                passwordGeneratorViewModel.updateIncludeUppercase(it)
-            }
-            SwitchItem(
-                label = stringResource(R.string.lowercase_letters),
-                checked = includeLowercase
-            ) {
-                passwordGeneratorViewModel.updateIncludeLowercase(it)
-            }
-            SwitchItem(
-                label = stringResource(R.string.special_symbols),
-                checked = includeSpecialChars
-            ) {
-                passwordGeneratorViewModel.updateIncludeSpecialChars(it)
-            }
+        SwitchItem(
+            label = stringResource(R.string.numbers),
+            checked = includeNumbers
+        ) {
+            passwordGeneratorViewModel.updateIncludeNumbers(it)
+        }
+        SwitchItem(
+            label = stringResource(R.string.uppercase_letters),
+            checked = includeUppercase
+        ) {
+            passwordGeneratorViewModel.updateIncludeUppercase(it)
+        }
+        SwitchItem(
+            label = stringResource(R.string.lowercase_letters),
+            checked = includeLowercase
+        ) {
+            passwordGeneratorViewModel.updateIncludeLowercase(it)
+        }
+        SwitchItem(
+            label = stringResource(R.string.special_symbols),
+            checked = includeSpecialChars
+        ) {
+            passwordGeneratorViewModel.updateIncludeSpecialChars(it)
         }
     }
 }
