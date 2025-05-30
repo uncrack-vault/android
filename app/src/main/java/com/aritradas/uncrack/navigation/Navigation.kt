@@ -48,6 +48,7 @@ import com.aritradas.uncrack.presentation.profile.ProfileScreen
 import com.aritradas.uncrack.presentation.settings.SettingsScreen
 import com.aritradas.uncrack.presentation.settings.SettingsViewModel
 import com.aritradas.uncrack.presentation.tools.ToolsScreen
+import com.aritradas.uncrack.presentation.tools.generator.GeneratorScreen
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGenerator
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGeneratorViewModel
 import com.aritradas.uncrack.presentation.tools.passwordHealth.PassHealthViewModel
@@ -281,6 +282,20 @@ fun Navigation(
                 UpdateMasterKey(
                     navController,
                     masterKeyViewModel
+                )
+            }
+
+            composable(
+                route = "${Screen.GeneratorScreen.name}?tab={tab}",
+                arguments = listOf(
+                    navArgument("tab") { defaultValue = "password" }
+                )
+            ) { backStackEntry ->
+                val initialTab = backStackEntry.arguments?.getString("tab") ?: "password"
+                GeneratorScreen(
+                    navController = navController,
+                    passwordGeneratorViewModel = passwordGeneratorViewModel,
+                    initialTab = initialTab
                 )
             }
 
