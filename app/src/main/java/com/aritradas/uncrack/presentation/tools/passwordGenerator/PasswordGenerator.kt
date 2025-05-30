@@ -89,6 +89,10 @@ fun PasswordGenerator(
     val scrollState = rememberScrollState()
     val scope = rememberCoroutineScope()
 
+    LaunchedEffect(Unit) {
+        passwordGeneratorViewModel.generatePassword()
+    }
+
     LaunchedEffect(password) {
         passwordStrength = calculatePasswordStrength(password)
         val mappedScore = (passwordStrength * 100) / 9
@@ -106,33 +110,24 @@ fun PasswordGenerator(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        if (password.isEmpty()) {
-            Text(
-                text = "Please select a password length below",
-                style = normal16.copy(OnPrimaryContainerLight),
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center
-            )
-        } else {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = buildAnnotatedString {
-                    password.forEach {
-                        val textColor = when {
-                            it.isDigit() -> Color.Blue
-                            it.isLetterOrDigit().not() -> Color.Magenta
-                            else -> OnPrimaryContainerLight
-                        }
-                        withStyle(style = SpanStyle(color = textColor)) {
-                            append(it.toString())
-                        }
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = buildAnnotatedString {
+                password.forEach {
+                    val textColor = when {
+                        it.isDigit() -> Color.Blue
+                        it.isLetterOrDigit().not() -> Color.Magenta
+                        else -> OnPrimaryContainerLight
                     }
-                },
-                style = medium30,
-                textAlign = TextAlign.Center,
-                letterSpacing = TextUnit(1F, TextUnitType.Sp)
-            )
-        }
+                    withStyle(style = SpanStyle(color = textColor)) {
+                        append(it.toString())
+                    }
+                }
+            },
+            style = medium30,
+            textAlign = TextAlign.Center,
+            letterSpacing = TextUnit(1F, TextUnitType.Sp)
+        )
 
         UCButton(
             modifier = Modifier.fillMaxWidth(),
