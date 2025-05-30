@@ -11,11 +11,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Switch
@@ -26,15 +23,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -55,10 +48,8 @@ import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.PrimaryLight
 import com.aritradas.uncrack.ui.theme.SurfaceLight
-import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.medium30
-import com.aritradas.uncrack.ui.theme.normal12
 import com.aritradas.uncrack.ui.theme.normal16
 import com.aritradas.uncrack.ui.theme.oldPassword
 import com.aritradas.uncrack.ui.theme.strongPassword
@@ -80,14 +71,12 @@ fun PasswordGenerator(
     val passwordLength by passwordGeneratorViewModel.passwordLength.observeAsState(0.0f)
     var passwordStrength by remember { mutableIntStateOf(0) }
     var progressValue by remember { mutableFloatStateOf(0f) }
-    var progressMessage by rememberSaveable { mutableStateOf("") }
     val includeUppercase by passwordGeneratorViewModel.includeUppercase.observeAsState(true)
     val includeLowercase by passwordGeneratorViewModel.includeLowercase.observeAsState(true)
     val includeNumbers by passwordGeneratorViewModel.includeNumbers.observeAsState(true)
     val includeSpecialChars by passwordGeneratorViewModel.includeSpecialChars.observeAsState(true)
 
     val scrollState = rememberScrollState()
-    val scope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
         passwordGeneratorViewModel.generatePassword()
@@ -98,8 +87,6 @@ fun PasswordGenerator(
         val mappedScore = (passwordStrength * 100) / 9
         progressValue = mappedScore.toFloat()
         Timber.d("Progress value $progressValue")
-        progressMessage = passwordStrength.toString()
-        Timber.d("Progress message $progressMessage")
     }
 
     Column(
@@ -129,6 +116,19 @@ fun PasswordGenerator(
             letterSpacing = TextUnit(1F, TextUnitType.Sp)
         )
 
+        val lineColor = when {
+            passwordStrength <= 3 -> weakPassword
+            passwordStrength <= 7 -> oldPassword
+            else -> strongPassword
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(2.dp)
+                .background(lineColor)
+        )
+
         UCButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.copy),
@@ -143,47 +143,10 @@ fun PasswordGenerator(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Row (
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Text(
-                text = stringResource(R.string.password_score),
-                style = medium24.copy(OnPrimaryContainerLight)
-            )
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Box(contentAlignment = Alignment.Center) {
-
-                CircularProgressIndicator(
-                    progress = { progressValue },
-                    modifier = Modifier.size(40.dp),
-                    color = when {
-                        passwordStrength <= 3 -> weakPassword
-                        passwordStrength <= 7 -> oldPassword
-                        else -> strongPassword
-                    },
-                    strokeWidth = 5.dp,
-                    trackColor = SurfaceTintLight,
-                    strokeCap = StrokeCap.Round,
-                )
-
-                Text(
-                    text = progressMessage,
-                    style = normal12,
-                    color = OnPrimaryContainerLight,
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(10.dp))
-
         Text(
             text = stringResource(R.string.password_generated_length, passwordLength.toInt()),
             style = medium24.copy(OnPrimaryContainerLight)
         )
-
-        Spacer(modifier = Modifier.height(10.dp))
 
         Slider(
             modifier = Modifier.fillMaxWidth(),
@@ -205,14 +168,12 @@ fun PasswordGenerator(
             )
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         Text(
             text = stringResource(R.string.include_following),
             style = medium24.copy(OnPrimaryContainerLight)
         )
-
-        Spacer(modifier = Modifier.height(10.dp))
 
         SwitchItem(
             label = stringResource(R.string.numbers),
