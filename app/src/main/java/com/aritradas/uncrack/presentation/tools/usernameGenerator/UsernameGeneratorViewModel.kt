@@ -11,28 +11,17 @@ import kotlin.random.Random
 class UsernameGeneratorViewModel @Inject constructor() : ViewModel() {
 
     private val adjectives = listOf(
-        "Happy",
-        "Sad",
-        "Brave",
-        "Clever",
-        "Swift",
-        "Calm",
-        "Lively",
-        "Shy",
-        "Witty",
-        "Bold"
+        "Happy", "Sad", "Brave", "Clever", "Swift", "Calm", "Lively", "Shy", "Witty", "Bold",
+        "Cheerful", "Gentle", "Fierce", "Nimble", "Quiet", "Energetic", "Mysterious", "Playful",
+        "Serene", "Vibrant", "Graceful", "Mighty", "Sneaky", "Brilliant", "Curious", "Daring",
+        "Elegant", "Faithful", "Jovial", "Keen", "Loyal", "Noble", "Peaceful", "Quick",
+        "Radiant", "Steady", "Trusty", "Unique", "Valiant", "Wise", "Zealous"
     )
     private val nouns = listOf(
-        "Ghost",
-        "Trumpet",
-        "Tiger",
-        "Falcon",
-        "Wizard",
-        "Panda",
-        "Rocket",
-        "Shadow",
-        "Lion",
-        "Otter"
+        "Ghost", "Trumpet", "Tiger", "Falcon", "Wizard", "Panda", "Rocket", "Shadow", "Lion", "Otter",
+        "Eagle", "Phoenix", "Dragon", "Wolf", "Bear", "Fox", "Hawk", "Jaguar", "Leopard", "Lynx",
+        "Shark", "Whale", "Dolphin", "Penguin", "Sparrow", "Raven", "Owl", "Swan", "Deer", "Horse",
+        "Elephant", "Rhino", "Hippo", "Giraffe", "Zebra", "Kangaroo", "Koala", "Sloth", "Turtle", "Frog"
     )
 
     private val _username = MutableLiveData<String>()
