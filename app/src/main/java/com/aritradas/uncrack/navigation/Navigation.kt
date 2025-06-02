@@ -53,6 +53,7 @@ import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGenera
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGeneratorViewModel
 import com.aritradas.uncrack.presentation.tools.passwordHealth.PassHealthViewModel
 import com.aritradas.uncrack.presentation.tools.passwordHealth.PasswordHealthScreen
+import com.aritradas.uncrack.presentation.tools.usernameGenerator.UsernameGeneratorViewModel
 import com.aritradas.uncrack.presentation.vault.AccountSelectionScreen
 import com.aritradas.uncrack.presentation.vault.AddPasswordScreen
 import com.aritradas.uncrack.presentation.vault.EditPasswordScreen
@@ -84,6 +85,7 @@ fun Navigation(
     modifier: Modifier = Modifier,
     authViewModel: AuthViewModel = hiltViewModel(),
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
+    usernameGeneratorViewModel: UsernameGeneratorViewModel = hiltViewModel(),
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
     userViewModel: UserViewModel = hiltViewModel(),
     themeViewModel: ThemeViewModel = hiltViewModel(),
@@ -290,7 +292,8 @@ fun Navigation(
                 route = Screen.GeneratorScreen.name) {
                 GeneratorScreen(
                     navController = navController,
-                    passwordGeneratorViewModel = passwordGeneratorViewModel
+                    passwordGeneratorViewModel = passwordGeneratorViewModel,
+                    usernameGeneratorViewModel = usernameGeneratorViewModel
                 )
             }
 

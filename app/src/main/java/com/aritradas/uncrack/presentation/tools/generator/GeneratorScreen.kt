@@ -1,7 +1,6 @@
 package com.aritradas.uncrack.presentation.tools.generator
 
 import androidx.compose.material3.SegmentedButton
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,13 +16,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.aritradas.uncrack.components.UCTopAppBar
+import com.aritradas.uncrack.presentation.tools.usernameGenerator.UsernameGenerator
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGenerator
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGeneratorViewModel
+import com.aritradas.uncrack.presentation.tools.usernameGenerator.UsernameGeneratorViewModel
 import com.aritradas.uncrack.ui.theme.BackgroundLight
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,6 +31,7 @@ import com.aritradas.uncrack.ui.theme.BackgroundLight
 fun GeneratorScreen(
     navController: NavHostController,
     passwordGeneratorViewModel: PasswordGeneratorViewModel,
+    usernameGeneratorViewModel: UsernameGeneratorViewModel,
     modifier: Modifier = Modifier,
     initialTab: String = "password"
 ) {
@@ -84,19 +85,12 @@ fun GeneratorScreen(
                     modifier = Modifier.weight(1f)
                 )
 
-                "Username" -> UsernameGeneratorPlaceholder(modifier = Modifier.weight(1f))
+                "Username" -> UsernameGenerator(
+                    navController = navController,
+                    usernameGeneratorViewModel = usernameGeneratorViewModel,
+                    modifier = Modifier.weight(1f)
+                )
             }
         }
-    }
-}
-
-// Delete this placeholder when the UsernameGenerator is implemented
-@Composable
-fun UsernameGeneratorPlaceholder(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text("Username generator coming soon!")
     }
 }
