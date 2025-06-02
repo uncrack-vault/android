@@ -109,6 +109,7 @@ fun Navigation(
         "${Screen.EditPasswordScreen.name}/{accountID}",
         Screen.SettingsScreen.name,
         Screen.UpdateMasterKeyScreen.name,
+        Screen.GeneratorScreen.name,
         Screen.PasswordGeneratorScreen.name,
         Screen.CategoryScreen.name,
         "${Screen.ViewPasswordScreen.name}/{id}",
@@ -286,16 +287,10 @@ fun Navigation(
             }
 
             composable(
-                route = "${Screen.GeneratorScreen.name}?tab={tab}",
-                arguments = listOf(
-                    navArgument("tab") { defaultValue = "password" }
-                )
-            ) { backStackEntry ->
-                val initialTab = backStackEntry.arguments?.getString("tab") ?: "password"
+                route = Screen.GeneratorScreen.name) {
                 GeneratorScreen(
                     navController = navController,
-                    passwordGeneratorViewModel = passwordGeneratorViewModel,
-                    initialTab = initialTab
+                    passwordGeneratorViewModel = passwordGeneratorViewModel
                 )
             }
 

@@ -74,6 +74,7 @@
     <string name="you_have_no_cards_saved_till_now">You have no Cards saved till now</string>
     <string name="empty_list">Empty List</string>
     <string name="my_passwords">My passwords</string>
+    <string name="generator">Generator</string>
     <string name="password_generator">Password Generator</string>
     <string name="include_numbers">Include numbers</string>
     <string name="include_lowercase_letters">Include lowercase letters</string>
@@ -200,6 +201,7 @@
     <string name="create_an_account">Create an account</string>
     <string name="tools">Tools</string>
     <string name="quickly_generate_your_new_secure_passwords">Quickly generate your new secure passwords</string>
+    <string name="quickly_generate_your_passwords_and_usernames">Quickly generate passwords and usernames.</string>
     <string name="password_health">Password Health</string>
     <string name="identify_passwords_health">Identify passwords health</string>
     <string name="strong_passwords">Strong Passwords</string>
