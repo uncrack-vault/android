@@ -41,7 +41,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.ui.theme.BackgroundLight
@@ -61,7 +60,6 @@ import timber.log.Timber
 
 @Composable
 fun PasswordGenerator(
-    navController: NavHostController,
     passwordGeneratorViewModel: PasswordGeneratorViewModel,
     modifier: Modifier = Modifier
 ) {

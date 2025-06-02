@@ -3,7 +3,6 @@ package com.aritradas.uncrack.presentation.tools.usernameGenerator
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -26,7 +25,6 @@ import com.aritradas.uncrack.ui.theme.medium30
 
 @Composable
 fun UsernameGenerator(
-    navController: NavHostController,
     usernameGeneratorViewModel: UsernameGeneratorViewModel,
     modifier: Modifier = Modifier
 ) {

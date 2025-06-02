@@ -17,8 +17,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.presentation.tools.usernameGenerator.UsernameGenerator
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGenerator
@@ -43,7 +45,7 @@ fun GeneratorScreen(
         topBar = {
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
-                title = "Generator",
+                title = stringResource(R.string.generator),
                 colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
                 onBackPress = { navController.popBackStack() }
             )
@@ -80,13 +82,11 @@ fun GeneratorScreen(
             // Change the content based on the selected tab
             when (selectedTab) {
                 "Password" -> PasswordGenerator(
-                    navController = navController,
                     passwordGeneratorViewModel = passwordGeneratorViewModel,
                     modifier = Modifier.weight(1f)
                 )
 
                 "Username" -> UsernameGenerator(
-                    navController = navController,
                     usernameGeneratorViewModel = usernameGeneratorViewModel,
                     modifier = Modifier.weight(1f)
                 )

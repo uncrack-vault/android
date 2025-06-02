@@ -49,7 +49,6 @@ import com.aritradas.uncrack.presentation.settings.SettingsScreen
 import com.aritradas.uncrack.presentation.settings.SettingsViewModel
 import com.aritradas.uncrack.presentation.tools.ToolsScreen
 import com.aritradas.uncrack.presentation.tools.generator.GeneratorScreen
-import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGenerator
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGeneratorViewModel
 import com.aritradas.uncrack.presentation.tools.passwordHealth.PassHealthViewModel
 import com.aritradas.uncrack.presentation.tools.passwordHealth.PasswordHealthScreen
@@ -294,13 +293,6 @@ fun Navigation(
                     navController = navController,
                     passwordGeneratorViewModel = passwordGeneratorViewModel,
                     usernameGeneratorViewModel = usernameGeneratorViewModel
-                )
-            }
-
-            composable(route = Screen.PasswordGeneratorScreen.name) {
-                PasswordGenerator(
-                    navController,
-                    passwordGeneratorViewModel
                 )
             }
 
