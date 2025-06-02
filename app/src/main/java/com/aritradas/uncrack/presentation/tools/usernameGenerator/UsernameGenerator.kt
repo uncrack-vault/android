@@ -9,6 +9,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -20,7 +21,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCButton
+import com.aritradas.uncrack.presentation.tools.passwordGenerator.SwitchItem
 import com.aritradas.uncrack.ui.theme.BackgroundLight
+import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
+import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.medium30
 
 @Composable
@@ -31,6 +35,8 @@ fun UsernameGenerator(
     val context = LocalContext.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
     val username = usernameGeneratorViewModel.username.observeAsState("")
+    val useCapitalization by usernameGeneratorViewModel.useCapitalization.observeAsState(true)
+    val includeNumbers by usernameGeneratorViewModel.includeNumbers.observeAsState(true)
 
     LaunchedEffect(Unit) {
         usernameGeneratorViewModel.generateUsername()
@@ -68,5 +74,25 @@ fun UsernameGenerator(
             },
             leadingIcon = painterResource(id = R.drawable.copy_password)
         )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = stringResource(R.string.include_following),
+            style = medium24.copy(OnPrimaryContainerLight)
+        )
+
+        SwitchItem(
+            label = stringResource(R.string.numbers),
+            checked = includeNumbers
+        ) {
+            usernameGeneratorViewModel.updateIncludeNumbers(it)
+        }
+        SwitchItem(
+            label = stringResource(R.string.uppercase_letters),
+            checked = useCapitalization
+        ) {
+            usernameGeneratorViewModel.updateUseCapitalization(it)
+        }
     }
 }

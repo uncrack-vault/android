@@ -11,26 +11,58 @@ import kotlin.random.Random
 class UsernameGeneratorViewModel @Inject constructor() : ViewModel() {
 
     private val adjectives = listOf(
-        "Happy", "Sad", "Brave", "Clever", "Swift", "Calm", "Lively", "Shy", "Witty", "Bold",
-        "Cheerful", "Gentle", "Fierce", "Nimble", "Quiet", "Energetic", "Mysterious", "Playful",
-        "Serene", "Vibrant", "Graceful", "Mighty", "Sneaky", "Brilliant", "Curious", "Daring",
-        "Elegant", "Faithful", "Jovial", "Keen", "Loyal", "Noble", "Peaceful", "Quick",
-        "Radiant", "Steady", "Trusty", "Unique", "Valiant", "Wise", "Zealous"
+        "happy", "sad", "brave", "clever", "swift", "calm", "lively", "shy", "witty", "bold",
+        "cheerful", "gentle", "fierce", "nimble", "quiet", "energetic", "mysterious", "playful",
+        "serene", "vibrant", "graceful", "mighty", "sneaky", "brilliant", "curious", "daring",
+        "elegant", "faithful", "jovial", "keen", "loyal", "noble", "peaceful", "quick",
+        "radiant", "steady", "trusty", "unique", "valiant", "wise", "zealous"
     )
     private val nouns = listOf(
-        "Ghost", "Trumpet", "Tiger", "Falcon", "Wizard", "Panda", "Rocket", "Shadow", "Lion", "Otter",
-        "Eagle", "Phoenix", "Dragon", "Wolf", "Bear", "Fox", "Hawk", "Jaguar", "Leopard", "Lynx",
-        "Shark", "Whale", "Dolphin", "Penguin", "Sparrow", "Raven", "Owl", "Swan", "Deer", "Horse",
-        "Elephant", "Rhino", "Hippo", "Giraffe", "Zebra", "Kangaroo", "Koala", "Sloth", "Turtle", "Frog"
+        "ghost", "trumpet", "tiger", "falcon", "wizard", "panda", "rocket", "shadow", "lion", "otter",
+        "eagle", "phoenix", "dragon", "wolf", "bear", "fox", "hawk", "jaguar", "leopard", "lynx",
+        "shark", "whale", "dolphin", "penguin", "sparrow", "raven", "owl", "swan", "deer", "horse",
+        "elephant", "rhino", "hippo", "giraffe", "zebra", "kangaroo", "koala", "sloth", "turtle", "frog"
     )
 
     private val _username = MutableLiveData<String>()
     val username: LiveData<String> = _username
 
+    private val _includeNumbers = MutableLiveData(true)
+    val includeNumbers: LiveData<Boolean> = _includeNumbers
+
+    private val _useCapitalization = MutableLiveData(true)
+    val useCapitalization: LiveData<Boolean> = _useCapitalization
+
     fun generateUsername() {
-        val adjective = adjectives.random()
-        val noun = nouns.random()
-        val number = Random.nextInt(100, 1000) // 3-digit number
-        _username.value = "$adjective$noun$number"
+        _username.value = generateUsername(
+            includeNumbers = _includeNumbers.value ?: true,
+            useCapitalization = _useCapitalization.value ?: true,
+        )
+    }
+
+    fun updateIncludeNumbers(include: Boolean) {
+        _includeNumbers.value = include
+    }
+
+    fun updateUseCapitalization(use: Boolean) {
+        _useCapitalization.value = use
+    }
+
+    private fun generateUsername(
+        includeNumbers: Boolean = true,
+        useCapitalization: Boolean = true
+    ): String {
+        var adjective = adjectives.random()
+        var noun = nouns.random()
+        val numberPart =
+            if (includeNumbers)
+                Random.nextInt(100, 1000).toString()
+            else ""
+        if (useCapitalization) {
+            adjective = adjective.replaceFirstChar { it.uppercase() }
+            noun = noun.replaceFirstChar { it.uppercase() }
+        }
+        val username = "$adjective$noun$numberPart"
+        return username
     }
 }
