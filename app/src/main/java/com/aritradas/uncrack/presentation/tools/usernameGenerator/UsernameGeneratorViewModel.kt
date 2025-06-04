@@ -10,14 +10,14 @@ import kotlin.random.Random
 @HiltViewModel
 class UsernameGeneratorViewModel @Inject constructor() : ViewModel() {
 
-    private val adjectives = listOf(
+    private val adjectives = arrayOf(
         "happy", "sad", "brave", "clever", "swift", "calm", "lively", "shy", "witty", "bold",
         "cheerful", "gentle", "fierce", "nimble", "quiet", "energetic", "mysterious", "playful",
         "serene", "vibrant", "graceful", "mighty", "sneaky", "brilliant", "curious", "daring",
         "elegant", "faithful", "jovial", "keen", "loyal", "noble", "peaceful", "quick",
         "radiant", "steady", "trusty", "unique", "valiant", "wise", "zealous"
     )
-    private val nouns = listOf(
+    private val nouns = arrayOf(
         "ghost", "trumpet", "tiger", "falcon", "wizard", "panda", "rocket", "shadow", "lion", "otter",
         "eagle", "phoenix", "dragon", "wolf", "bear", "fox", "hawk", "jaguar", "leopard", "lynx",
         "shark", "whale", "dolphin", "penguin", "sparrow", "raven", "owl", "swan", "deer", "horse",
