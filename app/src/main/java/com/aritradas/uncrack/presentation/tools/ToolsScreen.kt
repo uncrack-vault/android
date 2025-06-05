@@ -60,11 +60,11 @@ fun ToolsScreen(
         ) {
 
             Row(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(10.dp))
                     .clickable {
-                        navController.navigate(Screen.PasswordGeneratorScreen.name)
+                        navController.navigate(Screen.GeneratorScreen.name)
                     }
                     .background(SurfaceVariantLight)
                     .shadow(
@@ -83,21 +83,21 @@ fun ToolsScreen(
                 )
 
                 Spacer(modifier = Modifier.width(15.dp))
+
                 Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
                     horizontalAlignment = Alignment.Start,
                 ) {
                     Text(
-                        text = stringResource(id = R.string.password_generator),
+                        text = stringResource(id = R.string.generator),
                         color = Color.Black,
                         style = medium18
                     )
 
                     Text(
-                        text = stringResource(R.string.quickly_generate_your_new_secure_passwords),
+                        text = stringResource(R.string.quickly_generate_your_passwords_and_usernames),
                         color = Color.Gray,
                         style = normal14
-
                     )
                 }
             }

@@ -48,10 +48,11 @@ import com.aritradas.uncrack.presentation.profile.ProfileScreen
 import com.aritradas.uncrack.presentation.settings.SettingsScreen
 import com.aritradas.uncrack.presentation.settings.SettingsViewModel
 import com.aritradas.uncrack.presentation.tools.ToolsScreen
-import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGenerator
+import com.aritradas.uncrack.presentation.tools.generator.GeneratorScreen
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGeneratorViewModel
 import com.aritradas.uncrack.presentation.tools.passwordHealth.PassHealthViewModel
 import com.aritradas.uncrack.presentation.tools.passwordHealth.PasswordHealthScreen
+import com.aritradas.uncrack.presentation.tools.usernameGenerator.UsernameGeneratorViewModel
 import com.aritradas.uncrack.presentation.vault.AccountSelectionScreen
 import com.aritradas.uncrack.presentation.vault.AddPasswordScreen
 import com.aritradas.uncrack.presentation.vault.EditPasswordScreen
@@ -83,6 +84,7 @@ fun Navigation(
     modifier: Modifier = Modifier,
     authViewModel: AuthViewModel = hiltViewModel(),
     masterKeyViewModel: KeyViewModel = hiltViewModel(),
+    usernameGeneratorViewModel: UsernameGeneratorViewModel = hiltViewModel(),
     passwordGeneratorViewModel: PasswordGeneratorViewModel = hiltViewModel(),
     userViewModel: UserViewModel = hiltViewModel(),
     themeViewModel: ThemeViewModel = hiltViewModel(),
@@ -108,6 +110,7 @@ fun Navigation(
         "${Screen.EditPasswordScreen.name}/{accountID}",
         Screen.SettingsScreen.name,
         Screen.UpdateMasterKeyScreen.name,
+        Screen.GeneratorScreen.name,
         Screen.PasswordGeneratorScreen.name,
         Screen.CategoryScreen.name,
         "${Screen.ViewPasswordScreen.name}/{id}",
@@ -284,10 +287,12 @@ fun Navigation(
                 )
             }
 
-            composable(route = Screen.PasswordGeneratorScreen.name) {
-                PasswordGenerator(
-                    navController,
-                    passwordGeneratorViewModel
+            composable(
+                route = Screen.GeneratorScreen.name) {
+                GeneratorScreen(
+                    navController = navController,
+                    passwordGeneratorViewModel = passwordGeneratorViewModel,
+                    usernameGeneratorViewModel = usernameGeneratorViewModel
                 )
             }
 
