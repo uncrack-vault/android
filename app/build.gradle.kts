@@ -157,7 +157,7 @@ dependencies {
     implementation("com.airbnb.android:lottie-compose:6.6.2")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
     implementation ("com.google.firebase:firebase-crashlytics")
     implementation ("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-messaging")
