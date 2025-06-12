@@ -22,7 +22,6 @@ import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.ShieldCard
 import com.aritradas.uncrack.components.UCTopAppBar
-import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.strongPassword
 import com.aritradas.uncrack.ui.theme.weakPassword
 

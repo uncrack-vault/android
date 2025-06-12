@@ -30,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -49,8 +48,6 @@ import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.auth.AuthViewModel
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.PrimaryLight
 import com.aritradas.uncrack.ui.theme.medium16
 import com.aritradas.uncrack.util.ConnectivityObserver
 import com.aritradas.uncrack.util.Validator.Companion.isValidEmail

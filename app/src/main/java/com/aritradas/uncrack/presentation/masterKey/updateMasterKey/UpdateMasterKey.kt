@@ -35,7 +35,6 @@ import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.domain.model.Key
 import com.aritradas.uncrack.presentation.masterKey.KeyViewModel
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

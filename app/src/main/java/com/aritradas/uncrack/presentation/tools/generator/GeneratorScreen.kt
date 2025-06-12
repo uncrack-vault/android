@@ -27,7 +27,6 @@ import com.aritradas.uncrack.presentation.tools.usernameGenerator.UsernameGenera
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGenerator
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGeneratorViewModel
 import com.aritradas.uncrack.presentation.tools.usernameGenerator.UsernameGeneratorViewModel
-import com.aritradas.uncrack.ui.theme.BackgroundLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -44,10 +44,6 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCButton
-import com.aritradas.uncrack.ui.theme.BackgroundLight
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.PrimaryLight
-import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.medium30
 import com.aritradas.uncrack.ui.theme.normal16
@@ -171,7 +167,7 @@ fun PasswordGenerator(
 
         Text(
             text = stringResource(R.string.include_following),
-            style = medium24.copy(OnPrimaryContainerLight)
+            style = medium24.copy(color = MaterialTheme.colorScheme.onSurface)
         )
 
         SwitchItem(
@@ -216,7 +212,7 @@ fun SwitchItem(
     ) {
         Text(
             text = label,
-            style = normal16.copy(OnPrimaryContainerLight)
+            style = normal16.copy(color = MaterialTheme.colorScheme.onSurface)
         )
 
         Spacer(modifier = Modifier.weight(1f))

@@ -39,10 +39,6 @@ import com.aritradas.uncrack.components.SettingsItemGroup
 import com.aritradas.uncrack.components.UCSettingsCard
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.sharedViewModel.UserViewModel
-import com.aritradas.uncrack.ui.theme.BackgroundLight
-import com.aritradas.uncrack.ui.theme.OnSurfaceLight
-import com.aritradas.uncrack.ui.theme.SurfaceLight
-import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 import com.aritradas.uncrack.ui.theme.medium22
 import com.aritradas.uncrack.ui.theme.normal14
 import com.aritradas.uncrack.util.Constants

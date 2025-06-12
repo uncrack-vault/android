@@ -23,8 +23,6 @@ import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.SwitchItem
-import com.aritradas.uncrack.ui.theme.BackgroundLight
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.medium30
 

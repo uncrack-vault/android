@@ -21,7 +21,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -30,7 +29,6 @@ import androidx.navigation.NavHostController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.AccountCard
 import com.aritradas.uncrack.presentation.vault.viewmodel.AddEditViewModel
-import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.medium20
 import com.aritradas.uncrack.util.UtilsKt.getCommunicationAccounts
 import com.aritradas.uncrack.util.UtilsKt.getCommunitiesAccounts

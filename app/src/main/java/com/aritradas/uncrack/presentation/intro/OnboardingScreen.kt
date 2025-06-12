@@ -1,6 +1,5 @@
 package com.aritradas.uncrack.presentation.intro
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -36,9 +34,6 @@ import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCStrokeButton
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.intro.model.OnBoardingItem
-import com.aritradas.uncrack.ui.theme.OnSurfaceLight
-import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.PrimaryDark
 import com.aritradas.uncrack.ui.theme.medium18
 
 

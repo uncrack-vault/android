@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.navigation.Screen
-import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
