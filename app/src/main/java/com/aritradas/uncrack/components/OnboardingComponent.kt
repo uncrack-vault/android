@@ -4,14 +4,13 @@ import androidx.compose.runtime.Composable
 import com.aritradas.uncrack.presentation.intro.model.OnBoardingItem
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 import com.aritradas.uncrack.ui.theme.bold22
 import com.aritradas.uncrack.ui.theme.medium16
 
@@ -34,7 +33,7 @@ fun OnboardingComponent(item: OnBoardingItem, modifier: Modifier = Modifier) {
         Text(
             modifier = Modifier.padding(horizontal = 30.dp),
             text = item.title,
-            style = bold22.copy(OnPrimaryContainerLight),
+            style = bold22.copy(color = MaterialTheme.colorScheme.onPrimaryContainer),
             textAlign = TextAlign.Center
         )
 
@@ -44,7 +43,7 @@ fun OnboardingComponent(item: OnBoardingItem, modifier: Modifier = Modifier) {
             modifier = Modifier.padding(horizontal = 30.dp),
             text = item.text,
             textAlign = TextAlign.Center,
-            style = medium16.copy(SurfaceTintLight)
+            style = medium16.copy(color = MaterialTheme.colorScheme.surfaceTint)
         )
     }
 }

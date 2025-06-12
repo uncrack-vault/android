@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Switch
@@ -90,7 +91,7 @@ fun PasswordGenerator(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundLight)
+            .background(MaterialTheme.colorScheme.background)
             .verticalScroll(scrollState)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -102,7 +103,7 @@ fun PasswordGenerator(
                     val textColor = when {
                         it.isDigit() -> Color.Blue
                         it.isLetterOrDigit().not() -> Color.Magenta
-                        else -> OnPrimaryContainerLight
+                        else -> MaterialTheme.colorScheme.onPrimaryContainer
                     }
                     withStyle(style = SpanStyle(color = textColor)) {
                         append(it.toString())
@@ -143,7 +144,7 @@ fun PasswordGenerator(
 
         Text(
             text = stringResource(R.string.password_generated_length, passwordLength.toInt()),
-            style = medium24.copy(OnPrimaryContainerLight)
+            style = medium24.copy(MaterialTheme.colorScheme.onPrimaryContainer)
         )
 
         Slider(
@@ -158,9 +159,9 @@ fun PasswordGenerator(
             steps = sliderSteps,
             valueRange = sliderStepRange,
             colors = SliderDefaults.colors(
-                thumbColor = OnPrimaryContainerLight,
-                activeTrackColor = PrimaryLight,
-                inactiveTrackColor = SurfaceLight,
+                thumbColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                activeTrackColor = MaterialTheme.colorScheme.primary,
+                inactiveTrackColor = MaterialTheme.colorScheme.surface,
                 activeTickColor = Color.Transparent,
                 inactiveTickColor = Color.Transparent
             )

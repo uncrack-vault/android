@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
@@ -45,14 +47,13 @@ import com.aritradas.uncrack.components.ThemeDialog
 import com.aritradas.uncrack.components.UCSettingsCard
 import com.aritradas.uncrack.components.UCSwitchCard
 import com.aritradas.uncrack.navigation.Screen
-import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.medium14
 import com.aritradas.uncrack.ui.theme.medium18
 import com.aritradas.uncrack.ui.theme.normal16
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.aritradas.uncrack.sharedViewModel.ThemeMode
 import com.aritradas.uncrack.sharedViewModel.ThemeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -83,7 +84,12 @@ fun SettingsScreen(
 
     when {
         openThemeDialog -> {
-            ThemeDialog(onDismissRequest = { openThemeDialog = false })
+            ThemeDialog(
+                onDismissRequest = { openThemeDialog = false },
+                onDarkMode = { themeViewModel.setThemeMode(ThemeMode.DARK) },
+                onLightMode = { themeViewModel.setThemeMode(ThemeMode.LIGHT) },
+                onDynamicMode = { themeViewModel.setThemeMode(ThemeMode.SYSTEM) }
+            )
         }
 
         openAutoLockTimeoutDialog -> {
@@ -236,9 +242,9 @@ fun SettingsScreen(
                 },
                 scrollBehavior = scrollBehavior,
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = BackgroundLight,
-                    scrolledContainerColor = BackgroundLight,
-                    titleContentColor = Color.Black
+                    containerColor = MaterialTheme.colorScheme.background,
+                    scrolledContainerColor = MaterialTheme.colorScheme.background,
+                    titleContentColor = MaterialTheme.colorScheme.onBackground
                 )
             )
         }
@@ -249,6 +255,7 @@ fun SettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(MaterialTheme.colorScheme.background)
+                .verticalScroll(rememberScrollState())
         ) {
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -267,7 +274,7 @@ fun SettingsScreen(
                 UCSettingsCard(
                     itemName = stringResource(R.string.change_theme),
                     itemSubText = stringResource(R.string.cycle_through_light_dark_system),
-                    onClick = { themeViewModel.toggleTheme() }
+                    onClick = { openThemeDialog = true }
                 )
             }
 
@@ -292,7 +299,7 @@ fun SettingsScreen(
 
                 HorizontalDivider(
                     thickness = 2.dp,
-                    color = SurfaceLight
+                    color = MaterialTheme.colorScheme.surface
                 )
 
                 UCSwitchCard(
@@ -306,7 +313,7 @@ fun SettingsScreen(
 
                 HorizontalDivider(
                     thickness = 2.dp,
-                    color = SurfaceLight
+                    color = MaterialTheme.colorScheme.surface
                 )
 
                 UCSwitchCard(
@@ -320,7 +327,7 @@ fun SettingsScreen(
 
                 HorizontalDivider(
                     thickness = 2.dp,
-                    color = SurfaceLight
+                    color = MaterialTheme.colorScheme.surface
                 )
 
                 UCSettingsCard(
@@ -335,7 +342,7 @@ fun SettingsScreen(
 
                 HorizontalDivider(
                     thickness = 2.dp,
-                    color = SurfaceLight
+                    color = MaterialTheme.colorScheme.surface
                 )
 
 
@@ -356,7 +363,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
                 text = stringResource(R.string.danger_zone),
-                style = medium18.copy(color = OnPrimaryContainerLight)
+                style = medium18.copy(color = MaterialTheme.colorScheme.onBackground)
             )
 
             Spacer(modifier = Modifier.height(14.dp))

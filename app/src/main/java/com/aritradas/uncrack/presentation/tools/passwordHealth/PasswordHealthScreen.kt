@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -46,7 +47,7 @@ fun PasswordHealthScreen(
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 title = "Password Health",
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
                 onBackPress = { navController.popBackStack() }
             )
         }
@@ -56,7 +57,7 @@ fun PasswordHealthScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(16.dp)
         ) {
             ShieldCard(

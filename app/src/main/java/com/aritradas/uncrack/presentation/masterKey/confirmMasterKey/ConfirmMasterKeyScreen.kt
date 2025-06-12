@@ -18,6 +18,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -84,7 +85,7 @@ fun ConfirmMasterKeyScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .windowInsetsPadding(WindowInsets.ime)
         ) {
             Column(
@@ -96,7 +97,7 @@ fun ConfirmMasterKeyScreen(
 
                 Text(
                     text = stringResource(R.string.kindly_provide_your_master_password),
-                    style = bold30.copy(color = Color.Black)
+                    style = bold30.copy(color = MaterialTheme.colorScheme.onBackground)
                 )
 
                 Spacer(modifier = Modifier.height(50.dp))

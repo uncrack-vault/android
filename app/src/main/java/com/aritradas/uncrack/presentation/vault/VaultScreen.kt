@@ -25,6 +25,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
@@ -107,14 +108,14 @@ fun VaultScreen(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = BackgroundLight,
+                    containerColor = MaterialTheme.colorScheme.background,
                 ),
                 title = {
                     Text(
                         modifier = Modifier
                             .fillMaxWidth(),
                         text = "Hello, ${user.name}",
-                        style = medium24.copy(Color.Black)
+                        style = medium24.copy(MaterialTheme.colorScheme.onBackground)
                     )
                 }
             )
@@ -135,7 +136,7 @@ fun VaultScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(horizontal = 16.dp)
                 .then(modifier),
         ) {
@@ -155,7 +156,7 @@ fun VaultScreen(
                     Row {
                         Text(
                             text = "Search for ",
-                            style = normal16.copy(OnSurfaceVariantLight),
+                            style = normal16.copy(MaterialTheme.colorScheme.onSurfaceVariant),
                         )
                         TypewriterText(
                             texts = listOf(
@@ -168,7 +169,7 @@ fun VaultScreen(
                     }
                 },
                 colors = SearchBarDefaults.colors(
-                    containerColor = PrimaryContainerLight
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
                 ),
                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
                 trailingIcon = {

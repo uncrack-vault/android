@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +25,7 @@ fun SettingsItemGroup(
             .widthIn(max = 500.dp)
             .padding(horizontal = 12.dp)
             .clip(RoundedCornerShape(10.dp))
-            .background(SurfaceVariantLight),
+            .background(MaterialTheme.colorScheme.onSurfaceVariant),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         columnScope()

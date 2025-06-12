@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -66,19 +67,19 @@ fun CreateMasterKeyScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(16.dp)
         ) {
             Text(
                 text = stringResource(R.string.create_master_password),
-                style = bold30.copy(color = Color.Black)
+                style = bold30.copy(color = MaterialTheme.colorScheme.onBackground)
             )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
                 text = stringResource(R.string.you_will_be_using_master_password_as_a_key_to_unlock_your_passwords),
-                style = normal16.copy(color = SurfaceTintLight)
+                style = normal16.copy(color = MaterialTheme.colorScheme.surfaceTint)
             )
 
             Spacer(modifier = Modifier.height(50.dp))
@@ -114,7 +115,7 @@ fun CreateMasterKeyScreen(
             ) {
                 Text(
                     text = stringResource(R.string.master_password_must_include),
-                    style = medium14.copy(OnPrimaryContainerLight)
+                    style = medium14.copy(MaterialTheme.colorScheme.onPrimaryContainer)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
 

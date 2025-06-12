@@ -55,11 +55,6 @@ import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.components.UCTopAppBar
 import com.aritradas.uncrack.presentation.vault.viewmodel.ViewPasswordViewModel
-import com.aritradas.uncrack.ui.theme.BackgroundLight
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.SurfaceLight
-import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 import com.aritradas.uncrack.ui.theme.medium14
 import com.aritradas.uncrack.ui.theme.medium22
 import com.aritradas.uncrack.ui.theme.normal12
@@ -122,13 +117,13 @@ fun ViewPasswordScreen(
                 title = {
                     Text(
                         text = stringResource(R.string.delete_account),
-                        style = normal16.copy(color = OnPrimaryContainerLight)
+                        style = normal16.copy(color = MaterialTheme.colorScheme.onPrimaryContainer)
                     )
                 },
                 text = {
                     Text(
                         text = stringResource(R.string.are_you_sure_you_want_to_delete),
-                        style = normal16.copy(color = OnSurfaceVariantLight)
+                        style = normal16.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
                     )
                 },
                 confirmButton = {
@@ -180,7 +175,7 @@ fun ViewPasswordScreen(
                 onBackPress = { navController.popBackStack() },
                 shouldShowFavAndEditButton = false,
                 onEditPress = { navigateToEditPasswordScreen(accountId) },
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
+                colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.background),
                 onDeletePress = { showDeleteDialog = true }
             )
         }
@@ -188,7 +183,7 @@ fun ViewPasswordScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(paddingValues)
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -204,7 +199,7 @@ fun ViewPasswordScreen(
 
             Text(
                 text = accountCompany.toString(),
-                style = medium22.copy(Color.Black)
+                style = medium22.copy(MaterialTheme.colorScheme.onBackground)
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -217,7 +212,7 @@ fun ViewPasswordScreen(
                         elevation = 10.dp,
                         shape = RoundedCornerShape(10.dp)
                     )
-                    .background(SurfaceLight),
+                    .background(MaterialTheme.colorScheme.surface),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -235,14 +230,14 @@ fun ViewPasswordScreen(
 
                     Text(
                         text = category.toString(),
-                        style = normal12.copy(OnSurfaceVariantLight)
+                        style = normal12.copy(MaterialTheme.colorScheme.onSurfaceVariant)
                     )
                 }
 
                 VerticalDivider(
                     modifier = Modifier.height(40.dp),
                     thickness = 1.dp,
-                    color = SurfaceTintLight.copy(alpha = .5f)
+                    color = MaterialTheme.colorScheme.surfaceTint.copy(alpha = .5f)
                 )
 
                 Column(
@@ -262,28 +257,28 @@ fun ViewPasswordScreen(
                                 else -> strongPassword
                             },
                             strokeWidth = 5.dp,
-                            trackColor = SurfaceTintLight,
+                            trackColor = MaterialTheme.colorScheme.surfaceTint,
                             strokeCap = StrokeCap.Round,
                         )
 
                         Text(
                             text = progressMessage,
                             style = normal12,
-                            color = OnPrimaryContainerLight,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
                         )
 
                     }
 
                     Text(
                         text = stringResource(R.string.password_strength),
-                        style = normal12.copy(OnSurfaceVariantLight)
+                        style = normal12.copy(MaterialTheme.colorScheme.onSurfaceVariant)
                     )
                 }
 
                 VerticalDivider(
                     modifier = Modifier.height(40.dp),
                     thickness = 1.dp,
-                    color = SurfaceTintLight.copy(alpha = .5f)
+                    color = MaterialTheme.colorScheme.surfaceTint.copy(alpha = .5f)
                 )
 
                 Column(
@@ -319,7 +314,7 @@ fun ViewPasswordScreen(
 
                     Text(
                         text = stringResource(R.string.share),
-                        style = normal12.copy(OnSurfaceVariantLight)
+                        style = normal12.copy(MaterialTheme.colorScheme.onSurfaceVariant)
                     )
 
                 }
@@ -371,7 +366,7 @@ fun ViewPasswordScreen(
                         else painterResource(id = R.drawable.visibility_on)
 
                         IconButton(onClick =
-                        { passwordVisibility = passwordVisibility.not() }
+                            { passwordVisibility = passwordVisibility.not() }
                         ) {
                             Icon(
                                 modifier = Modifier.size(24.dp),

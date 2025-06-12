@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -52,7 +53,6 @@ fun ProfileScreen(
     userViewModel: UserViewModel,
     modifier: Modifier = Modifier
 ) {
-
     val context = LocalContext.current
     val userData by userViewModel.state.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
@@ -66,14 +66,14 @@ fun ProfileScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(top = paddingValues.calculateTopPadding() + 10.dp)
-            .background(BackgroundLight),
+            .background(MaterialTheme.colorScheme.background),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(BackgroundLight),
+                .background(MaterialTheme.colorScheme.background),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -94,9 +94,8 @@ fun ProfileScreen(
                 ) {
                     Text(
                         text = userData.name,
-                        style = medium22.copy(color = OnSurfaceLight)
+                        style = medium22.copy(color = MaterialTheme.colorScheme.onSurface)
                     )
-                    // Button to open the dialog
                     IconButton(onClick = { showDialog = true }) {
                         Icon(
                             painter = painterResource(id = R.drawable.edit),
@@ -105,7 +104,6 @@ fun ProfileScreen(
                     }
                 }
 
-                // Initiates the dialog to edit the username
                 if (showDialog) {
                     EditUsernameDialog(
                         currentName = userData.name,
@@ -132,7 +130,7 @@ fun ProfileScreen(
 
             HorizontalDivider(
                 thickness = 2.dp,
-                color = SurfaceLight
+                color = MaterialTheme.colorScheme.surface
             )
 
             UCSettingsCard(
@@ -161,7 +159,7 @@ fun ProfileScreen(
 
             HorizontalDivider(
                 thickness = 2.dp,
-                color = SurfaceLight
+                color = MaterialTheme.colorScheme.surface
             )
 
             UCSettingsCard(
@@ -184,13 +182,12 @@ fun ProfileScreen(
         Text(
             modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
             text = "Version: ${BuildConfig.VERSION_NAME}",
-            style = normal14.copy(color = SurfaceTintLight)
+            style = normal14.copy(color = MaterialTheme.colorScheme.surfaceTint)
         )
         Text(
             modifier = Modifier.padding(bottom = 150.dp),
             text = stringResource(R.string.by_aritra_das),
-            style = normal14.copy(color = SurfaceTintLight)
+            style = normal14.copy(color = MaterialTheme.colorScheme.surfaceTint)
         )
-
     }
 }

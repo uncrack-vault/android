@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -121,17 +122,16 @@ fun SignupScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(BackgroundLight)
+                        .background(MaterialTheme.colorScheme.background)
                         .padding(paddingValues)
                         .padding(16.dp)
                 ) {
-
                     Text(
                         text = stringResource(R.string.sign_up),
                         fontSize = 40.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = DMSansFontFamily,
-                        color = Color.Black
+                        color = MaterialTheme.colorScheme.onBackground
                     )
 
                     Spacer(modifier = Modifier.height(60.dp))
@@ -226,17 +226,15 @@ fun SignupScreen(
                     ) {
                         Text(
                             text = stringResource(id = R.string.already_have_an_account),
-                            style = medium16.copy(color = OnPrimaryContainerLight)
+                            style = medium16.copy(color = MaterialTheme.colorScheme.onPrimaryContainer)
                         )
-
                         Spacer(modifier = Modifier.width(8.dp))
-
                         Text(
                             modifier = Modifier.clickable {
                                 navController.navigate(Screen.LoginScreen.name)
                             },
                             text = stringResource(id = R.string.login),
-                            style = medium16.copy(color = PrimaryLight)
+                            style = medium16.copy(color = MaterialTheme.colorScheme.primary)
                         )
                     }
                 }

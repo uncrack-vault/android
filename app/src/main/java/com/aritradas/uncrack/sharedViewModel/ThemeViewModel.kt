@@ -43,15 +43,10 @@ class ThemeViewModel @Inject constructor(
         }
     }
 
-    fun toggleTheme() {
-        val nextMode = when (_themeState.value.themeMode) {
-            ThemeMode.LIGHT -> ThemeMode.DARK
-            ThemeMode.DARK -> ThemeMode.SYSTEM
-            ThemeMode.SYSTEM -> ThemeMode.LIGHT
-        }
+    fun setThemeMode(mode: ThemeMode) {
         viewModelScope.launch(Dispatchers.IO) {
             dataStore.edit { preferences ->
-                preferences[THEME_MODE_KEY] = nextMode.name
+                preferences[THEME_MODE_KEY] = mode.name
             }
         }
     }

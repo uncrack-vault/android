@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,7 +40,9 @@ import com.aritradas.uncrack.ui.theme.normal14
 @Composable
 fun ToolsScreen(
     navController: NavController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    generatorIconId: Int = R.drawable.generate_password_new,
+    shieldIconId: Int = R.drawable.shield
 ) {
 
     val context = LocalContext.current
@@ -55,7 +59,7 @@ fun ToolsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(16.dp),
         ) {
 
@@ -66,7 +70,7 @@ fun ToolsScreen(
                     .clickable {
                         navController.navigate(Screen.GeneratorScreen.name)
                     }
-                    .background(SurfaceVariantLight)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
                     .shadow(
                         elevation = 5.dp,
                         spotColor = Color(0x0D666666),
@@ -76,9 +80,9 @@ fun ToolsScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                Image(
+                Icon(
                     modifier = Modifier.size(30.dp),
-                    painter = painterResource(id = R.drawable.generate_password_new),
+                    painter = painterResource(id = generatorIconId),
                     contentDescription = null
                 )
 
@@ -90,13 +94,13 @@ fun ToolsScreen(
                 ) {
                     Text(
                         text = stringResource(id = R.string.generator),
-                        color = Color.Black,
+                        color = MaterialTheme.colorScheme.onSurface,
                         style = medium18
                     )
 
                     Text(
                         text = stringResource(R.string.quickly_generate_your_passwords_and_usernames),
-                        color = Color.Gray,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = normal14
                     )
                 }
@@ -111,7 +115,7 @@ fun ToolsScreen(
                     .clickable {
                         navController.navigate(Screen.PasswordHealthScreen.name)
                     }
-                    .background(SurfaceVariantLight)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
                     .shadow(
                         elevation = 5.dp,
                         spotColor = Color(0x0D666666),
@@ -120,9 +124,9 @@ fun ToolsScreen(
                     .padding(horizontal = 16.dp, vertical = 17.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
+                Icon(
                     modifier = Modifier.size(30.dp),
-                    painter = painterResource(id = R.drawable.shield),
+                    painter = painterResource(id = shieldIconId),
                     contentDescription = null
                 )
 
@@ -134,13 +138,13 @@ fun ToolsScreen(
                 ) {
                     Text(
                         text = stringResource(R.string.password_health),
-                        color = Color.Black,
+                        color = MaterialTheme.colorScheme.onSurface,
                         style = medium18
                     )
 
                     Text(
                         text = stringResource(R.string.identify_passwords_health),
-                        color = Color.Gray,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = normal14
 
                     )

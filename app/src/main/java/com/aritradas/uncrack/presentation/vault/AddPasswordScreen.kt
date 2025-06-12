@@ -24,6 +24,7 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -92,7 +93,7 @@ fun AddPasswordScreen(
             .imePadding(),
         topBar = {
             MediumTopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = BackgroundLight),
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
                 title = {
                     Text(
                         "Add Password",
@@ -116,7 +117,7 @@ fun AddPasswordScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -131,7 +132,7 @@ fun AddPasswordScreen(
 
             Text(
                 text = accountName,
-                style = medium22.copy(Color.Black)
+                style = medium22.copy(MaterialTheme.colorScheme.onBackground)
             )
 
             Spacer(modifier = Modifier.height(20.dp))

@@ -72,11 +72,11 @@ fun UnCrackTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor =  colorScheme.background.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
+            window.statusBarColor = colorScheme.background.toArgb()
+            val isLight = !isDark
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = isLight
         }
     }
-
     MaterialTheme(
         colorScheme = colorScheme,
         typography = typography,

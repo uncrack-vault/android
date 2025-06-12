@@ -20,6 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -88,7 +89,7 @@ fun EditPasswordScreen(
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 title = "Edit Password",
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
+                colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.background),
                 onBackPress = { navController.popBackStack() }
             )
         }
@@ -97,7 +98,7 @@ fun EditPasswordScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(paddingValues)
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState()),
@@ -114,7 +115,7 @@ fun EditPasswordScreen(
 
             Text(
                 text = accountName.toString(),
-                style =  medium22.copy(Color.Black)
+                style = medium22.copy(MaterialTheme.colorScheme.onBackground)
             )
 
             Spacer(modifier = Modifier.height(20.dp))

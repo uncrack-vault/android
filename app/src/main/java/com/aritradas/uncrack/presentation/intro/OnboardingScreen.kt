@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -71,7 +72,7 @@ fun OnboardingScreen(
                         navController.navigate(Screen.LoginScreen.name)
                     },
                 text = stringResource(R.string.skip),
-                style = medium18.copy(OnSurfaceLight)
+                style = medium18.copy(MaterialTheme.colorScheme.onSurface)
             )
         }
 
@@ -119,8 +120,8 @@ fun PageIndicator(
     pagesSize: Int,
     selectedPage: Int,
     modifier: Modifier = Modifier,
-    selectedColor: Color = PrimaryDark,
-    unselectedColor: Color = OnSurfaceVariantLight
+    selectedColor: Color = MaterialTheme.colorScheme.primary,
+    unselectedColor: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     Row(
         modifier = modifier,

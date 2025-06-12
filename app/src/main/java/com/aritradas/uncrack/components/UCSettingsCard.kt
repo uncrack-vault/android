@@ -1,5 +1,6 @@
 package com.aritradas.uncrack.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,13 +32,14 @@ fun UCSettingsCard(
     itemSubText: String? = null,
     modifier: Modifier = Modifier,
     iconId: Int? = null,
-    textColor: Color = OnSurfaceLight,
+    textColor: Color = MaterialTheme.colorScheme.onSurface,
     onClick: () -> Unit
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClick() }
+            .background(MaterialTheme.colorScheme.surface)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -63,7 +66,7 @@ fun UCSettingsCard(
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = itemSubText,
-                    style = normal14.copy(SurfaceTintLight)
+                    style = normal14.copy(MaterialTheme.colorScheme.onSurfaceVariant)
                 )
             }
         }
