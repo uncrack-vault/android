@@ -97,7 +97,7 @@ fun PasswordGenerator(
             text = buildAnnotatedString {
                 password.forEach {
                     val textColor = when {
-                        it.isDigit() -> Color.Blue
+                        it.isDigit() -> Color.Cyan
                         it.isLetterOrDigit().not() -> Color.Magenta
                         else -> MaterialTheme.colorScheme.onPrimaryContainer
                     }

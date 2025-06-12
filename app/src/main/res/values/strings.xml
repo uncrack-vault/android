@@ -222,7 +222,7 @@
     <string name="log_out">Log Out</string>
     <string name="theme">Theme</string>
     <string name="change_theme">Change Theme</string>
-    <string name="cycle_through_light_dark_system">Switch between Light, Dark, and System theme modes</string>
+    <string name="cycle_through_light_dark_system">Switch between Dark, Light, and System theme modes</string>
     <string name="old_master_password">Old Master Password\n</string>
     <string name="new_master_password">New Master Password</string>
     <string name="at_least_1_symbol"><![CDATA[At least 1 symbol (*#/&%....)]]></string>

@@ -393,7 +393,7 @@ fun ShowBottomNavigation(
                         }
                     },
                     colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = MaterialTheme.colorScheme.primary
+                        indicatorColor = MaterialTheme.colorScheme.primaryContainer
                     )
                 )
             }

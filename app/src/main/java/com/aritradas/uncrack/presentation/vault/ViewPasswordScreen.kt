@@ -222,10 +222,10 @@ fun ViewPasswordScreen(
                     verticalArrangement = Arrangement.spacedBy(6.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
+                    Icon(
                         modifier = Modifier.size(40.dp),
                         painter = getCategoryImage(category.toString()),
-                        contentDescription = null
+                        contentDescription = null,
                     )
 
                     Text(
@@ -287,7 +287,7 @@ fun ViewPasswordScreen(
                     verticalArrangement = Arrangement.spacedBy(6.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
+                    Icon(
                         modifier = Modifier
                             .size(40.dp)
                             .clickable {
