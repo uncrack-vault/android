@@ -52,13 +52,16 @@ import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.medium14
 import com.aritradas.uncrack.ui.theme.medium18
 import com.aritradas.uncrack.ui.theme.normal16
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.aritradas.uncrack.sharedViewModel.ThemeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     navController: NavHostController,
     settingsViewModel: SettingsViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    themeViewModel: ThemeViewModel = hiltViewModel()
 ) {
 
     val context = LocalContext.current
@@ -245,15 +248,35 @@ fun SettingsScreen(
             modifier = modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
         ) {
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 18.dp, top = 18.dp),
+                text = stringResource(R.string.theme),
+                style = medium18.copy(color = MaterialTheme.colorScheme.onBackground)
+            )
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            SettingsItemGroup {
+                UCSettingsCard(
+                    itemName = stringResource(R.string.change_theme),
+                    itemSubText = stringResource(R.string.cycle_through_light_dark_system),
+                    onClick = { themeViewModel.toggleTheme() }
+                )
+            }
 
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 18.dp, top = 18.dp),
                 text = stringResource(id = R.string.security),
-                style = medium18.copy(color = OnPrimaryContainerLight)
+                style = medium18.copy(color = MaterialTheme.colorScheme.onBackground)
             )
 
             Spacer(modifier = Modifier.height(14.dp))

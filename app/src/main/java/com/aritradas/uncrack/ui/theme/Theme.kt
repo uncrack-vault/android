@@ -18,7 +18,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.aritradas.uncrack.sharedViewModel.ThemeMode
 import com.aritradas.uncrack.sharedViewModel.ThemeViewModel
+import androidx.compose.foundation.isSystemInDarkTheme
 
 private val DarkColorPalette = darkColorScheme(
     primary = PrimaryDark,
@@ -51,17 +53,22 @@ fun UnCrackTheme(
 ) {
     val themeState by themeViewModel.themeState.collectAsState()
 
+    val isDark = when (themeState.themeMode) {
+        ThemeMode.DARK -> true
+        ThemeMode.LIGHT -> false
+        ThemeMode.SYSTEM -> isSystemInDarkTheme()
+    }
+
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            if (themeState.isDarkMode) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-
+            if (isDark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-        themeState.isDarkMode -> DarkColorPalette
+        isDark -> DarkColorPalette
         else -> LightColorPalette
     }
-    val view = LocalView.current
 
+    val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
