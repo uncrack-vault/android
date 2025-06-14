@@ -25,6 +25,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
@@ -40,7 +41,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -50,9 +50,6 @@ import com.aritradas.uncrack.components.TypewriterText
 import com.aritradas.uncrack.components.VaultCard
 import com.aritradas.uncrack.presentation.vault.viewmodel.VaultViewModel
 import com.aritradas.uncrack.sharedViewModel.UserViewModel
-import com.aritradas.uncrack.ui.theme.BackgroundLight
-import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.PrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.normal16
 
@@ -107,14 +104,14 @@ fun VaultScreen(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = BackgroundLight,
+                    containerColor = MaterialTheme.colorScheme.background,
                 ),
                 title = {
                     Text(
                         modifier = Modifier
                             .fillMaxWidth(),
                         text = "Hello, ${user.name}",
-                        style = medium24.copy(Color.Black)
+                        style = medium24.copy(MaterialTheme.colorScheme.onBackground)
                     )
                 }
             )
@@ -135,7 +132,7 @@ fun VaultScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(horizontal = 16.dp)
                 .then(modifier),
         ) {
@@ -155,7 +152,7 @@ fun VaultScreen(
                     Row {
                         Text(
                             text = "Search for ",
-                            style = normal16.copy(OnSurfaceVariantLight),
+                            style = normal16.copy(MaterialTheme.colorScheme.onSurfaceVariant),
                         )
                         TypewriterText(
                             texts = listOf(
@@ -168,7 +165,7 @@ fun VaultScreen(
                     }
                 },
                 colors = SearchBarDefaults.colors(
-                    containerColor = PrimaryContainerLight
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
                 ),
                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
                 trailingIcon = {

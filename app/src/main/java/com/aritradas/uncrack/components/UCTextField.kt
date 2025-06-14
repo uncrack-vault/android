@@ -1,13 +1,10 @@
 package com.aritradas.uncrack.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -23,10 +20,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.OnSurfaceLight
-import com.aritradas.uncrack.ui.theme.SurfaceTintLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.normal16
 
 @Composable
@@ -38,8 +31,8 @@ fun UCTextField(
     keyboardType: KeyboardType = KeyboardType.Text,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = keyboardType),
-    textColor: Color = OnSurfaceLight,
-    backgroundColor: Color = SurfaceVariantLight,
+    textColor: Color = MaterialTheme.colorScheme.onSurface,
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
     textStyle: TextStyle = normal16,
     enabled: Boolean = true,
     singleLine: Boolean = false,
@@ -78,8 +71,9 @@ fun UCTextField(
             minLines = minLines,
             leadingIcon = leadingIcon,
             visualTransformation = visualTransformation,
-            trailingIcon = trailingIcon
-        ) { onValueChange(it) } // Use String instead of MutableState<String>
+            trailingIcon = trailingIcon,
+            onValueChange = onValueChange
+        )
     }
 }
 
@@ -93,7 +87,7 @@ fun TextHeader(text: String, modifier: Modifier = Modifier) {
             lineHeight = 24.sp,
             fontFamily = DMSansFontFamily,
             fontWeight = FontWeight(500),
-            color = OnPrimaryContainerLight,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
         )
     )
 }
@@ -106,8 +100,8 @@ fun TextEditField(
     hintText: String = "",
     value: String = "",
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    textColor: Color = OnSurfaceLight,
-    backgroundColor: Color = SurfaceVariantLight,
+    textColor: Color = MaterialTheme.colorScheme.onSurface,
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
     keyboardType: KeyboardType = KeyboardType.Text,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = keyboardType),
     textStyle: TextStyle = normal16,
@@ -124,16 +118,27 @@ fun TextEditField(
         modifier = modifier.fillMaxWidth(),
         value = value,
         keyboardOptions = keyboardOptions,
-        onValueChange = {
-            onValueChange(it)
-        },
+        onValueChange = onValueChange,
         keyboardActions = keyboardActions,
-        colors = OutlinedTextFieldDefaults.colors(textColor),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedTextColor = textColor,
+            unfocusedTextColor = textColor,
+            disabledTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            focusedContainerColor = backgroundColor,
+            unfocusedContainerColor = backgroundColor,
+            disabledContainerColor = backgroundColor,
+            cursorColor = MaterialTheme.colorScheme.primary,
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+            disabledBorderColor = MaterialTheme.colorScheme.outlineVariant,
+            errorBorderColor = MaterialTheme.colorScheme.error,
+            errorCursorColor = MaterialTheme.colorScheme.error
+        ),
         placeholder = {
             Text(
                 modifier = Modifier.wrapContentHeight(align = Alignment.CenterVertically),
                 text = hintText,
-                color = SurfaceTintLight,
+                color = MaterialTheme.colorScheme.surfaceTint,
                 fontFamily = DMSansFontFamily
             )
         },

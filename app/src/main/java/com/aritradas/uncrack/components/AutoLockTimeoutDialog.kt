@@ -44,7 +44,7 @@ fun AutoLockTimeoutDialog(
         title = {
             Text(
                 text = stringResource(R.string.auto_lock_timeout),
-                style = normal16
+                style = normal16.copy(color = MaterialTheme.colorScheme.onBackground)
             )
         },
         text = {
@@ -71,7 +71,7 @@ fun AutoLockTimeoutDialog(
                         )
                         Text(
                             text = text,
-                            style = normal16,
+                            style = normal16.copy(color = MaterialTheme.colorScheme.onBackground),
                             modifier = Modifier
                                 .padding(start = 8.dp)
                         )
@@ -92,7 +92,7 @@ fun AutoLockTimeoutDialog(
             ) {
                 Text(
                     stringResource(R.string.save),
-                    style = medium14
+                    style = medium14.copy(color = MaterialTheme.colorScheme.primary)
                 )
             }
         },
@@ -106,7 +106,7 @@ fun AutoLockTimeoutDialog(
             ) {
                 Text(
                     stringResource(R.string.cancel),
-                    style = medium14
+                    style = medium14.copy(color = MaterialTheme.colorScheme.primary)
                 )
             }
         },

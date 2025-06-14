@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,7 +36,6 @@ fun NoInternetScreen(modifier: Modifier = Modifier) {
         isPlaying = true
     )
 
-
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -52,14 +52,14 @@ fun NoInternetScreen(modifier: Modifier = Modifier) {
 
         Text(
             text = "Opps Network Error!",
-            style = bold30
+            style = bold30.copy(color = MaterialTheme.colorScheme.onBackground)
         )
 
         Spacer(modifier = Modifier.height(5.dp))
 
         Text(
             text = "Please try again later",
-            style = normal20
+            style = normal20.copy(color = MaterialTheme.colorScheme.onBackground)
         )
     }
 }

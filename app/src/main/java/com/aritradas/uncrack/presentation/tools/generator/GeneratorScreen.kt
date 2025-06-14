@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
@@ -26,7 +27,6 @@ import com.aritradas.uncrack.presentation.tools.usernameGenerator.UsernameGenera
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGenerator
 import com.aritradas.uncrack.presentation.tools.passwordGenerator.PasswordGeneratorViewModel
 import com.aritradas.uncrack.presentation.tools.usernameGenerator.UsernameGeneratorViewModel
-import com.aritradas.uncrack.ui.theme.BackgroundLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +46,7 @@ fun GeneratorScreen(
             UCTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 title = stringResource(R.string.generator),
-                colors = TopAppBarDefaults.topAppBarColors(BackgroundLight),
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
                 onBackPress = { navController.popBackStack() }
             )
         }

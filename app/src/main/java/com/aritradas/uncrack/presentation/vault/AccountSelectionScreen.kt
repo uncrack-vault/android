@@ -13,6 +13,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -20,7 +21,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,7 +29,6 @@ import androidx.navigation.NavHostController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.AccountCard
 import com.aritradas.uncrack.presentation.vault.viewmodel.AddEditViewModel
-import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.medium20
 import com.aritradas.uncrack.util.UtilsKt.getCommunicationAccounts
 import com.aritradas.uncrack.util.UtilsKt.getCommunitiesAccounts
@@ -72,9 +71,9 @@ fun AccountSelectionScreen(
                 },
                 scrollBehavior = scrollBehavior,
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = BackgroundLight,
-                    scrolledContainerColor = BackgroundLight,
-                    titleContentColor = Color.Black
+                    containerColor = MaterialTheme.colorScheme.background,
+                    scrolledContainerColor = MaterialTheme.colorScheme.background,
+                    titleContentColor = MaterialTheme.colorScheme.onBackground
                 )
             )
         }
@@ -83,14 +82,14 @@ fun AccountSelectionScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             item {
                 Text(
                     text = stringResource(id = R.string.social),
-                    style = medium20.copy(Color.Black)
+                    style = medium20.copy(MaterialTheme.colorScheme.onBackground)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
             }
@@ -115,7 +114,7 @@ fun AccountSelectionScreen(
 
                 Text(
                     text = stringResource(id = R.string.work),
-                    style = medium20.copy(Color.Black)
+                    style = medium20.copy(MaterialTheme.colorScheme.onBackground)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
             }
@@ -140,7 +139,7 @@ fun AccountSelectionScreen(
 
                 Text(
                     text = stringResource(R.string.crowdsourcing),
-                    style = medium20.copy(Color.Black)
+                    style = medium20.copy(MaterialTheme.colorScheme.onBackground)
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
@@ -167,7 +166,7 @@ fun AccountSelectionScreen(
 
                 Text(
                     text = stringResource(R.string.communication),
-                    style = medium20.copy(Color.Black)
+                    style = medium20.copy(MaterialTheme.colorScheme.onBackground)
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
@@ -194,7 +193,7 @@ fun AccountSelectionScreen(
 
                 Text(
                     text = stringResource(R.string.portfolio),
-                    style = medium20.copy(Color.Black)
+                    style = medium20.copy(MaterialTheme.colorScheme.onBackground)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
             }
@@ -221,7 +220,7 @@ fun AccountSelectionScreen(
 
                 Text(
                     text = stringResource(R.string.communities),
-                    style = medium20.copy(Color.Black)
+                    style = medium20.copy(MaterialTheme.colorScheme.onBackground)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
             }

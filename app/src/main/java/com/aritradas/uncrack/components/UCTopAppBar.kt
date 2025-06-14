@@ -5,6 +5,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
@@ -18,8 +19,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
-import com.aritradas.uncrack.ui.theme.OnSurfaceLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +29,12 @@ fun UCTopAppBar(
     shouldShowBackButton: Boolean = true,
     shouldShowFavAndEditButton: Boolean = true,
     fontSize: TextUnit = 22.sp,
-    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(SurfaceVariantLight),
+    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(
+        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        titleContentColor = MaterialTheme.colorScheme.onSurface,
+        navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
+        actionIconContentColor = MaterialTheme.colorScheme.onSurface
+    ),
     onBackPress: () -> Unit = {},
     onEditPress: () -> Unit = {},
     onDeletePress: () -> Unit = {}
@@ -42,16 +46,14 @@ fun UCTopAppBar(
                 text = title,
                 fontFamily = DMSansFontFamily,
                 fontSize = fontSize,
-                color = OnSurfaceLight,
+                color = MaterialTheme.colorScheme.onSurface,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
             )
         },
         navigationIcon = {
             if (shouldShowBackButton) {
-                IconButton(onClick = {
-                    onBackPress()
-                }) {
+                IconButton(onClick = { onBackPress() }) {
                     Icon(
                         imageVector = navigationIcon,
                         contentDescription = null
@@ -60,16 +62,14 @@ fun UCTopAppBar(
             }
         },
         actions = {
-            if (shouldShowFavAndEditButton.not()) {
-                IconButton(onClick = {
-                    onEditPress()
-                }) {
-                    Icon(painter = painterResource(id = R.drawable.edit), contentDescription = null)
+            if (!shouldShowFavAndEditButton) {
+                IconButton(onClick = { onEditPress() }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.edit),
+                        contentDescription = null
+                    )
                 }
-
-                IconButton(onClick = {
-                    onDeletePress()
-                }) {
+                IconButton(onClick = { onDeletePress() }) {
                     Icon(
                         painter = painterResource(id = R.drawable.delete_icon),
                         contentDescription = null

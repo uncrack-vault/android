@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -66,10 +67,6 @@ import com.aritradas.uncrack.sharedViewModel.UserViewModel
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
 import com.aritradas.uncrack.ui.theme.FadeIn
 import com.aritradas.uncrack.ui.theme.FadeOut
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.PrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.PrimaryDark
 import com.aritradas.uncrack.util.BackPressHandler
 import com.aritradas.uncrack.util.ConnectivityObserver
 import kotlinx.collections.immutable.ImmutableList
@@ -319,7 +316,7 @@ fun ShowBottomNavigation(
     if (backStackEntry?.destination?.route !in screensWithoutNavigationBar) {
         NavigationBar(
             modifier = modifier,
-            containerColor = PrimaryContainerLight
+            containerColor = MaterialTheme.colorScheme.primaryContainer
         ) {
 
             val bottomNavItems = listOf(
@@ -360,9 +357,9 @@ fun ShowBottomNavigation(
                             imageVector = item.icon,
                             contentDescription = item.name,
                             tint = if (isSelected)
-                                OnPrimaryContainerLight
+                                MaterialTheme.colorScheme.onPrimaryContainer
                             else
-                                OnSurfaceVariantLight
+                                MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     },
                     label = {
@@ -370,9 +367,9 @@ fun ShowBottomNavigation(
                             text = item.name,
                             fontFamily = DMSansFontFamily,
                             color = if (isSelected)
-                                OnPrimaryContainerLight
+                                MaterialTheme.colorScheme.onPrimaryContainer
                             else
-                                OnSurfaceVariantLight,
+                                MaterialTheme.colorScheme.onSurfaceVariant,
                             fontWeight = if (isSelected)
                                 FontWeight.SemiBold
                             else
@@ -396,7 +393,7 @@ fun ShowBottomNavigation(
                         }
                     },
                     colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = PrimaryDark
+                        indicatorColor = MaterialTheme.colorScheme.primary
                     )
                 )
             }

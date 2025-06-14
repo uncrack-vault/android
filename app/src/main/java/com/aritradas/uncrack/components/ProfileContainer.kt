@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -20,8 +21,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.sharedViewModel.UserViewModel
-import com.aritradas.uncrack.ui.theme.PrimaryLight
-import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.bold24
 
 @Composable
@@ -29,7 +28,6 @@ fun ProfileContainer(
     userViewModel: UserViewModel,
     modifier: Modifier = Modifier
 ) {
-
     var initials by remember { mutableStateOf("") }
     val userData by userViewModel.state.collectAsState()
 
@@ -40,7 +38,7 @@ fun ProfileContainer(
         modifier = modifier
             .size(100.dp)
             .clip(CircleShape)
-            .background(PrimaryLight)
+            .background(MaterialTheme.colorScheme.primary)
     ) {
         if (initials.isEmpty()) {
             Image(
@@ -51,7 +49,7 @@ fun ProfileContainer(
         } else {
             Text(
                 text = initials,
-                style = bold24.copy(SurfaceLight)
+                style = bold24.copy(color = MaterialTheme.colorScheme.onPrimary)
             )
         }
     }

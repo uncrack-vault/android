@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Switch
@@ -43,10 +44,6 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.components.UCButton
-import com.aritradas.uncrack.ui.theme.BackgroundLight
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.PrimaryLight
-import com.aritradas.uncrack.ui.theme.SurfaceLight
 import com.aritradas.uncrack.ui.theme.medium24
 import com.aritradas.uncrack.ui.theme.medium30
 import com.aritradas.uncrack.ui.theme.normal16
@@ -90,7 +87,7 @@ fun PasswordGenerator(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundLight)
+            .background(MaterialTheme.colorScheme.background)
             .verticalScroll(scrollState)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -100,9 +97,9 @@ fun PasswordGenerator(
             text = buildAnnotatedString {
                 password.forEach {
                     val textColor = when {
-                        it.isDigit() -> Color.Blue
+                        it.isDigit() -> Color.Cyan
                         it.isLetterOrDigit().not() -> Color.Magenta
-                        else -> OnPrimaryContainerLight
+                        else -> MaterialTheme.colorScheme.onPrimaryContainer
                     }
                     withStyle(style = SpanStyle(color = textColor)) {
                         append(it.toString())
@@ -143,7 +140,7 @@ fun PasswordGenerator(
 
         Text(
             text = stringResource(R.string.password_generated_length, passwordLength.toInt()),
-            style = medium24.copy(OnPrimaryContainerLight)
+            style = medium24.copy(MaterialTheme.colorScheme.onPrimaryContainer)
         )
 
         Slider(
@@ -158,9 +155,9 @@ fun PasswordGenerator(
             steps = sliderSteps,
             valueRange = sliderStepRange,
             colors = SliderDefaults.colors(
-                thumbColor = OnPrimaryContainerLight,
-                activeTrackColor = PrimaryLight,
-                inactiveTrackColor = SurfaceLight,
+                thumbColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                activeTrackColor = MaterialTheme.colorScheme.primary,
+                inactiveTrackColor = MaterialTheme.colorScheme.surface,
                 activeTickColor = Color.Transparent,
                 inactiveTickColor = Color.Transparent
             )
@@ -170,7 +167,7 @@ fun PasswordGenerator(
 
         Text(
             text = stringResource(R.string.include_following),
-            style = medium24.copy(OnPrimaryContainerLight)
+            style = medium24.copy(color = MaterialTheme.colorScheme.onSurface)
         )
 
         SwitchItem(
@@ -215,7 +212,7 @@ fun SwitchItem(
     ) {
         Text(
             text = label,
-            style = normal16.copy(OnPrimaryContainerLight)
+            style = normal16.copy(color = MaterialTheme.colorScheme.onSurface)
         )
 
         Spacer(modifier = Modifier.weight(1f))

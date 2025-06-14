@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +21,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -36,9 +36,6 @@ import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.domain.model.Key
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.masterKey.KeyViewModel
-import com.aritradas.uncrack.ui.theme.BackgroundLight
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 import com.aritradas.uncrack.ui.theme.bold30
 import com.aritradas.uncrack.ui.theme.medium14
 import com.aritradas.uncrack.ui.theme.normal16
@@ -66,19 +63,19 @@ fun CreateMasterKeyScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(BackgroundLight)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(16.dp)
         ) {
             Text(
                 text = stringResource(R.string.create_master_password),
-                style = bold30.copy(color = Color.Black)
+                style = bold30.copy(color = MaterialTheme.colorScheme.onBackground)
             )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
                 text = stringResource(R.string.you_will_be_using_master_password_as_a_key_to_unlock_your_passwords),
-                style = normal16.copy(color = SurfaceTintLight)
+                style = normal16.copy(color = MaterialTheme.colorScheme.surfaceTint)
             )
 
             Spacer(modifier = Modifier.height(50.dp))
@@ -114,7 +111,7 @@ fun CreateMasterKeyScreen(
             ) {
                 Text(
                     text = stringResource(R.string.master_password_must_include),
-                    style = medium14.copy(OnPrimaryContainerLight)
+                    style = medium14.copy(MaterialTheme.colorScheme.onPrimaryContainer)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
 

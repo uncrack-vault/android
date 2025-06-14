@@ -1,6 +1,5 @@
 package com.aritradas.uncrack.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,12 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.aritradas.uncrack.R
-import com.aritradas.uncrack.ui.theme.DMSansFontFamily
 
 @Composable
 fun ProgressDialog(
@@ -33,13 +30,9 @@ fun ProgressDialog(
         )
     ) {
         Surface(
-            modifier = Modifier
-                .background(
-                    MaterialTheme.colorScheme.surfaceContainer,
-                    shape = MaterialTheme.shapes.medium
-                )
-                .then(modifier),
-            shape = MaterialTheme.shapes.medium
+            modifier = modifier,
+            shape = MaterialTheme.shapes.medium,
+            color = MaterialTheme.colorScheme.surfaceContainer
         ) {
             Column(
                 modifier = Modifier
@@ -53,7 +46,8 @@ fun ProgressDialog(
                 )
                 Text(
                     text = stringResource(R.string.please_wait),
-                    style = TextStyle(fontFamily = DMSansFontFamily)
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }

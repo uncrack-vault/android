@@ -8,17 +8,15 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
-import com.aritradas.uncrack.ui.theme.PrimaryLight
-import com.aritradas.uncrack.ui.theme.SurfaceTintLight
 
 @Composable
 fun UCButton(
@@ -41,21 +39,24 @@ fun UCButton(
             .then(modifier),
         onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(
-            containerColor = PrimaryLight
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+            disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+            disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant
         ),
         enabled = enabled && !isLoading
     ) {
         if (isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier.size(24.dp),
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurface,
                 strokeWidth = 2.dp
             )
             loadingText?.let {
                 Text(
                     modifier = Modifier.padding(start = 8.dp),
                     text = it,
-                    color = Color.Black,
+                    color = MaterialTheme.colorScheme.onSurface,
                     fontFamily = DMSansFontFamily,
                     fontSize = 14.sp
                 )
@@ -70,7 +71,7 @@ fun UCButton(
             }
             Text(
                 text = text,
-                color = if (enabled) Color.White else SurfaceTintLight,
+                color = if (enabled) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
                 fontFamily = DMSansFontFamily,
                 fontSize = 14.sp
             )
