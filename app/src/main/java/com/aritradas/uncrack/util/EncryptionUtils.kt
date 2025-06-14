@@ -2,7 +2,6 @@ package com.aritradas.uncrack.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Base64
 import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
@@ -64,7 +63,7 @@ object EncryptionUtils {
 
             val keyString = sharedPreferences.getString(KEY_DATA, null)
             return if (keyString != null) {
-                val keyBytes = Base64.decode(keyString, Base64.DEFAULT)
+                val keyBytes = android.util.Base64.decode(keyString, android.util.Base64.DEFAULT)
                 SecretKeySpec(keyBytes, "AES")
             } else {
                 generateAndStoreNewKey(sharedPreferences)
@@ -80,7 +79,7 @@ object EncryptionUtils {
         val keyString = sharedPreferences.getString(KEY_DATA, null)
 
         return if (keyString != null) {
-            val keyBytes = Base64.decode(keyString, Base64.DEFAULT)
+            val keyBytes = android.util.Base64.decode(keyString, android.util.Base64.DEFAULT)
             SecretKeySpec(keyBytes, "AES")
         } else {
             generateAndStoreNewKey(sharedPreferences)
@@ -95,7 +94,7 @@ object EncryptionUtils {
 
         // Store the new key
         val keyBytes = newKey.encoded
-        val keyString = Base64.encodeToString(keyBytes, Base64.DEFAULT)
+        val keyString = android.util.Base64.encodeToString(keyBytes, android.util.Base64.DEFAULT)
         sharedPreferences.edit { putString(KEY_DATA, keyString) }
 
         return newKey
@@ -104,6 +103,11 @@ object EncryptionUtils {
     fun encrypt(data: String): String {
         if (!isInitialized) {
             throw IllegalStateException("EncryptionUtils must be initialized before use")
+        }
+
+        // Handle empty input
+        if (data.isEmpty()) {
+            return ""
         }
 
         try {
@@ -118,10 +122,13 @@ object EncryptionUtils {
             System.arraycopy(iv, 0, combined, 0, iv.size)
             System.arraycopy(encryptedBytes, 0, combined, iv.size, encryptedBytes.size)
 
-            return Base64.encodeToString(combined, Base64.DEFAULT)
+            return android.util.Base64.encodeToString(combined, android.util.Base64.DEFAULT)
         } catch (e: Exception) {
-            Timber.e(e, "Encryption error")
-            return data // Return original data in case of encryption failure
+            Timber.e(e, "Encryption error for data: ${data.take(20)}...")
+            throw IllegalStateException(
+                "Failed to encrypt data",
+                e
+            ) // Throw exception instead of returning original data
         }
     }
 
@@ -130,8 +137,19 @@ object EncryptionUtils {
             throw IllegalStateException("EncryptionUtils must be initialized before use")
         }
 
+        // Handle empty or null input
+        if (encryptedData.isEmpty()) {
+            return ""
+        }
+
         try {
-            val combined = Base64.decode(encryptedData, Base64.DEFAULT)
+            val combined = android.util.Base64.decode(encryptedData, android.util.Base64.DEFAULT)
+
+            // Validate combined data length
+            if (combined.size < 12) {
+                Timber.e("Invalid encrypted data: too short")
+                return "" // Return empty string for invalid data
+            }
 
             // Extract IV and encrypted data
             val iv = combined.copyOfRange(0, 12) // GCM uses 12 bytes IV
@@ -144,8 +162,33 @@ object EncryptionUtils {
             val decryptedBytes = cipher.doFinal(encrypted)
             return String(decryptedBytes, StandardCharsets.UTF_8)
         } catch (e: Exception) {
-            Timber.e(e, "Decryption error")
-            return encryptedData // Return encrypted data in case of decryption failure
+            Timber.e(e, "Decryption error for data: ${encryptedData.take(20)}...")
+            return "" // Return empty string instead of encrypted data when decryption fails
         }
+    }
+
+    /**
+     * Utility function to check if a string appears to be encrypted data
+     * This can help identify corrupted or unencrypted data in the database
+     */
+    fun isLikelyEncryptedData(data: String): Boolean {
+        if (data.isEmpty()) return false
+
+        return try {
+            // Check if it's valid Base64 and has reasonable length for encrypted data
+            val decoded = android.util.Base64.decode(data, android.util.Base64.DEFAULT)
+            decoded.size >= 12 // At least IV size
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /**
+     * Force re-initialization of the encryption key
+     * Use this only for recovery scenarios
+     */
+    fun reinitialize(context: Context) {
+        isInitialized = false
+        initialize(context)
     }
 }

@@ -9,6 +9,7 @@ import com.aritradas.uncrack.util.EncryptionUtils
 import com.aritradas.uncrack.util.UtilsKt.validateEmail
 import com.aritradas.uncrack.util.runIO
 import dagger.hilt.android.lifecycle.HiltViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -62,12 +63,17 @@ class AddEditViewModel @Inject constructor(
     }
 
     fun addAccount(account: Account) = runIO {
-        val encryptedAccount = account.copy(
-            email = EncryptionUtils.encrypt(account.email),
-            username = if (account.username.isNotEmpty()) EncryptionUtils.encrypt(account.username) else "",
-            password = EncryptionUtils.encrypt(account.password)
-        )
-        repository.addAccount(encryptedAccount)
+        try {
+            val encryptedAccount = account.copy(
+                email = EncryptionUtils.encrypt(account.email),
+                username = if (account.username.isNotEmpty()) EncryptionUtils.encrypt(account.username) else "",
+                password = EncryptionUtils.encrypt(account.password)
+            )
+            repository.addAccount(encryptedAccount)
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to encrypt and save account data")
+            throw e // Re-throw to let the UI handle the error
+        }
     }
 
     private fun checkIfAdded() {
