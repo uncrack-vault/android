@@ -121,8 +121,8 @@ jobs:
           
           # Build release with signing parameters
           ./gradlew assembleRelease \
-            -Pandroid.injected.signing.store.file=$RELEASE_KEYSTORE_PATH \
-            -Pandroid.injected.signing.store.password=$RELEASE_KEYSTORE_PASSWORD \
-            -Pandroid.injected.signing.key.alias=$RELEASE_KEY_ALIAS \
-            -Pandroid.injected.signing.key.password=$RELEASE_KEY_PASSWORD \
+            -Pandroid.injected.signing.store.file="$(pwd)/$RELEASE_KEYSTORE_PATH" \
+            -Pandroid.injected.signing.store.password="$RELEASE_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$RELEASE_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$RELEASE_KEY_PASSWORD" \
             -x uploadCrashlyticsMappingFileRelease

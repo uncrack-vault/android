@@ -41,10 +41,20 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file(localProperties.getProperty("uncrack.store.file", "../uncrack_release.jks"))
-            storePassword = localProperties.getProperty("uncrack.store.password", "")
-            keyAlias = localProperties.getProperty("uncrack.key.alias", "")
-            keyPassword = localProperties.getProperty("uncrack.key.password", "")
+            val keystorePath = localProperties.getProperty("uncrack.store.file")
+                ?: System.getProperty("android.injected.signing.store.file")
+                ?: "../uncrack_release.jks"
+
+            storeFile = file(keystorePath)
+            storePassword = localProperties.getProperty("uncrack.store.password")
+                ?: System.getProperty("android.injected.signing.store.password")
+                        ?: ""
+            keyAlias = localProperties.getProperty("uncrack.key.alias")
+                ?: System.getProperty("android.injected.signing.key.alias")
+                        ?: ""
+            keyPassword = localProperties.getProperty("uncrack.key.password")
+                ?: System.getProperty("android.injected.signing.key.password")
+                        ?: ""
         }
     }
 
