@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,18 +16,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.aritradas.uncrack.ui.theme.SurfaceTintLight
-import com.aritradas.uncrack.ui.theme.SurfaceVariantLight
 import com.aritradas.uncrack.ui.theme.medium18
 import com.aritradas.uncrack.ui.theme.medium26
 import com.aritradas.uncrack.ui.theme.normal14
-import com.aritradas.uncrack.ui.theme.strongPassword
 
 @Composable
 fun ShieldCard(
     count: Int,
     modifier: Modifier = Modifier,
-    textColor: Color = strongPassword,
+    textColor: Color = MaterialTheme.colorScheme.primary,
     text: String = "",
     subText: String = ""
 ) {
@@ -34,7 +32,7 @@ fun ShieldCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .background(SurfaceVariantLight)
+            .background(MaterialTheme.colorScheme.surfaceVariant)
             .shadow(
                 elevation = 5.dp,
                 spotColor = Color(0x0D666666),
@@ -55,7 +53,7 @@ fun ShieldCard(
 
             Text(
                 text = subText,
-                style = normal14.copy(SurfaceTintLight)
+                style = normal14.copy(color = MaterialTheme.colorScheme.surfaceTint)
             )
 
             Text(

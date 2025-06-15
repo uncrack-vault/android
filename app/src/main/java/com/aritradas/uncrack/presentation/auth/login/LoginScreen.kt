@@ -30,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -48,10 +47,7 @@ import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCTextField
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.auth.AuthViewModel
-import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
-import com.aritradas.uncrack.ui.theme.PrimaryLight
 import com.aritradas.uncrack.ui.theme.medium16
 import com.aritradas.uncrack.util.ConnectivityObserver
 import com.aritradas.uncrack.util.Validator.Companion.isValidEmail
@@ -111,7 +107,7 @@ fun LoginScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(BackgroundLight)
+                        .background(MaterialTheme.colorScheme.background)
                         .padding(paddingValues)
                         .padding(16.dp)
                 ) {
@@ -120,7 +116,7 @@ fun LoginScreen(
                         fontSize = 40.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = DMSansFontFamily,
-                        color = Color.Black
+                        color = MaterialTheme.colorScheme.onBackground
                     )
 
                     Spacer(modifier = Modifier.height(60.dp))
@@ -196,7 +192,7 @@ fun LoginScreen(
                     ) {
                         Text(
                             text = stringResource(R.string.don_t_have_an_account),
-                            style = medium16.copy(color = OnPrimaryContainerLight)
+                            style = medium16.copy(color = MaterialTheme.colorScheme.onPrimaryContainer)
                         )
 
                         Spacer(modifier = Modifier.width(8.dp))
@@ -204,7 +200,7 @@ fun LoginScreen(
                         Text(
                             modifier = Modifier.clickable { navController.navigate(Screen.SignUpScreen.name) },
                             text = stringResource(R.string.create),
-                            style = medium16.copy(color = PrimaryLight)
+                            style = medium16.copy(color = MaterialTheme.colorScheme.primary)
                         )
                     }
                 }

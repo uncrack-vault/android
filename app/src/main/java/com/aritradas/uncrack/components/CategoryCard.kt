@@ -11,19 +11,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.aritradas.uncrack.R
-import com.aritradas.uncrack.ui.theme.PrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.normal12
 
 @Composable
@@ -48,8 +47,12 @@ fun CategoryCard(
                 .widthIn(min = 100.dp, 100.dp)
                 .heightIn(min = 100.dp, 100.dp)
                 .clip(RoundedCornerShape(10.dp))
-                .background(PrimaryContainerLight)
-                .border(width = 1.dp, color = Color(0xFFEEEEEE), RoundedCornerShape(12.dp)),
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.outlineVariant,
+                    shape = RoundedCornerShape(12.dp)
+                ),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -67,7 +70,7 @@ fun CategoryCard(
             Text(
                 modifier = Modifier.padding(top = 11.dp),
                 text = text,
-                style = normal12.copy(Color.Black),
+                style = normal12.copy(MaterialTheme.colorScheme.onPrimaryContainer),
                 maxLines = 1
             )
         }

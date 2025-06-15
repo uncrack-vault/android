@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,15 +17,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.aritradas.uncrack.ui.theme.BackgroundDark
 import com.aritradas.uncrack.ui.theme.DMSansFontFamily
 
 @Composable
 fun UCStrokeButton(
     text: String,
     modifier: Modifier = Modifier,
-    strokeColor: Color = BackgroundDark,
-    textColor: Color = BackgroundDark,
+    strokeColor: Color = MaterialTheme.colorScheme.primary,
+    textColor: Color = MaterialTheme.colorScheme.primary,
     leadingIcon: Painter? = null,
     enabled: Boolean = true,
     onClick: () -> Unit
@@ -40,7 +40,11 @@ fun UCStrokeButton(
         onClick = { onClick() },
         shape = CircleShape,
         enabled = enabled,
-        border = BorderStroke(1.dp, strokeColor)
+        border = BorderStroke(1.dp, strokeColor),
+        colors = ButtonDefaults.outlinedButtonColors(
+            contentColor = textColor,
+            disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     ) {
         leadingIcon?.let {
             Icon(

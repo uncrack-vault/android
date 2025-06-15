@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aritradas.uncrack.R
 import com.aritradas.uncrack.navigation.Screen
-import com.aritradas.uncrack.ui.theme.BackgroundLight
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
@@ -64,7 +64,7 @@ fun SplashScreen(
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .background(BackgroundLight),
+                .background(MaterialTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {

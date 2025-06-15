@@ -1,6 +1,5 @@
 package com.aritradas.uncrack.presentation.intro
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,13 +18,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -35,9 +34,6 @@ import com.aritradas.uncrack.components.UCButton
 import com.aritradas.uncrack.components.UCStrokeButton
 import com.aritradas.uncrack.navigation.Screen
 import com.aritradas.uncrack.presentation.intro.model.OnBoardingItem
-import com.aritradas.uncrack.ui.theme.OnSurfaceLight
-import com.aritradas.uncrack.ui.theme.OnSurfaceVariantLight
-import com.aritradas.uncrack.ui.theme.PrimaryDark
 import com.aritradas.uncrack.ui.theme.medium18
 
 
@@ -71,7 +67,7 @@ fun OnboardingScreen(
                         navController.navigate(Screen.LoginScreen.name)
                     },
                 text = stringResource(R.string.skip),
-                style = medium18.copy(OnSurfaceLight)
+                style = medium18.copy(MaterialTheme.colorScheme.onSurface)
             )
         }
 
@@ -119,8 +115,8 @@ fun PageIndicator(
     pagesSize: Int,
     selectedPage: Int,
     modifier: Modifier = Modifier,
-    selectedColor: Color = PrimaryDark,
-    unselectedColor: Color = OnSurfaceVariantLight
+    selectedColor: Color = MaterialTheme.colorScheme.primary,
+    unselectedColor: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     Row(
         modifier = modifier,

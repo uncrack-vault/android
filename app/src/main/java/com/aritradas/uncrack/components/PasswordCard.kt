@@ -11,20 +11,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.aritradas.uncrack.R
-import com.aritradas.uncrack.ui.theme.OnPrimaryContainerLight
 import com.aritradas.uncrack.ui.theme.medium16
 import com.aritradas.uncrack.ui.theme.normal12
 
@@ -37,7 +36,7 @@ private fun PasswordCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -58,7 +57,7 @@ private fun PasswordCard(
         ) {
             Text(
                 text = "Instagram",
-                color = OnPrimaryContainerLight,
+                color = MaterialTheme.colorScheme.onSurface,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = medium16
@@ -69,7 +68,7 @@ private fun PasswordCard(
             Text(
                 modifier = Modifier.alpha(0.75f),
                 text = stringResource(id = R.string.email_hint),
-                color = OnPrimaryContainerLight,
+                color = MaterialTheme.colorScheme.onSurface,
                 style = normal12
             )
         }
