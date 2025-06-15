@@ -76,7 +76,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.7"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
 }
 
@@ -85,11 +85,11 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
     val roomVersion = "2.6.1"
     val viewModelVersion = "2.5.1"
-    val navVersion = "2.8.6"
 
     // Compose
     val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
     implementation(composeBom)
+    androidTestImplementation(composeBom)
     implementation("androidx.compose.runtime:runtime")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.foundation:foundation")
@@ -110,7 +110,6 @@ dependencies {
 
 
     // Compose Test
-    androidTestImplementation(platform("androidx.compose:compose-bom:2025.05.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
@@ -129,7 +128,6 @@ dependencies {
 
     // Room
     implementation ("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor ("androidx.room:room-compiler:$roomVersion")
     ksp ("androidx.room:room-compiler:$roomVersion")
     implementation ("androidx.room:room-ktx:$roomVersion")
 

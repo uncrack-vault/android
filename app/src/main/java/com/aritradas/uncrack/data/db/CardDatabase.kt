@@ -9,7 +9,8 @@ import com.aritradas.uncrack.domain.model.Card
 
 @Database(
     entities = [Card::class],
-    version = 2
+    version = 2,
+    exportSchema = false
 )
 abstract class CardDatabase : RoomDatabase() {
 
