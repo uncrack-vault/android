@@ -116,9 +116,13 @@ jobs:
           RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
         run: |
-          ./gradlew build \
-            -Pandroid.injected.signing.store.file=$RELEASE_KEYSTORE_PATH \
-            -Pandroid.injected.signing.store.password=$RELEASE_KEYSTORE_PASSWORD \
-            -Pandroid.injected.signing.key.alias=$RELEASE_KEY_ALIAS \
-            -Pandroid.injected.signing.key.password=$RELEASE_KEY_PASSWORD \
+          # Build debug without signing parameters
+          ./gradlew assembleDebug
+          
+          # Build release with signing parameters
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file="$(pwd)/$RELEASE_KEYSTORE_PATH" \
+            -Pandroid.injected.signing.store.password="$RELEASE_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$RELEASE_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$RELEASE_KEY_PASSWORD" \
             -x uploadCrashlyticsMappingFileRelease
