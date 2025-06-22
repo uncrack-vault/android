@@ -93,7 +93,7 @@ android {
 dependencies {
 
     implementation("com.google.android.material:material:1.12.0")
-    val roomVersion = "2.6.1"
+    val roomVersion = "2.7.2"
     val viewModelVersion = "2.5.1"
 
     // Compose
